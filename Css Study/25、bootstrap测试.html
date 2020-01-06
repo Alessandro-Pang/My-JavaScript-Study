@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="BS/bootstrap.min.css">
+    <style>
+        .header-h {
+            height: 10vh
+        }
+        
+        .main-h {
+            height: 90vh;
+        }
+        
+        .aside-h {
+            height: 100%;
+        }
+        
+        .center-KPI-h {
+            height: 15%;
+        }
+        
+        .center-map-h {
+            height: 85%
+        }
+        
+        .center {
+            height: 100%;
+        }
+        
+        .aside-chart-h {
+            height: 50%
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        div:nth-child(odd) {
+            border: 1px solid rebeccapurple;
+        }
+        
+        div:nth-child(even) {
+            border: 1px solid yellowgreen;
+        }
+        
+        .main-h {
+            border: none !important;
+        }
+        
+        @media (max-width:768px) and (min-width:576px) {
+            .aside-h {
+                height: 45vh
+            }
+            .aside-chart-h {
+                height: 100%;
+            }
+            .center {
+                height: 130%;
+            }
+            .center-KPI-h {
+                height: 30%;
+            }
+            .center-KPI-h>div {
+                background: olive;
+                height: 50%;
+            }
+            .center-map-h {
+                height: 70%;
+                background: orangered
+            }
+        }
+        
+        @media (max-width:576px) {
+            .aside-h {
+                height: 90vh
+            }
+            .center {
+                height: 130%;
+            }
+            .center-KPI-h {
+                height: 30%;
+            }
+            .center-KPI-h>div {
+                background: olive;
+                height: 50%;
+                width: 50%;
+            }
+            .center-map-h {
+                height: 70%;
+                background: orangered
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row header-h">
+            <div class="col-md-12">
+                这是标题
+            </div>
+        </div>
+        <div class="row main-h">
+            <div class="col-md-3">
+                <div class="row aside-h">
+                    <div class="col-md-12 col-sm-6 aside-chart-h"></div>
+                    <div class="col-md-12 col-sm-6 aside-chart-h"></div>
+                </div>
+            </div>
+            <div class="col-md-6 center">
+                <div class="row center-KPI-h">
+                    <div class="col-md-3 col-sm-6"></div>
+                    <div class="col-md-3 col-sm-6"></div>
+                    <div class="col-md-3 col-sm-6"></div>
+                    <div class="col-md-3 col-sm-6"></div>
+                </div>
+                <div class="row center-map-h">
+                    <div class="col-md-12"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row aside-h">
+                    <div class="col-md-12 col-sm-6 aside-chart-h"></div>
+                    <div class="col-md-12 col-sm-6 aside-chart-h"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

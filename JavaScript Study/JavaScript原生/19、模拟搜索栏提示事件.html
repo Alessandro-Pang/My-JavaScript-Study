@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		#dv1{
+			border: 1px solid green;
+			width:320px;
+		}
+		p{
+			margin:0;
+			padding:0;
+			cursor :pointer ;
+			float: left
+		}
+		#txt{
+			width: 320px;
+            border: 1px solid #ccc;
+            padding: 7px 0px;
+            border-radius: 3px;
+            padding-left:5px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,
+            -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+            }
+        #txt:focus{
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+        }
+	</style>
+</head>
+<body>
+
+<center>
+<input type="text" name="" id="txt">
+<div id="dv1">
+	
+</div>
+</center>
+
+</body>
+<script type="text/javascript">
+	
+	var testData = ["小强是谁",'小强的工作','小李呀','小石头吧','小小的灵儿']
+
+	my$("txt").onkeyup = function(){
+		
+		var text = this.value;
+		var tempArr = [];
+
+		//有责删除，无则创建
+		//避免重复创建元素
+		if($("#dv1 p")){
+			$("#dv1 p").remove();
+			$("#dv1 br").remove();
+		}
+
+		//匹配用户输入的字符
+		//插入临时数组
+		for(var i = 0 ;i<testData.length;i++){
+			
+			if (testData[i].indexOf(text)==0) {
+				tempArr.push(testData[i]);
+			}
+		}
+
+		//创建显示查询结果
+		for (var j=0;j<tempArr.length;j++) {			   
+			//遍历临时数组
+			//循环数组有多少个元素，就创建多少个p标签
+			
+			//jQuery 创建元素
+			$("#dv1").append("<p>"+tempArr[j]+"</p>");	
+			$("#dv1").append("<br />")
+			//JS原生代码，创建元素
+			/*
+			var pObj = document.createElement("p");
+			my$("dv1").appendChild(pObj);
+			pObj.innerHTML =  tempArr[j];
+			*/
+		}		
+
+		var pTag = document.getElementsByTagName("p");
+		for(var i=0 ;i < pTag.length ; i++){
+
+			pTag[i].onmouseover = function(){
+				this.style.backgroundColor = "yellow";
+			}
+
+			pTag[i].onmouseout = function(){
+				this.style.backgroundColor = "";
+			}
+		}
+		//判断输入栏是否为空
+		//如果为空则清空P标签
+		if(this.value.length == 0 || tempArr.length==0){
+			$("#dv1 p").remove();
+			$("#dv1 br").remove();
+		}
+										
+
+	}
+</script>
+</html>

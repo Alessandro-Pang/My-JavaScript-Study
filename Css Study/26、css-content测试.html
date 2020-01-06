@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dv {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+        
+        #dv::after,
+        #dv::before {
+            /* =======================================
+                content:' ' 
+                    目的是不去额外填写div创建空元素
+                    content:''创建的是一个inline盒子
+                    设置display:'block'可以设置他的宽高
+            ==========================================*/
+            counter-increment: count-content-box;
+            content: counter(count-content-box);
+            margin: auto;
+            display: block;
+            transform: translateY(100%);
+            width: 50px;
+            height: 50px;
+            border: 1px solid rebeccapurple;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 50px
+        }
+        
+        #test-line-height {
+            /*=======================================
+                html中文本自动在一行间居中
+                    字体一般默认16px
+                    div默认18,span默认17左右
+
+                line-height：
+                    可以直接设置行高为元素高度
+                    文本会自动垂直居中
+            ========================================*/
+            width: 300px;
+            height: 300px;
+            border: 1px solid saddlebrown;
+            line-height: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dv"></div>
+    <div id="test-line-height">哈哈哈哈啊哈</div>
+</body>

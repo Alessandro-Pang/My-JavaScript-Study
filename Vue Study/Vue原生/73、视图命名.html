@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div @click="link1">link1</div>
+        <router-link to="/client">click</router-link>
+        <router-view class="view one"></router-view>
+        <router-view class="view two" name="top1"></router-view>
+        <router-view class="view three" name="top2"></router-view>
+    </div>
+    <script>
+        'use strict';
+        /*
+            /settings/emails                                       /settings/profile
+            +-----------------------------------+                  +------------------------------+
+            | UserSettings                      |                  | UserSettings                 |
+            | +-----+-------------------------+ |                  | +-----+--------------------+ |
+            | | Nav | UserEmailsSubscriptions | |  +------------>  | | Nav | UserProfile        | |
+            | |     +-------------------------+ |                  | |     +--------------------+ |
+            | |     |                         | |                  | |     | UserProfilePreview | |
+            | +-----+-------------------------+ |                  | +-----+--------------------+ |
+            +-----------------------------------+                  +------------------------------+
+        
+        */
+        const Foo = {
+            template: '<div> 顶呱呱 </div>'
+        }
+        const user = {
+            template: '<div> biu 提否 </div>'
+        }
+        const client = {
+            template: '<div> this is client </div>'
+        }
+        const router = new VueRouter({
+            routes: [{
+                path: '/user',
+                name: 'user',
+                components: {
+                    default: Foo,
+                    top1: user,
+                    top2: client
+                }
+            }, {
+                path: '/client',
+                component: client
+            }]
+        });
+
+        /**
+            当使用router-link时，没有报错，同时不会有任何反应
+            当使用router.push()方法时：
+                error : uncaught exception: Object
+            错误原因：
+                1、路径不一致（router实例中 path 应以 '/' 路径开始）;
+                2、重复点击 router 实例
+        */
+        new Vue({
+            router,
+            methods: {
+                link1() {
+                    router.push('/user')
+                }
+            }
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>

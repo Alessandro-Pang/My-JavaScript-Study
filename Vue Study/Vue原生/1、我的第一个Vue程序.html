@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!--在vue教程下懵逼了两天后，终于跑起了我的第一个vue程序-->
+    <!--Date:2019/7/31-->
+    <div id="vue_det">
+        <h1>site:{{site}}</h1>
+        <h1>url:{{url}}</h1>
+        <h1>{{details()}}</h1>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#vue_det',
+            data: {
+                site: "庞超的Vue学习之旅",
+                url: "www.github.com/pangChaoYue",
+                alexa: "10000"
+            },
+            methods: {
+                details: function() {
+                    return this.site + " - 学的不仅是技术，更是梦想";
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

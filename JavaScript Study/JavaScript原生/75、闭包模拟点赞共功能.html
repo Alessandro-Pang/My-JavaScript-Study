@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="赞(0)">
+    <input type="button" value="赞(0)">
+    <input type="button" value="赞(0)">
+    <input type="button" value="赞(0)">
+    <input type="button" value="赞(0)">
+</body>
+<script>
+    function getValue() {
+        var num = 1;
+        return function() {
+            this.value = "赞(" + (num++) + ")"
+        }
+    }
+
+    let btn = document.getElementsByTagName("input");
+    for (var i = 0; i < btn.length; i++) {
+        btn[i].onclick = getValue();
+    }
+</script>
+
+</html>

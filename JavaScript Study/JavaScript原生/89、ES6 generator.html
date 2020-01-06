@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+<div id="dv">
+    generator 生成器
+    <br>
+    根据ID推荐接口：<br>
+    https://api.apiopen.top/videoRecommend?id=127398<br>
+    新闻接口：<br>
+    https://www.apiopen.top/journalismApi<br>
+    随机推荐热门段子（包含文字、图片、GIF、视频）：<br>
+    https://www.apiopen.top/satinApi?type=1&page=1<br>
+    随机推荐热门段子【神评版本】（包含文字、图片、GIF、视频）：<br>
+    https://www.apiopen.top/satinGodApi?type=1&page=1<br>
+</div>
+
+</body>
+<script>
+
+    //geerator生成器
+    //function 和 函数名中间有一个*，
+    //可以任意靠一边，也可以不靠边，但不能同时连着两边
+    function* show() {
+        console.log('nengshalei');
+
+        // yield 暂时放弃执行
+        yield;
+
+        console.log("yield执行后");
+    }
+
+    let genObj = show();
+
+    console.log(genObj);
+    genObj.next(); //执行yield前的代码
+    genObj.next();//执行第一个yield后的代码
+</script>
+
+</html>

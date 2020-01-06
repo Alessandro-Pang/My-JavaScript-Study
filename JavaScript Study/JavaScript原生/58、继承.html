@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    //-------------通过原型继承-------------------
+    function Person(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+    Person.prototype.eat = function() {
+        console.log(this.name);
+        console.log("人吃东西");
+    };
+    Person.prototype.sleep = function() {
+        console.log(this.age);
+        console.log("人需要睡觉");
+    };
+    Person.prototype.play = function() {
+        console.log(this.sex);
+        console.log("游戏人生");
+    };
+
+    function Student(score) {
+        this.score = score;
+    }
+    //----------------改变原型指向------------------------
+    Student.prototype = new Person('xiaoMing', 10, 'boy');
+
+    Student.prototype.study = function() {
+        console.log(this.score);
+        console.log('学生学习很累');
+    };
+
+    var st = new Student('100');
+
+    st.eat();
+    st.play();
+    st.sleep();
+    st.study();
+
+    /*************************************************/
+    /*******************ES6 Class*********************/
+    /*************************************************/
+
+    //-----------构造函数----------------
+    class User {
+        constructor(name, pass) {
+            this.name = name;
+            this.pass = pass;
+        }
+
+        showName() {
+            console.log('class--name===' + this.name);
+        }
+        showPass() {
+            console.log('class--pass===' + this.pass)
+        }
+    }
+
+    //-----------继承---------------------
+    class Admin extends User {
+        constructor(name, pass, grant) {
+            super(name, pass);
+            this.grant = grant;
+        }
+        showGrant() {
+            console.log('extends--grant===' + this.grant)
+        }
+    }
+
+    var adm = new Admin('雷神', '111111', '9');
+    adm.showName();
+    adm.showPass();
+    adm.showGrant();
+</script>
+
+</html>

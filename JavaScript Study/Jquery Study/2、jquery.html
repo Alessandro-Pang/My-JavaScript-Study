@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js">/*这里写Jqery代码是访问不到的*/</script>
+    <style>
+        .cls{
+            background: #000;
+        }
+        #screen{
+            width: 300px;
+            height: 300px;
+        }
+        #dv{
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<button id="app">Click Me</button>
+<div id="screen"></div>
+
+<input type="button" id="app2" value="关灯">
+<div id="dv"></div>
+</body>
+<script>
+    $('#app').click(()=>{
+        // hasClass 验证元素是否拥有这个类样式，如果有则返回true
+        // The .hasClass() method will return true
+        // if the class is assigned to an element,even if other classes also are.
+        // For example, given the HTML above,the following will return true:
+        if($("#screen").hasClass('cls')){
+            //removeClass --移除类样式
+            $('#screen').removeClass('cls')
+        }else{
+            //addClass --添加类样式
+            $('#screen').addClass('cls')
+        }
+    });
+
+    $('#app2').click(function () {
+        if($(this).val()=="关灯"){
+            $(this).val("开灯");
+            $('#dv').css({background:"black"})
+        }else{
+            $(this).val("关灯");
+            $('#dv').css({background:""})
+        }
+    })
+</script>
+</html>

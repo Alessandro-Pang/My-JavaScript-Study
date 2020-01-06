@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //浅拷贝
+    //复制一份
+    let obj = {
+        age: "20",
+        sex: "boy",
+        car: ['aodi', 'byd', 'benchi', 'bmw', 'tesila']
+    }
+
+    var obj2 = {};
+
+    function extent(a, b) {
+        for (let key in a) {
+            b[key] = a[key]
+        }
+    }
+
+    extent(obj, obj2)
+    console.log(obj)
+    console.log(obj2)
+</script>
+
+<script>
+    //深拷贝
+    let object = {
+        name: 'xiaoming',
+        age: 20,
+        sex: "boy",
+        car: ['aodi', 'byd', 'benchi', 'bmw', 'tesila'],
+        dog: {
+            name: 'xiaojin',
+            age: 3,
+            color: 'yellow',
+            play: ['ball', 'gutou', 'feipan']
+        }
+    }
+
+    let object2 = {}
+
+    //通过函数实现，将对象A中的元素深拷贝到对象B中
+    function extentDeepCopy(a, b) {
+        for (let key in a) {
+            //先获取对象A中每个属性的值
+            let item = a[key]
+                //判断这个元素的值是不是数组
+            if (item instanceof Array) {
+                //如果是数组，就在对象B中添加一个新的属性，并且这个属性值也是数组
+                b[key] = [];
+                //调用这个方法，把这个数组中属性值一个一个的深拷贝到B对象中的这个数组属性中
+                extentDeepCopy(item, b[key]);
+            } else if (item instanceof Object) {
+                //如果是对象类型的，就在对象B中添加一个新的属性，并且这个属性值也是对象类型的
+                b[key] = {};
+                //调用这个方法，把这个对象类型中属性值一个一个的深拷贝到B对象中的这个对象类型属性中
+                extentDeepCopy(item, b[key])
+            } else {
+                //如果是普通类型的数据，则直接复制到B对象的这个属性中
+                b[key] = item
+            }
+        }
+    }
+
+    extentDeepCopy(object, object2);
+    console.log(object);
+    console.log(object2)
+</script>
+
+<!-- 
+                               深拷贝和浅拷贝的区别 
+    
+                          浅拷贝 与 深拷贝 复制结果是一样的
+                                    _______           ============
+        浅拷贝剖析图                 |  栈 |           |   堆     |
+                                    |_____|           |==========|
+        obj1 = {...}--------------》|0x110|--------》 | obj1{...}|
+                                    |_____|           |========= |
+        obj2 = new Object();------》|0x120|--------》 | obj2{...}|
+                                    |—————|           |==========|
+        
+        浅拷贝就是讲对象复制了一份，栈中有两个位置，指向两个对象属性值
+
+        深拷贝不仅复制了对象属性值，如果属性值中还有对象或者数组，就再次在堆中开辟一份空间
+ -->
+
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>虚拟网站</title>
+	<script type="text/javascript" src="./common.js"></script>
+	<style type="text/css">
+		.a{
+			color : rgb(255,125,0);
+			text-decoration:none;/*去除a标签的下划线*/
+		}
+		.defualt{
+			color : rgb(255,255,255);
+			text-decoration:none;
+		}
+		#backBtn{
+			float: right;
+
+		}
+		.background{
+			background-repeat : no-repeat;/*背景图片不平铺*/
+			width: 100%;
+			height: 100%;
+			float: right;
+		}
+		.background-defualt{
+			background-repeat : repeat;/*平铺背景图片*/
+			width: 100%;
+			height: 100%;
+			float: right;
+			background-image: url("./background/bj1.jpg");
+		}
+		#txt,#password{
+			color: gray
+		}
+		.hide{
+			display: none;
+		}
+		.show{
+			display: block;
+		}
+		#login-border{
+			margin:0 auto;
+			width:220px;
+			height:200px;
+			border-style: solid;
+			border-width: 5px;
+			border-color: rgb(255,155,155);
+		}
+		#rotate-img{
+			width:800px;
+			height: 300px
+		}
+		.moudleStyle{
+			width: 100px;
+			height: 50px;
+		}
+
+	</style>
+</head>
+<body class="background-defualt">
+<div id = "divBtn" style="width: 20 ;height: 10px">
+	<input type="button" name="" value="点击换肤" id = "backBtn">
+<br />
+<br />
+<br />
+<div id = "login" style="text-align: center ;">
+	<div id="login-border">
+		<h3 style="color: #ffff">登录界面</h3>
+		<input type="text" name="" value="输入账号" id = "txt">
+		<span id = "sp1"></span>
+		<input type="button" name="" value="清空" id = "clear-txt">
+		<br />
+		<br />
+		<input type="text" name="" value="输入密码" id="password">
+		<span id = "sp2"></span>
+		<input type="button" name="" value="清空" id = "clear-password">
+		<br />
+		<br />
+		<div style="">
+		<input type="button" value="确认登录" id="commit">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" name="" value="注册账号" id = "regedit">
+		</div>
+	</div>
+</div>
+<div id="myBody" class="hide">
+	<div id="www">
+		<center>
+			<a href="http://www.baidu.com" >百度</a>
+			&nbsp;
+			<a href="http://www.ifeng.com" >凤凰网</a>
+			&nbsp;
+			<a href="http://www.163.com">网易</a>
+			<br />
+			<a href="http://www.jd.com">京东</a>
+			&nbsp;
+			<a href="http://www.csdn.net">CSDN</a>
+			&nbsp;
+			<a href="http://www.tmall.com" >天猫</a>
+		</center>
+	</div>
+
+	<br />
+
+	<div id = "rotate">
+		<center>
+			<div style= "background-color:blue">
+				<span>新闻</span> 
+			</div>
+			&nbsp;
+			<div>
+				<span>吐槽</span>
+			</div>
+			&nbsp;
+			<div>
+				<span>搞笑</span> 
+			</div>
+			&nbsp;
+			<div>
+				<span>IT科技</span> 
+			</div>
+			&nbsp;
+			<div>
+				<span>时尚</span> 
+			</div>
+			<br /><br />
+			<div id="rotate-img">
+				<img src="./images/js02.png" id="myImg" >
+			</div>
+			<br>
+		</center>
+	</div>
+	<div id="module" class="moduleStyle">
+		<center>
+			<span>
+				我是新闻模块<br>
+				新闻一：<a href="https://www.chinanews.com">中国新闻网</a><br>
+				新闻二：<a href="https://news.baidu.com">百度新闻</a><br> 
+				新闻三：<a href="https://www.qq.com">腾讯新闻</a><br> 
+				新闻四：<a href="https://www.toutiao.com">今日头条</a><br> 
+				新闻五：<a href="https://news.sina.com.cn">新浪新闻网</a><br>
+			</span>
+	
+			<span>
+				我是吐槽模块<br>
+				吐槽一：<a href="https://www.chinanews.com">中国吐槽网</a><br>
+				吐槽二：<a href="https://news.baidu.com">百度吐槽</a><br> 
+				吐槽三：<a href="https://www.qq.com">腾讯吐槽</a><br> 
+				吐槽四：<a href="https://www.toutiao.com">今日吐槽</a><br> 
+				吐槽五：<a href="https://news.sina.com.cn">新浪吐槽网</a><br>
+			</span>
+
+			<span>
+				我是搞笑模块<br>
+				搞笑一：<a href="https://www.chinanews.com">中国搞笑网</a><br>
+				搞笑二：<a href="https://news.baidu.com">百度搞笑</a><br> 
+				搞笑三：<a href="https://www.qq.com">腾讯搞笑</a><br> 
+				搞笑四：<a href="https://www.toutiao.com">今日搞笑</a><br> 
+				搞笑五：<a href="https://news.sina.com.cn">新浪搞笑网</a><br>
+			</span>
+	
+			<span>
+				我是IT模块<br>
+				科技一：<a href="https://www.chinanews.com">中国科技网</a><br>
+				科技二：<a href="https://news.baidu.com">百度科技</a><br> 
+				科技三：<a href="https://www.qq.com">腾讯科技</a><br> 
+				科技四：<a href="https://www.toutiao.com">今日科技</a><br> 
+				科技五：<a href="https://news.sina.com.cn">新浪科技网</a><br>
+			</span>
+
+			<span>
+				我是时尚模块<br>
+				时尚一：<a href="https://www.chinanews.com">中国时尚网</a><br>
+				时尚二：<a href="https://news.baidu.com">百度时尚</a><br> 
+				时尚三：<a href="https://www.qq.com">腾讯时尚</a><br> 
+				时尚四：<a href="https://www.toutiao.com">今日时尚</a><br> 
+				时尚五：<a href="https://news.sina.com.cn">新浪时尚网</a><br>
+			</span>
+		</center>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	
+	//递归算法
+	//点击一下更换一张背景图片
+	function back$(i){
+
+		my$("backBtn").onclick = function(){
+
+			var myBody = document.getElementsByTagName("body")[0];
+			
+			myBody.className="background";
+
+			myBody.style.backgroundImage ="url(./background/bj"+i+".jpg)";
+
+			i<6 ? back$(i+1) : i=1
+		}
+	}
+
+var item = 2;
+back$(item);
+	
+	//获取文本框焦点事件
+	my$("txt").onfocus = function(){
+
+		if (this.value == "输入账号"){
+			this.value = "";
+			this.style.color = "black"
+		}
+
+	}
+	//获取文本框失去焦点事件
+	my$("txt").onblur = function(){
+
+		if(this.value.length >= 10 || this.value.length <= 5){
+			my$("sp1").innerText = "×";
+			my$("sp1").style.color = "red";
+		}
+
+		if(this.value.length <= 10 && this.value.length >= 5){
+			my$("sp1").innerText = "√";
+			my$("sp1").style.color = "green";
+		}
+
+		if(this.value.length == 0 ){
+			this.value = "输入账号";
+			this.style.color = "gray";
+			my$("sp1").innerText = "";
+		};
+	}					
+	
+	my$("password").onfocus = function(){
+
+		if(this.value == "输入密码"){
+			this.type = "password";
+			this.value = "";
+			this.style.color = "black";
+		};
+	}
+
+	my$("password").onblur = function(){
+
+		if(this.value.length >= 10 || this.value.length <= 5){
+			my$("sp2").innerText = "×";
+			my$("sp2").style.color = "red";
+		}
+
+		if(this.value.length <= 10 && this.value.length >= 5){
+			my$("sp2").innerText = "√";
+			my$("sp2").style.color = "green";
+		}
+
+		if(this.value.length == 0){
+			this.type = "text";
+			this.value = "输入密码";
+			this.style.color = "gray";
+			my$("sp2").innerText = "";
+		};
+	}
+
+	my$("clear-txt").onclick = function(){
+		my$("txt").value = "";
+		my$("txt").value = "输入账号";
+		my$("txt").style.color = "gray";
+		my$("sp1").innerText = "";
+	}
+
+	my$("clear-password").onclick = function(){
+		my$("password").value = "";
+		my$("password").type = "text";
+		my$("password").value = "输入密码";
+		my$("password").style.color = "gray";
+		my$("sp2").innerText = "";
+	}
+
+	my$("commit").onclick = function(){
+
+		if(my$("sp1").innerText=="√" && my$("sp2").innerText=="√"){
+			alert("登陆成功");
+			my$("login").innerHTML = "";
+			my$("myBody").className = "show";
+		}else{
+			alert("登录失败，请输入用户名和密码");
+		}
+	}
+	//应先循环，在循环内执行排他及事件触发
+	var myTag=my$('www').getElementsByTagName("a");
+
+	for (var i = 0 ; i < myTag.length ; i++){
+		//先设置固定默认颜色
+		myTag[i].className="defualt";
+		//当鼠标悬浮到该标签，修改背景颜色
+		myTag[i].onmouseover=function(){
+			this.className="a";
+		};
+		//当鼠标离开该标签，恢复默认颜色
+		myTag[i].onmouseout=function(){
+			this.className="defualt";
+		};
+	};
+
+	spanFontColor = my$("rotate").getElementsByTagName("span");
+	
+	for (var i = 0 ; i<spanFontColor.length ;i++){
+
+		spanFontColor[i].style.color="#ffff";
+
+	}
+	var moduleFontColor = my$("module").getElementsByTagName("span");
+	for (var n = 0;n<moduleFontColor.length ;n++){
+		moduleFontColor[n].style.color="rgb(125,255,125)";
+		for(var j=0 ; j < moduleFontColor.length ;j++){
+			moduleFontColor[j].style.display = "none";
+		}
+		moduleFontColor[0].style.display = "block";
+	}
+	function myImg$(i){
+
+		var myDiv = my$("rotate").getElementsByTagName("div");
+
+		myDiv[i].style.display = "inline";//块级元素转换为内联元素
+		myDiv[i].style.cursor = "pointer";
+		
+		myDiv[i].onmouseover = function(){
+
+			//先取消已经设定好背景色			
+			for (num = 0 ;num < myDiv.length ;num++){
+				myDiv[num].style.backgroundColor = "";
+			}
+			//悬浮修改背景色
+			this.style.backgroundColor = "blue";
+			my$("myImg").src="./images/js0"+(i+2)+".png";
+			
+
+			for (var n = 0;n<moduleFontColor.length ;n++){
+
+				for(var j=0 ; j < moduleFontColor.length ;j++){
+					moduleFontColor[j].style.display = "none";
+				}
+				moduleFontColor[i].style.display = "block";
+			}
+		}
+		//数组myDiv最大下标是4
+		i < 4 ? myImg$(i+1) : "";
+	}
+		
+var num = 0 ;
+myImg$(num);
+	
+	var myModuleLink = my$("module").getElementsByTagName("a");
+	for (var i = 0;myModuleLink.length; i++) {
+		myModuleLink[i].className="defualt";
+		
+		myModuleLink[i].onmouseover = function(){
+			this.className = "a";
+		}
+		myModuleLink[i].onmouseout = function(){
+			this.className = "defualt";
+		}
+	}
+</script>
+
+
+</html> 

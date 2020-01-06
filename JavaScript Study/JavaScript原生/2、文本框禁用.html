@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<!-- 点击按钮禁用文本框></!-->
+<input type="button" id='but' value='文本框已启用'/>
+<input type="text" id='txt' />
+
+</body>
+
+<script>
+ 	function my$(id){
+
+ 		return document.getElementById(id);
+ 	}
+	//JS区分大小写，document必须全部是小写
+ 	my$('but').onclick=function(){
+		
+		if (this.value=='文本框已启用') {
+			this.value='文本框已禁用';
+ 			my$('txt').disabled=true;
+ 		}	
+ 		else if (this.value=='文本框已禁用') {
+ 			this.value='文本框已启用';
+ 			my$('txt').disabled=false;
+ 		}
+ 		
+ }
+ 
+</script>
+
+<body>
+	<br />
+	<!-- 点击图片，在下面显示下一张  （点击小图，在下面显示大图）></!-->
+	<a href="images/js02.png" id="ima1">
+		<img src="images/js01.png" alt="图例1" >
+	</a>
+	<br />
+	<img id="big">
+</body>
+<script>
+	function my$(id){
+
+		return document.getElementById(id)
+	}
+	my$("ima1").onclick = function(){
+
+		my$("big").src = this.href;
+		
+		return false
+		/**
+		 * 捕获用户点击事件， 
+		 * my$("big").src = this.href
+		 * this 是my$("ima1").href
+		 * return false 阻止超链接跳转
+		 */
+	}
+
+</script>
+</html>

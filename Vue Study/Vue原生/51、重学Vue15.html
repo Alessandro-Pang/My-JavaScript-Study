@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <script src="./axios.js"></script>
+    <style>
+        #demo4>ul>li {
+            list-style: none
+        }
+        
+        .divider {
+            list-style: none;
+            height: 1px;
+            width: 300px;
+            background: palegreen
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <ul>
+            <li v-for="item in items">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+
+    <div id="demo2">
+        <ul>
+            <li v-for="item of even(info)">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+
+    <div id="demo3">
+        <ul>
+            <li v-for="item in 11">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+
+    <div id="demo4">
+        <ul>
+            <!-- vue并不推荐 同一个元素同时使用 v-for 和 v-if -->
+            <!-- 但是我这里写的也并不符合vue的官方规范 -->
+            <!-- vue官方写法:
+                
+                <ul v-if="todos.length">
+                    <li v-for="todo in todos">
+                        {{ todo }}
+                    </li>
+                </ul>
+                <p v-else>No todos left!</p>
+
+                vue官方推荐在for循环外层使用 v-if
+                可我在这里会发生一些莫名其妙的问题,所以我的v-if 卸载for循环内了
+            -->
+            <li v-for="item in info">
+                <span v-if="item.femalename.length>7">
+                        {{item.femalename}}
+                </span>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="demo5">
+        <ul>
+            <template v-for="item of items">
+                <li>{{item.femalename}}</li>
+                <li class="divider" role="presentation"></li>
+            </template>
+        </ul>
+    </div>
+
+    <div id="demo6">
+        <ul>
+            <my-component v-for="item of items" v-bind:item="item" v-bind:key="item.key"></my-component>
+        </ul>
+    </div>
+
+    <!-- 
+        注意这里的 is="todo-item" 属性。
+        这种做法在使用 DOM 模板时是十分必要的，因为在 <ul> 元素内只有 <li> 元素会被看作有效内容。
+        这样做实现的效果与 <todo-item> 相同，但是可以避开一些潜在的浏览器解析错误。
+        查看 DOM 模板解析说明 来了解更多信息。 
+    -->
+    <div id="demo7">
+        <form v-on:submit.prevent="addNewTodo">
+            <label for="new-todo">Add a Todo</label>
+            <input type="text" v-model="newTodoText" id="new-todo" placeholder="点击添加元素">
+            <button>Add</button>
+        </form>
+        <ul>
+            <li is="todo-item" v-for="(todo,index) of todos" v-bind:key="todo.id" v-bind:title="todo.title" v-on:remove="todos.splice(index,1)">
+            </li>
+        </ul>
+    </div>
+    <script>
+        //有时，我们想要显示一个数组经过过滤或排序后的版本，而不实际改变或重置原始数据。
+        //在这种情况下，可以创建一个计算属性，来返回过滤或排序后的数组。
+        new Vue({
+            el: demo,
+            data: {
+                info: [1, 2, 3, 4, 5]
+            },
+            computed: {
+                items: function() {
+                    return this.info.filter(function(param) {
+                        return param % 2 === 0
+                    })
+                }
+            }
+        });
+
+        //在计算属性不适用的情况下 (例如，在嵌套 v-for 循环中) 你可以使用一个方法：
+        new Vue({
+            el: demo2,
+            data: {
+                info: [1, 2, 3, 4, 5]
+            },
+            methods: {
+                even: function(info) {
+                    return info.filter(function(param) {
+                        return param % 2 !== 0
+                    })
+                }
+            }
+        });
+
+        //for循环可以接受整数
+        new Vue({
+            el: demo3,
+        })
+
+        new Vue({
+            el: demo4,
+            data: {
+                info: null
+            },
+            mounted() {
+                axios
+                    .get("https://www.apiopen.top/femaleNameApi?page=1")
+                    .then(response => this.info = response.data.data)
+            },
+        })
+
+        new Vue({
+            el: demo5,
+            data: {
+                items: null
+            },
+            mounted() {
+                axios
+                    .get("https://www.apiopen.top/femaleNameApi?page=1")
+                    .then(response => this.items = response.data.data)
+            }
+        });
+
+        Vue.component("my-component", {
+            props: ["item"],
+            template: "<li>{{item}}</li>"
+        });
+
+        new Vue({
+            el: demo6,
+            data: {
+                items: null
+            },
+            mounted() {
+                axios
+                    .get("https://www.apiopen.top/femaleNameApi?page=1")
+                    .then(response => this.items = response.data.data)
+            }
+        })
+
+        Vue.component("todo-item", {
+            template: `
+                <li>
+                    {{title}}
+                    <button v-on:click="$emit('remove')">Remove</button>
+                </li>
+            `,
+            props: ['title']
+        })
+        new Vue({
+            el: demo7,
+            data: {
+                newTodoText: '',
+                todos: [{
+                    id: 1,
+                    title: "Do the dishes"
+                }, {
+                    id: 2,
+                    title: 'Take out the trash',
+                }, {
+                    id: 3,
+                    title: 'Mow the lawn'
+                }],
+                nextTodoId: 4
+            },
+            methods: {
+                addNewTodo: function() {
+                    this.todos.push({
+                            id: this.nextTodoId++,
+                            title: this.newTodoText
+                        }),
+                        this.newTodoText = ''
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

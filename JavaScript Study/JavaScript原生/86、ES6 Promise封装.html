@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+<div id="dv">11</div>
+
+</body>
+<script>
+    //resolve 解决，成功
+    //reject 拒绝，失败
+    let promise = new Promise(function (resolve,reject) {
+        //异步代码
+        $.ajax({
+            url:"./data/json_demo.json",
+            dataType:"json",
+            success(json){
+                resolve(json)
+            },
+            error(err){
+                reject(err)
+            }
+        })
+    });
+
+    let createPromise = url=>{
+        return new Promise(function (resolve,reject) {
+            $.ajax({
+                url,
+                dataType:"json",
+                success(data){
+                    resolve(data);
+                },
+                error(err){
+                    reject(err)
+                }
+            })
+        })
+    };
+
+    Promise.all([
+        createPromise('https://www.apiopen.top/journalismApi'),
+        createPromise('https://api.apiopen.top/videoRecommend?id=127398')
+    ]).then((arr)=>{
+        console.log('chenggongle');
+        let [res1,res2] = arr;
+        console.log(JSON.stringify(res1));
+        console.log(JSON.stringify(res2))
+    },(err)=>{
+        console.log('shibaile',err)
+    })
+</script>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+</head>
+<body>
+<div id="dv"></div>
+<div id="dv2"></div>
+<div id="dv3"></div>
+</body>
+<script type="text/babel">
+    // JSX == babel == browser.js
+
+    class Test extends React.Component {
+        constructor(...args) {
+            super(...args);
+        }
+
+        render() {
+            return <div>456789</div>;
+        }
+    }
+
+    window.onload = () => {
+        let oDiv = document.getElementById('dv');
+        //render --渲染
+        ReactDOM.render(
+            <Test></Test>, //调用声明的组件
+            // <span>1234567</span>,只能有一个组件
+            oDiv
+        )
+    }
+</script>
+
+<!-- 传递参数 -->
+<script type="text/babel">
+
+    class Item extends React.Component {
+        constructor(...args) {
+            super(...args)
+        }
+
+        render() {
+            return <li>{this.props.str}</li>
+        }
+    }
+
+    class List extends React.Component {
+        constructor(...args) {
+            super(...args)
+        }
+
+        render() {
+            let aItems= [];
+            for (let i = 0 ; i<this.props.arr.length;i++){
+                aItems.push(<Item str={this.props.arr[i]}></Item>)
+            }
+
+            return <ul>
+                {aItems}
+            </ul>
+        }
+    }
+
+    window.onload = () => {
+        let Odom = document.getElementById('dv2');
+
+        ReactDOM.render(
+            <List arr={['app','react','vue','thatMe','testOk']}></List>,
+            Odom
+        )
+    }
+
+</script>
+
+<!-- map 映射-->
+<script type="text/babel">
+
+    class Item extends React.Component {
+        constructor(...args) {
+            super(...args)
+        }
+
+        render() {
+            return <li>{this.props.str}</li>
+        }
+    }
+
+    class List extends React.Component {
+        constructor(...args) {
+            super(...args)
+        }
+
+        render() {
+
+            return <ul>
+                {this.props.arr.map(a=><Item str={a}></Item>)}
+            </ul>
+        }
+    }
+
+    window.onload = () => {
+        let Odom = document.getElementById('dv3');
+
+        ReactDOM.render(
+            <List arr={['app','react1','vue3','thatMe1','testOk2']}></List>,
+            Odom
+        )
+    }
+
+</script>
+</html>

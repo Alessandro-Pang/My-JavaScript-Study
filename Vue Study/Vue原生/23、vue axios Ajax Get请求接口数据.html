@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="axios.js"></script>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>省市区(县)街道四级联动</h1>
+    <div v-for="site in info">
+        {{site.id}}:{{site.name}}
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                info: null
+            }
+        },
+        mounted() {
+            axios
+                .get('http://www.wangshuwen.com/api/getRegion')
+                //response.data处理json数据
+                .then(response => (this.info = response.data.data))
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+    })
+</script>
+
+</html>

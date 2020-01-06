@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        div[id*='dv'] {
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+            background: aqua;
+            float: left;
+        }
+        
+        input[type='button'] {
+            float: left
+        }
+        
+        p {
+            width: 100px;
+            height: 100px;
+            border: 1px solid springgreen;
+            background: darkorange
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="button" value="on" id="btn1">
+        <input type="button" value="off all" id="btn1-1">
+        <div id="dv1">
+
+            <p></p>
+        </div>
+    </div>
+    <div>
+        <input type="button" value="on" id="btn2">
+        <input type="button" value="off" id="btn2-2">
+        <div id="dv2">
+
+            <p></p>
+        </div>
+    </div>
+    <div>
+        <input type="button" value="on" id="btn3">
+        <input type="button" value="off" id="btn3-3">
+        <div id="dv3">
+
+            <p></p>
+        </div>
+    </div>
+
+    <script>
+        $('#btn1').on('click', function() {
+            $('#dv1').on('mouseenter', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+            $('#dv1').on('mouseleave', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+            $('#dv1').on('click', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            })
+
+            $('#dv1 p').on('mouseenter', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+            $('#dv1 p').on('mouseleave', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+            $('#dv1 p').on('click', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            })
+        });
+
+        //移除该元素所有事件
+        $('#btn1-1').click(function() {
+            $('#dv1').off()
+        })
+
+        $('#btn2').on('click', function() {
+            $('#dv2').on('mouseenter', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+            $('#dv2').on('mouseleave', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+            $('#dv2').on('click', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            })
+
+            $('#dv2 p').on('mouseenter', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+            $('#dv2 p').on('mouseleave', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+            $('#dv2 p').on('click', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            })
+        });
+
+        //移除指定事件
+        $('#btn2-2').click(function() {
+            $('#dv2').off('mouseenter mouseleave')
+        })
+
+
+        $('#btn3').on('click', function() {
+            $('#dv3').on('mouseenter', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            }).on('mouseleave', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            }).on('click', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            }).on('mouseenter', 'p', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            }).on('mouseleave', 'p', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            }).on('click', 'p', function(e) {
+                console.log('test code ,debuger', this.localName, this.id, e.type);
+            });
+        });
+        //移除子元素事件，当首个参数为空时，移除全部事件
+        $('#btn3-3').on('click', function() {
+            $('#dv3').off('mouseenter mouseleave', "p")
+        })
+    </script>
+</body>
+
+</html>

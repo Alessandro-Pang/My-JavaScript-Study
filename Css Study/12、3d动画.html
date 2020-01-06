@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dv {
+            width: 300px;
+            height: 200px;
+            border: 3px solid saddlebrown;
+            background: sandybrown;
+            transition: all 2s;
+        }
+        
+        #dv:hover {
+            transform: rotateX(180deg);
+        }
+        
+        #dv2 {
+            width: 300px;
+            height: 200px;
+            border: 3px solid saddlebrown;
+            background: sandybrown;
+            transition: all 2s;
+        }
+        
+        hr {
+            height: 20px;
+        }
+        
+        #dv2:hover {
+            transform: rotateY(180deg);
+        }
+        
+        #dv3 {
+            width: 300px;
+            height: 200px;
+            border: 3px solid saddlebrown;
+            background: sandybrown;
+            transition: all 2s;
+        }
+        
+        #dv3:hover {
+            transform: rotate(180deg);
+        }
+        
+        div[id*=dv] {
+            float: left;
+            margin-left: 20px;
+        }
+        
+        #jk {
+            width: 100%;
+            height: 220px;
+        }
+        
+        #app {
+            width: 200px;
+            height: 100px;
+            border: 1px solid cornflowerblue;
+            perspective: 200;
+            -webkit-perspective: 200;
+            margin: 20px;
+            padding: 10px;
+        }
+        
+        #app>.demo {
+            padding: 10px;
+            background: darkcyan;
+            transform: rotateX(30deg);
+            -webkit-transform: rotateX(30deg);
+            border: 1px solid aqua;
+        }
+        
+        #app2 {
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            border: 1px solid sienna;
+            background: teal;
+            animation: app2Rotate .5s infinite;
+        }
+        /* @keyframes animationname {keyframes-selector {css-styles;}} */
+        
+        @keyframes app2Rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            /* 50%{}  可以设置任意百分比 */
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        #app3 {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ff8c00;
+            background: darkorchid;
+            position: relative;
+            animation: moveon 2s infinite
+        }
+        
+        div[id*="app"] {
+            float: left;
+            margin-left: 20px;
+        }
+        
+        @keyframes moveon {
+            /* @keyframes 声明动画 */
+            0% {
+                width: 200px;
+                height: 200px;
+                top: 0;
+                left: 0;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                top: 50px;
+                left: 50px
+            }
+        }
+        
+        #app4 {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            border: 1px solid slateblue;
+            background: tomato;
+            /* animation 绑定动画 */
+            animation: moveto 2s infinite
+        }
+        /* 
+           标签定义及使用说明
+            使用@keyframes规则，你可以创建动画。
+
+            创建动画是通过逐步改变从一个CSS样式设定到另一个。
+
+            在动画过程中，您可以更改CSS样式的设定多次。
+
+            指定的变化时发生时使用％，或关键字"from"和"to"，这是和0％到100％相同。
+
+            0％是开头动画，100％是当动画完成。
+
+            为了获得最佳的浏览器支持，您应该始终定义为0％和100％的选择器。
+
+            注意: 使用animation属性来控制动画的外观，还使用选择器绑定动画。.
+         */
+        
+        @keyframes moveto {
+            from {
+                /* 等效于 0% */
+                width: 200px;
+                height: 200px;
+                top: 0;
+                left: 0;
+            }
+            to {
+                /* 等效于100% */
+                width: 99px;
+                height: 99px;
+                top: 99px;
+                left: 99px;
+            }
+        }
+        
+        #babel {
+            margin-top: 100px;
+            width: 500px;
+            height: 150px;
+        }
+        
+        ul {
+            width: 500px;
+            height: 30px;
+            list-style: none;
+        }
+        
+        li {
+            margin-left: 10px;
+            width: 30px;
+            height: 100%;
+            float: left;
+            border: 1px solid slateblue;
+            counter-increment: licnt;
+            text-align: center;
+            border-radius: 5px;
+            transition: all .8s;
+            line-height: 30px;
+        }
+        
+        li:after {
+            content: counter(licnt)'';
+        }
+        
+        li:hover {
+            background: coral;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="jk">
+        <div id="dv">
+            <h1>ROTATEX(180DEG)</h1>
+            <h2>3D X轴旋转</h2>
+            <h3>hover动画效果</h3>
+        </div>
+        <div id="dv2">
+            <h1>ROTATEY(180DEG)</h1>
+            <h2>3D Y轴旋转</h2>
+            <h3>hover动画效果</h3>
+        </div>
+        <div id="dv3">
+            <h1>ROTATE(180DEG)</h1>
+            <h2>2D旋转</h2>
+            <h3>hover动画效果</h3>
+        </div>
+
+    </div>
+
+    <div>
+        <div id="app">
+            <div class="demo">这是一个DEMO</div>
+        </div>
+        <div id="app2">
+            <img src="./images/ico1.png" alt="">
+        </div>
+
+        <div id="app3"></div>
+        <div id="app4"></div>
+    </div>
+
+    <div id="babel">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+
+</html>

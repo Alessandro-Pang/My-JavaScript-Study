@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../common.js"></script>
+    <style type="text/css">
+        canvas{
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="tutorial" width="300" height="300"></canvas>
+
+<canvas id="tutorial2" width="300" height="300"></canvas>
+
+</body>
+<script type="text/javascript">
+    /**
+     * fillText(text,x,y [,maxWidth])
+     *      在指定的（x,y）位置填充文本，绘制的最大宽度可选
+     *
+     * strokeText(text,x,y [,maxWidth])
+     *      在指定的（x,y）位置绘制文本边框，绘制的最大宽度可选
+     */
+    var ctx = my$("tutorial").getContext("2d");
+    function draw() {
+        if (!ctx) return;
+        ctx.font = "50px sans-serif";
+        ctx.fillText("天若有情",10,100);
+        ctx.strokeText("天若有情",10,200);
+    }
+    draw();
+
+    //给文本添加样式
+
+    /**
+     * font = value
+     * 当前我们用来绘制文本的样式。
+     * 这个字符串使用和css font属性相同语法。
+     * 默认字体是 10px sans-serif
+     */
+
+    /**
+     * textAlign = value
+     * 文本对齐项
+     * 可选值：
+     *      start,end,left,right or center
+     * 默认值是：start
+     */
+
+    /**
+     * textBaseline = value
+     * 基线对齐选项
+     * 可选值：
+     *      top,hanging,middle,alphabetic,ideographic,bottom
+     * 默认值：alphabetic
+     */
+    /**
+     * direction = value
+     * 文本方向
+     * 可选值：
+     *      ltr,rtl,inherit
+     * 默认值：inherit
+     */
+
+
+    var ctx2 = my$("tutorial2").getContext("2d");
+    function draw2() {
+        if (!ctx) return;
+        ctx2.font = "50px sans-serif";
+        //ctx2.textAlign = "right";
+        ctx2.textBaseline = "middle";
+        ctx2.direction = "ltr";
+        ctx2.fillText("天若有情",10,100);
+        ctx2.strokeText("天若有情",10,200);
+    }
+    draw2();
+</script>
+</html>：

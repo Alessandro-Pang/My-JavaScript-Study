@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./dist/cytoscape.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cy"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var cy = window.cy = cytoscape({
+                container: document.getElementById('cy'),
+                // demo your layout
+                layout: {
+                    name: 'grid',
+                    // some more options here...
+                },
+                style: [{
+                    selector: 'node',
+                    style: {
+                        'background-color': '#dd4de2'
+                    }
+                }, {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'line-color': '#dd4de2',
+                        'target-arrow-color': '#dd4de2',
+                        'opacity': 0.5
+                    }
+                }],
+                elements: fetch('https://cytoscape.org/cytoscape.js-klay/example-graphs/planar-chain.json').then(function(res) {
+                    return res.json();
+                })
+            });
+        });
+    </script>
+</body>
+
+</html>

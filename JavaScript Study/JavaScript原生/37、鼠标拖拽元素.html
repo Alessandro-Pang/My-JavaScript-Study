@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="common.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        div {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            background: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="im"></div>
+</body>
+<script type="text/javascript">
+    //鼠标按下拖拽元素
+    my$('im').onmousedown = function(e) {
+
+        //根据鼠标离屏幕边框的距离 减去 元素边框离屏幕的距离
+        //获取鼠标当前离元素边框的相对距离
+        let imLeft = e.clientX - this.offsetLeft;
+        let imTop = e.clientY - this.offsetTop;
+
+        //根据移动后的位置对元素重新赋值
+        //元素需要在整个页面中移动，所以对象是document
+        document.onmousemove = function(evt) {
+
+            //为什么不能用offset系列？
+            //因为offset是获取当前位置离屏幕的距离，是固定值
+            //在触发事件时，会直接将目前的值重新赋值
+            //拖拽动作需要动态属性值
+            //需要鼠标可视区域内的位置 - 鼠标离元素边框的相对距离
+            //获取元素边框离屏幕的距离
+            my$('im').style.left = evt.clientX - imLeft + "px";
+            my$('im').style.top = evt.clientY - imTop + "px";
+            // my$('im').style.left = this.offsetLeft +"px";
+            // my$('im').style.top =  this.offsetTop+"px";
+        }
+    }
+
+    //鼠标抬起停止拖拽事件
+    //如果使用my$("im")对象，在鼠标移出document时(调试栏，地址栏)
+    //不会触发onmouseup事件
+    document.onmouseup = function() {
+        document.onmousemove = null;
+    }
+</script>
+
+</html>

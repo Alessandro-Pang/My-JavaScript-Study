@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		#dv{
+			width: 100px;
+			height: 100px;
+			border: 1px solid red;
+			background: green;
+		}
+	</style>
+</head>
+<body>
+<div id="dv"></div>
+</body>
+<script type="text/javascript">
+
+	//获取计算后的元素样式属性值
+	//offset系列只能获取基于HTML改变后的值
+	//getComputedStyle 直接获取样式属性值
+	var dvStyle = window.getComputedStyle(my$("dv"));
+	console.log(dvStyle)
+
+	console.log(dvStyle.width);
+	console.log(dvStyle.backgroundColor);
+
+	//当属性值是必须的，但没有在样式中定义时，结果为auto
+	console.log(dvStyle.left);
+
+	//当属性值不是必须的，且没在央视中定义，结果为none;
+	console.log(dvStyle.backgroundImage);
+
+	
+</script>
+</html>

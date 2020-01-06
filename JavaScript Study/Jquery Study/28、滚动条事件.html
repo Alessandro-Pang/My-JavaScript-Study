@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0
+        }
+        
+        #box {
+            border: 1px solid springgreen;
+            width: 270px;
+            height: 300px;
+            border: 1px solid red;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #app {
+            width: 250px;
+            position: absolute;
+            left: 0px;
+        }
+        
+        #scroll {
+            width: 20px;
+            height: 100%;
+            position: absolute;
+            right: 0px;
+            border: 1px solid rebeccapurple
+        }
+        
+        #bar {
+            border: 1px solid aquamarine;
+            border-radius: 20px;
+            background: wheat;
+            width: 100%;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="app">
+            宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花
+            宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花 宝带河连锦带斜，精严寺古黯金沙 墙阴一径游人少，开遍年年梓树花
+        </div>
+        <div id="scroll">
+            <div id="bar"></div>
+        </div>
+    </div>
+
+
+    <script>
+        let appHeight = $('#app').height();
+        let boxHeight = $('#box').height();
+        let bili = boxHeight / appHeight;
+        let barHeight = boxHeight * bili;
+        $('#bar').height(barHeight)
+
+        $('#bar').mousedown(function(e) {
+            let spaceY = e.clientY - $(this).offset().top;
+            let maxDistance = $('#scroll').height() - $('#bar').height();
+
+            $('#bar').mousemove(function(event) {
+                var y = event.clientY - spaceY;
+                y = y < 0 ? 0 : y;
+                y = y > maxDistance ? maxDistance : y;
+
+                $('#bar').offset({
+                    'top': y + 2
+                });
+
+                let textFrame = appHeight - boxHeight;
+                let scrollFrame = $('#scroll').height() - $('#bar').height();
+                let moveY = y * textFrame / scrollFrame;
+                $('#app').offset({
+                    top: -moveY
+                })
+            });
+        })
+
+
+        // $('#bar').mousemove(function(e) {
+        //         console.log(e.screenY)
+        //         console.log($(this).offset().top)
+        //     })
+        // $('#app').scroll(function() {
+        //     let sc = $(this).scrollTop()
+        // })
+    </script>
+</body>
+
+</html>

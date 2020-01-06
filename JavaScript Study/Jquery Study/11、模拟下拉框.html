@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #warp {
+            width: 200px;
+            height: 700px;
+        }
+        
+        ul {
+            padding: 0;
+            margin: 0px;
+        }
+        
+        #warp>ul>li {
+            list-style: none;
+            width: 200px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        #warp>ul>li>ul {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="warp">
+        <ul>
+            <li>初级雇佣兵
+                <ul>
+                    <li>张泽</li>
+                    <li>里尔</li>
+                    <li>牟斯</li>
+                    <li>森罗</li>
+                    <li>琳娜</li>
+                </ul>
+            </li>
+            <li>中级雇佣兵
+                <ul>
+                    <li>张泽</li>
+                    <li>里尔</li>
+                    <li>牟斯</li>
+                    <li>森罗</li>
+                    <li>琳娜</li>
+                </ul>
+            </li>
+            <li>高级雇佣兵
+                <ul>
+                    <li>张泽</li>
+                    <li>里尔</li>
+                    <li>牟斯</li>
+                    <li>森罗</li>
+                    <li>琳娜</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    $(function() {
+        $("#warp>ul>li").css("background", "orange")
+        $('#warp>ul>li>ul>li:odd').css("background", '#ffff99');
+        $('#warp>ul>li>ul>li:even').css("background", '#99ffff');
+    })
+
+    $(function() {
+        $("#warp>ul>li").click(function() {
+            $("#warp>ul>li>ul").stop().hide(300);
+            $(this).find('ul').stop().show(300);
+        })
+    })
+</script>
+
+</html>

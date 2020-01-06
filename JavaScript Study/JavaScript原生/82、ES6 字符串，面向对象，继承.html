@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //字符串语法
+    //startsWith，endWith  返回boolean类型
+    //startsWith  以什么开头、
+    //endWith 以什么结尾
+
+    let str = "https://www.baidu.com";
+    if (str.startsWith('http://')){
+        console.log('普通地址')
+    }else if(str.startsWith('https://')){
+        console.log('加密网址')
+    }else if(str.startsWith('git://')){
+        console.log('git地址')
+    }else{
+        console.log('其他网址')
+    }
+
+    let str2 = "myHtml.gif";
+    if (str2.endsWith('.html')){
+        console.log('HTML文本')
+    } else if(str2.endsWith('.gif')){
+        console.log('gif图片')
+    }else if (str2.endsWith('.png')){
+        console.log('png图片')
+    }else{
+        console.log('其他图片')
+    }
+
+    //面向对象
+    class User{
+        constructor(name,pass){
+            this.name = name;
+            this.pass = pass;
+        }
+        showName(){
+            console.log(this.name);
+        }
+        showPass(){
+            console.log(this.pass)
+        }
+    }
+
+    let user = new User('jack','a123456b');
+    user.showName();
+    user.showPass();
+
+
+    //继承
+    class VipUser extends User{
+        constructor(name,pass,level){
+            super(name,pass);
+
+            this.level = level;
+        }
+
+        showLevel(){
+            console.log(this.level)
+        }
+    }
+
+    let vip = new VipUser('xiaojia','a2121b','10')
+
+
+    vip.showName();
+    vip.showPass();
+    vip.showLevel();
+
+
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		img{
+			width: 200px;
+			height: 200px;
+		}
+		#dv{
+			position: absolute;
+		}
+	</style>
+	<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+<input type="button" name="" id="btn1" value="摇起来">
+<input type="button" name="" id="btn2" value="停下来">
+<div id="dv">
+	<img src="./background/bj1.jpg" id="img1">
+	<img src="./background/bj2.jpg" id="img2">
+</div>
+</body>
+<script type="text/javascript">
+
+	//声明全局变量
+	var setIntervalId = "";
+	//定时器会随事件一直生成
+	//声明一个变量，当没有结束当前定时器时，则不会生成新的定时器
+	var tag = true;
+	my$("btn1").onclick = function(){
+		
+		//判断当前是否还有定时器的在工作
+		if(tag==false){
+			return false
+		}
+		setIntervalId = window.setInterval(function(){
+
+			//Math.random()设置随机数 0-1之间的小数，不包括1
+			//parseInter()获取整数
+			var x  = parseInt(Math.random()*100+1);
+			var y  = parseInt(Math.random()*100+1);
+
+			//设置元素，left和top的属性值
+			my$("dv").style.left = x+"px";
+			my$("dv").style.top = y+"px";
+
+		},100);	
+		tag = false;
+	};
+
+
+	//停止定时器
+	my$("btn2").onclick = function(){
+		window.clearInterval(setIntervalId);
+		tag = true;
+	};
+</script>
+</html>

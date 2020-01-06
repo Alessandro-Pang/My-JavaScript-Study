@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 反转字符串实例1 -->
+    <div id="test">
+        {{message.split('').reverse().join('')}}
+    </div>
+    <script>
+        new Vue({
+            el: "#test",
+            data: {
+                message: "PangChao"
+            }
+        })
+    </script>
+
+    <!-- 反转字符串实例2 -->
+    <!-- 计算属性关键词：computed -->
+    <div id="app">
+        <p>原始字符串：{{message}}</p>
+        <p>计算后反转字符串：{{reversedMessage}}</p>
+    </div>
+
+    <script>
+        // 声明一个计算属性的变量reversedMessage
+        // 提供的函数将用作 vm.reversedMessage的getter
+        // vm.reversedMessage 依赖于 vm.message
+        // 在vm.message发生改变时，vm.reversedMessage也会更新
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                message: "Runoob"
+            },
+            computed: {
+                //计算属性的 getter
+                reversedMessage: function() {
+                    //`this`指向 vm 实例
+                    return this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app2">
+        <p>原始字符串：{{message}}</p>
+        <p>计算后反转字符串：{{reversedMessage}}</p>
+        <p>使用方法后反转字符串：{{reversedMessage2()}}</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app2",
+            data: {
+                message: "Runoob！！"
+            },
+            computed: {
+                //计算属性的 getter
+                reversedMessage: function() {
+                    return this.message.split('').reverse().join('')
+                }
+            },
+            methods: {
+                reversedMessage2: function() {
+                    return this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app3">
+        <p>{{site}}</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app3",
+            data: {
+                name: "Google",
+                url: "http://www.baidu.com",
+            },
+            computed: {
+                site: {
+                    //getter
+                    get: function() {
+                        return this.name + " " + this.url
+                    },
+                    set: function(newValue) {
+                        var names = newValue.split(' ');
+                        this.name = names[0]
+                        this.url = names[names.length - 1]
+                    }
+
+                }
+            }
+        })
+
+        vm.site = "菜鸟教程 http://www.runoob.com";
+        document.write('name' + vm.name);
+        document.write('<br>');
+        document.write('url:' + vm.url);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="common.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 350px;
+            height: 350px;
+            margin: 100px;
+            /*border: 1px solid #ccc;*/
+            position: relative;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            cursor: move;
+            display: none;
+        }
+
+        .small {
+
+            position: relative;
+
+        }
+
+        .aaa {
+            vertical-align: middle;
+        }
+
+        .big {
+            position: relative;
+            top: -350px;
+        }
+
+        .big img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <!--左侧的盒子-->
+    <div class="small" style="z-index: 1;">
+        <!--图片-->
+        <img src="background/small.jpg" width="350" class="aaa" alt=""/>
+        <!--黄色小盒子-->
+        <div class="mask"></div>
+    </div>
+    <!--右侧的盒子-->
+    <div class="big" style="border: 1px solid red;">
+        <!--右侧盒子内的大图片-->
+        <img src="background/bj1.jpg" width="800"/>
+    </div>
+</div>
+</body>
+<script>
+    'use strict';
+
+    //1 获取元素
+    var box = document.getElementById("box");//最外侧的父盒子
+    var smallBox = box.children[0];//左侧的父盒子
+    var mask = smallBox.children[1];//遮罩层黄盒子
+    var bigBox = box.children[1];//右侧的父盒子
+    var bigImg = bigBox.children[0];
+
+    //2 设置移入移出效果
+    box.onmouseover = function () {
+        mask.style.display = "block";
+        bigBox.style.display = "block";
+    };
+    box.onmouseout = function () {
+        mask.style.display = "none";
+        bigBox.style.display = "none";
+    };
+
+    //3 鼠标在smallBox内部移动时，居中跟随
+    smallBox.onmousemove = function (e) {
+        //计算mask的运动位置 : 鼠标坐标 - box的外部距离 - mask宽高的一半
+        var x = e.clientX - box.offsetLeft - mask.offsetWidth / 2;
+        var y = e.clientY - box.offsetTop - mask.offsetHeight / 2;
+        //4 设置运动的边界
+        x = x < 0 ? 0 : x;//最小值检测
+        y = y < 0 ? 0 : y;
+        //计算最大值
+        var maxLeft = smallBox.offsetWidth - mask.offsetWidth;
+        var maxTop = smallBox.offsetHeight - mask.offsetHeight;
+        x = x > maxLeft ? maxLeft : x;//最大值检测
+        y = y > maxTop ? maxTop : y;
+
+        //设置给mask的left与top
+        mask.style.left = x + "px";
+        mask.style.top = y + "px";
+
+        //1 情况1所有的盒子均对应成比例
+        var biliX = mask.offsetWidth / (bigBox.offsetWidth - 2);
+        //注意，边框不是可运动的范围，计算时进行去除即可
+        var biliY = mask.offsetHeight / (bigBox.offsetHeight - 2);
+
+        //由于，运动的步长为小步长，比例也是小比例，采用除法
+        bigImg.style.left = -x / biliX + "px";
+        bigImg.style.top = -y / biliY + "px";
+
+    };
+    //coment:
+    /**
+     * （注：当你要在同级元素加入遮挡层时）
+     *  1、不能给同级元素注册鼠标悬浮事件
+     *  给div1 和 screen 的父级元素注册鼠标悬浮事件
+     *  不能直接给dv1注册悬浮事件
+     *  因为他们是同级元素，后续会在dv1上面注册鼠标移动事件
+     *  当鼠标在screen元素上时，dv1无法获取鼠标的悬浮事件！！！
+     *
+     * 2、 position 中 relatve 和 absulote 理解
+     *  （1.当你要给元素加入 绝对定位时 absulute
+     *      必须给父级元素加入 relatve 相对定位布局
+     *  （2.当父级元素为relatve，子元素时absulute
+     *      子元素会以父级元素绝对定位
+     *      即：父级元素的left ，top 均为0
+     *
+     * 3、根据遮挡层 找到 大图中的比例位置
+     *   （1、 遮挡层的宽度 ：大图的宽度  === 这是相对比例
+     *          遮挡层left移动值 / 比例 === 大图 left 移动位置
+     *          由于，大图应该向右移动，所以大图left值取负值
+     *   （2、 例如：
+     *      <1> 遮挡层宽度  ：  大图宽度  =  比例值
+     *          100 ： 1000 == 100/1000 === 0.1
+     *      <2> 小图left移动值 / 比例 == 大图移动位置
+     *          60 / 0.1 == 600  （os: 取负值 ：-600 ）
+     *  4、思路二：
+     *      通过大图可移动的最大距离获取比例
+     *
+     *      smallMaxLeft = 遮挡层的宽 - 小图的宽
+     *      bigMaxLft = 大图的宽 -  相框的宽
+     *      bigMaxLeft / bigMaxLeft ----获取比例
+     *      x == 遮挡层移动的距离
+     *      bigX = x * bigMaxLeft / smallMaxLft
+     */
+</script>
+</html>

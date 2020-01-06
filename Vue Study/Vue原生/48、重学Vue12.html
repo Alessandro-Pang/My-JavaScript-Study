@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+</head>
+
+
+<body>
+    <div id="app">
+        <div v-if="false">第一个div</div>
+        <div v-else-if="false">第二个div</div>
+        <div v-else="false">第三个div</div>
+    </div>
+
+    <div id="app2">
+        <div v-if="false">第一个div</div>
+        <div v-else-if="true">第二个div</div>
+        <div v-else="false">第三个div</div>
+    </div>
+
+    <div id="app3">
+        <h1 v-if="awesome">Vue is awesome!</h1>
+        <h1 v-else>Oh no 😢</h1>
+    </div>
+
+    <div id="app4">
+        <div v-if="Math.random()>=0.5">
+            大于等于零点五就显示哦！！
+        </div>
+    </div>
+
+    <div id="app5">
+        <template v-if="show">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+        <template v-if="hide">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+    </div>
+
+    <div id="app6">
+        <button @click="upLgTp()">切换登陆的方式</button>
+        <br>
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+        </template>
+    </div>
+
+    <!--不同的是带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS 属性 display。
+
+        注意，v-show 不支持 <template> 元素，也不支持 v-else。
+        v-if vs v-show
+
+        v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+
+        v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+
+        相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+
+        一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。
+        因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。 
+    -->
+
+    <div id="app7">
+        <div v-show="0.5>=Math.random()">
+            小于等于0.5显示？
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+    })
+    new Vue({
+        el: "#app2"
+    })
+
+    new Vue({
+        el: "#app3",
+        data: {
+            awesome: false
+        }
+    })
+
+    new Vue({
+        el: "#app4",
+    })
+
+    new Vue({
+        el: "#app5",
+        data: {
+            show: true,
+            hide: false
+        }
+    })
+
+    new Vue({
+        el: app6,
+        data: {
+            loginType: "Email"
+        },
+        methods: {
+            upLgTp: function() {
+                this.loginType = this.loginType == 'username' ? 'Email' : "username"
+            }
+        },
+    })
+
+    new Vue({
+        el: app7
+    })
+</script>
+
+</html>

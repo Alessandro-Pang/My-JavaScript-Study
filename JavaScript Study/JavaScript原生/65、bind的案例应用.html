@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    function ShowRandom() {
+        this.number = parseInt(Math.random() * 10 + 1)
+    }
+
+    ShowRandom.prototype.show1 = function() {
+        //setInterval会等到页面加载完后再执行，且等待指定时间后
+        //自带window.onload的功能
+
+        //定时器中的函数，this指向是window
+        //当使用bind改变this指向后，这里的this就是外面 show1的this指向
+        window.setInterval(this.show2.bind(this), 1000)
+    }
+
+    ShowRandom.prototype.show2 = function() {
+        console.log(this.number)
+    }
+
+    var sr = new ShowRandom();
+    sr.show1();
+
+    /***********************************************************************************/
+    /********************验证 方法内 this 指向的是外层 函数的this*************************/
+    /***********************************************************************************/
+
+    function TestFunction() {
+        this.number = '1399399';
+    }
+
+    TestFunction.prototype.showTest = function() {
+        try {
+            window.setInterval(this.show2.bind(this), 1001);
+        } catch (e) {
+            console.log('this.指向的show不存在,现在的this指向' + this + '   错误信息：---->' + e)
+        } finally {
+            let i1 = window.setInterval(
+                console.dir('window.setInterval中的this指向' + this), 1002
+            )
+            let i2 = window.setInterval(
+                this.showTest2.bind(this), 1003
+            )
+            let i3 = setInterval(
+                function() {
+                    clearInterval(i1);
+                    clearInterval(i2);
+                    clearInterval(i3)
+                }, 2000
+            )
+        }
+
+    }
+
+    TestFunction.prototype.showTest2 = function() {
+        console.log(this)
+    }
+
+    var tsfn = new TestFunction();
+    tsfn.showTest();
+</script>
+
+</html>

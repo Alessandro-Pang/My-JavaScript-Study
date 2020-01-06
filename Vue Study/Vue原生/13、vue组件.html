@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <runoob></runoob>
+    </div>
+
+    <script>
+        //注册组件
+        Vue.component('runoob', {
+            template: '<h1>自定义组件</h1>'
+        })
+
+        //创建根实例（实例化Vue对象）
+        new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app2">
+        <!-- app1中的全局组件实例 -->
+        <runoob></runoob>
+        <!-- app2中只能在父模板可用的组件 -->
+        <runoob2></runoob2>
+    </div>
+
+    <script>
+        var Child = {
+            template: '<h2>自定义组件2</h2>'
+        }
+
+        // 创建根实例
+        new Vue({
+            el: "#app2",
+            components: {
+                // <runoob2>只能在父模板可用
+                'runoob2': Child
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <!-- prop是父组件传递数据的一个自定义属性 -->
+    <!-- 父组件的数据需要通过prop把数据传递给子组件 -->
+    <!-- 子组件需要显式的使用props选项声明 "prop" -->
+    <div id="app3">
+        <child message="hello!!"></child>
+    </div>
+
+    <script>
+        //regedit component
+        Vue.component('child', {
+            //defined props
+            props: ['message'],
+            //可以向vm实例中，this.message这样使用
+            template: '<span>{{message}}</span>'
+        })
+
+        //create root obj
+        new Vue({
+            el: "#app3",
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app4">
+        <!-- 动态prop -->
+        <!-- 类似于一个 v-bind 绑定HTML一个特性到表达式，也可以用v-bind动态绑定props到父组件的数据中 -->
+        <!-- 每当父组件变化时，该变化也会传导给子组件，子组件的值也相应变化 -->
+        <input type="text" v-model="parentMsg">
+        <br>
+        <child2 v-bind:message="parentMsg"></child2>
+    </div>
+
+    <script>
+        // regedit component
+        Vue.component("child2", {
+                // define props
+                props: ['message'],
+                // write template
+                template: "<h3>{{message}}</h3>"
+            })
+            //instantiation Vue
+        new Vue({
+            el: "#app4",
+            data: {
+                parentMsg: "父组件中的内容"
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <!-- 该实例，将v-bind指令绑定的todo,传递到每一个重复的组件中 -->
+    <div id="app5">
+        <ol>
+            <todo-item v-for="item in sites" v-bind:todo="item"></todo-item>
+        </ol>
+    </div>
+
+    <script>
+        Vue.component("todo-item", {
+            props: ["todo"],
+            template: "<li>{{ todo.text }}</li>"
+        })
+
+        new Vue({
+            el: "#app5",
+            data: {
+                sites: [{
+                    text: 'Runoob'
+                }, {
+                    text: 'Google'
+                }, {
+                    text: 'Taobao'
+                }, {
+                    text: 'Firfox'
+                }, ]
+            }
+        })
+    </script>
+</body>
+
+<!-- 注意prop属性，是单向绑定的，父组件可以传递数据给子组件，但却不能反过来 -->
+
+<body>
+    <div id="app6">
+        <!-- 格式化父组件类型为数字.number -->
+        <input type="Number" v-model.Number="vuePrent">
+        <childs v-bind:message="vuePrent"></childs>
+    </div>
+
+    <script>
+        // 验证父组件输入是否是数字，不是数字，不会将数据传输给子组件，且会在console中报错
+        Vue.component("childs", {
+            props: {
+                "message": Number
+            },
+            template: "<h2>{{message}}</h2>"
+        })
+
+        new Vue({
+                el: "#app6",
+                data: {
+                    vuePrent: 111111
+                }
+            })
+            //props 数据验证
+            //组件可以为 props 指定验证要求。
+            //为了定制 prop 的验证方式，
+            //你可以为 props 中的值提供一个带有验证需求的对象，而不是一个字符串数组
+        Vue.component('my-component', {
+            props: {
+                // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+                propA: Number,
+                // 多个可能的类型
+                propB: [String, Number],
+                // 必填的字符串
+                propC: {
+                    type: String,
+                    required: true
+                },
+                // 带有默认值的数字
+                propD: {
+                    type: Number,
+                    default: 100
+                },
+                // 带有默认值的对象
+                propE: {
+                    type: Object,
+                    // 对象或数组默认值必须从一个工厂函数获取
+                    default: function() {
+                        return {
+                            message: 'hello'
+                        }
+                    }
+                },
+                // 自定义验证函数
+                propF: {
+                    validator: function(value) {
+                        // 这个值必须匹配下列字符串中的一个
+                        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+                    }
+                }
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>

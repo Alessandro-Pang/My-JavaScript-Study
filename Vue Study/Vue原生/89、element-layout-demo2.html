@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="elementUI.css">
+    <script src="elementUI.js"></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        
+        #app * {
+            box-sizing: border-box;
+        }
+        
+        .header {
+            height: 15vh;
+            border: 5px solid red;
+        }
+        
+        .aside {
+            height: 75vh;
+            border: 5px solid darkcyan;
+        }
+        
+        .main {
+            height: 75vh;
+            border: 5px solid springgreen;
+        }
+        
+        .footer {
+            height: 10vh;
+            border: 5px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <el-row>
+            <el-col :span="24" class="header">header</el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="6" class="aside">aside</el-col>
+            <el-col :span="12" class="main">main</el-col>
+            <el-col :span="6" class="aside">aside</el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="24" class="footer">footer</el-col>
+        </el-row>
+    </div>
+    <script>
+        new Vue({
+            el: app,
+        })
+    </script>
+</body>
+
+</html>

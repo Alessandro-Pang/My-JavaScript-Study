@@ -1,0 +1,18 @@
+用户鼠标事件：
+nmouseover --鼠标悬浮
+onmouseout  --鼠标离开
+onmousemove --鼠标移动
+onmousedown --鼠标按下
+onmouseup  --鼠标抬起
+onclick  --鼠标单击
+
+
+用户聚焦事件：
+onfocus  --元素聚焦
+onblur   --元素失去聚焦
+
+用户键盘事件
+onkeyup --键盘按下
+
+窗口滚动事件
+onscroll

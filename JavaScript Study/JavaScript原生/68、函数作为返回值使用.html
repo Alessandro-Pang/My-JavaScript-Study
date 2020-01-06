@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    function f1() {
+        console.log('f1函数开始');
+        return function() {
+            console.log('函数作为返回值使用')
+        }
+    }
+
+    var ff = f1();
+    ff()
+
+    debugger
+
+    //获取 num 的变量数据类型
+    var num = 10;
+    console.log(typeof num);
+
+    //判断某个对象是不是某个类型的
+    var obj = {};
+    console.log(obj instanceof Object);
+
+    //输出Object的数据类型 [object Object]
+    console.log(Object.prototype.toString());
+
+    //此时输出的是数组类型  [object Array]
+    console.log(Object.prototype.toString.call([]));
+
+    var arr = [10, 20, 30];
+    console.log(Object.prototype.toString.call(arr))
+
+    //日期类型  [object Array]
+    console.log(Object.prototype.toString.call(new Date()))
+
+
+    //某个对象是不是你传入的类型
+    function getFunc(type) {
+        return function(obj) {
+            return Object.prototype.toString.call(obj) === type
+        }
+    }
+
+    var ff = getFunc('[object Array]')
+    var result = ff([10, 20, 34]);
+    console.log(result)
+
+    //箭头函数重写 getFunc()
+    let getObjectType = type => obj =>
+        Object.prototype.toString.call(obj) === type ? true : Object.prototype.toString.call(obj);
+
+    var ff = getObjectType('[object Object]')
+    var result = ff({
+        a: 10,
+        b: 20,
+        c: 30
+    });
+    console.log(result)
+
+    var ff = getObjectType('[object Date]')
+    var result = ff(new Date());
+    console.log(result)
+</script>
+
+</html>

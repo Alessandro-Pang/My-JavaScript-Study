@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="common.js"></script>
+    <style type="text/css">
+        #box {
+            width: 210px;
+            height: 300px;
+            border: 2px solid green;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #content {
+            width: 200px;
+            position: absolute;
+            left: 0;
+        }
+        
+        #scroll {
+            width: 20px;
+            height: 300px;
+            background: #D0DBEE;
+            position: absolute;
+            right: 0;
+        }
+        
+        #bar {
+            width: 18px;
+            height: 50px;
+            background: #ffff00;
+            border-radius: 18px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="content">
+            窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜；
+            窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜；
+            窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 窗前明月光，疑是地上霜； 举头望明月，低头思故乡
+        </div>
+        <div id="scroll">
+            <div id="bar"></div>
+        </div>
+    </div>
+    <script>
+        //文本域
+        var box = my$('box');
+        //文本框
+        var content = my$('content');
+        //滚动条框架
+        var scroll = my$('scroll');
+        //滚动条
+        var bar = my$('bar');
+
+        //设置滚动条的高度
+        //滚动条的高 / 滚动条框架的高  == box的高 / 文本框的高
+        //滚动条的高 = box的高 / 文本框的高 * 滚动条框架的高
+        var height = box.offsetHeight / content.offsetHeight * scroll.offsetHeight;
+        bar.style.height = parseInt(height) + 'px';
+
+        bar.onmousedown = function(e) {
+            var spaceY = e.clientY - bar.offsetTop;
+            var maxDistance = scroll.offsetHeight - bar.offsetHeight;
+            document.onmousemove = function(e) {
+                var y = e.clientY - spaceY;
+                y = y < 0 ? 0 : y;
+                y = y > maxDistance ? maxDistance : y;
+                bar.style.top = y + "px";
+
+                //按住滚动条时，不去选中文字
+                window.getSelection ?
+                    window.getSelection().removeAllRanges() :
+                    window.Selection.empty();
+
+                var textFrame = content.offsetHeight - box.offsetHeight;
+                var scrollFrame = scroll.offsetHeight - bar.offsetHeight;
+                //textFrame / scrollFrame 比例 * 距离
+                var moveY = y * textFrame / scrollFrame;
+
+                content.style.marginTop = -moveY - 4 + "px";
+            }
+        };
+
+        //在页面中任何位置抬起鼠标
+        //都会结束滚动条移动事件
+        document.onmouseup = function() {
+            document.onmousemove = null;
+        };
+    </script>
+</body>

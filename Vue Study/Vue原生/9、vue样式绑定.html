@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+    <style>
+        body {
+            margin: 5px;
+        }
+        
+        div>div {
+            border: 1px solid yellow
+        }
+        
+        .base {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .active2 {
+            background: green;
+        }
+        
+        .text-danger2 {
+            background: red;
+        }
+        
+        .active {
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+        
+        .text-danger {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 为v-bind:class 设置一个对象，从而动态切换class -->
+        <div v-bind:class="{active:isActive}"></div>
+
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                isActive: true
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app2">
+        <!-- text-danger 覆盖了 active类的颜色 -->
+        <div class="static" v-bind:class="{active:isActive,'text-danger':hasError}"></div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app2",
+            data: {
+                isActive: true,
+                hasError: true
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app3">
+        <!-- 直接绑定一个数据对象 -->
+        <div v-bind:class="classObject"></div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app3",
+            data: {
+                classObject: {
+                    active: true,
+                    'text-danger': true
+                }
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app4">
+        <!-- 绑定返回对象的计算属性 -->
+        <div v-bind:class="classObject"></div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app4",
+            data: {
+                isActive: true,
+                error: {
+                    value: true,
+                    type: 'fatal'
+                }
+            },
+            computed: {
+                classObject: function() {
+                    return {
+                        base: true,
+                        active2: this.isActive && !this.error.value,
+                        'text-danger2': this.error.value && this.error.type === "fatal",
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app5">
+        <!-- 将一个数组传给v-bind:class -->
+        <div v-bind:class='[activeClass,errorClass]'></div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app5",
+            data: {
+                activeClass: "active",
+                errorClass: "text-danger"
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app6">
+        <!-- 使用三元表达式切换样式 -->
+        <div v-bind:class="[errorClass,isActive ? activeClass : '']"></div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app6",
+            data: {
+                isActive: true,
+                activeClass: "active",
+                errorClass: "text-danger"
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app7">
+        <!-- v-bind:style直接设置样式 -->
+        <div v-bind:style="{color:activeColor,fontSize:fontSize + 'px'}">小菜鸟学编程</div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app7",
+            data: {
+                activeColor: "green",
+                fontSize: 30
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app8">
+        <!-- 直接绑定一个样式对象 -->
+        <div v-bind:style="styleObject">老菜鸟教程</div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app8",
+            data: {
+                styleObject: {
+                    color: "green",
+                    fontSize: "30px"
+                }
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app9">
+        <!-- v-bind:style 可以使用数组将多个样式对象应用到一个元素上 -->
+        <div v-bind:style="[baseStyle,overridingStyle]">this is super runoob</div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app9",
+            data: {
+                baseStyle: {
+                    color: 'green',
+                    fontSize: "30px"
+                },
+                overridingStyle: {
+                    'font-weight': "bold"
+                }
+            }
+        })
+    </script>
+
+    <!-- 注意:当v-bind:style使用需要特定前缀的CSS属性时，
+        如transform,vue.js自动侦测并添加相应的前缀 -->
+</body>
+
+</html>

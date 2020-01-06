@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            /* 通过逗号分隔多个背景图片 */
+            width: 300px;
+            height: 300px;
+            /* 当使用渐变遮挡背景图片时，需要先声明渐变色，再声明背景图片，否则背景图片将会遮挡住渐变色 */
+            background-image: linear-gradient(to left bottom, rgba(100, 255, 50, .7), rgba(0, 0, 0, .3)), url(images/bg.png), url(images/bg2.jpg);
+            /* 因为调用了三个背景图(一个渐变色，两个图片)，所以下面也需要声明三个属性 */
+            background-position: center, left, right;
+            background-size: 100% 100%, 150px 300px, 150px 300px;
+            background-repeat: no-repeat, no-repeat, no-repeat;
+        }
+        
+        #app2 {
+            width: 150px;
+            height: 150px;
+            background-image: url(images/ico1.png), url(images/ico2.png), url(images/ico3.png);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            border: 20px solid rgba(0, 0, 0, 0);
+            /*===============================================
+            |    background-origin:定义了背景图片的基准位置、 
+            |        基于 css 的盒子模型                      
+            |        content-box :  盒子内                   
+            |        padding-box :  padding内       
+            |        border-box  :  border内
+            |
+            |        padding-box	背景图像填充框的相对位置
+            |        border-box    	背景图像边界框的相对位置
+            |        content-box	背景图像的相对位置的内容框
+            |==================================================*/
+            padding: 30px;
+            background-size: 50px, 30px, 20px;
+            background-origin: content-box, padding-box, border-box;
+        }
+        
+        #app3 {
+            width: 300px;
+            height: 300px;
+            background-image: url(images/middkeleftbg.png), url(images/bg.png);
+            border: 10px rgba(100, 255, 50, .7);
+            border-style: dotted;
+            padding: 30px;
+            /*==================================================================
+                background-clip:
+                    根据当前位置裁剪背景
+                    基于 css 盒子模型
+                   
+                    border-box  	默认值。背景绘制在边框方框内（剪切成边框方框）。
+                    padding-box 	背景绘制在衬距方框内（剪切成衬距方框）。
+                    content-box 	背景绘制在内容方框内（剪切成内容方框）。
+            ====================================================================*/
+            background-clip: content-box, padding-box;
+        }
+        
+        table {
+            border: 1px solid saddlebrown;
+            border-collapse: collapse;
+            width: 400px;
+            text-align: center;
+        }
+        
+        tr,
+        th,
+        td {
+            border: 1px solid saddlebrown;
+        }
+        
+        thead>tr {
+            background-color: yellowgreen;
+            ;
+        }
+        
+        tbody>tr:nth-of-type(even) {
+            background: chartreuse;
+        }
+        
+        tbody>tr:nth-of-type(odd) {
+            background: rgba(220, 220, 220, .7);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <div id="app2"></div>
+
+    <div id="app3"></div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>分数</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>李超</td>
+                <td>99</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>王曦</td>
+                <td>66</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>刘诗诗</td>
+                <td>89</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>孙思溪</td>
+                <td>56</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>张思远</td>
+                <td>72</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

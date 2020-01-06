@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="../common.js"></script>
+	<style type="text/css">
+		body{
+			margin:0px;
+			padding: 0px;
+		}
+		canvas{
+			border: 1px solid green;
+		}
+	</style>
+</head>
+<body>
+	<!--圆弧案例一-->
+	<canvas id="tutorial" width="300" height="300"></canvas>
+
+	<!--圆弧案例二-->
+	<canvas id="tutorial2" width="300" height="300"></canvas>
+
+	<!--圆弧案例三-->
+	<canvas id="tutorial3" width="300" height="300"></canvas>
+
+	<br/>
+</body>
+<script type="text/javascript">
+	/**
+	 * arc(x,y,r,startAngle,endAngle,anticlockwise)
+	 * x,y为圆心，r为半径
+	 * 从startAngle弧度开始 到endAngle弧度结束
+	 * anticlckwise是布尔值，true表示逆时针，false表示顺时针
+	 *
+	 * radians = (Math.PI/180)*degrees //角度转换成弧度
+	 */
+	function draw(){
+		let canvas = document.getElementById("tutorial");
+		
+		if (!canvas.getContext)return;
+
+		var ctx = canvas.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(50,50,40,0,Math.PI/2,false);
+		ctx.stroke();
+	}
+	draw();
+
+	function draw2(){
+		let canvas = document.getElementById("tutorial2");
+		if (!canvas.getContext)return;
+		var ctx = canvas.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(50,50,40,0,Math.PI/2,false);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(150,50,40,0,-Math.PI/2,true);
+		ctx.closePath();
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(50,150,40,-Math.PI/2,Math.PI/2,false);
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(150,150,40,0,Math.PI,false);
+		ctx.fill();
+	}
+	draw2();
+
+	function draw3(){
+		let canvas = document.getElementById("tutorial3");
+		if (!canvas.getContext) return;
+
+		var ctx = canvas.getContext("2d");
+
+		ctx.beginPath();
+		ctx.moveTo(50,50);
+
+		//crcTo(x1,y1,x3,y2,radius)
+		//参数1、2：控制点1坐标
+		//参数3、4：控制点2坐标
+		//参数4：圆弧半径
+		ctx.arcTo(200,50,200,200,100);
+		ctx.lineTo(200,200);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.rect(50,50,10,10);
+		ctx.rect(200,50,10,10);
+		ctx.rect(200,200,10,10);
+		ctx.fill();
+	}
+	draw3();
+	/**
+	 * arcTo()方法说明
+	 * 这个方法可以理解为，绘制的弧形是由两条切线所决定的
+	 * 第一条切线：起始点和控制点1决定的直线
+	 * 第二条切线：控制点1和控制点2决定的直线
+	 */
+</script>
+
+<body>
+	<!-- 贝塞尔曲线 -->
+	
+	<!-- 二次贝塞尔曲线 -->
+	<canvas id="tutorialX" width="300" height="300"></canvas>
+
+	<!-- 三次贝塞尔曲线 -->
+	<canvas id="tutorialY" width="300" height="300"></canvas>
+</body>
+<script type="text/javascript">
+	
+	//quadraticCurveTo(cplx,cply,x,y)
+	//参数一、二：控制点坐标
+	//参数三、四：结束点坐标
+	function drawX(){
+		var canvas = document.getElementById("tutorialX");
+		if (!canvas.getContext)return;
+
+		var ctx = canvas.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(10,200);//起始点
+		var cplx = 40,cply = 100;//控制点
+		var x =200 ,y=200;//结束点
+		//绘制二次贝塞尔曲线
+		ctx.quadraticCurveTo(cplx,cply,x,y);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.rect(10,200,10,10);
+		ctx.rect(cplx,cply,10,10);
+		ctx.rect(x,y,10,10);
+		ctx.fill();
+
+	}
+
+	drawX();
+
+	function drawY(){
+
+		//bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y)
+		//参数1、2：控制点1的坐标
+		//参数3、4：控制点2的坐标
+		//参数5、6：结束点的坐标
+		var canvas = document.getElementById("tutorialY");
+		if (!canvas.getContext)return;
+
+		var ctx = canvas.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(40,200);//起始点
+		var cplx = 20,cply = 100;//控制点
+		var cp2x = 100,cp2y = 120;//控制点
+		var x =200 ,y=200;//结束点
+		//绘制二次贝塞尔曲线
+		ctx.bezierCurveTo(cplx,cply,cp2x,cp2y,x,y);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.rect(40,200,10,10);
+		ctx.rect(cplx,cply,10,10);
+		ctx.rect(cp2x,cp2y,10,10);
+		ctx.rect(x,y,10,10);
+		ctx.fill();
+
+	}
+
+	drawY();
+</script>
+</html>

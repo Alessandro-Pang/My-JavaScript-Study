@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../common.js"></script>
+    <style type="text/css">
+        canvas {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<!-- Canvas全局合成1 source-over-->
+<canvas id="canvas" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成2 source-in -->
+<canvas id="canvas2" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成3 source-out -->
+<canvas id="canvas3" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成4 source-atop -->
+<canvas id="canvas4" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成5  destination-over -->
+<canvas id="canvas5" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成6  destination-in -->
+<canvas id="canvas6" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成7  destination-out -->
+<canvas id="canvas7" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成8  destination-atop -->
+<canvas id="canvas8" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成9   lighter -->
+<canvas id="canvas9" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成10  darken -->
+<canvas id="canvas10" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成11  xor -->
+<canvas id="canvas11" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成12  copy -->
+<canvas id="canvas12" width="300" height="300"></canvas>
+
+<!-- Canvas全局合成13  clip裁切 -->
+<canvas id="canvas13" width="300" height="300"></canvas>
+</body>
+<script>
+    "use strict";
+    //globalCompositeOperation = type;
+    /*
+     * type :
+     *   1、source --以新图像为主
+     *   2、destination --以旧图像为主
+     *       主要类型： over , in , out ,atop
+     *
+     *   3、重合部分处理
+     *       主要类型： lighter , darken , xor
+     *
+     *   4、copy --只保留新图像
+     */
+
+    (function () {
+        let ctx = my$('canvas').getContext('2d');
+        if (!ctx) return;
+
+        ctx.fillStyle = "blue";
+        ctx.fillRect(0, 0, 200, 200);
+
+        //source-over ---全局合成操作
+        //新图像会覆盖原有的图像
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();//自调函数必须加分号！！！
+
+    (function () {
+        let ctx = my$('canvas2').getContext('2d');
+        if (!ctx) return;
+        ctx.fillStyle = "blue";
+        ctx.fillRect(0, 0, 200, 200);
+
+        //source-in ---全局合成操作
+        //新图像只保留重合部分  --会移除旧图像
+        ctx.globalCompositeOperation="source-in";
+        ctx.fillStyle = 'red';
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas3').getContext('2d');
+        if (!ctx) return;
+        ctx.fillRect(0,0,200,200);
+
+        //source-out ---全局合成操作
+        //新图像只保留没有重合的部分 --会移除旧图像
+        ctx.globalCompositeOperation = 'source-out';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas4').getContext('2d');
+        if (!ctx) return;
+        ctx.fillRect(0,0,200,200);
+
+        //source-atop ---全局合成操作
+        //新图像只保留重合的部分 --保留旧图像
+        ctx.globalCompositeOperation = 'source-atop';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas5').getContext('2d');
+        if (!ctx) return;
+        ctx.fillRect(0,0,200,200);
+
+        //destination-over ---全局合成操作
+        //新图像会在老图像下面
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas6').getContext('2d');
+        if (!ctx) return;
+        ctx.fillRect(0,0,200,200);
+
+        //destination-in ---全局合成操作
+        //显示 老图像和新图像成和部分
+        ctx.globalCompositeOperation = 'destination-in';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas7').getContext('2d');
+        if (!ctx) return;
+        ctx.fillRect(0,0,200,200);
+
+        //destination-out ---全局合成操作
+        //显示老图像和新图像没有重合的部分
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas8').getContext('2d');
+        if (!ctx) return;
+        ctx.fillRect(0,0,200,200);
+
+        //destination-atop ---全局合成操作
+        //老图像只显示和新图像重合部分  --新图像完全显示，但在老图像下面
+        ctx.globalCompositeOperation = 'destination-atop';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas9').getContext('2d');
+        if (!ctx) return;
+        ctx.fillStyle="blue";
+        ctx.fillRect(0,0,200,200);
+
+        //lighter ---全局合成操作
+        //新老图像都显示，重合部分颜色做相加(+)处理  --十六进制按位相加
+        //blue = #0000ff ; red = #ff0000 ; lighter = #ff00ff
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas10').getContext('2d');
+        if (!ctx) return;
+        ctx.fillStyle="blue";
+        ctx.fillRect(0,0,200,200);
+
+        //darken ---全局合成操作
+        //新老图像都显示，重合部分颜色按位取值(十六进制，每位取最小值)
+        //blue = #0000ff ; red = #ff0000 ; darken = #000000
+        ctx.globalCompositeOperation = 'darken';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas11').getContext('2d');
+        if (!ctx) return;
+        ctx.fillRect(0,0,200,200);
+
+        //xor ---全局合成操作
+        //重合部分透明化处理
+        ctx.globalCompositeOperation = 'xor';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+    (function () {
+        let ctx = my$('canvas12').getContext('2d');
+        if (!ctx) return;
+        ctx.fillRect(0,0,200,200);
+
+        //copy ---全局合成操作
+        //只保留新图像，其他全部清除(透明)
+        ctx.globalCompositeOperation = 'copy';
+        ctx.fillStyle="red";
+        ctx.fillRect(100,100,200,200);
+    })();
+
+
+    (function() {
+        //clip()把已经创建的路径转换为裁切路径
+        //裁剪路径的作用是遮罩，只显示裁切路径内的区域，裁切路径外的区域会被隐藏
+
+        //注：clip()只能遮罩在这个方法调用之后绘制的图像，
+        //如果是在clip()方法调用之前绘制出的图像，则无法实现遮罩
+        let ctx = my$('canvas13').getContext('2d');
+        if (!ctx) return;
+
+        ctx.beginPath();
+        ctx.arc(20,20,100,0,Math.PI*2);
+        ctx.clip();
+
+        ctx.fillStyle = "pink";
+        ctx.fillRect(20,20,100,100);
+    })();
+</script>
+</html>

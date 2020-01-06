@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <!-- <script src="./axios.js"></script> -->
+</head>
+
+<body>
+    <div id="app" v-bind="info_filters()">
+        {{items}}
+    </div>
+
+    <div id="app2">
+        {{info}} <br> {{info2}}
+    </div>
+    <script>
+        // 替换数组
+
+        //变异方法， 顾名思义， 会改变调用了这些方法的原始数组。 
+        //相比之下， 也有非变异(non - mutating method) 方法， 例如 filter()、 concat() 和 slice()。 
+        //它们不会改变原始数组， 而总是返回一个新数组。 当使用非变异方法时， 可以用新数组替换旧数组：
+        new Vue({
+                el: app,
+                data: {
+                    info: [
+                        "what?",
+                        "fuck",
+                        "I don't no!",
+                        "what's you name ?",
+                        "last this foo",
+                    ],
+                    items: null
+                },
+                //事实上我的写法并不是Vue的规范写法
+                //我还创建立刻一个新的元素items用来收集filter筛选后的而数据
+                //vue官方写法中是重新给元素赋值
+                //>>> this.info = this.info.filter(...)
+                //但是我会报一个死循环的错误，所以暂且舍弃了那种写法
+                methods: {
+                    info_filters: function() {
+                        this.items = this.info.filter(function(item) {
+                            return item.length > 5
+                        })
+                    }
+                }
+            })
+            //你可能认为这将导致 Vue 丢弃现有 DOM 并重新渲染整个列表。
+            //幸运的是，事实并非如此。
+            //Vue 为了使得 DOM 元素得到最大范围的重用而实现了一些智能的启发式方法，
+            //所以用一个含有相同元素的数组去替换原来的数组是非常高效的操作。
+
+
+
+        let vm = new Vue({
+            el: app2,
+            data: {
+                info: ["a", "b", "c", "d", "e"],
+                info2: ["a", "b", "c", "d", "e"]
+            },
+        })
+
+        // vm.info["x"] //不是响应式的
+        // vm.info.length = 2 //不是响应式的
+
+        //为了解决第一类问题，
+        //以下两种方式都可以实现和 vm.items[indexOfItem] = newValue 相同的效果，
+        //同时也将在响应式系统内触发状态更新：
+        Vue.set(vm.info, 1, "x");
+        vm.info.splice(0, 1, "m")
+
+        //你也可以使用 vm.$set 实例方法，该方法是全局方法 Vue.set 的一个别名：
+        vm.$set(vm.info, 2, "z");
+        //为了解决第二类问题，你可以使用 splice：
+        vm.info2.splice(2)
+    </script>
+</body>
+
+</html>

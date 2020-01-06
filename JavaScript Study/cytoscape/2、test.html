@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./dist/cytoscape.min.js"></script>
+    <script src="../jquery.js"></script>
+    <style>
+        #cy {
+            width: 800px;
+            height: 500px;
+            border: 1px solid darkorange;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="add">点击添加元素</button>
+    <button id="remove">点击移除元素</button>
+    <button id="move">添加连接线</button>
+    <div id="cy"></div>
+    <div id="cy2"></div>
+    <script>
+        let cy = cytoscape({
+            container: $('#cy'),
+            elements: {
+                nodes: [{
+                    data: {
+                        id: 'a',
+                        name: 'aa'
+                    }
+                }, {
+                    data: {
+                        id: 'b',
+                        name: 'bb'
+                    }
+                }, {
+                    data: {
+                        id: 'c',
+                        name: 'cc'
+                    }
+                }],
+                edges: [{
+                    data: {
+                        id: 'ab',
+                        source: 'a',
+                        target: 'b'
+                    }
+                }]
+            },
+            style: [ // the stylesheet for the graph
+                {
+                    selector: 'node',
+                    style: {
+                        'background-color': '#666',
+                        'label': 'data(id)'
+                    }
+                },
+
+                {
+                    selector: 'edge',
+                    style: {
+                        'width': 3,
+                        'line-color': '#ccc',
+                        'target-arrow-color': '#ccc',
+                        'target-arrow-shape': 'triangle'
+                    }
+                }
+            ],
+
+            layout: {
+                name: 'grid',
+                rows: 1
+            }
+        });
+        /**
+            -- 获取节点元素 --
+            let eles = cy.elements();
+            let ele = eles.filter(function(ele) {
+                return ele.group() !== 'edges'
+            })
+        */
+        $('#add').click(function() {
+            let random = Math.random() * 40;
+            let random2 = Math.random() * 40;
+
+            let index = cy.$('node').length + 1;
+            cy.add({
+                group: 'nodes',
+                data: {
+                    id: 'add' + index,
+                    width: 75
+                },
+                position: {
+                    x: 200 + random * index,
+                    y: 200 + random2 * index
+                }
+            })
+        })
+
+
+        cy.on('tap', function(event) {
+            var evtTarget = event.target;
+            /*=============================================
+                tap 类似于点击事件，可以判定点击目标是否是元素
+            ===============================================*/
+            if (evtTarget === cy) {
+                console.log('tap on background');
+            } else {
+                var id = event.target.id();
+                console.log('tap on some element : ' + id);
+            }
+        });
+
+        cy.on('tap', function(event) {
+            var evt = event.target;
+            if (evt === cy) return;
+            var id = evt.id();
+            $('#remove').click(function() {
+                cy.remove('#' + id)
+            })
+        })
+
+        $('#move').click(function() {
+            var ej = cy.$('#a');
+            ej.move({
+                target: 'c'
+            })
+        })
+    </script>
+
+    <script>
+        cytoscape({
+
+            container: document.getElementById('cy2'),
+
+            elements: [ // 节点和边的平面数组
+                { // node n1
+                    group: 'nodes', // 'nodes' for a node, 'edges' for an edge
+                    // 注意:可以为您自动推断组字段，但要指定它
+                    // 如果您错误地初始化了元素，就会得到很好的调试消息
+
+
+                    data: { // element data (put json serialisable dev data here)
+                        id: 'n1', // mandatory (string) id for each element, assigned automatically on undefined
+                        parent: 'nparent', // indicates the compound node parent id; not defined => no parent
+                        // (`parent` can be effectively changed by `eles.move()`)
+                    },
+
+                    // scratchpad data (usually temp or nonserialisable data)
+                    scratch: {
+                        _foo: 'bar' // app fields prefixed by underscore; extension fields unprefixed
+                    },
+
+                    position: { // the model position of the node (optional on init, mandatory after)
+                        x: 100,
+                        y: 100
+                    },
+
+                    selected: false, // whether the element is selected (default false)
+
+                    selectable: true, // whether the selection state is mutable (default true)
+
+                    locked: false, // when locked a node's position is immutable (default false)
+
+                    grabbable: true, // whether the node can be grabbed and moved by the user
+
+                    pannable: false, // whether dragging the node causes panning instead of grabbing
+
+                    classes: ['foo', 'bar'] // an array (or a space separated string) of class names that the element has
+                },
+
+                { // node n2
+                    data: {
+                        id: 'n2'
+                    },
+                    renderedPosition: {
+                        x: 200,
+                        y: 200
+                    } // can alternatively specify position in rendered on-screen pixels
+                },
+
+                { // node n3
+                    data: {
+                        id: 'n3',
+                        parent: 'nparent'
+                    },
+                    position: {
+                        x: 123,
+                        y: 234
+                    }
+                },
+
+                { // node nparent
+                    data: {
+                        id: 'nparent'
+                    }
+                },
+
+                { // edge e1
+                    data: {
+                        id: 'e1',
+                        // inferred as an edge because `source` and `target` are specified:
+                        source: 'n1', // the source node id (edge comes from this node)
+                        target: 'n2' // the target node id (edge goes to this node)
+                            // (`source` and `target` can be effectively changed by `eles.move()`)
+                    },
+
+                    pannable: true // 是否拖动边缘会导致平移
+                }
+            ],
+
+            layout: {
+                name: 'preset' //预设值
+            },
+
+            // so we can see the ids
+            style: [{
+                selector: 'node',
+                style: {
+                    'label': 'data(id)'
+                }
+            }]
+
+        });
+    </script>
+</body>
+
+</html>

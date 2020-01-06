@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <style>
+        .active {
+            border: 1px solid red;
+            background: #a0ffff;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .text-danger {
+            background: brown;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:class="[activeClass,errorClass]">
+            绑定Class样式，数组语法
+        </div>
+    </div>
+
+    <div id="app2">
+        <div v-bind:class="[isActive ? activeClass : '',isError ? errorClass : '']">
+            三元表达式，绑定class样式
+        </div>
+    </div>
+
+    <div id="app3">
+        <div v-bind:class="[{active:activeClass},{errorClass:isError}]">
+            对象写法，绑定class样式
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            activeClass: "active",
+            errorClass: "text-danger"
+        }
+    });
+
+    new Vue({
+        el: "#app2",
+        data: {
+            isActive: true,
+            isError: false,
+            activeClass: "active",
+            errorClass: "text-danger"
+        }
+    })
+
+    new Vue({
+        el: "#app3",
+        data: {
+            isActive: true,
+            isError: false,
+            activeClass: "active",
+            errorClass: "text-danger"
+        }
+    })
+</script>
+
+</html>

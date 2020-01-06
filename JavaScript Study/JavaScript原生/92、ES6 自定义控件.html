@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <!-- 基础测试 -->
+    <hello-world></hello-world>
+
+    <!-- 实现点击改变文字 -->
+    <my-test name="Csutom Elements"></my-test>
+    <button id="change">Change name</button>
+
+    <br><br>
+
+    <my-element content='hello world'></my-element>
+
+    <br><br>
+    <!-- 一个时间标签的案例 -->
+    <date-string></date-string>
+
+    <script>
+        //创建一个标签元素
+        class HelloWorld extends HTMLElement {};
+        window.customElements.define("hello-world", HelloWorld);
+
+        /*========================================================================================
+         *========================================* 案 例 一 *====================================
+         *========================================================================================
+         */
+
+        // 创建一个带有样式和标签的 自定义元素
+        class Test extends HTMLElement {
+            static get observedAttributes() {
+                return ["name"];
+            }
+
+            constructor() {
+                super();
+                this.attachShadow({
+                    mode: "open"
+                });
+                this.render();
+            }
+
+            render() {
+                const t = document.createElement("template");
+                t.innerHTML = `
+                    <style>
+                        :host{
+                            color:darkgreen;
+                        }
+                    </style>
+                    <h1>
+                        Hello world from <span id="name"></span>
+                    </h1>
+                `;
+                this.shadowRoot.appendChild(t.content.cloneNode(true));
+            }
+
+            attributeChangedCallback(name, oldValue, newValue) {
+                this.shadowRoot.getElementById(name).innerText = newValue;
+            }
+        };
+        window.customElements.define("my-test", Test);
+
+
+        document.querySelector("#change").onclick = () => {
+            document.querySelector("my-test")
+                .setAttribute("name", "Shadow Dom")
+        }
+
+        /*========================================================================================
+         *========================================* 案 例 二 *====================================
+         *========================================================================================
+         */
+        // author : sifo
+        // url : https://segmentfault.com/a/1190000011465768
+        class DateString extends HTMLElement {
+            constructor() {
+                super()
+                return
+            }
+
+            // 返回需要监听的属性，当属性值改变的时候会调用 attributeChangedCallback 这个方法
+            static get observedAttributes() {
+                return ['ln']
+            }
+
+            attributeChangedCallback(name, oldValue, newValue) {
+                this.updateRendering(newValue)
+            }
+
+            // 元素插入到文档中时调用
+            connectedCallback() {
+                const ln = this.getAttribute('ln')
+                this.updateRendering(ln)
+            }
+
+            // 元素从文档中移除时调用
+            disconnectedCallback() {
+                window.clearInterval(this.interval)
+            }
+
+            updateRendering(ln = 'zh') {
+                // 一个比较好的实践就是在渲染时，检查元素的 ownerDocument.defaultView, 如果不存在则什么都不干
+                if (!this.ownerDocument.defaultView) {
+                    return
+                }
+                if (this.interval) {
+                    window.clearInterval(this.interval)
+                }
+                this.interval = setInterval(() => {
+                    if (ln === 'zh') {
+                        this.innerHTML = new Date().toLocaleString()
+                    } else {
+                        this.innerHTML = new Date().toString()
+                    }
+                }, 1000)
+            }
+        }
+
+        //调用 customElements.define() 注册这个自定义元素，设置属性并插入到 body 中。
+        customElements.define("date-string", DateString);
+        const dateStr = document.createElement('date-string');
+        dateStr.setAttribute('ln', 'zh');
+        document.body.appendChild(dateStr);
+
+        /* 可以用直接调用构造函数创建元素
+         *
+         * const dateStr = new DateString()
+         * dateStr.setAttribute('ln', 'zh')
+         * document.body.appendChild(dateStr)
+         */
+
+
+        /*========================================================================================
+         *========================================* 案 例 三 *====================================
+         *========================================================================================
+         */
+        //myElement继承自一个HTML元素，这里用了ES6的class类语法糖。
+        //constructor用来初始化一些属性
+        class MyElement extends HTMLElement {
+            constructor() {
+                super()
+                return
+            }
+
+            //get函数获得元素属性，这里是一个content属性
+            get content() {
+                return this.getAttribute('content');
+            }
+
+            //set函数设置元素属性，这里是设置content属性
+            set content(val) {
+                this.setAttribute('content', val);
+            }
+
+            //这里就是阮大神疏漏的地方，如果没有下面的几个回调函数，自定义的这些元素是没啥卵用的。
+            //此回调是当元素插入文档时调用
+            connectedCallback() {
+                    const txt = this.getAttribute('content');
+                    this.updateContent(txt);
+                }
+                //此回调很关键，也很隐蔽。
+                //用于监听是哪个属性发生了改变。
+                //如果不设置此回调，更新元素属性是没什么卵用的。
+            static get observedAttributes() {
+                return ['content']
+            }
+
+            //当元素属性改变的时候调用。
+            //还是注意上面那句话,没有上面的监听函数，此函数不会被回调。
+            attributeChangedCallback(attrName, oldValue, newValue) {
+                    if (attrName == 'content') {
+                        this.updateContent(newValue);
+                    }
+
+                }
+                //这是自己定义的函数，更新textContent内容。
+            updateContent(val) {
+                this.textContent = val;
+            }
+        }
+        //注册此元素
+        customElements.define('my-element', MyElement);
+        //以上就是我们完成了整个自定义元素生成的过程，接下来就是调用了。
+
+        var element = document.querySelector('my-element');
+        //这个是用来测试属性变化时是否能执行attributeChangedCallback();
+        //如果不设置observedAttributes回调，则不会变更内容。
+        setTimeout(() => {
+            element.setAttribute('content', 'i am changed')
+        }, 5000)
+    </script>
+</body>
+
+</html>

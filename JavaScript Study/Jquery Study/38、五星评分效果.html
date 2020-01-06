@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+
+    <style>
+        body {
+            background: grey;
+            cursor: pointer;
+        }
+        
+        span {
+            color: yellow;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+
+    <script>
+        $('span').mouseenter(function() {
+            //$(this).text('★').prevAll('span').text('★')
+            //此时返回的不是this对象，是this的之前的兄弟对象，所有需要断链
+            $(this).text('★').prevAll('span').text('★').end().nextAll('span').text('☆');
+        })
+
+        $('span').mouseleave(function() {
+            $('span').text('☆')
+            $('span[index=1]').text('★').prevAll('span').text('★')
+        })
+
+        $('span').click(function() {
+            $(this).siblings('span').removeAttr('index');
+            //$(this).prevAll('span').nextAll('span').removeAttr('index')
+            $(this).attr('index', '1');
+            $(this).text('★').prevAll('span').text('★')
+        })
+    </script>
+</body>
+
+</html>

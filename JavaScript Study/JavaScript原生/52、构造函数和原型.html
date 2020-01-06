@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /*
+     **************************************************************************
+     * 构造函数：
+     *   1.构造函数也是普通函数，创建方式和普通函数一样
+     *       但构造函数规范声明时首字母大写
+     *
+     *   2.构造函数和普通函数的区别于：调用方式不一样，作用也不一样
+     *       (构造函数用来新建实例对象)
+     *
+     *   3.调用方式不一样
+     *       a.普通函数调用方式: 直接调用 -- functionName();
+     *       b.构造函数调用方式: 需要使用new关键字调用 -- new FunctionName();
+     *
+     *   4.构造函数的函数名与类名相同
+     *       FunctionName()这是函数名，也是这个对象的类名
+     *
+     *   5.内部用this来构造属性和方法
+     *       this.property = property;
+     *
+     *   6.构造函数的执行流程：
+     *       A.立刻在堆中创建一个新的对象
+     *       B.将新建的对象设置为函数中的this
+     *       C.逐行执行函数中的代码
+     *       D.将新建的对象作为返回值
+     *
+     *   7.普通函数有返回值，构造函数没有返回值
+     *       a.输出普通函数时，如果没有返回值，返回undefined;
+     *       b.构造函数会马上创建一个新对象，并将新对象作为返回值返回
+     *
+     *   8.用 instanceof 可以检查一个对象是否是一个类的实例 ,如果是，则返回true
+     *       注：所有对象都是Object对象的后代，
+     *               所以任何对象和Object做instanceof都会返回true
+     *
+     *********************************************************************
+     */
+    /*
+     * 原型对象：
+     *  在声明一个构造函数后，浏览器会自动按照一定的规则创建一个对象
+     *  这个对象就是原型对象，这个原型对象其实是储存在了内存当中
+     *
+     */
+    /*
+     * 原型属性prototype：
+     *   在声明一个函数后，这个构造函数中会有一个 属性 prototype
+     *   这个属性指向的 就是这个构造函数对应的 原型对象
+     *   原型对象中有一个属性constructor
+     *
+     */
+    /*
+     * 使用原型的优点
+     *   如果直接在构造函数中添加方法
+     *   每一次生成一个实例，都必须为重复的内容，多占用一些内存
+     *
+     *   通过原型添加方法，指向同一个方法，解决数据共享，节省内存空间
+     */
+    function Student() {
+        //这是一个构造函数
+    }
+
+    //实例化构造函数
+    //stu 是 Student 构造函数创建出来的对象
+    var st = new Student();
+
+    //这个stu对象是没有 prototype属性的
+    //prototype 属性只有在构造函数Student中有
+
+    console.log(st.prototype); //--> undefined
+    console.log(st.__proto__); //{constructor:f}
+
+    //构造函数中prototype属性，指向的是Student对应的原型对象；
+    //而stu是Student创建出来的对象，他不存在prototype属性
+    //但stu有一个__proto__的属性，stu调用这个属性可以直接访问到构造函数student的原型对象
+    //也就是说：stu的__proto__属性指向的是构造函数的原型对象
+
+    /*                  *构造函数原型链*
+     *
+     *   构造函数Student    <-------------------------------
+     *        |                                           |
+     *        |                                           |
+     *        |                                           |
+     *        V     (prototype指向原型对象)                 |
+     *     prototype  -----                               |
+     *                     \ ---------> *原型对象*         |
+     *                  ----->     Sudent.prototype       |
+     *                  |                   |             |
+     *                  |                   |             |
+     *                  |                   |             |
+     *                  |                   V             |(指向构造函数Student)
+     *     对象 stu      |              constructor  ------
+     *        |         |
+     *        |         |
+     *        |         |
+     *        V         | (__proto__指向原型对象)
+     *     __proto__ ---|
+     *
+     */
+    /*
+     * 1.从原型中可得出：
+     *      创建 stu 对象虽然使用的是Student对象
+     *      但是，对象创建出来之后，这个stu对象已经和Student构造函数没有任何关系了
+     *      stu对象的 __proto__ 属性指向的是Student构造函数的原型对象
+     *
+     * 2.如果使用 new Student() 创建多个对象
+     *      则多个对象都会同时指向Student构造函数的原型对象
+     *
+     * 3.我们可以手动给这个原型对象添加属性和方法
+     *      那么 stu1,stu2,stu3...这些对象就会共享这些原型中添加的属性和方法
+     *      例： Student.propotype.property = function(){};
+     *
+     * 4.如果我们访问stu中的一个某一个属性
+     *      如果在stu对象中找到，则直接返回。
+     *      如果在stu中没找到，则直接去stu对象中的__proto__属性指向的原型对象中查找
+     *      如果找到则返回(如果原型中也没有找到，则继续向上找原型的原型-->原型链)
+     *
+     * 5.通过stu对象只能读取原型中的属性的值，
+     *      而不能修改原型中属性的值。
+     *      stu.property ="..";
+     *      并不是修改了原型中的值，而是在stu对象中添加了一个属性property;
+     *
+     */
+    function Students() {
+
+    }
+
+    //可以使用Students.prototype 直接访问到原型对象
+    //给Students构造函数的原型对象中添加一个属性 name 并且赋值
+    Students.prototype.name = "张三";
+    Students.prototype.age = 20;
+
+    var stu = new Students();
+    /*
+     * 访问stu对象的属性name,
+     * 虽然在stu对象中我们并没有明确的添加属性name，
+     * 但是，stu的__proto__属性指向的原型中有name属性
+     * 所以，这里可以访问到属性 name 的值
+     *
+     * 注意：
+     *  这个时候不能通过stu对象删除name属性
+     *  因为只能删除在stu添加的对象
+     */
+
+    alert(stu.name);
+
+    var stu1 = new Students();
+    alert(stu1.name);
+
+    //张三是从原型中找到的，所以一样
+
+    alert(stu.name === stu1.name); // ---> true
+
+    //由于不能修改原型中的值
+    //则这种方法就直接在stu中添加了一个新的属性 name,
+    //然后在stu中无法在访问到
+
+    stu.name = "李四";
+    alert(stu.name);
+
+    //由于stu1中没有name访问，
+    //则对stu1来说仍然是访问的原型中的属性
+    alert(stu1.name);
+
+    /*
+     * 与原型有关的几个属性和方法
+     *
+     * 1、prototype 属性
+     *      prototype属性只存在于构造函数中
+     *      (其实任意函数中都有)，他指向了这个构造函数的原型对象
+     *
+     * 2、constructor 属性
+     *      constructor属性存在于原型对象中，他指向了构造函数
+     *
+     * 3、__proto__ 属性
+     *      用构造方法new出一个对象后，
+     *      这个对象中默认有一个不可访问的属性 __protype__
+     *      这个属性就指向了构造方法的原型对象
+     *
+     * 4、hasOwnProperty() 方法
+     *      hasOwnProperty方法可以判断一个对象是否在对象本身添加的，
+     *      但是不能判断是否存在于原型中，
+     *      因为有可能这个属性不存在
+     *      也就是说，在原型中的属性和不存在的属性都返回false
+     *
+     * 5、in操作符
+     *      in操作符来判断一个属性是否存在于这个对象中
+     *      但是在查找这个属性的时候，先在对象本身中找，
+     *      如果对象中找不到，再去原型中找。
+     *      只要对象和原型中有一个地方存在这个属性，就返回true
+     */
+
+    //constructor 属性
+    function Person() {
+
+    }
+
+    alert(Person.prototype.constructor === Person);
+
+    var pn = new Person();
+
+    //使用instanceof操作符可以判断一个对象的类型
+    //typeof一般用来获取简单类型和函数
+    //而引用类型一般使用instanceof,因为引用类型用typeof，总是返回object
+    alert(pn instanceof Person);
+
+    /*
+     * 可以根据Person.prototype属性指定新的对象，来作为Person原型的对象
+     * 但是这时候有个问题，新的对象的constructor属性不在指向Person构造函数
+     */
+    function Person1() {
+
+    }
+
+    //直接给Person的原型指定对象字面量，
+    //则这个对象的constructor属性不在指向Person函数
+    Person1.prototype = {
+        name: "小杨",
+        age: 22
+    };
+    var pn1 = new Person1();
+    alert(pn1.name);
+
+    alert(pn1 instanceof Person1); //true
+    alert(Person1.prototype.constructor === Person1); //false
+    //如果constructor对你很重要，
+    //你应该在Person.prototype中添加一行这样的代码
+    /**
+     * @type {{constructor: Person1}}
+     */
+    /*
+     * Person1.prototype = {
+     *     constructor : Person1
+     *  };
+     */
+
+
+    //__proto__属性
+    /*
+     * 这个属性是给浏览器看的，不是给开发人员看的
+     *
+     * 开发者尽量不要用这种方式访问，
+     * 因为操作不慎会改变这个对象的继承原型链
+     */
+    function Person2() {
+
+    }
+    //直接个给Person2的原型指定对象字面量
+    //则这个对象的constructor属性不在指向Person函数
+    Person2.prototype = {
+        constructor: Person,
+        name: "雷子",
+        age: 29
+    };
+    var pn2 = new Person2();
+    alert(pn2.__proto__ === Person2.prototype);
+
+
+    //hasOwnProperty()方法
+
+    //hasOwnPropertype方法可以判断一个属性是否来自对象本身
+    function Person3() {
+        size = 99
+    }
+    Person3.prototype.name = "阿勒";
+    var pn3 = new Person3();
+    pn3.sex = "女";
+
+    //sex属性是直接在pn3属性中添加，所以是true
+    alert("sex属性是对象本身的：" + pn3.hasOwnProperty("sex"));
+    //name属性是在原型中添加的，所以是fasle
+    alert("name属性是对象本身的：" + pn3.hasOwnProperty("name"));
+    //size是构造函数本身的，也就是原型中的，所以也是fasle
+    alert("size属性是对象本身的：" + pn3.hasOwnProperty("size"));
+    //age属性不存在，所以也是fasle
+    alert("age属性是对象本身的：" + pn3.hasOwnProperty("age"));
+
+    //in操作符
+    function Fun() {
+
+    }
+    Fun.prototype.name = "孙贼";
+    var fn = new Fun();
+    fn.sex = "男";
+    alert("sex" in fn); //true
+    alert("name" in fn); //true
+    alert("age" in fn); //false
+</script>
+
+</html>

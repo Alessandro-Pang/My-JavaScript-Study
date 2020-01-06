@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+
+    <button id="btn">点击创建P标签</button>
+    <div id="demo"></div>
+
+    <!-- slblings兄弟元素，当鼠标离开后仍会有一个不会改变 -->
+    <button id="btn2">点击创建div标签</button>
+    <div id="demo2"></div>
+    <script>
+        $('#btn').click(() => {
+
+            for (let i = 0; i < 10; i++) {
+
+                $('<p>这是一个P标签,mouseleaver写法</p>').appendTo($('#demo')).mouseenter(function() {
+                    $(this).css('backgroundColor', 'yellow')
+                }).mouseleave(function() {
+                    $(this).css('backgroundColor', '')
+                })
+            }
+        });
+
+        $('#btn2').click(() => {
+            for (let i = 0; i < 10; i++) {
+                $('<div>这是一个DIV标签,Siblings写法</div>').appendTo($('#demo2')).mouseenter(function() {
+                    $(this).css('backgroundColor', 'yellow').siblings().css('backgroundColor', '')
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="axios.js"></script>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>省市区(县)街道四级联动</h1>
+    <div v-for="site in info">
+        电话:{{site.phone}}&nbsp;姓名：{{site.name}}&nbsp;密码：{{site.passwd}}&nbsp;签名:{{site.text}}
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                info: null
+            }
+        },
+        mounted() {
+            // post请求接口数据
+            axios
+                .post('https://www.apiopen.top/login?key=00d91e8e0cca2b76f515926a36db68f5&phone=13594347817&passwd=123456')
+                .then(response => (this.info = response.data))
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    });
+</script>
+</html>

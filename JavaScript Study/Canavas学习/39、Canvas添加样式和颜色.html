@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="../common.js"></script>
+    <style type="text/css">
+        body {
+            /*margin: 0px;*/
+            /*padding: 0px;*/
+        }
+
+        canvas {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<!--fillStyle填充颜色-->
+<canvas id="tutorial" width="300" height="300"></canvas>
+
+<!--strokeStyle设置轮廓颜色-->
+<canvas id="tutorial2" width="300" height="300"></canvas>
+
+<!--设置线宽-->
+<canvas id="tutorial3" width="300" height="300"></canvas>
+
+<br>
+<!--设置线条末端样式-->
+<canvas id="tutorial4" width="300" height="300"></canvas>
+
+<!--设置线条接合处的样式-->
+<canvas id="tutorial5" width="300" height="300"></canvas>
+
+<!--虚线-->
+<canvas id="tutorial6" width="300" height="300"></canvas>
+
+</body>
+<script type="text/javascript">
+    'use strict';
+
+    //fillStyle = color设置图形的填充颜色
+    function draw() {
+        var canvas = my$("tutorial");
+        if (!canvas.getContext) return;
+        var ctx = canvas.getContext("2d");
+
+        var colorR = randomInt(0, 255);
+        var colorG = randomInt(0, 255);
+        var colorB = randomInt(0, 255);
+
+        for (var i = 0; i < 6; i++) {
+            for (var j = 0; j < 6; j++) {
+
+                ctx.fillStyle = 'rgb(' + Math.floor(colorR - 42.5 * i) + ','
+                    + Math.floor(colorG - 42.5 * j) + ',' + colorB + ')';
+                ctx.fillRect(j * 50, i * 50, 50, 50);
+            }
+        }
+    }
+
+    function draw2() {
+        //strokeStyle = color 设置图形轮廓的颜色
+        var canvas = my$('tutorial2');
+        if (!canvas.getContext) return;
+
+        var ctx = canvas.getContext('2d');
+        for (var i = 0; i < 6; i++) {
+            for (var j = 0; j < 6; j++) {
+                ctx.strokeStyle = `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+                ctx.strokeRect(j * 50 + 2, i * 50 + 2, 45, 45)
+            }
+        }
+    }
+
+    setInterval(function () {
+        draw();
+        draw2();
+    }, 200)
+
+    /**
+     * 返回随机的[from，to]之间的整数(包括from ,也包括to)
+     */
+    function randomInt(from, to) {
+        return parseInt(Math.random() * (to - from + 1) + from);
+    }
+
+
+    function draw3() {
+        //设置线宽，只能是正值
+        //起始点和终点的连线为中心
+        //上下各占线宽的一半
+        var canvas = my$('tutorial3');
+        if (!canvas.getContext) return;
+
+        var ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.moveTo(10, 10);
+        ctx.lineTo(100, 10);
+        ctx.lineWidth = 10;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(110, 10);
+        ctx.lineTo(160, 10);
+        ctx.lineWidth = 20;
+        ctx.stroke();
+    }
+
+    draw3();
+
+    function draw4() {
+
+        /*
+         * lineCap = type;
+         * 线条末端样式有三种值：
+         * 1.butt:线条末端以方形结束
+         * 2.round:线条末端以圆形结束
+         * 3.square:线条末端以方形结束 ，
+         *     但增加了一个宽度和线段相同,高度是线段厚度一半的矩形区域
+         */
+
+        var canvas = my$('tutorial4');
+        if (!canvas.getContext) return;
+
+        var lineCaps = ["butt", "round", "square"];
+
+        for (var i = 0; i < 3; i++) {
+
+            var ctx = canvas.getContext('2d');
+            ctx.beginPath();
+            ctx.moveTo(20 + 30 * i, 30);
+            ctx.lineTo(20 + 30 * i, 100);
+            ctx.lineWidth = 20;
+            ctx.lineCap = lineCaps[i];
+            ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(0, 30);
+        ctx.lineTo(300, 30);
+
+        ctx.moveTo(0, 100);
+        ctx.lineTo(300, 100);
+
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+
+    draw4();
+
+    function draw5() {
+        /* 在同一个path内，设定线条与线条之间接合处的样式
+         *
+         * 1、round 通过一个额外的圆角，
+         *   圆心在相连部分末端扇形，绘制拐角的形状。
+         *   圆角的半径是线段的宽度。
+         *
+         * 2、bevel 在相连部分的末端填充一个额外的以三角形为底的区域，
+         *   每个部分都有各自独立的矩形拐角
+         *
+         * 3、miter(默认)通过延伸相连部分的外边缘，
+         *   使其相交于一点，形成一个额外的菱形区域。
+         */
+
+        var canvas = my$("tutorial5");
+
+        if (!canvas.getContext) return;
+
+        var ctx = canvas.getContext("2d");
+
+        var lineJoin = ['round', 'bevel', 'miter'];
+        ctx.lineWidth = 20;
+
+        for (var i = 0; i < lineJoin.length; i++) {
+            ctx.lineJoin = lineJoin[i];
+            ctx.beginPath();
+            ctx.moveTo(50, 50 + i * 50);
+            ctx.lineTo(100, 100 + i * 50);
+            ctx.lineTo(150, 50 + i * 50);
+            ctx.lineTo(200, 100 + i * 50);
+            ctx.lineTo(250, 50 + i * 50);
+            ctx.stroke();
+        }
+    }
+
+    draw5();
+
+    function draw6() {
+        //用setLineDash 方法和 lineDashOffset 属性来指定虚线样式
+        //setLineDash 方法接受一个数组，来指定线段与间隙的交替
+        //lineDashOffset 属性设置起始偏移量
+        var canvas = my$('tutorial6');
+        if (!canvas.getContext) return;
+
+        var ctx = canvas.getContext("2d");
+
+        ctx.setLineDash([20, 5]);//[实线长度，间隙长度]
+        ctx.lineDashOffset = 0;
+        ctx.strokeRect(50, 50, 210, 210);
+
+        //getLineDash 返回一个包含当前虚线样式，长度为非负偶数的数组
+    }
+
+    draw6();
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        main {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        #demo {
+            width: 1000px;
+            height: 200px;
+            box-sizing: border-box;
+        }
+        
+        #demo>ul {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #demo>ul>li {
+            list-style: none;
+            float: left;
+            width: 200px;
+            height: 100%;
+            overflow: hidden
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <ul>
+            <li>
+                <a href="#"></a><img src="./background/bj1.jpg" alt=""></li>
+            <li>
+                <a href="#"></a><img src="./background/bj2.jpg" alt=""></li>
+            <li>
+                <a href="#"></a><img src="./background/bj3.jpg" alt=""></li>
+            <li>
+                <a href="#"></a><img src="./background/bj4.jpg" alt=""></li>
+            <li>
+                <a href="#"></a><img src="./background/bj5.jpg" alt=""></li>
+        </ul>
+    </div>
+</body>
+<script>
+    $(function() {
+        $('#demo>ul>li').mouseenter(function() {
+            $("#demo>ul>li").css("width", "100px");
+            $(this).css("width", "600px");
+        }).mouseleave(function() {
+            $("#demo>ul>li").css("width", "200px")
+        })
+    })
+</script>
+
+</html>

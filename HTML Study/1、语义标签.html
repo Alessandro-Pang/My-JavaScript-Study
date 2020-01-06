@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- base标签设置href后，a标签锚点将会失效 -->
+    <base href="" target="_blank">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 200px;
+            height: 200px;
+            border: 1px solid saddlebrown;
+            position: absolute;
+            top: 120%;
+            left: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <b>b标签 文本加粗</b><br>
+    <strong>Strong标签 文本加粗</strong><br>
+    <br>
+    <i>i标签 文本倾斜</i><br>
+    <em>em标签 文本倾斜</em><br>
+    <br>
+    <s>s标签 文本加删除线</s><br>
+    <del>del标签 文本加删除线</del><br>
+    <br>
+    <u>u标签 文本加下划线</u><br>
+    <ins>ins标签 文本加下划线</ins><br>
+    <a href="#app" target="_self">锚点链接</a>
+    <p>
+        html中地址将以 Base 标签中设置得地址为基准地址 <br> base href属性 需要在http协议下才能正常跳转
+        <a href="../Css Study/16、尺寸.html">Base 标签测试</a>
+
+    </p>
+
+    <div id="app">锚点测试</div>
+
+    <dl>
+        <dt>自定义列表</dt>
+        <dd>自定义列表下的解释1</dd>
+        <dd>自定义列表下的解释2</dd>
+        <dt>名词</dt>
+        <dd>名词的解释1</dd>
+        <dd>名词的解释2</dd>
+        <dt>dt标签</dt>
+        <dd>dd标签1</dd>
+        <dd>dd标签2</dd>
+    </dl>
+</body>
+
+</html>

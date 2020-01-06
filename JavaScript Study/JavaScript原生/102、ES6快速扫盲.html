@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+    let promise = new Promise((resolve, reject) => {
+        var timeout = Math.random() * 2;
+        setTimeout(() => {
+            if (timeout < 1) {
+                resolve("sucecess:ok " + timeout)
+            } else {
+                reject("error:timeout " + timeout)
+            }
+        }, timeout * 1000);
+    });
+    /*
+    	生成 0-2 之间的随机数
+    	如果小于1则成功-->执行then
+    	如果大于1则失败-->执行catch
+     */
+    promise
+        .then(res => console.log(`成功：${res}`))
+        .catch(res => console.log(`失败：${res}`))
+
+    /**
+     * Promise 的三种状态
+     * 	unresolved: 等待任务完成
+     * 	resolved:   任务完成，并且没有任何问题
+     * 	rejectd:    任务完成，但是出现问题
+     *
+     *
+     * 		一切正常                状态           回调函数
+     *				 |----------> resolved ------> then
+     * 				 |
+     *  Promise----->|
+     *  			 |
+     *  			 |----------> rejected ------> catch 
+     *      出现问题                状态           回调函数
+     */
+
+
+    /**
+     * generator
+     * 		yield 返回当前执行结果
+     * 
+     * @param {[type]} max [description]
+     * @yield {[type]} [description]
+     *
+     * 实现 斐波那契数列
+     */
+    function* fib(max) {
+        let a = 0,
+            b = 1,
+            n = 0;
+        while (n < max) {
+            yield a;
+            [a, b] = [b, a + b];
+            ++n
+        }
+        return;
+    };
+    /*
+    	for in 遍历对象
+    	for of 遍历数组  ES6
+     */
+    for (let x of fib(10)) {
+        console.log(x)
+    }
+
+    /**
+     * [*testGenerator description]
+     * @param {[type]} age [description]
+     * @yield {[type]} [description]
+     *
+     * Generator 生成器
+     * 		yiled 返回当前结果
+     * 		yiled 可以接受参数 	
+     */
+    function* testGenerator(age) {
+        age = age++;
+        yield age;
+
+        age = age + 10;
+        yield age;
+
+        age = age - 1000;
+        return age
+    };
+
+    /**
+     * [tg description]
+     * @type {[type]}
+     *
+     * generator 需要先获取对象
+     * 	然后通过 next() 执行 yiled
+     * 	通过next方法，可以传值给 yiled
+     * 	grenerator.next() => {value：(执行结果),done：(完毕)}
+     */
+    let tg = testGenerator(100);
+    console.log(tg.next().value)
+    console.log(tg.next().value)
+    console.log(tg.next().value)
+
+
+    /**
+     * fetch
+     * 	发送网络请求获取数据
+     * 	fetch()返回一个包含响应结果的 Promise (一个Response对象)
+     */
+    fetch('data/json_demo.json')
+        .then(resp => resp.json())
+        .then(res => console.log(res));
+
+
+    /**
+     * async/await (ES7)
+     * 	
+     * 	async/await 是javascript 中最终极的异步解决方案 
+     */
+    async function getUsers() {
+        const resp = await fetch('data/json_demo.json');
+        const data = await resp.json;
+        return data;
+    }
+    /* async 返回一个Promise对象，因此可以调用 then 获取结果*/
+    getUsers().then(users => {
+        console.log('async / await')
+        console.log(users)
+    });
+</script>
+
+</html>

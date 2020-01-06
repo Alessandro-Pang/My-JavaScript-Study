@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <script src="./axios.js"></script>
+</head>
+
+<body>
+    <!-- HTML 对大小写不敏感，浏览器会把所有的大写字符解释为小写字符 -->
+    <!-- 所以在创建模板时，需要将驼峰式命名，换成短横线式命名 hello-world -->
+    <div id="app">
+        <test-bind-value title="鼠标悬浮上去就出来了"></test-bind-value>
+    </div>
+
+    <div id="app2">
+        <test-align v-for="items of info" v-bind:key="items.id" v-bind:items="items" v-bind:num="42"></test-align>
+    </div>
+
+    <div id="app3">
+        <!-- 即便 `42` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+        <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+        <!-- 如果需要表达该传输的值是字符串，则还需要嵌套加入引号 -->
+        <propstype v-bind:num='42' v-bind:str="'哈哈哈哈'" v-bind:bln="false" v-bind:obj="{a:10,b:'测试'}" v-bind:arr="[20,30,40,10,60]"></propstype>
+    </div>
+    <script>
+        //prop 指定值类型
+        /*
+            props: {
+                title: String,
+                likes: Number,
+                isPublished: Boolean,
+                commentIds: Array,
+                author: Object,
+                callback: Function,
+                contactsPromise: Promise // or any other constructor
+            }
+        */
+        let testBindValue = {
+            template: '<div>这是一个DIV</div>'
+        }
+
+        new Vue({
+            el: "#app",
+            components: {
+                'test-bind-value': testBindValue
+            }
+        });
+
+        Vue.component('test-align', {
+            props: {
+                title: String,
+                items: Object,
+                num: Number
+            },
+            template: `
+                <div>
+                    精选网名：{{items.femalename}}
+                </div>
+            `
+        })
+
+        new Vue({
+            el: "#app2",
+            data: {
+                info: null,
+            },
+            mounted() {
+                axios
+                    .get("https://www.apiopen.top/femaleNameApi?page=1")
+                    .then(response => this.info = response.data.data)
+            }
+        })
+
+        Vue.component('propstype', {
+            props: {
+                num: Number,
+                str: String,
+                obj: Object,
+                bln: Boolean,
+                arr: Array
+            },
+            template: `
+                <div>
+                    <div>{{num}}</div>
+                    <div>{{str}}</div>
+                    <div>{{obj}}</div>
+                    <div>{{bln}}</div>
+                    <div>{{arr}}</div>
+                </div>
+            `
+        })
+
+        new Vue({
+            el: '#app3'
+        })
+    </script>
+</body>
+
+</html>

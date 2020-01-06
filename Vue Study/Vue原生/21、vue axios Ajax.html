@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <script src="./axios.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{info}}
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    info: null
+                }
+            },
+            mounted() {
+                axios
+                    .get('./data/json_demo.json')
+                    .then(response => (this.info = response))
+                    .catch(function(error) { //处理失败请求
+                        console.log(error)
+                    })
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app2">
+        <h1>网站列表</h1>
+        <div v-for="site in info">
+            {{site.name}}
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app2",
+            data() {
+                return {
+                    info: null
+                }
+            },
+            mounted() {
+                axios
+                    .get('./data/json_demo.json')
+                    //response.data处理json数据
+                    .then(response => (this.info = response.data.sites))
+                    .catch(function(error) {
+                        console.log(error)
+                    })
+            }
+        })
+    </script>
+</body>
+
+</html>

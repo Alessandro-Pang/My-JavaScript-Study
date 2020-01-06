@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!-- 如果methods中有相同的函数名，则vue优先级会更高 -->
+    <div id="databinding"></div>
+    <script>
+        var mixin = {
+            methods: {
+                helloworld: () => {
+                    document.write('helloworld方法<br>')
+                },
+                samemethods: () => {
+                    document.write('Mixins相同方法<br>')
+                }
+            }
+        };
+
+        let vm = new Vue({
+            mixins: [mixin],
+            methods: {
+                start: () => {
+                    document.write('start方法<br>')
+                },
+                samemethods: () => {
+                    //samemethods方法名和mixin中重复，vue实例中的方法优先级较高
+                    document.write('main相同方法名<br>')
+                }
+            },
+        })
+
+        vm.helloworld();
+        vm.start();
+        vm.samemethods()
+    </script>
+
+</body>
+
+<body>
+    <!--
+    全局混入
+        注意：一旦使用全局混入对象，就会影响到之后创建的所有Vue实例
+        处理恰当时，可以为自定义对象注入处理逻辑
+     -->
+    <div id="databinding2"></div>
+    <script>
+        Vue.mixin({
+            created: function() {
+                var myOption = this.$options.myOption;
+                if (myOption) {
+                    document.write(myOption)
+                }
+            }
+        })
+        new Vue({
+            el: "#databinding2", //mixin并没有写在绑定的元素中
+            myOption: 'hello!'
+        })
+    </script>
+</body>
+
+</html>

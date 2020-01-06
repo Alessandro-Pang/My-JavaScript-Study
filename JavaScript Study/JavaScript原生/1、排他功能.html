@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="div1">
+	<input id='di' type="button" name="ceshi" value="点我"> 
+	<p id="ins">我是一个标签</p>
+</div>	
+
+<br />
+
+<div id="div2">
+<input type="button" name="baidu" value="点击获取百度链接" id="lian">
+<a href="" id="baidu">百度链接已失效</a>
+</div>
+
+<br/>
+
+<div id="div3">
+<input type="button" name="" value="测试" id="but1" /><br/>
+<input type="text">
+<input type="text">
+<input type="text">
+</div>
+
+<br/>
+<div id="div4">
+<font size=4 color='green'>测试排他功能</font>
+<br />
+<input type="button" value="奔波霸">
+<input type="button" value="奔波霸">
+<input type="button" value="奔波霸">
+<input type="button" value="奔波霸">
+<input type="button" value="奔波霸">
+</div>
+<!-- 
+	name是用来向后台提交的，这里是为了分组
+	如果没有name，那么则每个单选按钮都可以选中
+	在neme分组后，该组内只能有一个选项
+
+	checked默认选项，该值只有一个，
+	checked是布尔类型的，当提交给浏览器时，会判断值是否为空
+	所以在JS脚本中直接赋予true即可，否则浏览器也会先将值转换成true
+-->
+<br/>
+<div id="div5">
+<input type="button" value="修改按钮" id="but5">
+<input type="radio" value="男" name="sex">
+<input type="radio" value="女" name="sex">
+<input type="radio" value="保密" name="sex" id="defualt">
+</div>
+</body>
+<script>
+
+function my$(id) {
+	return document.getElementById(id)
+}
+
+my$("di").onclick=function(){
+	my$('ins').innerText="Biu的以下，就换了";
+}
+
+my$("lian").onclick=function(){
+	my$('baidu').innerText="百度链接";
+	my$('baidu').href='http://www.baidu.com'
+}
+
+my$("but1").onclick=function(){
+	var objs = document.getElementsByTagName("input");
+	for (var i=0;i<objs.length;i++){
+		if ( objs[i].type!='button') {
+
+			objs[i].value='hahahaha';
+		
+		}
+	};
+};
+
+/**
+ * [obj4 description]
+ * @type {[type]}
+ * 排他功能
+ * for循环在浏览器加载时就已经执行完毕了
+ * 当浏览器打开页面时， i = obj4.length+1
+ * 事件是在被触发时执行
+ * 故，最外层只能使用this，不能使用数组
+ */
+
+var obj4 = my$('div4').getElementsByTagName("input");
+
+for (var i = 0;i<obj4.length;i++){
+	
+	if(obj4[i].type!='text'){
+
+		obj4[i].onclick=function(){
+
+			for (var n = 0 ;n<obj4.length;n++) {
+
+				if(obj4[n].type!='text'){
+							
+					obj4[n].value="霸波奔";
+
+				}
+
+			}
+			
+			this.value="奔波霸";//这里只能用this，不能用obj4[i]
+
+		};
+	}
+};
+
+
+/*
+var obj01= window.location.hostname;
+alert(obj01);
+*/
+
+my$('but5').onclick=function(){
+
+	my$('defualt').checked=true;
+}
+
+</script>
+</html>

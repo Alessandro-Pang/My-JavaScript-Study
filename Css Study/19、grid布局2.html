@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            /* ========================
+                grid 布局
+                    通过父级容器，
+                    控制子项目
+            =========================*/
+            display: grid;
+            width: 300px;
+            height: 500px;
+            /* =====================================
+                minmax() 函数产生一个长度范围，
+                表示长度就在这个范围之中。
+                它接受两个参数，分别为最小值和最大值。 
+            ========================================*/
+            grid-template-columns: 1fr 1fr minmax(100px, 1.5fr);
+        }
+        
+        #app>.item {
+            border: 1px solid sienna;
+        }
+        
+        #app>.item:nth-of-type(odd) {
+            background: springgreen;
+        }
+        
+        #app2 {
+            display: grid;
+            width: 500px;
+            height: 500px;
+            /* ========================================================
+                auto关键字表示由浏览器自己决定长度。
+                
+                第二列的宽度，基本上等于该列单元格的最大宽度，
+                除非单元格内容设置了min-width，且这个值大于最大宽度。
+            ===========================================================*/
+            grid-template-columns: 100px auto 100px;
+        }
+        
+        #app2>.item {
+            border: 1px solid springgreen;
+        }
+        
+        #app2>.item:nth-of-type(2n+1) {
+            border: 1px solid slateblue;
+            background: steelblue
+        }
+        
+        .container {
+            display: grid;
+            width: 500px;
+            height: 300px;
+            /* ==============================================
+                app,app2 通过float进行浮动布局
+                .container 作为兄弟元素，会被影响
+                通过 clear:both 清除浮动带来的影响
+            =============================================== */
+            clear: left;
+            /* ========================================================
+                grid-template-columns属性和grid-template-rows属性里面，
+                还可以使用方括号，指定每一根网格线的名字，方便以后的引用。
+            =========================================================== */
+            grid-template-columns: [c1] 100px [c2] 100px [c3] auto [c4];
+            grid-template-rows: [r1] 100px [r2] 100px [r3] auto [r4];
+        }
+        
+        .container>.item {
+            border: 1px solid steelblue;
+        }
+        
+        #demo {
+            margin-top: 30px;
+            display: grid;
+            width: 100%;
+            height: 500px;
+            grid-template-columns: 1fr 2fr 1fr;
+            border: 5px solid springgreen;
+            box-sizing: border-box;
+        }
+        
+        #demo>div:nth-of-type(2n+1) {
+            border: 1px solid darkorange;
+            background: darkturquoise;
+        }
+        
+        #demo2 {
+            display: grid;
+            width: 90%;
+            height: 300px;
+            grid-template-columns: 30% 70%;
+            /*===========================================
+                outline  不占用宽高
+                如果超出屏幕范围，则不显示
+                如果和其他元素没有间隔，则会显示在其他元素上面
+                
+                outline-offset 向外偏移，与元素本身的间距
+            ==============================================*/
+            outline-offset: 10px;
+            outline-width: 2px;
+            outline-color: saddlebrown;
+            outline-style: dotted;
+            margin-left: 30px;
+        }
+        
+        #demo2>.item {
+            border: 1px solid saddlebrown;
+        }
+        
+        #demo2>.item:nth-child(1) {
+            /* =========================================
+                nth-child()
+                    返回一个子元素
+                    参数是第几个
+            ========================================= */
+            background: seagreen;
+        }
+        
+        #demo2>.item:nth-last-child(1) {
+            background: skyblue;
+        }
+        /* =======================================================================================
+            CSS 属性正则表达
+            
+            选择器 	                    描述
+            [attribute] 	    用于选取带有指定属性的元素。
+            [attribute=value] 	用于选取带有指定属性和值的元素。
+            [attribute~=value] 	用于选取属性值中包含指定词汇的元素。
+            [attribute|=value] 	用于选取带有以指定值开头的属性值的元素，该值必须是整个单词。
+            [attribute^=value] 	匹配属性值以指定值开头的每个元素。
+            [attribute$=value] 	匹配属性值以指定值结尾的每个元素。
+            [attribute*=value] 	匹配属性值中包含指定值的每个元素。
+         ========================================================================================*/
+        
+        #demo3 {
+            width: 100%;
+            height: 300px;
+            border: 1px solid slateblue;
+            display: grid;
+            grid-template-columns: 50% 50%;
+            margin-top: 30px;
+        }
+        
+        #demo3>.item:first-child {
+            /* =====================
+                first-child
+                    第一个子元素
+            ======================= */
+            background: teal;
+        }
+        
+        #demo3>.item:last-child {
+            /* ====================
+                last-child
+                    最后一个子元素
+            ======================= */
+            background: violet;
+        }
+        
+        #test {
+            width: 300px;
+            height: 200px;
+            border: 1px solid darkkhaki;
+            vertical-align: middle;
+        }
+        
+        #test>p {
+            vertical-align: middle;
+        }
+        
+        #app,
+        #app2 {
+            float: left;
+            margin: 30px;
+            /* =========================================================================================
+                clear 定义和用法
+                    clear 属性规定元素的哪一侧不允许其他浮动元素。
+
+                说明
+                    clear 属性定义了元素的哪边上不允许出现浮动元素。
+                    在 CSS1 和 CSS2 中，这是通过自动为清除元素（即设置了 clear 属性的元素）增加上外边距实现的。
+                    在 CSS2.1 中，会在元素上外边距之上增加清除空间，而外边距本身并不改变。
+                    不论哪一种改变，最终结果都一样，如果声明为左边或右边清除，
+                    会使元素的上外边框边界刚好在该边上浮动元素的下外边距边界之下。
+                
+                clear:
+                    left	在左侧不允许浮动元素。
+                    right	在右侧不允许浮动元素。
+                    both	在左右两侧均不允许浮动元素。
+                    none	默认值。允许浮动元素出现在两侧。
+                    inherit	规定应该从父元素继承 clear 属性的值。
+            ========================================================================================== */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <br>
+    <div id="app2">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+    <div class="container">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+    <div id="demo">
+        <div class="left"></div>
+        <div class="center"></div>
+        <div class="right"></div>
+    </div>
+
+    <br>
+
+    <div id="demo2">
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+    <div id="demo3">
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //bind 改变属性的this指向
+    function f1(x, y) {
+        console.log(this.age)
+        console.log((x + y) + '=========' + this)
+    }
+    //  bind 是将 f1函数，复制了一份给ff
+    // 调用bind时，可以传参，也可以在调用时传参
+    // 如果在，调用bind时传参，那么，再次调用函数 ff时，会忽略参数
+    // 传入 null值，this的指向是window
+    var ff = f1.bind(null, 100, 33)
+    ff()
+
+    function Person() {
+        this.age = 1000
+    }
+
+    Person.prototype.eat = function() {
+        console.log('eat,eat,eat')
+    }
+
+    var per = new Person();
+
+    //改变this的指向，为per实例对象
+    //原本 f1中的this.age ，this指向的是window，而window中没有 age这个属性，所有返回undefined
+    //改变this指向后，this.age指向的就是per实例对象中的 age，所有返回 1000
+    var ff = f1.bind(per, 10, 20);
+    ff();
+
+    //===============================================================================================
+
+    //bind 改变方法的this指向
+
+    function Persons(age) {
+        this.age = age;
+    }
+    Persons.prototype.play = function() {
+        console.log(this + '============>' + this.age)
+    }
+
+    function Student(age) {
+        this.age = age
+    }
+
+    var pers = new Persons(100);
+    var stu = new Student(200);
+
+    //改变this的指向
+    var ff = pers.play.bind(stu);
+    ff()
+</script>
+
+</html>

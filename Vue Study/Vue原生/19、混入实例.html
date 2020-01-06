@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        混入 (mixins)定义了一部分可复用的方法或者计算属性。
+        混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项。
+     -->
+    <div id="databinding"></div>
+    <script>
+        let vm = new Vue({
+            el: "#databinding",
+            data: {},
+            methods: {
+
+            },
+        });
+        //这里不能使用 箭头函数，因为箭头函数 this 指向有问题
+        var myMixin = {
+            created: function() {
+                this.startmixin()
+            },
+            methods: {
+                startmixin: () => {
+                    document.write('Test 混入')
+                }
+            },
+        }
+        var Component = Vue.extend({
+            mixins: [myMixin]
+        })
+        var components = new Component()
+    </script>
+</body>
+
+<body>
+    <div id="databinding2"></div>
+    <script>
+        var mixin = {
+            created: () => {
+                document.write('混入调用' + '<br>')
+            }
+        }
+
+        new Vue({
+            mixins: [mixin],
+            created: () => {
+                document.write('组件调用' + '<br>')
+            }
+        })
+    </script>
+</body>
+
+</html>

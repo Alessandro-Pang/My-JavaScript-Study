@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="radio">
+        <!-- 
+            <label> 标签为 input 元素定义标注（标记）。
+            label 元素不会向用户呈现任何特殊效果。不过，它为鼠标用户改进了可用性。
+            如果您在 label 元素内点击文本，就会触发此控件。
+            就是说，当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。
+            <label> 标签的 for 属性应当与相关元素的 id 属性相同。
+         -->
+        <label for="boy">男：<input type="radio" name="sex" id="boy"></label>
+        <label for="girl">女：<input type="radio" name="sex" id="girl"></label>
+        <label for="secrecy">保密：<input type="radio" name="sex" id="secrecy"></label>
+    </div>
+
+    <div id="checkbox">
+        <label for="ck1">复选框1<input type="checkbox" name="test" id="ck1"></label>
+        <label for="ck2">复选框2<input type="checkbox" name="test" id="ck2"></label>
+        <label for="ck3">复选框3<input type="checkbox" name="test" id="ck3"></label>
+        <label for="ck4">复选框4<input type="checkbox" name="test" id="ck4"></label>
+        <label for="ck5">复选框5<input type="checkbox" name="test" id="ck5"></label>
+    </div>
+
+    <div id="button">
+        <input type="button" value="按钮">
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+        <input type="image" src="../iali/iali30_1.jpg" alt="图片按钮" style="width: 200px;height: 100px;">
+    </div>
+    <div>
+        输入10-100之间的数字：<input type="number" max="100" min="10">
+        <br/> 限制10位的名字：
+        <input type="text" maxlength="10" placeholder="username">
+        <br/> date：
+        <input type="date" name="" id="">
+    </div>
+
+    <div id="select">
+        <select name="text" id="">
+            <option value="none">请选择</option>
+            <option value="text1">文本</option>
+            <option value="text2">下拉框</option>
+            <option value="text3">筛选框</option>
+            <option value="text4">选择框</option>
+        </select>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<mate charts="utf-8"></mate>
+		<title></title>
+	</head>
+	<body>
+		<input type="button"  onClick="confirm$()" value=" confirm 确认框测试">
+		<br />
+		<span id="test"></span>
+		<br>
+		<input type="button" onClick="alert$()" value="alert 警告框测试">
+		<br>
+		<input type="button" onClick="prompt$()" value="prompt 提示框测试">
+		<br>
+		<span id="test2"></span>
+		<br>
+		<input type="button" value="点击显示文本框" id="btn">
+		<input type="text" id = "inTest">
+	</body>
+	<script>
+		function confirm$(){
+			var	r = confirm("this is test!")
+			if(r==true){
+				x="你按下了“确定”按钮";
+
+			}else{
+				x="你按下了“取消”按钮";
+			}
+
+			document.getElementById("test").innerHTML=x
+		}
+		//--------------------------------------------------------------
+		function alert$(){
+			alert("我是一个警告框")
+		}
+		//---------------------------------------------------------------
+		function prompt$(){
+			var person = prompt("请输入你的名字","大白菜");
+			if	(person !=null && person !=""){
+				x="你好"+person+"!";
+				document.getElementById("test2").innerHTML=x
+			}
+		}
+
+		//---------------------------------------------------------------
+		var inTest$ = document.getElementById("inTest");
+		inTest$.style.display = "none";
+		
+		var btn$ = document.getElementById("btn").onclick = function(){
+			inTest$.style.display = "block";
+			setInterval(				//时间，文本框出现五秒后，锁定文本框，1000是1秒
+				function(){
+					inTest$.disabled = true;
+				},5000
+			)
+			this.style.display = "none";
+		}
+	</script>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 300px;
+            height: 300px;
+            border: 1px solid springgreen;
+            display: grid;
+            grid-template-columns: repeat(3, 33%);
+            grid-template-rows: repeat(3, 33%);
+            grid-auto-rows: 33%;
+            grid-auto-columns: 33%;
+            place-content: start center;
+        }
+        
+        #app>.item {
+            background: violet;
+            border: 1px solid yellow;
+        }
+        
+        #app>.item:nth-child(1) {
+            box-sizing: border-box;
+            grid-column-start: 2;
+            grid-column-end: 4;
+            background: slateblue;
+        }
+        
+        #app2 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid darkcyan;
+            display: grid;
+            grid-template-columns: repeat(3, 33%);
+            grid-template-rows: repeat(3, 33%);
+            grid-auto-columns: 33%;
+            grid-auto-rows: 33%;
+        }
+        
+        #app2>.item {
+            background: darkviolet;
+            border: 1px solid darkcyan;
+        }
+        
+        #app2>.item:nth-child(1) {
+            /* ========================================================
+                grid-column-start属性：左边框所在的垂直网格线
+                grid-column-end属性：  右边框所在的垂直网格线
+                grid-row-start属性：   上边框所在的水平网格线
+                grid-row-end属性：     下边框所在的水平网格线
+               
+                项目的位置是可以指定的，
+                具体方法就是指定项目的四个边框，分别定位在哪根网格线。
+                一个 grid 布局，有 n+1 个网格线
+                n 为 行 列 的元素个数
+            ======================================================== */
+            box-sizing: border-box;
+            grid-row-start: 1;
+            grid-row-end: 3;
+            grid-column-start: 1;
+            grid-column-end: 3;
+            background: coral;
+        }
+        
+        #app,
+        #app2,
+        #app3,
+        #app4 {
+            float: left;
+            margin: 15px;
+        }
+        
+        #app3 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid darkcyan;
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            grid-template-rows: repeat(4, 25%);
+            place-content: start center;
+        }
+        
+        #app3>.item {
+            place-items: center;
+            border: 1px solid darkorange;
+            background: deeppink;
+        }
+        
+        #app3>.item:first-child {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 2;
+            grid-row-end: 4;
+            background: darkturquoise;
+        }
+        
+        #app4 {
+            width: 300px;
+            height: 300px;
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            grid-template-rows: repeat(4, 30%);
+            place-content: start;
+            color: lawngreen;
+            font-size: 20px;
+        }
+        
+        #app4>.item {
+            border: 1px solid darkorange;
+            background: cadetblue;
+            display: grid;
+            place-items: center;
+        }
+        
+        #app4>.item:nth-child(1) {
+            /* ==========================================================================
+                span 关键字，表示"跨越"，即左右边框（上下边框）之间跨越多少个网格。
+
+                span 关键字使用 start 和 end 效果相等
+                
+                grid-column-start === grid-column-end
+                grid-row-start === grid-row-end
+                
+                使用这四个属性，如果产生了项目的重叠，则使用z-index属性指定项目的重叠顺序。
+            =========================================================================== */
+            grid-column-start: span 2;
+            grid-row-start: span 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="item">11111</div>
+        <div class="item">22222</div>
+        <div class="item">33333</div>
+        <div class="item">44444</div>
+        <div class="item">55555</div>
+        <div class="item">66666</div>
+        <div class="item">77777</div>
+        <div class="item">88888</div>
+        <div class="item">99999</div>
+    </div>
+
+    <div id="app2">
+        <div class="item">11111</div>
+        <div class="item">22222</div>
+        <div class="item">33333</div>
+        <div class="item">44444</div>
+        <div class="item">55555</div>
+        <div class="item">66666</div>
+        <div class="item">77777</div>
+        <div class="item">88888</div>
+        <div class="item">99999</div>
+    </div>
+
+    <div id="app3">
+        <div class="item">11111</div>
+        <div class="item">22222</div>
+        <div class="item">33333</div>
+        <div class="item">44444</div>
+        <div class="item">55555</div>
+        <div class="item">66666</div>
+        <div class="item">77777</div>
+        <div class="item">88888</div>
+        <div class="item">99999</div>
+    </div>
+
+    <div id="app4">
+        <div class="item">11111</div>
+        <div class="item">22222</div>
+        <div class="item">33333</div>
+        <div class="item">44444</div>
+        <div class="item">55555</div>
+        <div class="item">66666</div>
+        <div class="item">77777</div>
+        <div class="item">88888</div>
+        <div class="item">99999</div>
+    </div>
+</body>
+
+</html>

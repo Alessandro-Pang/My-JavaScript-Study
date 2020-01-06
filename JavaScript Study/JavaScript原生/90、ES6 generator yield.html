@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+<div id="dv">
+    generator 生成器
+    <br>
+    根据ID推荐接口：<br>
+    https://api.apiopen.top/videoRecommend?id=127398<br>
+    新闻接口：<br>
+    https://www.apiopen.top/journalismApi<br>
+    随机推荐热门段子（包含文字、图片、GIF、视频）：<br>
+    https://www.apiopen.top/satinApi?type=1&page=1<br>
+    随机推荐热门段子【神评版本】（包含文字、图片、GIF、视频）：<br>
+    https://www.apiopen.top/satinGodApi?type=1&page=1<br>
+</div>
+
+</body>
+
+<script>
+    function* show() {
+        console.log('generator');
+
+        let a = yield;
+
+        console.log('yield');
+        console.log(a); // >>> 5
+    }
+
+    let gen = show();
+
+    //第一个next没法传参，可以通过调用函数时传参
+    gen.next(12); //yield 前一段的结果
+    gen.next(5);  //yiled 执行后的结果
+
+    //=====================================================================================
+    //=====================================generator 返回值=================================
+    //=====================================================================================
+
+    function* show2() {
+        console.log('generator1');
+
+        yield 11;
+        console.log('generator1');
+
+        yield 22;
+        console.log('generator1');
+
+        return 55;
+    }
+
+    let generator = show2();
+
+    //{ value: 11, done: false }
+    //value:返回值，done:完毕
+    //generator最后一个返回值，通过return返回
+    let result1 = generator.next();
+    console.log(result1);
+    let result2 = generator.next();
+    console.log(result2);
+    let result3 = generator.next();
+    console.log(result3);
+</script>
+
+</html>

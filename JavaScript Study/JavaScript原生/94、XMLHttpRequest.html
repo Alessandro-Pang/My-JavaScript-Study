@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <button type="submit" id="submit">GET Submit</button>
+    <button type="submit" id="submit2">POST Submit</button>
+    <div id="myDiv"></div>
+    <button type="submit" id="submit3">on ready state change</button>
+    <div id="dv1"></div>
+    <button type="submit" id='submit4'>my custom Ajax</button>
+    <div id="dv2"></div>
+</body>
+<script>
+    $('#submit').click(function() {
+        let xmlhttp = null;
+        if (window.XMLHttpRequest) {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp = new XMLHttpRequest;
+        } else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp = new ActiveXObject;
+        }
+
+        /** 
+            open(method,url,async):
+                规定请求的类型、URL 以及是否异步处理请求。
+                method：请求的类型；GET 或 POST
+                url：文件在服务器上的位置
+                async：true（异步）或 false（同步）
+         */
+
+        xmlhttp.open('GET', 'http://127.0.0.1:3300/db/queryUser?username="大天使"', true);
+        /**
+            send(string):
+                将请求发送到服务器。
+                string：仅用于 POST 请求
+        */
+        xmlhttp.send()
+    });
+
+    /** 
+        GET 还是 POST 区别:
+            与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用。
+            然而，在以下情况中，请使用 POST 请求：
+                无法使用缓存文件（更新服务器上的文件或数据库）
+                向服务器发送大量数据（POST 没有数据量限制）
+                发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+    */
+
+    $('#submit2').click(function() {
+        let xmlhttp;
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest;
+        } else {
+            xmlhttp = new ActiveXObject;
+        }
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                /*
+                responseText 属性
+                    如果来自服务器的响应并非 XML，应使用 responseText 属性。    
+                    responseText 属性返回字符串形式的响应
+                */
+                $('#myDiv').html(xmlhttp.responseText);
+                console.log(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open('POST', 'http://127.0.0.1:3300/db/register', true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // key=value&key=value.....
+        xmlhttp.send("username=xiao a li&password=password");
+        /**	
+            xmlhttp.setRequestHeader():
+                向请求添加 HTTP 头
+                    header: 规定头的名称
+                    value:  规定头的值
+         */
+    })
+
+    /**
+        onreadystatechange 事件
+            当请求被发送到服务器时，我们需要执行一些基于响应的任务。
+            每当 readyState 改变时，就会触发 onreadystatechange 事件。
+            readyState 属性存有 XMLHttpRequest 的状态信息。
+    */
+    $('#submit3').click(function() {
+        let xmlhttp = null;
+
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest;
+        } else {
+            xmlhttp = new ActiveXObject;
+        }
+        /**
+            onreadystatechange 	
+                存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。
+                
+            readyState 	
+                存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。
+                0: 请求未初始化
+                1: 服务器连接已建立
+                2: 请求已接收
+                3: 请求处理中
+                4: 请求已完成，且响应已就绪
+
+            status 	
+                200: "OK"
+                404: 未找到页面
+         */
+        xmlhttp.onreadystatechange = function() {
+            let xmlState = xmlhttp.readyState;
+            let xmlstatus = xmlhttp.status;
+            if (xmlState === 4 && xmlstatus === 200) {
+                $('#dv1').html(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.open('POST', 'http://127.0.0.1:3300/db/register', true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send('username=pang pang&password=1213567')
+    })
+
+    //封装 xmlHttpRequest 方法
+    let myajax = (type, url, data, success) => {
+        /** 
+         * @param {string :post,get} type
+         * @param {string :http url} url
+         * @param {object :key:value} data
+         * @param {function :callback function} success
+         */
+        let xmlhttp = null;
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        let xmlhttpResponseData = null;
+        let ajax = xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                success(xmlhttp.responseText)
+            }
+        }
+
+        let requestData = '';
+        for (let result in data) {
+            requestData += `${result}=${data[result]}&`;
+        }
+
+        let datalen = requestData.length - 1;
+        requestData = requestData.substr(0, datalen);
+        type = type.toUpperCase;
+        if (type === 'POST') {
+            xmlhttp.open(type, url, true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send(requestData)
+        } else if (type === 'GET') {
+            url = url + '?' + requestData;
+            xmlhttp.open(type, url, true)
+            xmlhttp.send();
+        } else {
+            return false
+        }
+    }
+
+    let data = {
+        username: "大龙",
+        password: "guazi"
+    }
+    $('#submit4').click(function() {
+        myajax('POST', 'http://127.0.0.1:3300/db/register', data,
+            function(data) {
+                $('#dv2').html(data)
+            });
+    })
+</script>
+
+</html>

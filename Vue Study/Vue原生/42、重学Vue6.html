@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <style>
+        #a {
+            color: red
+        }
+        
+        #b {
+            color: rosybrown
+        }
+        
+        #c {
+            color: blue
+        }
+        
+        #d {
+            color: darkmagenta
+        }
+        
+        #e {
+            color: aqua
+        }
+        
+        #f {
+            color: darkgoldenrod
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ol>
+            <!--
+                为每个 todo-item 提供 todo 对象
+                todo 对象是变量，即其内容可以是动态的。
+            -->
+            <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
+
+            </todo-item>
+        </ol>
+    </div>
+
+    <div id="app2">
+        <p>双大括号会将数据解释为普通文本，而非 HTML 代码<br>{{message}}</p>
+        <!-- 这个 span 的内容将会被替换成为属性值 rawHtml，直接作为 HTML——会忽略解析属性值中的数据绑定。
+            注意，你不能使用 v-html 来复合局部模板，因为 Vue 不是基于字符串的模板引擎。
+            反之，对于用户界面 (UI)，组件更适合作为可重用和可组合的基本单位。 -->
+        <p> 为了输出真正的 HTML，你需要使用 v-html 指令：<span v-html="message"></span></p>
+        <!-- 你的站点上动态渲染的任意 HTML 可能会非常危险，因为它很容易导致 XSS 攻击。
+            请只对可信内容使用 HTML 插值，绝不要对用户提供的内容使用插值 -->
+    </div>
+
+    <div id="app3">
+        <input type="text" v-model="message">
+        <div v-bind:id="message">是否显示效果？</div>
+        <input type="text" v-bind:disabled="isDisable">
+    </div>
+</body>
+<script>
+    Vue.component('todo-item', {
+        // todo-item 组件现在接受一个
+        // "prop"，类似于一个自定义特性。
+        // 这个 prop 名为 todo。
+        //props是一个数组
+        props: ['todo'],
+        template: '<li>{{todo.text}}</li>'
+    })
+
+    new Vue({
+        el: "#app",
+        data: {
+            groceryList: [{
+                id: 0,
+                text: '蔬菜'
+            }, {
+                id: 1,
+                text: '奶酪'
+            }, {
+                id: 2,
+                text: '随便其它什么人吃的东西'
+            }]
+        }
+    });
+    new Vue({
+        el: "#app2",
+        data: {
+            message: "<div style='color:red;background:#33ffff'>这是一个div标签</div>"
+        }
+    })
+
+    new Vue({
+        el: "#app3",
+        data: {
+            message: '输入a-f任意一个选取颜色',
+            isDisable: true
+        }
+    })
+</script>
+
+</html>

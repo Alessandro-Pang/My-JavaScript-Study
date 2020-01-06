@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /****************************************************************************************/
+    /***************************************作用域*******************************************/
+    /****************************************************************************************/
+
+    //在非严格模式下，没有var的变量声明是隐形全局变量,函数级作用域
+    i = 10
+    console.log(i)
+
+    //var 函数级作用域,且可重复声明
+    if (true) {
+        var a = 10
+        p1 = 100;
+        var b = 10;
+    }
+    console.log(a, b, p1)
+
+    //证实函数级作用域
+    function a() {
+        var c = 100;
+        s = 10;
+    };
+    try {
+        console.log(c)
+    } catch (e) {
+        console.log(e)
+    };
+    try {
+        console.log(s)
+    } catch (e) {
+        console.log(e)
+    };
+
+    //let 、const块级作用域，且不可重复声明
+    {
+        let letA = 10;
+    };
+    try {
+        console.log(letA)
+    } catch (e) {
+        console.log(e)
+    };
+    //const 测试 
+    {
+        const constA = 100;
+    };
+    try {
+        console.log(constA)
+    } catch (e) {
+        console.log(e)
+    };
+
+    /****************************************************************************************/
+    /**********************************变量作用域链*******************************************/
+    /****************************************************************************************/
+
+    //变量作用域链
+    let num = 0;
+    let fn1 = () => {
+        var num = 10; //失效 => 0
+        let fn2 = () => {
+            var num = 20; //失效 => 10
+            let fn3 = () => {
+                var num = 30; //失效 => 20
+                console.log(num)
+            }
+            fn3()
+        }
+        fn2()
+    }
+    fn1()
+
+    /****************************************************************************************/
+    /**********************************变量预解析*********************************************/
+    /****************************************************************************************/
+
+    //在浏览器解析代码前，把变量的声明和函数的声明，提前到该作用域的最前面
+    //Preliminary--准备，预备 Analysis--分析，解析
+    try {
+        console.log(varPreliminaryAnalysis);
+    } catch (e) {
+        console.log(e)
+    }
+    var varPreliminaryAnalysis = 10;
+
+    //let 和 const 不会提前预解析
+    try {
+        console.log(letPreliminaryAnalysis);
+    } catch (e) {
+        console.log(e)
+    }
+    let letPreliminaryAnalysis = 10;
+
+    try {
+        console.log(constPreliminaryAnalysis);
+    } catch (e) {
+        console.log(e)
+    }
+    const constPreliminaryAnalysis = 10
+
+    /****************************************************************************************/
+    /******************************函数提前与解析*********************************************/
+    /****************************************************************************************/
+
+    try {
+        fnA()
+    } catch (e) {
+        console.log(e)
+    }
+
+    function fnA() {
+        console.log('函数提前预解析')
+    }
+
+    //箭头函数无法预解析
+    try {
+        fnB()
+    } catch (e) {
+        console.log(e)
+    }
+
+    var fnB = () => {
+        console.log('箭头函数提前预解析')
+    }
+
+    //匿名函数不会提前解析
+    try {
+        fnC()
+    } catch (e) {
+        console.log(e)
+    }
+
+    var fnC = function() {
+        console.log('匿名函数提前预解析')
+    }
+
+
+    //匿名函数赋值给变量
+    //变量提前预解析
+    //变量名+()，浏览器是无法识别的
+    var fnD;
+    var fnD = function() {
+        console.log('函数提前预解析')
+    }
+    try {
+        fnD()
+    } catch (e) {
+        console.log(e)
+    }
+</script>
+
+</html>

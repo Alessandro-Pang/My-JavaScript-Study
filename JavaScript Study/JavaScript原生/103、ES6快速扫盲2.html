@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    postData('data/json_demo.json', {
+            amswer: 42
+        })
+        .then(data => console.log(data))
+        .catch(error => console.log(error));
+
+    /**
+        fetch() 支持第二个可选参数，一个可以控制不同配置的init对象
+    */
+    function postData(url, data) {
+        return fetch(url, {
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                'use-agent': "Mozilla/4.0 MDN Example"
+            },
+            methods: "GET",
+            mode: "cors",
+            redirect: "follow",
+            referrer: "no-referrer"
+        }).then(response => response.json())
+    }
+
+    // 数据结构 ---> Map
+    /**
+     * Map 中的键可以是任意类型的，比如function(),{},string等
+     */
+    const map = new Map();
+    const key1 = 'some string',
+        key2 = {},
+        key3 = function() {};
+
+    //为key设置value
+    map.set(key1, 'Value of key1');
+    map.set(key2, 'Value of key2');
+    map.set(key3, 'Value of key3');
+
+    console.log(map.get(key1));
+    console.log(map.get(key2));
+    console.log(map.get(key3));
+
+    for (let [key, value] of map) {
+        console.log(`${key}=>${value}`);
+    }
+
+    for (let key of map.keys()) {
+        console.log(key)
+    }
+
+    for (let value of map.values()) {
+        console.log(value)
+    }
+
+    map.forEach((key, value) => {
+        console.log(`${key}=>${value}`)
+    })
+</script>
+
+
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            display: grid;
+            width: 300px;
+            height: 300px;
+            grid-template-columns: repeat(3, 31%);
+            border: 1px solid darkcyan;
+            /* ===================================
+                grid-row-gap:设置行间距
+                grid-column-gap:设置列间距
+            ====================================== */
+            grid-row-gap: 10px;
+            grid-column-gap: 10px;
+            box-sizing: border-box;
+        }
+        
+        #app>.item {
+            border: 1px solid springgreen;
+        }
+        
+        #app>.item:nth-of-type(odd) {
+            background: cadetblue;
+        }
+        
+        #app>.item:nth-of-type(even) {
+            background: coral;
+        }
+        
+        #app2 {
+            display: grid;
+            width: 300px;
+            height: 300px;
+            grid-template-columns: repeat(3, 31%);
+            border: 1px solid coral;
+            /* ======================================================================
+                grid-gap属性是grid-column-gap和grid-row-gap的合并简写形式，语法如下。
+
+                grid-gap: <grid-row-gap> <grid-column-gap>;
+                因此，上面一段 CSS 代码等同于下面的代码。
+
+                .container {
+                    grid-gap: 20px 20px;
+                }
+                如果grid-gap省略了第二个值，浏览器认为第二个值等于第一个值。
+
+                根据最新标准，上面三个属性名的grid-前缀已经删除，
+                grid-column-gap和grid-row-gap写成column-gap和row-gap，grid-gap写成gap。
+            ========================================================================== */
+            grid-gap: 10px 10px
+        }
+        
+        #app2>.item {
+            border: 1px solid darkorchid;
+        }
+        
+        #app2>.item:nth-of-type(odd) {
+            background: peru;
+        }
+        
+        #app2>.item:nth-of-type(even) {
+            background: fuchsia;
+        }
+        
+        #app,
+        #app2 {
+            float: left;
+            margin: 20px;
+        }
+        
+        #page {
+            /* ===============================================
+                grid-template-areas 区域布局
+             =============================================== */
+            display: grid;
+            /* 1.设置display为grid */
+            width: 100%;
+            height: 250px;
+            grid-template-areas: "head head" "nav  main" "nav  foot";
+            /* 2.区域划分 当前为 三行 两列 */
+            grid-template-rows: 50px 1fr 30px;
+            /* 3.各区域 宽高设置 */
+            grid-template-columns: 150px 1fr;
+        }
+        
+        #page>header {
+            grid-area: head;
+            /* 4. 指定当前元素所在的区域位置, 从grid-template-areas选取值 */
+            background-color: #8ca0ff;
+        }
+        
+        #page>nav {
+            grid-area: nav;
+            background-color: #ffa08c;
+        }
+        
+        #page>main {
+            grid-area: main;
+            background-color: #ffff64;
+        }
+        
+        #page>footer {
+            grid-area: foot;
+            background-color: #8cffa0;
+        }
+        
+        #demo {
+            width: 400px;
+            height: 300px;
+            display: grid;
+            grid-template-areas: "head head" "nav nav" "aside arti" "foot foot";
+            grid-template-columns: 1fr 3fr;
+            grid-template-rows: .8fr minmax(30px, .5fr) 2fr 50px;
+            border: 1px solid darkgoldenrod;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        #demo>header {
+            grid-area: head;
+            background: blueviolet;
+        }
+        
+        #demo>nav {
+            grid-area: nav;
+            background: burlywood;
+        }
+        
+        #demo>aside {
+            grid-area: aside;
+            background: coral;
+        }
+        
+        #demo>article {
+            grid-area: arti;
+            background: darkcyan;
+        }
+        
+        #demo>footer {
+            /* ==================================
+                footer中的文字不会自动折行
+                    所以文字会撑款footer
+            ================================== */
+            grid-area: foot;
+            background: darkred;
+        }
+        
+        #flow {
+            display: grid;
+            width: 300px;
+            height: 300px;
+            /* ============================================================================
+                grid-auto-flow属性除了设置成row和column，还可以设成row dense和column dense。
+                这两个值主要用于，某些项目指定位置以后，剩下的项目怎么自动放置。
+            ============================================================================== */
+            grid-auto-flow: column;
+            /* 因为指定按行排列，所以grid-template-* 需要指定rows */
+            grid-template-rows: repeat(3, 33.33%);
+            border: 1px solid slateblue;
+        }
+        
+        #flow>.item:nth-of-type(odd) {
+            border: 1px solid darkorange;
+            background: aquamarine;
+        }
+        
+        #flow2 {
+            display: grid;
+            width: 300px;
+            height: 300px;
+            /* 先行后列 */
+            grid-auto-flow: row dense;
+            grid-template-columns: repeat(3, 33.33%);
+            border: 1px solid darkorange;
+            font-size: 20px;
+        }
+        
+        #flow2>.item:nth-of-type(odd) {
+            border: 1px solid darkkhaki;
+            background: darkslategray;
+        }
+        
+        #flow2>.item:nth-of-type(even) {
+            border: 1px solid darkkhaki;
+            background: darkmagenta;
+        }
+        
+        #flow2>.item:first-child {
+            background: lightcoral;
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+        
+        #flow2>.item:nth-child(2) {
+            background: lightseagreen;
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+        
+        #flow,
+        #flow2,
+        #flow3 {
+            float: left;
+            margin: 20px;
+        }
+        
+        #flow3 {
+            display: grid;
+            width: 300px;
+            height: 300px;
+            /* 先列后行 */
+            grid-auto-flow: column dense;
+            grid-template-rows: repeat(3, 33.33%);
+            border: 1px solid darkorange;
+            font-size: 20px;
+        }
+        
+        #flow3>.item:nth-of-type(odd) {
+            border: 1px solid darkkhaki;
+            background: darkslategray;
+        }
+        
+        #flow3>.item:nth-of-type(even) {
+            border: 1px solid darkkhaki;
+            background: darkmagenta;
+        }
+        
+        #flow3>.item:first-child {
+            background: lightcoral;
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+        
+        #flow3>.item:nth-child(2) {
+            background: lightseagreen;
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+    <div id="app2">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+    <section id="page">
+        <header>Header</header>
+        <nav>Navigation</nav>
+        <main>Main area</main>
+        <footer>Footer</footer>
+    </section>
+
+    <div id="demo">
+        <header>This is Heaxder</header>
+        <nav>This is Nav</nav>
+        <aside>侧边栏,侧边栏,侧边栏,侧边栏，侧边栏</aside>
+        <article>文章,文章,文章,文章,文章,文章,文章,文章,文章,文章,</article>
+        <footer>footer,footer,footer,footer,footer,footer<br> footer,footer,footer,footer,footer,footer,footer,footer
+        </footer>
+    </div>
+
+    <div id="flow">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+    <div id="flow2">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">9</div>
+    </div>
+
+    <div id="flow3">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">9</div>
+    </div>
+</body>
+
+</html

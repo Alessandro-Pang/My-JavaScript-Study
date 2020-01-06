@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/user/pangchao">欢迎你</router-link>
+        <router-view/>
+    </div>
+    <script>
+        const Home = {
+            template: `<h1>welecome to ziyangBlog</h1>
+                        `
+        };
+        const User = {
+            template: `<div>您好 {{ $route.params.name }}</div>`
+        };
+        /**
+         * 路由实例对象
+         * 当 使用 自闭router-view标签时,会自动渲染 '/' 组件
+         * 当 使用 router-link 组件时,会覆盖router-view的根渲染
+         */
+        const router = new VueRouter({
+            routes: [{
+                path: '/',
+                component: Home
+            }, {
+                path: '/user/:name',
+                component: User
+            }]
+        });
+
+        // Vue实例对象  $mount-->挂载路由
+        new Vue({
+            router
+        }).$mount('#app')
+    </script>
+
+</body>
+
+</html>

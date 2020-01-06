@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dv {
+            width: 300px;
+            height: 200px;
+            border: 1px solid saddlebrown;
+            background: saddlebrown;
+            /* animation 所有动画可以简写，除了animation-paly-state */
+            animation: test1 5s infinite linear alternate;
+        }
+        
+        @keyframes test1 {
+            0% {
+                width: 300px;
+                height: 200px;
+                background: saddlebrown;
+            }
+            50% {
+                width: 150px;
+                height: 150px;
+                background: sandybrown;
+            }
+            100% {
+                width: 400px;
+                height: 400px;
+                background: slateblue;
+            }
+        }
+        
+        #dv2 {
+            width: 300px;
+            height: 200px;
+            border: slateblue;
+            background: slateblue;
+            border-radius: 150px;
+            /* 定义动画名称 */
+            animation-name: test;
+            /* 定义一个动画完成一个周期所花费的秒数 */
+            animation-duration: 2s;
+            /* 定义动画速度曲线,默认ease 
+                    linear:匀速, ease:渐快 ,ease-in:低速开始 ,
+                    ease-out:低速结束 ,ease-in-out:低速开始和结束 ,
+                    cubic-bezier(n,n,n,n) 赛贝尔曲线
+            */
+            animation-timing-function: linear;
+            /* 定义动画延迟开始时间 */
+            animation-delay: 0ms;
+            /* 定义动画完成时,元素的样式 */
+            /*
+                none	   默认值。动画在动画执行之前和之后不会应用任何样式到目标元素。
+                forwards   在动画结束后（由 animation-iteration-count 决定），动画将应用该属性值。
+                backwards  动画将应用在 animation-delay 定义期间启动动画的第一次迭代的关键帧中定义的属性值。
+                            这些都是 from 关键帧中的值（当 animation-direction 为 "normal" 或 "alternate" 时）
+                            或 to 关键帧中的值（当 animation-direction 为 "reverse" 或 "alternate-reverse" 时）。
+                both	   动画遵循 forwards 和 backwards 的规则。也就是说，动画会在两个方向上扩展动画属性。
+                initial	   设置该属性为它的默认值。
+                inherit	   从父元素继承该属性。
+             */
+            animation-fill-mode: none;
+            /* 定义动画执行次数，默认1，infinite:死循环 */
+            animation-iteration-count: infinite;
+            /* 规定动画下一周期是否逆向播放 */
+            /* 
+                normal:默认值，正常播放;
+                reverse:动画反向播放;
+                alternate:动画在奇数时正常播放，偶数时逆向播放;
+                alternate-reverse:动画在奇数次时逆向播放，偶数次时正向播放
+                inherit:从父元素继承
+             */
+            animation-direction: normal;
+            /* 规定动画是否暂停，默认running ，paused:暂停动画 */
+            animation-play-state: running;
+        }
+        
+        @keyframes test {
+            from {
+                /* transform: rotate(0deg) */
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+        
+        #dv3 {
+            width: 300px;
+            height: 200px;
+            /* 
+                linear-gradient() 函数用于创建一个线性渐变的 "图像"。
+
+                为了创建一个线性渐变，你需要设置一个起始点和一个方向（指定为一个角度）的渐变效果。
+                你还要定义终止色。终止色就是你想让Gecko去平滑的过渡，并且你必须指定至少两种，
+                当然也会可以指定更多的颜色去创建更复杂的渐变效果。 
+            */
+            /* linear-gradient(target,init-color,target-color) */
+            background-image: linear-gradient(to left bottom, #3fcf3f, white);
+        }
+        
+        #dv4 {
+            width: 300px;
+            height: 200px;
+            /* linear-gradient 线性渐变 */
+            background-image: linear-gradient(to right bottom, rgba(50, 255, 100), rgba(0, 0, 0, 0)), url(./images/bg.png);
+        }
+        
+        #dv5 {
+            width: 300px;
+            height: 200px;
+            /* radial-gradient 径向渐变 */
+            background-image: radial-gradient(red, yellow, green);
+        }
+        
+        .a1>div[id*="dv"] {
+            float: left;
+            margin-left: 20px;
+        }
+        /* 
+            如果指定的多媒体类型匹配设备类型则查询结果返回 true，文档会在匹配的设备上显示指定样式效果。
+
+            除非你使用了 not 或 only 操作符，否则所有的样式会适应在所有设备上显示效果。
+
+            not: not是用来排除掉某些特定的设备的，比如 @media not print（非打印设备）。
+
+            only: 用来定某种特别的媒体类型。
+                对于支持Media Queries的移动设备来说，如果存在only关键字，
+                移动设备的Web浏览器会忽略only关键字并直接根据后面的表达式应用样式文件。
+                对于不支持Media Queries的设备但能够读取Media Type类型的Web浏览器，遇到only关键字时会忽略这个样式文件。
+
+            all: 所有设备，这个应该经常看到。
+        */
+        
+        #div {
+            margin-top: 250px;
+            width: 300px;
+            height: 300PX;
+            border: 1px solid antiquewhite;
+            background: peru;
+        }
+        
+        @media only screen and (max-width: 1200px) {
+            #div {
+                background: deepskyblue;
+            }
+            @media only screen and (max-width: 900px) {
+                #div {
+                    background: darkcyan;
+                }
+                @media only screen and (max-width:600px) {
+                    #div {
+                        background: chocolate;
+                    }
+                    @media only screen and (max-width: 300px) {
+                        #div {
+                            background: blueviolet;
+                        }
+                    }
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dv"></div>
+
+    <div id="dv2"></div>
+
+    <div class="a1">
+        <div id="dv3"></div>
+
+        <div id="dv4"></div>
+
+        <div id="dv5"></div>
+    </div>
+
+    <div id="div"></div>
+</body>
+
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #map {
+            transform: translate(35%, 5%);
+            width: 800px;
+            height: 600px;
+            font: Arial;
+            position: relative;
+            background: lightseagreen;
+        }
+        
+        .gameOver {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            color: rebeccapurple;
+        }
+        
+        .star {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        #score {
+            font: "17px Arial";
+        }
+        
+        .play {
+            width: 100px;
+            height: 50px;
+            color: deeppink;
+            box-sizing: border-box;
+            font: Arial;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map">
+        <div id="score">当前分数:0分</div>
+    </div>
+
+    <script>
+        function my$(id) {
+            return document.getElementById(id);
+        }
+
+        //食物构造函数
+        (function() {
+            var elements = []; //用来保存每个小方块食物的
+
+            function Food(x, y, width, height, color) {
+                this.x = x || 0;
+                this.y = y || 0;
+                this.width = width || 20;
+                this.height = height || 20;
+                this.color = color || "red";
+            };
+
+            Food.prototype.init = function(map) {
+                remove();
+
+                var div = document.createElement('DIV');
+                map.appendChild(div);
+
+                div.style.width = this.width + 'px';
+                div.style.height = this.height + "px";
+                div.style.color = this.color;
+                div.innerHTML = "<span class='star'>★</span>";
+                div.style.position = 'absolute';
+
+                this.x = parseInt(Math.random() * (map.offsetWidth / this.width)) * this.width;
+                this.y = parseInt(Math.random() * (map.offsetHeight / this.height)) * this.height;
+
+                div.style.left = this.x + 'px';
+                div.style.top = this.y + "px";
+                elements.push(div)
+            }
+
+            function remove() {
+                for (var i = 0; i < elements.length; i++) {
+                    var ele = elements[i];
+                    ele.parentNode.removeChild(ele);
+                    elements.splice(i, 1);
+                }
+            }
+            window.Food = Food
+        }());
+
+        //snake构造函数
+        (function() {
+            var elements = [];
+            let score = 0;
+
+            function Snake(width, height, direction) {
+                this.width = width || 20;
+                this.height = height || 20;
+                this.body = [{
+                    x: 3,
+                    y: 2,
+                    color: 'green'
+                }, {
+                    x: 2,
+                    y: 2,
+                    color: 'orange'
+                }, {
+                    x: 1,
+                    y: 2,
+                    color: 'orange'
+                }]
+                this.direction = direction || 'right';
+            }
+
+            Snake.prototype.init = function(map) {
+                remove();
+                for (let i = 0; i < this.body.length; i++) {
+
+                    var obj = this.body[i];
+
+                    var div = document.createElement('DIV');
+                    map.appendChild(div);
+                    div.style.position = "absolute";
+                    div.style.width = this.width + 'px';
+                    div.style.height = this.height + 'px';
+                    div.style.left = obj.x * this.width + 'px';
+                    div.style.top = obj.y * this.height + 'px';
+                    div.style.backgroundColor = obj.color;
+
+                    elements.push(div);
+                }
+            }
+
+            Snake.prototype.move = function(food, map) {
+                let i = this.body.length - 1;
+                for (; i > 0; i--) {
+                    this.body[i].x = this.body[i - 1].x;
+                    this.body[i].y = this.body[i - 1].y;
+                }
+                switch (this.direction) {
+                    case "right":
+                        this.body[0].x += 1;
+                        break;
+                    case "left":
+                        this.body[0].x -= 1;
+                        break;
+                    case "bottom":
+                        this.body[0].y += 1;
+                        break;
+                    case "top":
+                        this.body[0].y -= 1;
+                        break;
+                }
+
+                let headX = this.body[0].x * this.width;
+                let headY = this.body[0].y * this.height;
+
+                if (headX === food.x && headY === food.y) {
+                    let lastBody = this.body[this.body.length - 1];
+                    this.body.push({
+                        x: lastBody.x,
+                        y: lastBody.y,
+                        color: lastBody.color
+                    });
+
+                    score += 100;
+                    my$('score').innerText = "当前分数：" + score + "分"
+                    food.init(map);
+                }
+            }
+
+            function remove() {
+                var i = elements.length - 1;
+                for (; i >= 0; i--) {
+                    var ele = elements[i];
+                    ele.parentNode.removeChild(ele);
+                    elements.splice(i, 1);
+                }
+            }
+            window.Snake = Snake;
+        }());
+
+        //游戏主函数
+        (function() {
+            function Game(map) {
+                this.food = new Food;
+                this.snake = new Snake;
+                this.map = map;
+                that = this;
+            };
+            Game.prototype.init = function() {
+                this.food.init(this.map);
+                this.snake.init(this.map);
+                this.runSnake();
+                this.bindKey();
+            }
+            Game.prototype.bindKey = function() {
+                document.addEventListener('keydown', function(event) {
+                    let key = event.keyCode;
+                    if ((key === 87 || key === 38) && this.snake.direction !== 'bottom') {
+                        //w --- 上
+                        this.snake.direction = 'top';
+                    } else if ((key === 83 || key === 40) && this.snake.direction !== 'top') {
+                        //s --- 下
+                        this.snake.direction = 'bottom';
+                    } else if ((key === 65 || key === 37) && this.snake.direction !== 'right') {
+                        //a --- 左
+                        this.snake.direction = 'left';
+                    } else if ((key === 68 || key === 39) && this.snake.direction !== 'left') {
+                        //d --- 右
+                        this.snake.direction = 'right';
+                    }
+                }.bind(that), false)
+            }
+            Game.prototype.runSnake = function() {
+                let timeId = setInterval(function() {
+                        this.snake.init(this.map);
+                        this.snake.move(this.food, this.map);
+
+                        var maxX = map.offsetWidth / this.snake.width;
+                        var maxY = map.offsetHeight / this.snake.height;
+
+                        var snakeBody = this.snake.body;
+                        var snakeLen = snakeBody.length - 1;
+                        var headX = this.snake.body[0].x;
+                        var headY = this.snake.body[0].y;
+                        //贪吃蛇碰到边界
+                        if (headX < 0 || headX >= maxX || headY < 0 || headY >= maxY) {
+
+                            clearInterval(timeId);
+                            gameOver();
+                        }
+                        //贪吃蛇碰到自己的身体
+                        for (; snakeLen > 0; snakeLen--) {
+                            if (headX === snakeBody[snakeLen].x && headY === snakeBody[snakeLen].y) {
+                                clearInterval(timeId);
+                                gameOver();
+                            }
+                        }
+                    }.bind(that), 150) //bind改变this指向
+            }
+
+            function gameOver() {
+                let div = document.createElement('div');
+                div.className = "gameOver";
+                div.innerHTML = "<h1>Game Over!!</h1>";
+                my$('map').appendChild(div);
+            }
+
+            window.Game = Game;
+        }());
+
+        let div = document.createElement('div');
+        div.className = "play"
+        div.innerHTML = "<h1 id='paly'>play<h1>"
+        my$('map').appendChild(div);
+
+        my$('paly').onclick = function() {
+            // 开始
+            var game = new Game(my$('map'));
+            game.init();
+            my$('map').removeChild(div);
+        }
+    </script>
+</body>
+
+</html>

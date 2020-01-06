@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Socket.IO chat</title>
+    <style>
+        body {
+            background: url(background/bj6.jpg);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font: 13px Helvetica, Arial;
+        }
+        
+        form {
+            background: #000;
+            padding: 3px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        form input {
+            border: 0;
+            padding: 10px;
+            width: 90%;
+            margin-right: .5%;
+        }
+        
+        form button {
+            width: 9%;
+            background: rgb(130, 224, 255);
+            border: none;
+            padding: 10px;
+        }
+        
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #messages li {
+            padding: 5px 10px;
+        }
+        
+        #messages li:nth-child(odd) {
+            background: #0ff;
+        }
+    </style>
+    <script src="socket.io.js"></script>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <ul id="messages"></ul>
+    <form action="">
+        <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <script>
+        $(function() {
+            var socket = io('ws://192.168.0.100:3300');
+            $('form').submit(function(e) {
+
+                e.preventDefault(); //防止页面重新加载 
+                // 将数据发送到服务器
+                socket.emit('chat message', $('#m').val());
+                $('#m').val('');
+                return false;
+            });
+            // 在客户端，当我们捕获chat message事件时，会将其包括在页面中。
+            socket.on('chat message', function(msg) {
+                $('#messages').append($('<li>').text(msg));
+            });
+
+            setInterval(function() {
+                $('#messages').append($('<li>').text('自动播报 : 陈浩南在线yp,有意者联系、、、'));
+            }, 5000)
+        });
+    </script>
+</body>
+
+</html>

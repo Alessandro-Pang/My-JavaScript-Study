@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //label 语句
+    var i, j;
+
+    loop1:
+        for (i = 0; i < 3; i++) { //The first for statement is labeled "loop1"
+            loop2: for (j = 0; j < 3; j++) { //The second for statement is labeled "loop2"
+                if (i === 1 && j === 1) {
+                    continue loop1;
+                }
+                console.log('i = ' + i + ', j = ' + j);
+            }
+        }
+
+    //with 语句的作用是将代码的作用域设置到一个特定的对象中
+
+    //提示：with 语句是运行缓慢的代码块，尤其是在已设置了属性值时。
+    //大多数情况下，如果可能，最好避免使用它。
+    function f(foo, values) {
+        with(foo) {
+            console.log(values)
+        }
+    }
+    f(this, 'a')
+</script>
+
+</html>

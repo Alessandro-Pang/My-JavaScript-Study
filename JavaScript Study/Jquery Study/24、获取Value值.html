@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+
+    <button id="btn">click</button>
+    <button id="btn1">click</button>
+    <button id="btn2">click</button>
+    <br>
+    <textarea name="" id="text" cols="30" rows="10">
+        biu 嘟嘟嘟嘟嘟
+    </textarea>
+
+    <select name="" id="sel1">
+        <option value="1">妲己</option>
+        <option value="2">王昭君</option>
+        <option value="3">亚瑟</option>
+        <option value="4">项羽</option>
+        <option value="5">刘备</option>
+    </select>
+</body>
+<script>
+    $('#btn').click(function() {
+        $('#text').text('哇，好神奇啊')
+    });
+
+    $('#btn1').click(function() {
+        $('#text').html('btn1 实现了效果')
+    });
+
+    $('#btn2').click(function() {
+        $('#text').val('嘀嘀嘀嗒嗒嗒哒哒')
+    });
+
+    //为select标签中的option 标签 选中 value值为 3 的值
+    $('#sel1').val(3)
+</script>
+
+</html>

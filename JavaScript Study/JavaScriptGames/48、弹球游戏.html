@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../common.js"></script>
+    <script src="../jquery.js"></script>
+    <style>
+        canvas {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+</body>
+<script>
+    //弹球对象
+    //x,y 弹球初始位置
+    //xSpeed ,ySpeed 初始移动的速度 (每次移动的距离)
+    var ball = {
+        x: 100,
+        y: 100,
+        xSpeed: -5,
+        ySpeed: -5
+    };
+
+    //canvas画布对象
+    var ctx = my$('canvas').getContext('2d');
+
+    //球体样式
+    ball.draw = function() {
+        ctx.beginPath();
+        //探求对象直径为10
+        ctx.arc(this.x, this.y, 10, 0, Math.PI * 2, false);
+        ctx.fill();
+    };
+
+    //弹球移动轨迹
+    ball.move = function() {
+        //每调用一次，x,y的位置就做一次改变
+        //初始移动轨迹是往右上走
+        this.x = this.x + this.xSpeed;
+        this.y = this.y + this.ySpeed;
+    };
+
+    //小球移动速度，每次取 5 - 10之间
+    function parseIntRandom() {
+        let speed = parseInt(Math.random(0, 1) * 10);
+        return speed > 5 ? speed : parseIntRandom();
+    }
+
+    //检测弹球移动范围，挡板元素碰撞事件
+    ball.checkCanvas = function(panelStart, panelEnd) {
+        //弹球 X 轴移动范围，x <398 && x > 2 ,
+        //2是去除边框大小 边框1px,诊断条件是小于2
+        if (this.x < 2) {
+            let xSpeed = parseIntRandom();
+            //当小球碰撞到边框，x轴位置每次相加
+            this.xSpeed = xSpeed;
+        } else if (this.x > 398) {
+            let xSpeed = parseIntRandom();
+            //当小球碰撞到边框，x轴位置每次相加
+            this.xSpeed = -xSpeed;
+        }
+        //弹球 Y 轴移动范围，y > 2
+        if (this.y < 2) {
+            let ySpeed = parseIntRandom();
+            //y轴效果同x轴
+            this.ySpeed = ySpeed;
+        }
+        //挡板碰撞事件
+        // y > 400 - 挡板Y轴位置 - 边框大小
+        if (this.y > 388) {
+            //当小球下落到该位置
+            //判断 x,y 是否和挡板在同一位置 距离 + 5 取自小球半径
+            if (this.x > panelStart - 5 && this.x < panelEnd + 5) {
+                let ySpeed = parseIntRandom();
+                //如果位置相同，则反弹小球
+                this.ySpeed = -ySpeed;
+            } else {
+                //如果 x,y轴 不和挡板在同一位置，
+                //则判定游戏结束
+                alert("Game over!");
+                //重置小球位置
+                this.x = 100;
+                this.y = 100;
+                //重置挡板位置
+                panel.x = 175;
+            }
+        }
+    };
+
+    //挡板对象
+    var panel = {
+        x: 175,
+        y: 390,
+        xSize: 50,
+        ySize: 4
+    };
+
+    panel.draw = function() {
+        ctx.fillRect(this.x, this.y, this.xSize, this.ySize);
+    };
+
+    $("body").keydown(function(event) {
+        if (event.keyCode === 37) {
+            panel.x = panel.x - 15;
+            if (panel.x < 0) {
+                panel.x = 0;
+            }
+        }
+        if (event.keyCode === 39) {
+            panel.x = panel.x + 20;
+            if (panel.x > 400 - panel.xSize) {
+                panel.x = 400 - panel.xSize;
+            }
+        }
+    });
+
+    //弹球移动事件
+    setInterval(function() {
+        ctx.clearRect(0, 0, 400, 400);
+        ball.draw();
+        panel.draw();
+        ball.move();
+        ball.checkCanvas(panel.x, parseInt(panel.x) + parseInt(panel.xSize));
+        ctx.strokeRect(0, 0, 400, 400);
+    }, 30);
+</script>
+
+</html>

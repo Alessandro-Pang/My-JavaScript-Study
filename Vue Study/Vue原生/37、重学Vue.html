@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+
+        <ol>
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+    <script>
+        let app = new Vue({
+                el: "#app",
+                data: {
+                    message: '页面加载于 ' + new Date().toLocaleString(),
+                    todos: [{
+                        text: 'Learn JavaScript'
+                    }, {
+                        text: 'Learn Vue'
+                    }, {
+                        text: 'Build something awesome'
+                    }]
+                }
+            })
+            //可以插入数组
+            //app.todos.push({ text: 'New item' })
+    </script>
+</body>
+
+</html>

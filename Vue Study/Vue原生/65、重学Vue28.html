@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <!-- <script src="./axios.js"></script> -->
+</head>
+
+<!-- .sync修饰符 -->
+
+<body>
+    <!-- 
+        在有些情况下，我们可能需要对一个 prop 进行“双向绑定”。
+        不幸的是，真正的双向绑定会带来维护上的问题，因为子组件可以修改父组件，且在父组件和子组件都没有明显的改动来源。
+
+        这也是为什么我们推荐以 update:myPropName 的模式触发事件取而代之。
+        举个例子，在一个包含 title prop 的假设的组件中，我们可以用以下方法表达对其赋新值的意图： 
+    -->
+
+    <!-- <text-document v-bind:title.sync="doc.totle"></text-document> -->
+    <div class="app" style="width:300px;height:300px;border:1px solid red">
+        <text-document v-bind:title="doc.title" v-on:update:title="doc.title = $event"></text-document>
+    </div>
+
+    <script>
+        Vue.component('text-document', {
+            props: ["title"],
+            //这里绑定props不需要 ${} 变量值
+            template: `<div v-bind:title=title>哈哈哈，悬浮上去看title</div>`
+        });
+
+        let vm = new Vue({
+            el: '.app',
+            data: {
+                doc: {
+                    title: 'wuwuwuwuwu'
+                }
+            }
+        })
+
+        vm.doc.title = "hhhhh"
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <input type="text" name="username" id="username" placeholder="username">
+    <button type="submit" id="app">submit</button>
+    <div id="dv"></div>
+
+    <button type="submit" id="demo">加载JS脚本</button>
+    <button type="submit" id="demo2">序列化对象</button>
+    <div id="dv2"></div>
+</body>
+
+<script>
+    $('#app').click(function() {
+        let data = {
+            username: $('#username').val()
+        };
+        // $(selector).getJSON(url,data,success(data,status,xhr))
+        $.getJSON(`http://127.0.0.1:3300/db/queryUser`, data,
+            function(result) {
+                console.log(result)
+                for (let i in result) {
+                    $('#dv').append(result[i])
+                }
+            })
+    })
+
+    $('#demo').click(function() {
+        //加载js文件
+        $.getScript('../common.js', function() {
+            personObj = new Object();
+            personObj.firstname = "John";
+            personObj.lastname = "Doe";
+            personObj.age = 50;
+            personObj.eyecolor = "blue";
+            my$('demo2').onclick = function() {
+                //$.param 序列化
+                my$('dv2').innerText = $.param(personObj);
+            }
+        })
+    })
+</script>
+
+</html>

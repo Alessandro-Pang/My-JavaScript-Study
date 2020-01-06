@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px
+        }
+        
+        ul {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        ul>li {
+            list-style: none;
+            float: left;
+            display: block;
+            width: 50px;
+            height: 100px;
+            background: saddlebrown;
+            border: 1px solid palevioletred;
+            padding: 0px;
+            margin: 0px
+        }
+        
+        #wapper {
+            width: 600px;
+            height: 500px;
+            border: 1px solid rebeccapurple;
+            box-sizing: border-box;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            top: 100px;
+            overflow: hidden;
+        }
+        
+        #center img {
+            position: absolute;
+            left: 50px;
+            width: 500px;
+            height: 500px;
+        }
+        
+        #center>li {
+            display: none;
+        }
+        
+        #left {
+            position: absolute;
+            width: 50px;
+            height: 500px;
+            border: 1px solid royalblue;
+        }
+        
+        #right {
+            position: absolute;
+            width: 50px;
+            height: 500px;
+            border: 1px solid royalblue;
+            right: 0px
+        }
+        
+        #test {
+            position: relative;
+            top: 100px;
+        }
+        
+        #test2 {
+            position: relative;
+            top: 100px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wapper">
+        <ul id="left">
+            <li>
+                <a href="javascript:void();">图片1</a>
+            </li>
+            <li>
+                <a href="javascript:void();">图片2</a>
+            </li>
+            <li>
+                <a href="javascript:void();">图片3</a>
+            </li>
+            <li>
+                <a href="javascript:void();">图片4</a>
+            </li>
+            <li>
+                <a href="javascript:void();">图片5</a>
+            </li>
+        </ul>
+        <ul id="center">
+            <li style="display: block">
+                <a href="#"><img src="./images/js01.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js02.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js03.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js04.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js05.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js06.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js07.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js08.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js09.png" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/js010.png" alt=""></a>
+            </li>
+        </ul>
+        <ul id="right">
+            <li>
+                <a href="#">图片1</a>
+            </li>
+            <li>
+                <a href="#">图片2</a>
+            </li>
+            <li>
+                <a href="#">图片3</a>
+            </li>
+            <li>
+                <a href="#">图片4</a>
+            </li>
+            <li>
+                <a href="#">图片5</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="test">
+        <ol>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+            <li>哈哈哈啊哈哈哈哈</li>
+        </ol>
+    </div>
+
+    <div id="test2">
+        <ol>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+            <li>哒哒哒哒哒哒大</li>
+        </ol>
+    </div>
+</body>
+<script>
+    $(() => {
+        //index()   获取元素唯一id
+        //:eq()    index选择器
+
+        $("#left>li").mouseenter(function() {
+            var index = $(this).index()
+            $("#center>li").hide()
+            $("#center>li:eq(" + index + ")").show()
+        })
+
+        $("#right>li").mouseenter(function() {
+            var index = $(this).index() + 5
+            $("#center>li").hide()
+            $("#center>li:eq(" + index + ")").show()
+        })
+    })
+
+    $(() => {
+        //索引值 == 8的元素  eq ==
+        $('#test>ol>li:eq(8)').css({
+            background: "#55ffff"
+        })
+
+        //索引值大于10的元素  gt >
+        $('#test>ol>li:gt(10)').css({
+            background: "#ffff55"
+        })
+
+        //所以只小于6的元素  lt <
+        $('#test>ol>li:lt(6)').css({
+            background: "#ff55ff"
+        })
+    })
+
+    $(() => {
+        //:gt(5):lt(5) 索引选择器同时使用，会先选择索引大于5的元素，在所选元素中选择前5个元素
+        $('#test2>ol>li:gt(5):lt(5)').css({
+            background: "#8899ff"
+        })
+    })
+</script>
+
+</html>

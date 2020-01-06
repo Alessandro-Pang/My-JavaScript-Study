@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="axios.js"></script>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="img in info">
+        <div v-if="img.img == null?false:true">
+            {{img.img}}
+        </div>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                info: null
+            }
+        },
+        mounted() {
+            // axios(config);
+            axios({
+                method: 'post',
+                url: `https://www.apiopen.top/login
+                     ?key=00d91e8e0cca2b76f515926a36db68f5
+                     &phone=13594347817
+                     &passwd=123456`
+
+            }).then(response => {
+                this.info = response.data;
+            })
+        }
+    })
+</script>
+</body>
+</html>

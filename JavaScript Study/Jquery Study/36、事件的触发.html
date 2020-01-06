@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid slateblue
+        }
+        
+        #app {
+            width: 300px;
+            height: 300px;
+            border: 1px solid skyblue;
+            background: tan
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="button" value="触发事件" id="btn1">
+    <input type="button" value="trigger" id="btn2">
+    <input type="button" value="triggerHandler" id="btn3">
+    <input type="text" id="text">
+    <span></span>
+    <div></div>
+
+    <div id="dv">组合键测试</div>
+
+    <div id="app">
+
+    </div>
+    <script>
+        $('#text').focus(function() {
+            $(this).next().text('焦点事件被触发')
+        });
+
+        //调用文本框的焦点事件
+        $('#btn1').click(function() {
+            $('#text').focus()
+        })
+
+        //触发事件
+        $('#btn2').click(function() {
+            $('#text').trigger('focus');
+        })
+
+        //该行为 可以触发事件，但不会触发浏览器的默认行为（不会在文本框中显示光标）
+        $('#btn3').click(function() {
+            $('#text').triggerHandler('focus')
+        })
+
+        $("body").mousedown(function(e) {
+            //e,button 捕获鼠标按键行为
+            //0 --> 左键，1 --> 滚轮 ，2 --> 右键
+            console.log(e.button)
+        })
+
+        //获取用户是否按下了组合键
+        $('#dv').click(function(e) {
+            if (e.altKey) {
+                console.log('你按下了alt键，并且鼠标点击了div,触发了点击事件')
+            } else if (e.ctrlKey && e.shiftKey) {
+                console.log('你同时按下了ctrl 和 shift 键，并且鼠标点击了div,触发了点击事件')
+            } else if (e.ctrlKey) {
+                console.log('你按下了ctrl键，并且鼠标点击了div,触发了点击事件')
+            } else if (e.shiftKey) {
+                console.log('你按下了shift键，并且鼠标点击了div,触发了点击事件')
+            } else {
+                console.log('你鼠标点击了div,触发了点击事件')
+            }
+        })
+
+        let randomColor = (from, to) => parseInt(Math.random() * (to - from))
+
+        $(document).keydown(function(e) {
+            let code = e.keyCode;
+            let rgb = `rgb(${randomColor(code,255)},${randomColor(code,255)},${randomColor(code,255)})`
+            $('#app').css('background', rgb);
+        })
+    </script>
+</body>
+
+</html>

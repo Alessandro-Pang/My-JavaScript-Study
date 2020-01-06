@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: all 0.8s;
+        }
+        
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+        /*------------------------
+                trans特效
+        -------------------------*/
+        
+        .trans-enter-active,
+        .trans-leave-active {
+            transition: all 1s
+        }
+        
+        .trans-enter {
+            transform: scale(1.5);
+        }
+        
+        .trans-enter-to {
+            transform: scale(.8);
+        }
+        
+        .trans-leave-to {
+            transform: scale(1.5);
+        }
+        
+        .trans-leave {
+            transform: scale(.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="Clik Me" @Click="show = !show">
+        <transition name="fade">
+            <div v-show="show">hhhhhhh</div>
+        </transition>
+
+        <input type="button" value="Click Me2" @click="show2 = !show2">
+        <transition name="trans">
+            <div style="width: 200px;height:200px;border:1px solid red" v-if="show2"></div>
+        </transition>
+    </div>
+
+    <script>
+        new Vue({
+            el: app,
+            data: {
+                show: true,
+                show2: true
+            }
+        })
+    </script>
+</body>
+
+</html>

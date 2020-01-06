@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        #demo {
+            margin: auto;
+            top: 100px;
+            transform: translate(20%, 20%)
+        }
+        
+        li {
+            list-style: none;
+            float: left;
+            /* border: 1px solid slateblue; */
+        }
+        
+        #demo>.title {
+            text-align: center
+        }
+        
+        #demo>.title>ol {
+            text-align: center;
+            width: 500px;
+            height: 30px;
+            background: springgreen;
+            /* display: inline-block; */
+        }
+        
+        #demo>.article>ol {
+            text-align: center;
+        }
+        
+        #demo>.article>ol>li {
+            display: none
+        }
+        
+        img {
+            width: 500px;
+            height: 500px;
+        }
+        
+        .active {
+            display: block !important;
+        }
+        
+        .selected {
+            border-top: 5px solid slateblue !important
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <div class="title">
+            <ol>
+                <li class="selected">
+                    <a href="#"></a><span>导航栏一</span></li>
+                <li>
+                    <a href="#"></a><span>导航栏二</span></li>
+                <li>
+                    <a href="#"></a><span>导航栏三</span></li>
+                <li>
+                    <a href="#"></a><span>导航栏四</span></li>
+                <li>
+                    <a href="#"></a><span>导航栏五</span></li>
+            </ol>
+        </div>
+        <div class="article">
+            <ol>
+                <li class="active">
+                    <a href="#"></a><img src="./images/js01.png"></li>
+                <li>
+                    <a href="#"></a><img src="./images/js02.png"></li>
+                <li>
+                    <a href="#"></a><img src="./images/js03.png"></li>
+                <li>
+                    <a href="#"></a><img src="./images/js04.png"></li>
+                <li>
+                    <a href="#"></a><img src="./images/js05.png"></li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        $(function() {
+
+            $('#demo>.title>ol>li').mouseenter(function() {
+                $('#demo>.title>ol>li').removeClass('selected');
+                $(this).addClass('selected');
+
+                let index = $(this).index();
+                $('#demo>.article>ol>li').removeClass('active');
+                $('#demo>.article>ol>li:eq(' + index + ')').addClass('active')
+            })
+        })
+    </script>
+</body>
+
+</html>

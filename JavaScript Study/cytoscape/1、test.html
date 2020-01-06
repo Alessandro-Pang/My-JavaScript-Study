@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./dist/cytoscape.min.js"></script>
+    <!-- <script src="./dist/cytoscape.esm.min.js"></script>
+    <script src="./dist/cytoscape.umd.js"></script> -->
+
+    <style>
+        #cy {
+            width: 500px;
+            height: 500px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cy"></div>
+</body>
+<script>
+    cy = cytoscape({
+        container: document.getElementById('cy'), //容器名字
+        elements: [ // 开始时的图形元素列表
+            { // node a
+                group: 'nodes',
+                data: {
+                    id: 'a'
+                }
+            }, { // node b
+                group: 'nodes',
+                data: {
+                    id: 'b'
+                }
+            }, {
+                group: 'nodes',
+                data: {
+                    id: 'c'
+                }
+            }, {
+                group: 'nodes',
+                data: {
+                    id: 'd'
+                }
+            }, { // 连接 ab
+                group: 'edges',
+                data: {
+                    id: 'ab',
+                    source: 'a', //souce 来源
+                    target: 'b' //target 目标
+                }
+            }, { // 连接 bc
+                group: 'edges',
+                data: {
+                    id: 'bc',
+                    source: 'b',
+                    target: 'c'
+                }
+            }, { // 连接 ad
+                group: 'edges',
+                data: {
+                    id: 'ad',
+                    source: 'c',
+                    target: 'd'
+                }
+            }, { // 连接 dc
+                group: 'edges',
+                data: {
+                    id: 'dc',
+                    source: 'd',
+                    target: 'a'
+                }
+            }
+        ],
+
+        style: [ // 图形的样式表
+            {
+                selector: 'node',
+                style: {
+                    'background-color': '#666',
+                    'label': 'data(id)'
+                }
+            },
+
+            {
+                selector: 'edge',
+                style: {
+                    'width': 3,
+                    'line-color': '#ccc',
+                    'target-arrow-color': '#ccc',
+                    'target-arrow-shape': 'triangle'
+                }
+            }
+        ],
+
+        layout: {
+            name: 'circle',
+            rows: 1
+        }
+    });
+
+    for (let i = 0; i < 5; i++) {
+        cy.add({
+            group: 'nodes',
+            data: {
+                id: 'add' + (i + 1),
+                weight: 75
+            },
+            position: {
+                x: 200 + i * 30,
+                y: 200 + i * 30
+            }
+        });
+    }
+
+    cy.iseage
+</script>
+
+</html>

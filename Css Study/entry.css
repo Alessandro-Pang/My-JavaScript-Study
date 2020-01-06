@@ -1,0 +1,31 @@
+/* background */
+
+.define-core {
+    background: url(./background/bj3.jpg);
+}
+
+.top {
+    background-image: url(./images/title.png)
+}
+
+
+/* logo */
+
+.logo {
+    background-image: url(./images/logo.png)
+}
+
+
+/* analyze charts background */
+
+.charts-box {
+    background-image: url(./images/bg.png);
+}
+
+.charts-border-left {
+    background: url(./images/title2.png);
+}
+
+.charts-border-right {
+    background: url(./images/title2.png);
+}

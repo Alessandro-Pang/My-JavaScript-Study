@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>span</div>
+    <div>span</div>
+    <div>span</div>
+    <p>pppppppppp</p>
+    <p>pppppppppp</p>
+    <p>pppppppppp</p>
+</body>
+<script>
+    //沙箱  --> 环境 ，黑盒
+    //沙箱内部运行不会影响真实环境，沙箱能够访问真实环境
+    //沙箱环境即-->自调用函数
+    // >>>  (function () {})();  
+    // >>>  (function () {}());
+
+    let getTag = 10;
+    let dvObj = 20;
+    let pObj = 30;
+
+    (function() {
+        function getTag(tagName) {
+            return document.getElementsByTagName(tagName);
+        }
+        var dvObj = getTag('div');
+        for (var i = 0; i < dvObj.length; i++) {
+            dvObj[i].style.border = '2px solid pink';
+        }
+        var pObj = getTag('p');
+        for (var i = 0; i < pObj.length; i++) {
+            pObj[i].style.border = '2px solid pink'
+        }
+    }());
+    //避免了 函数名 和 变量名冲突
+    console.log(getTag);
+    console.log(dvObj);
+    console.log(pObj);
+</script>
+
+</html>

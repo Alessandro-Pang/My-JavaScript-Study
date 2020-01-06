@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="common.js"></script>
+    <style type="text/css">
+        #dv{
+            margin:0 auto;
+            text-align: center;
+            top:50%;
+            transform: translateY(50%);
+            width: 500px;
+            height: 300px;
+            border: 1px solid lightseagreen;
+        }
+        table,tr,td{
+            border-collapse: collapse;
+            border: 1px solid orange;
+            /*padding: 0;*/
+            /*margin: 0;*/
+        }
+        #dv2{
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="dv">
+    <table>
+        <tbody id="tbd">
+            <tr>
+                <td>用户</td>
+                <td>评论</td>
+            </tr>
+            <tr>
+                <td>会飞的猪</td>
+                <td>哈哈哈哈哈哈</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="dv2">
+        <input type="text" id="text" placeholder="请输入用户名">
+        <br>
+        <textarea name="" id="article" cols="30" rows="10"></textarea>
+        <br>
+        <input type="button" id="submmit" value="评论">
+    </div>
+</div>
+<script>
+    //点击评论按钮后
+    //获取当前的用户名和评论
+    //在评论表格创建元素，并添加评论
+    my$('submmit').onclick = function () {
+        let article = my$('article').value;
+        let text = my$('text').value;
+
+        if(text == ''){
+            alert('请输入用户名');
+            return
+        }
+        if(article == ''){
+            alert('评论不能为空');
+            return
+        }
+        let tr = document.createElement('tr');
+        my$('tbd').appendChild(tr);
+
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        td1.innerHTML = text;
+        td2.innerHTML = article;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        my$('text').value = '';
+        my$('article').value = '';
+    }
+</script>
+</body>
+</html>

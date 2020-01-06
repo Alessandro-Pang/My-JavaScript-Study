@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../common.js"></script>
+    <style type="text/css">
+        canvas{
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<img src="./background/bj1.jpg" id="img" width="400">
+
+<!-- 通过canvas直接访问图片 -->
+<canvas id="canvas" width="400" height="250"></canvas>
+
+<!-- 绘制img标签元素中的图片 -->
+<canvas id="canvas2" width="400" height="250"></canvas>
+
+<!-- canvas 切片 -->
+<canvas id="canvas3" width="400" height="250"></canvas>
+</body>
+<script>
+    /*
+     * 通过canvas直接访问图片
+     */
+    function draw() {
+        var canvas = my$('canvas');
+        if (!canvas.getContext) return;
+
+        var img = new Image();
+        img.src = "background/bj1.jpg";
+
+    }
+    /*
+     * 如果drawImage的图片还没有加载完成
+     * 则什么都不会做
+     * 所以我们应当保证img绘制完成之后再加载drawImage
+     */
+    img.onload = function(){
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img,0,0,400,250);
+    };
+
+    /*
+     * 绘制img标签元素中的图片
+     */
+    function draw2() {
+        var canvas = my$('canvas2');
+        if (!canvas.getContext) return ;
+
+        var ctx = canvas.getContext('2d');
+        var img = document.querySelector("#img");
+        ctx.drawImage(img,0,0,400,250);
+
+    }
+    img.onclick = function () {
+        draw2();
+    };
+
+    //切片实例
+    function draw3() {
+        var canvas = my$("canvas3");
+        if (!canvas.getContext) return;
+
+        var ctx = canvas.getContext('2d');
+        var img = my$("img");
+
+        //drawImage(image,sc,sy,sWidth,sHeight,dx,dy,dWidth,dHeight)
+        ctx.drawImage(img,0,0,100,80,100,100,80,80);
+    }
+    img.onload = function(){
+        draw3()
+    }
+</script>
+</html>

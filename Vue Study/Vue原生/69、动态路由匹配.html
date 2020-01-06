@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>
+            <!-- 
+                我们经常需要把某种模式匹配到的所有路由，全都映射到同个组件。
+                例如，我们有一个 User 组件，对于所有 ID 各不相同的用户，都要使用这个组件来渲染。
+                那么，我们可以在 vue-router 的路由路径中使用“动态路径参数”(dynamic segment) 来达到这个效果： 
+            -->
+            <router-link to="/user/foo">/user/foo</router-link>
+            <router-link to="/user/bar">/user/bar</router-link>
+        </p>
+        <!--
+            router-view 是路由出口
+            所有路由都会渲染到这里    
+        -->
+        <router-view></router-view>
+    </div>
+
+    <div id="app2">
+        <p>
+            <router-link to="/user/watch/pang">/user/watch/pang</router-link>
+            <router-link to="/user/watch/chao">/user/watch/chao</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+    <script>
+        const user = {
+            template: `<div>User {{ $route.params.id }} </div>`
+        };
+        /**
+         * 一个“路径参数”使用冒号 : 标记。
+         * 当匹配到一个路由时，参数值会被设置到 this.$route.params，可以在每个组件内使用。
+         * 于是，我们可以更新 User 的模板，输出当前用户的 ID：
+         */
+        const router = new VueRouter({
+            routes: [
+                //动态路径参数，以冒号开头
+                {
+                    path: '/user/:id',
+                    component: user
+                }
+            ]
+        })
+        new Vue({
+            router
+        }).$mount('#app');
+
+        //======================================================================================
+        //======================================DEMO2===========================================
+        //======================================================================================
+
+        const user2 = {
+            template: `<div>my watch test ,user is {{ $route.params.id }}</div>`,
+            // watch: {
+            //     '$route' (to, from) {
+            //         alert('{{ $route.params.id }}.event')
+            //     }
+            // }
+        };
+
+        const router2 = new VueRouter({
+            routes: [{
+                path: '/user/watch/:id',
+                component: user2
+            }]
+        })
+
+        new Vue({
+            router: router2
+        }).$mount('#app2');
+    </script>
+</body>
+
+</html>

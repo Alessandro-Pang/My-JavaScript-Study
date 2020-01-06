@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dv1 {
+            /* 当元素小于 max-width 时，以width为准，当元素width属性值大于max-width时，则以max-width为准 */
+            /* 如果 max-width 和 width 都为 px,rem 国定属性值，则没必要设置 */
+            max-width: 20%;
+            width: 500px;
+            max-height: 20%;
+            height: 300px;
+            border: 1px solid saddlebrown;
+        }
+        
+        #dv2 {
+            width: 200px;
+            height: 100px;
+            border: 1px solid lightcoral;
+            /* margin:auto --会自动填充两边的margin值 */
+            /* margin-left = margin-right = (parent element width - element Width)/2  */
+            margin: auto;
+            /* 如果没有设置 width 属性，或者设置width为100%，则margin:auto不会生效 */
+        }
+        
+        #dv3 {
+            width: 300px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            border: 2px solid slateblue;
+            box-sizing: border-box;
+        }
+        
+        #dv4 {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border: 2px solid seagreen;
+            box-sizing: border-box;
+        }
+        
+        #dv4>p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* transform:trasnlate 百分比，相对于本身的宽高 */
+            /* 如果 元素本身with:200px ;height:200px ,50% 则是 x,y 轴偏移100px;*/
+            transform: translate(-50%, -50%);
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dv1">width:500px; max-width:20%</div>
+
+    <div id="dv2">margin:auto ,会自动填充满父级元素</div>
+
+    <div id="dv3">文本水平/垂直居中 line-height </div>
+
+    <div id="dv4">
+        <p>position绝对定位</p>
+    </div>
+</body>
+
+</html>

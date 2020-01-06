@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid springgreen
+        }
+        
+        p {
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 1px solid aqua;
+            background: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="Click Me" id="btn">
+    <div id="dv"></div>
+    <input type="button" value="Click Me" id="btn2">
+    <div id="dv2"></div>
+    <input type="button" value="Click Me" id="btn3">
+    <div id="dv3"></div>
+    <input type="button" value="Click Me" id="btn4">
+    <div id="dv4"></div>
+    <script>
+        //click 绑定事件
+        //只能为 已经存在的元素 绑定事件
+        $(function() {
+            $('#btn').click(function() {
+                $('#dv').append($('<p>hhhhhh</p>'));
+
+                $('p').click(function() {
+                    alert('trigger!!')
+                });
+                //不会触发！！！
+                $('#dv').append($('<p>hhhhhh</p>'));
+            });
+
+
+        });
+
+        //delegate 绑定事件
+        //可以获取动态元素，可以没事件
+        $(function() {
+            $('#btn2').click(function() {
+                $('#dv2').append($('<p>hhhhhh</p>'))
+            });
+
+            $('#dv2').delegate('p', 'click', function() {
+                alert('trigger!!')
+            })
+
+            $('#btn2').click(function() {
+                $('#dv2').append($('<p>hhhhhh</p>'))
+            });
+        });
+
+        //bind 绑定事件
+        //只能获取静态元素，不能获取动态元素，必须有事件
+        $(function() {
+            $('#btn3').click(function() {
+                $('#dv3').append($('<p>hhhhhh</p>'))
+                    //只能为已存在的绑定事件
+                $('p').bind('click', function() {
+                        alert('trigger!!')
+                    })
+                    //该元素在事件绑定之后才创建，所以不会触发
+                $('#dv3').append($('<p>hhhhhh</p>'))
+            });
+        });
+
+        //on 绑定事件
+        //on()可以获取动态元素，必须有事件
+        $(function() {
+            $('#btn4').click(function() {
+                $('#dv4').append($('<p>hhhhhh</p>')).on('click', 'p', function() {
+                    alert('trigger!!!')
+                });
+                $('#dv4').append($('<p>hhhhhh2</p>'))
+            })
+        })
+    </script>
+</body>

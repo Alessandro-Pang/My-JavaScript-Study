@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <!-- <script src="./axios.js"></script> -->
+</head>
+
+<body>
+
+    <!-- Vue组件 -->
+    <!-- 
+        组件命名规范：
+
+            在注册一个组件的时候，我们始终需要给它一个名字。
+
+            Vue.component('my-component-name', { /* ... */ })
+
+            该组件名就是 Vue.component 的第一个参数。
+
+            你给予组件的名字可能依赖于你打算拿它来做什么。
+            当直接在 DOM 中使用一个组件 (而不是在字符串模板或单文件组件) 的时候，
+            我们强烈推荐遵循 W3C 规范中的自定义组件名 (字母全小写且必须包含一个连字符)。
+            这会帮助你避免和当前以及未来的 HTML 元素相冲突。
+
+            驼峰式命名法：
+                myComponentName
+
+            短横线分隔命名法
+                my-component-name
+    -->
+
+    <div id="app">
+        <h3>全局组件</h3>
+        <my-test-component></my-test-component>
+        <my-test-component2></my-test-component2>
+        <my-test-component3></my-test-component3>
+    </div>
+
+    <div id="app2">
+        <h3>局部组件</h3>
+        <temp-component></temp-component>
+        <temp-component2></temp-component2>
+        <temp-component3></temp-component3>
+    </div>
+
+    <div id="demo">
+        <h3>父传子 --组件调用</h3>
+        <input type="text" v-model="message">
+        <chidren-componet v-bind:message="message"></chidren-componet>
+    </div>
+
+    <!-- 
+        对于 components 对象中的每个属性来说，
+        其属性名就是自定义元素的名字，其属性值就是这个组件的选项对象。
+
+        注意局部注册的组件在其子组件中不可用。
+    -->
+
+    <div id="demo2">
+
+        <h3>父调子 --局部组件--子组件调用父组件</h3>
+        <childs></childs>
+    </div>
+
+    <div id="demo3">
+
+        <h3>父调子 --全局组件--子组件调用父组件</h3>
+        <component_temp></component_temp>
+    </div>
+
+    <script>
+        'use strict'
+
+        Vue.component('my-test-component', {
+            template: `
+                <div>这是我的第一个全局Vue组件</div>
+            `
+        });
+        Vue.component('my-test-component2', {
+            template: `
+                <div>这是我的第二个全局Vue组件</div>
+            `
+        });
+        Vue.component('my-test-component3', {
+            template: `
+                <div>这是我的第三个全局Vue组件</div>
+            `
+        });
+
+        new Vue({
+            el: "#app"
+        })
+
+        var tempComponent = {
+            template: `
+                <div>这是我的第一个局部组件</div>
+            `
+        }
+        var tempComponent2 = {
+            template: `
+                <div>这是我的第一个局部组件</div>
+            `
+        }
+        var tempComponent3 = {
+            template: `
+                <div>这是我的第一个局部组件</div>
+            `
+        }
+
+        new Vue({
+            el: "#app2",
+            components: {
+                'temp-component': tempComponent,
+                'temp-component2': tempComponent2,
+                'temp-component3': tempComponent3,
+            }
+        });
+
+        Vue.component(`chidren-componet`, {
+            props: ['message'],
+            template: `
+                <div>这是子组件 --  {{message}} --</div>
+            `
+        })
+        new Vue({
+            el: "#demo",
+            data: {
+                message: ""
+            }
+        });
+
+        let component_A = {
+            template: '<div>This parent template</div>'
+        };
+
+        let childs = {
+            components: {
+                'component_A': component_A
+            },
+            template: "<div>This is children template <component_A></component_A></div>",
+        };
+
+        new Vue({
+            el: "#demo2",
+            components: {
+                'childs': childs,
+            }
+        });
+
+        Vue.component('temp', {
+            template: '<div>This parent template</div>'
+        })
+
+        Vue.component('component_temp', {
+            template: "<div>This component template  <temp></temp></div>"
+        })
+
+        new Vue({
+            el: "#demo3",
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid slateblue;
+            background: springgreen;
+            float: left;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        #dv {
+            width: 300px;
+            height: 300px;
+            border: 1px solid slateblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <input type="button" value="点击创建元素" id="btn">
+    <div id="dv"></div>
+    <script>
+        //参数一：index 索引值、下标
+        //参宿二：元素对象
+        $('div').each(function(index, elements) {
+            //celements
+            //>> <div style="opacity: 0.1;"> 
+            $(this).text(index)
+            $(this).css('opacity', (index + 1) / 10)
+        });
+        //$().each()方法，用来遍历jquery对象，函数内返回的是DOM对象
+        //在each函数内想使用jquery方法时，需要转换成jquery对象 $()!
+
+        //多库共存，处理命名冲突
+        let jq = $.noConflict()
+        jq('div').css('border-radius', '5px');
+
+        //此时$,将无法以jquery对象访问
+        //$('div').css('color', 'red')
+
+        //jquery获取的元素对象都是一个包装集
+        //所有的对象都存放在一个集合之中（数组）
+        //可以通过 $()[0] , $().get(0) 获取
+        //当获取多个对象时，单独取出一个元素，可以通过更改下标获取
+
+        //通过 $().length 判断元素是否存在
+        if (jq('div').length !== 0) {
+            console.log('元素存在')
+        } else {
+            console.log('元素不存在')
+        }
+
+        jq('#btn').on('click', function() {
+            //exist --> 存在
+            if (jq('#exist').length === 0) jq('#dv').append('<p id="exist">这是一个P标签</p>')
+
+        })
+
+        //如果想让jquery调用方法
+        //则加入到 $.fn.方法名 中 （jquery 顶级对象）
+    </script>
+</body>
+
+</html>

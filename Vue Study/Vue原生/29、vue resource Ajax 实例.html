@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-resource.js"></script>
+</head>
+<body>
+<div id="box">
+    请输入关键字：<input type="text" v-model="keyword" @keyup="sendJsonP(keyword)">
+    <ul v-for="r in result">
+        {{r}}
+    </ul>
+</div>
+</div>
+<script>
+    window.onload = function () {
+        let vm = new Vue({
+            el: "#box",
+            data: {
+                keyword: '',
+                result: '',
+            },
+            methods: {
+                sendJsonP(keyword) {
+                    let url = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web';
+                    this.$http.jsonp(url, {
+                        params: {
+                            wd: keyword
+                        },
+                        jsonp: 'cb'
+                    }).then(res => {
+                        if (res.data.g) {
+                            this.result = res.data.g.map(x => x['q']);
+                        } else {
+                            this.result = []
+                        }
+                    })
+                }
+            }
+        })
+    };
+</script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .dvParent {
+            border: red 2px solid;
+            width: 1000px;
+            height: 600px;
+            top: 100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        /*  */
+        
+        @keyframes myOpacity {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .dv {
+            border: 1px solid red;
+            background: deeppink;
+            position: relative;
+            top: 100px;
+            width: 300px;
+            height: 300px;
+            animation: myOpacity 5s;
+        }
+        
+        .dvSub {
+            border: 1px solid blue;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    &copy; &forall;
+    <br>
+    <div class="dvParent">
+        <div class="dv">
+            <div class="dvSub"></div>
+        </div>
+    </div>
+
+</body>
+<script>
+    /*
+     * f1.name ==> 函数名称
+     * f1.arguments ==> 返回调用函数时，传入的参数值
+     * f1.arguments.length ==> 返回实参的个数
+     * f1.lenth ==> 函数定义时，形参的个数, ...agr个数不在计算范围内
+     * f1.caller ==> 返回函数调用对象 --> 在f2中调用的f1,返回f2
+     */
+    function f1(a, b, c, d, ...agr) {
+        console.log(f1.name);
+        console.log(f1.arguments);
+        console.log(f1.arguments.length);
+        console.log(f1.length);
+        console.log(f1.caller);
+    }
+
+    let f2 = () => {
+        f1(1, 2, 3, 4, 5, 6, 7);
+    }
+    f2();
+</script>
+
+</html>

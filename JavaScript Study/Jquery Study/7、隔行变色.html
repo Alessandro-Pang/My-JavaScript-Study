@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <button>click me</button>
+    <ol>
+        <li>射雕英雄传武功大全</li>
+        <li>越女剑法越女剑法</li>
+        <li>九阴真经九阴真经</li>
+        <li>铁掌铁掌</li>
+        <li>降龙十八掌降龙十八掌</li>
+        <li>打狗棒法打狗棒法</li>
+        <li>蛤蟆功蛤蟆功</li>
+        <li>空明拳空明拳</li>
+        <li>双手互搏双手互搏</li>
+        <li>一阳指一阳指</li>
+        <li>杨家枪法杨家枪法</li>
+    </ol>
+</body>
+<script>
+    //odd --奇数
+    //even --偶数
+    $(() => {
+        $('button').click(() => {
+            $('li:odd').css({
+                background: "yellow"
+            })
+            $('li:even').css({
+                background: "red"
+            })
+        })
+
+    })
+</script>
+
+</html>

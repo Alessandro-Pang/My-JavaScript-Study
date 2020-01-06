@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="./common.js"></script>
+</head>
+<body>
+<input type="button" name="" id="btn" value="点击显示英雄">
+<input type="button" name="" id="btn2" value="点击删除第一个元素">
+<input type="button" name="" id="btn3" value="点击删除所有元素">
+<div id="dv">
+	<ul id="list">
+	</ul>
+</div>
+</body>
+<script type="text/javascript">
+	
+	var names = ["剑圣","木木","慎","卡西佩奥娜","嘉文四世","盖伦","纳尔","人马","波比","科加斯","内瑟斯","泰达米尔","莫德凯撒"]
+
+	var btn = my$("btn");
+	var list = my$("list");
+	btn.onclick = function(){
+
+		//有则删除，无则创建
+		// if(list.firstElementChild){
+		// 	while(list.firstElementChild){
+		// 		list.removeChild(list.firstElementChild);
+		// 	}
+		// }
+
+		//改代码在重复创建时有BUG（“需要重复创建，注释掉if语句的代码”）
+		if(!list.firstElementChild){
+			
+			for (var i = 0 ; i < names.length ; i++){
+				 
+				/*第一段*/
+				var myList = document.createElement("li");	//创建元素
+				myList.innerHTML = names[i]+i;	//在元素中写入文本
+				list.appendChild(myList);	//追加子元素
+
+				/*第二段*/
+				var heList = document.createElement("li");	//创建元素
+				heList.innerHTML = names[i]+i;	//在元素中写入文本
+				list.insertBefore(heList,list.firstElementChild);//将元素插入到某个元素的前面
+
+				/*替换元素：如不加，则会打印两段*/
+				list.replaceChild(myList,heList);
+				
+				var liObj = list.getElementsByTagName("li");	//加入悬浮事件
+				for (var i = 0 ; i < liObj.length ;i++){
+					liObj[i].onmouseover = getMouseOver;
+					liObj[i].onmouseout = getMouseOut;
+				}
+			}
+		}
+	}
+
+	function getMouseOver(){
+		this.style.backgroundColor = "red";
+	}
+
+	function getMouseOut(){
+		this.style.backgroundColor = "";
+	}
+
+	//实现点击按钮后，删除第一个元素
+	my$("btn2").onclick = function(){
+
+		var list = my$("list");
+		list.removeChild(list.firstElementChild);
+	}
+
+
+	//删除所有子元素
+	my$("btn3").onclick = function(){
+
+		var list = my$("list");
+
+		// var list2 = list.children
+		// for(var i = 0 ;i<list2.length ; i++){
+		// 	list.removeChild(list2);
+		// }
+		while (list.firstElementChild){
+			list.removeChild(list.firstElementChild);
+		}
+	}
+
+
+</script>
+</html>

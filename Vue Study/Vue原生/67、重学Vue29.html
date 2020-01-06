@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <!-- <script src="./axios.js"></script> -->
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 自定义扩展元素，无法在里面插入值 -->
+        <test-component>这里写啥都不会再网页中显示</test-component>
+
+        <!-- 测试 filedset 标签 -->
+        <fieldset>
+            <legend>包围流、、、、</legend>
+        </fieldset>
+    </div>
+
+    <!-- 当组件渲染的时候，<slot></slot> 将会被替换为“Your Profile”。插槽内可以包含任何模板代码，包括 HTML： -->
+    <div id="app2">
+        <test-slot>
+            slot 插槽 ,插入文本测试 <br>
+            <span style="color :yellow;background: black">插入span标签测试</span>
+            <test-fieldset><br>插入一些文本</test-fieldset>
+        </test-slot>
+
+    </div>
+
+    <script>
+        let testComponent = {
+            template: '<div style="width:100px ;height:100px ;border:1px solid red"></div>'
+        }
+
+        new Vue({
+            el: app,
+            components: {
+                'test-component': testComponent
+            }
+        });
+
+        //slot --> 插槽
+        //正常的自定义元素不能再元素中间插入 任何文本/元素
+        //所以需要 slot插槽 获取中间的文本
+        let testSlot = {
+            template: '<div style="width:800px ;height:600px ;border:1px solid red"><slot></slot></div>',
+
+        };
+
+        let testFieldset = {
+            template: `<fieldset>
+                        <legend>testFiledset 组件</legend>
+                        还可以插入其他自定义组件哦
+                        <slot></slot> 
+                    </fieldset>`
+        }
+        new Vue({
+            el: app2,
+            components: {
+                'test-slot': testSlot,
+                'test-fieldset': testFieldset
+            }
+        })
+    </script>
+</body>
+
+</html>

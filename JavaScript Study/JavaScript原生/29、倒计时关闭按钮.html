@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		#dv1{
+			width: 200px;
+			height:200px;
+			background: red;
+		}
+		#dv3{
+			padding: 0px;
+			margin: 0px;
+			width: 200px;
+			height: 100px;
+			border-radius: 100px;
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+<textarea style="width: 200px;height: 100px;">
+这是一个文本域，
+这里写了一些字，
+这是个定时器案例，
+这里使按钮倒计时使用。
+</textarea>
+<br>
+<input type="button" name="" id="btn1" value="请阅读文本(5)" disabled="disabled">
+
+<br><br>
+<div id="dv1">
+</div>
+<input type="button" name="" id="btn2" value="点击渐变">
+
+<br><br>
+<div id="dv3"></div>
+<input type="button" name="" id="btn3" value="点击变宽">
+</body>
+<script type="text/javascript">
+	
+	var time = 5;
+	var timeId = window.setInterval(function(){
+		time--;
+
+		if(time==0){		
+			window.clearInterval(timeId);
+			my$("btn1").disabled = false;
+			my$("btn1").value = "OK啦";
+			return 
+		}
+		
+		my$("btn1").value = "请阅读文本("+time+")";
+	},1000)
+
+	//处理生成多个定时器
+	var tag = false;
+	my$("btn2").onclick = function(){
+		//透明度 0-1
+		//JS小数算数会出现问题，这里使用整数再除以10
+		var opacity = 10;
+
+		//如果定时器已经创建，还未清理
+		//则不再创建新的定时器
+		if (tag) {
+			return
+		}
+		var timeId = window.setInterval(function(){
+			opacity--;
+			tag = true;	//定时器创建标识
+			my$("dv1").style.opacity = opacity/10;
+			
+			if(opacity == 0){
+				window.clearInterval(timeId);
+				tag = false;//定时器处理标识
+				return
+			}
+		},200)
+	}
+
+	var tag = false;
+	my$("btn3").onclick = function(){
+		
+		//当CSS属性 写在 style标签中，
+		//则无法通过 my$().style的方式获取值
+		//则可以通过 offset 获取值
+		var width = my$("dv3").offsetWidth ;
+
+		if (tag) {
+			return
+		}
+		var timeId = window.setInterval(function(){
+			width +=20;
+	
+			my$("dv3").style.width = width+"px";
+			tag = true ;
+
+			if(width >= 800){
+				window.clearInterval(timeId);
+				tag = false;
+				return
+			}
+		},200)
+	}
+
+	console.log(my$("dv1").offsetBackgroundColor)
+</script>
+</html>

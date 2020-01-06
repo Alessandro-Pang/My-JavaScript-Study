@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="./common.js"></script>
+</head>
+<body>
+	<input type="button" name="" value="点击显示JS截图" id="myBtn">
+	<br />
+	<img src="./images/background.jpg" id="myImg" width="192" height="108">
+	<br />
+	<img src="" id = "big">
+</body>
+<script type="text/javascript">
+
+//实现悬浮事件触发
+function event(i){
+	
+	my$("myImg").onmouseover = function(){
+
+		my$("big").src="./images/js0"+(i)+".png";
+
+	};
+	my$("myImg").onmouseout = function(){
+
+		my$("big").src = "";
+	};
+
+	return true;
+}
+
+//通过递归实现每点击一次 +1	
+function myBtn(i){
+		
+	my$("myBtn").onclick = function(){
+		
+		this.value = "下一张";
+
+		my$("myImg").src = "./images/js0"+(i)+".png";
+
+		i < 13 ? (myBtn(i + 1) ? true : event(i)) : (event(i)? (alert('已经是最后一页了') ? '' : i = 1) : '');	
+
+	}
+		
+}
+var i = 1;
+myBtn(i)
+
+</script>
+</html>

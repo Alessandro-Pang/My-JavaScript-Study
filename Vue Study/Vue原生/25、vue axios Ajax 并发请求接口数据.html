@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="axios.js"></script>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>用户登录</h1>
+    <div v-for="site in info">
+        <!-- 只显示有数据的 -->
+        <div v-if="site.key == null ? false : true">  <!-- 不能用三等哦！ -->
+            key:{{site.key}}<br>
+            电话:{{site.phone}}<br>
+            姓名:{{site.name}}<br>
+            密码：{{site.passwd}}<br>
+            签名:{{site.text}}<br>
+            图片链接：{{site.img}}<br>
+            备注1：{{site.other}}<br>
+            备注2：{{site.other2}}<br>
+            创建时间：{{site.createTime}}<br>
+        </div>
+    </div>
+
+    <h1>美图秀秀</h1>
+    <div v-for="data in infodatas">
+        创建时间：{{data.createdAt}}<br>
+        公开时间：{{data.publishedAt}}<br>
+        链接类型：{{data.type}}<br>
+        链接：{{data.url}}<br>
+        ---------------------------------------<br>
+    </div>
+</div>
+</body>
+<script>
+
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                // shows: shows(),
+                infodatas: null,
+                info: null
+            }
+        },
+        mounted() {
+            let ajaxData1 = () => {
+                //美图API
+                return axios.get('https://www.apiopen.top/meituApi?page=1')
+            };
+            let ajaxData2 = () => {
+                return axios
+                    .post('https://www.apiopen.top/login?key=00d91e8e0cca2b76f515926a36db68f5&phone=13594347817&passwd=123456')
+            };
+            axios.all([ajaxData1(), ajaxData2()])
+            //同步请求
+                .then(axios.spread((acct, perms) => {
+                    this.infodatas = acct.data.data;
+                    this.info = perms.data;
+                }))
+
+
+        }
+    });
+</script>
+</html>

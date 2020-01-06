@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 除了默认设置的核心指令(v-model,v-show),vue也允许注册自定义属性 -->
+    <!-- 注册一个全局指令v-focus, 该指令是在页面加载时，元素获取焦点-->
+    <div id="app">
+        <p>页面载入时input自动获取焦点</p>
+        <input type="text" v-focus>
+    </div>
+
+    <script>
+        //注册一个全局自定义属性：v-focus
+        Vue.directive("focus", {
+            //将绑定元素插入到Dom中
+            inserted: function(el) {
+                //聚焦元素
+                el.focus();
+            }
+        })
+
+        //创建根实例
+        new Vue({
+            el: "#app",
+        })
+    </script>
+</body>
+
+
+<body>
+    <!-- 在实例使用 directives 选项来注册局部指令，这样指令只能在这个实例中使用： -->
+    <!-- 当一个html带有多个焦点事件时，最终只会以最后一个事件为准 -->
+    <div id="app2">
+        <p>页面载入时input自动获取焦点</p>
+        <input type="text" v-focus2>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app2",
+            directives: {
+                //注册一个局部自定义属性 v-focus2
+                focus2: {
+                    inserted: function(el) {
+                        el.focus()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

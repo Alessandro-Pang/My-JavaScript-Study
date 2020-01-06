@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">点击反转字符串</button>
+    </div>
+
+    <div id="app2">
+        <p>{{message}}</p>
+        <!-- v-model指令 --双向绑定数据 -->
+        <input type="text" v-model="message">
+    </div>
+
+    <div id="app3">
+        <p>{{message}}</p>
+        <input type="text" v-model="message">
+        <p>上一步oldData:{{oldData}}</p>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: app,
+        data: {
+            message: "Hello Vue.js"
+        },
+        methods: {
+            reverseMessage: function() {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+
+    let vm2 = new Vue({
+        el: app2,
+        data: {
+            message: "字符串"
+        }
+    })
+
+    let vm3 = new Vue({
+        el: app3,
+        data: {
+            message: "enenene",
+            oldData: null
+        }
+    })
+    vm3.$watch('message', function(newValue, oldValue) {
+        console.log(`${newValue}========>${oldValue}`);
+        this.oldData = oldValue
+    })
+</script>
+
+</html>

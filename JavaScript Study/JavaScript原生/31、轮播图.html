@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		*{
+			margin: 0px auto;
+			padding:0px;
+		}
+
+		img{
+			height: 200px; 
+			width: 500px;
+		}
+
+		#box{
+			position: relative;
+			text-align: center;
+			width: 410px;
+			height: 260px;
+			border:1px solid green;
+			/*overflow: hidden;*/
+		}
+		#screen{
+			position: relative;
+			width: 400px;
+			height: 250px;
+			overflow: hidden;
+		}
+
+		ol{
+			height: 250px; 
+			width: 2000px;
+			position: absolute;
+			top: 5px;
+		}
+
+		li{
+			list-style: none;
+			position: relative;
+			height: 250px; 
+			width: 400px;
+			float: left;
+
+		}
+		#btn{
+			position: absolute;
+			text-align: right;
+			bottom: 1px;
+			right:1px;
+		}
+		#btn span{
+			display: inline-block;
+			width: 20px;
+			height: 20PX;
+			color: yellow;
+			cursor: pointer;
+			border: 1px solid green; 
+			text-align: center;
+		}
+
+		#onFocus{
+			position: absolute;
+			display:none;
+			top: 40%;
+			width: 100%;
+		}
+
+		#left{
+			position: absolute;
+			left:0px;
+		}
+
+		#right{
+			position: absolute;
+			right: 0px;
+		}
+
+		#onFocus span{
+			display: block;
+			width: 30px;
+			height: 50px;
+			border: 1px solid green;
+			font-size: 30px;
+			color: yellow;
+			cursor: pointer;
+			text-align: center;
+		}
+
+		.spanStyle {
+			background: rgb(255,255,100);
+			border:2px solid red  !important;
+			color:rgb(0,0,0) !important;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+	<div id="screen">	
+		<ol>
+			<li><img src="./background/bj1.jpg"></li>
+			<li><img src="./background/bj2.jpg"></li>
+			<li><img src="./background/bj3.jpg"></li>
+			<li><img src="./background/bj4.jpg"></li>
+			<li><img src="./background/bj5.jpg"></li>
+			<li><img src="./background/bj1.jpg"></li>
+		</ol>	
+		<div id="btn">
+			<span>1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+		</div>
+		<div id="onFocus"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+
+	var ele_ol = my$('screen').firstElementChild;
+	var spanTag = my$('btn').getElementsByTagName('span');
+	var divWidth = my$('screen').offsetWidth;
+	var olWidth = ele_ol.offsetWidth;
+	var timeId = null;
+	
+	//右下角点击事件
+	for(let i=0 ; i < spanTag.length ; i++){
+		spanTag[i].index = i;
+
+		spanTag[i].onclick = function(){
+
+			for (let j=0 ; j < spanTag.length ; j++) {
+				spanTag[j].className ="";
+			}
+
+			spanTag[i].className = "spanStyle";
+
+			let index = this.index;
+			ele_ol.style.left = -divWidth*index +'px';
+ 		}
+	}
+
+	spanTag[0].className = "spanStyle";
+
+	timeId = setInterval(timeJob,100);
+
+	//鼠标进入事件，显示左右按钮
+	my$('screen').onmouseover = function(){
+		my$('onFocus').style.display = "block";
+		clearInterval(timeId);
+	}
+	my$('screen').onmouseout = function(){
+		my$('onFocus').style.display = "none";
+		timeId = setInterval(timeJob,100);
+	}
+	
+	//左右按钮点击事件
+	//点击显示上一个
+	my$('left').onclick = function(){
+		let thisLeftValue = ele_ol.offsetLeft;
+		//获取上一级按钮下标
+		let index = -thisLeftValue / divWidth -1;
+
+		if(thisLeftValue / divWidth == 0){
+			index = spanTag.length-1;
+			//当前位置在第一个，下标为0的位置
+			//点击按钮后跳转到最后一个
+			animations(ele_ol,-index*divWidth,100,100);
+		}else{
+			//上级下标*400
+			animations(ele_ol,-index*divWidth,20,20);
+		}
+		//右下角小标签排他功能
+		for (let j=0 ; j < spanTag.length ; j++) {
+			spanTag[j].className ="";
+		}
+		spanTag[index].className = "spanStyle";
+	}
+
+	//点击显示上一个
+	my$('right').onclick = function(){
+		let thisLeftValue = ele_ol.offsetLeft;
+		let index = -thisLeftValue / divWidth +1;
+		let maxIndex = spanTag.length;
+		if(maxIndex == index){
+			index = 0;
+			animations(ele_ol,index,100,100);
+		}else{
+			animations(ele_ol,thisLeftValue - divWidth,20,20);
+		}
+		//右下角小标签排他功能
+		for (let j=0 ; j < spanTag.length ; j++) {
+			spanTag[j].className ="";
+		}
+		spanTag[index].className = "spanStyle";
+	}
+	
+	//========动画函数封装==========//
+	//参数一：动画元素 my$();
+	//参数二：目标步数
+	//参数三：每次前进步数
+	//参数四：每次后退步数
+	function animations(elementId,target,next,back){
+		
+		//清理定时器
+		window.clearInterval(timeId);
+
+		let biubiu = window.setInterval(function(){ //定时器任务
+
+			//获取当前div位置
+			var dvPath = elementId.offsetLeft;
+
+			//如果div位置小于目标位置 ,则往前移动
+			if (dvPath < target) {
+				
+				dvPath = dvPath+next;
+
+				if (next % 2 !== 0 && dvPath > target && dvPath <= target+next) {
+
+					dvPath = target;
+				}
+
+			}else if(dvPath > target){
+
+				dvPath = dvPath-back;
+
+				if (next % 2 !== 0 && dvPath < target && dvPath >= target-next) {
+
+					dvPath = target;
+				}
+			}
+
+			//执行每次移动后的位置
+			elementId.style.left=dvPath+"px";
+
+			//当前位置==目标位置 结束定时器任务
+			if (dvPath == target) {
+
+				window.clearInterval(biubiu);
+				return
+			}
+
+		},20)	
+	}
+
+	//定时器任务
+	function timeJob(){
+		//获取当前left值
+		let ele_ol_left = ele_ol.offsetLeft;
+		//获取元素宽度
+		let ele_ol_width = ele_ol.offsetWidth;
+		//设置index数值，因为默认是0，所以每次+1
+		let index = -ele_ol_left / divWidth + 1;
+		//设置最大index值
+		let maxIndex = spanTag.length;
+		
+		//当index值 == 最大值，从0再次开始
+		if (index == maxIndex-1) {
+			index = 0;
+			animations(ele_ol,-index*divWidth,100,100);
+
+		}else{
+			animations(ele_ol,-index*divWidth,20,20);
+
+		}
+		
+		//右下角小标签排他功能
+		for (let j=0 ; j < spanTag.length ; j++) {
+			spanTag[j].className ="";
+
+		}
+		spanTag[index].className = "spanStyle";
+	}
+</script>
+</html>

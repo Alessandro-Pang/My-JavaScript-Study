@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <!-- <script src="./axios.js"></script> -->
+</head>
+
+
+<body>
+
+    <div id="emitDemo">
+        <template>
+            <div class="parent">
+                <p>$emit -->父组件传入子组件的值：{{name}}</p>
+                <fieldset>
+                    <legend>子组件</legend>
+                    <child :val="name" @update="modify"></child>
+                </fieldset>
+           </div>
+        </template>
+    </div>
+
+    <div id="syncDemo">
+        <template>
+            <div class="parent">
+                <p>sync --> 父组件传入子组件的值：{{name}}</p>
+                <fieldset>
+                    <legend>子组件</legend>
+                    <child :val.sync="name"></child>
+                </fieldset>
+            </div>
+        </template>
+    </div>
+</body>
+
+<!-- $emit -->
+<script>
+    let Child = {
+        props: ['val'],
+        template: `<label class="child">
+                输入框：
+                <input :value=val @input="$emit('update',$event.target.value)"/>
+            </label>`
+    };
+
+    new Vue({
+        el: emitDemo,
+        components: {
+            Child
+        },
+        data() {
+            return {
+                name: 'linda'
+            }
+        },
+        methods: {
+            modify(newVal) {
+                this.name = newVal
+            }
+        }
+    })
+</script>
+
+<!-- sync -->
+<script>
+    let Child2 = {
+        props: ['val'],
+        template: `<label class="child">
+                        输入框：
+                        <input :value=val @input="$emit('update:val',$event.target.value)"/>
+                    </label>`
+    }
+    new Vue({
+        el: syncDemo,
+        components: {
+            "Child": Child2
+        },
+        data() {
+            return {
+                name: 'linda'
+            }
+        }
+    })
+</script>
+
+</html>

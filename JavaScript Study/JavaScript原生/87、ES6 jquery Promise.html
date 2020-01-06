@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+<div id="dv">
+    根据ID推荐接口：
+    https://api.apiopen.top/videoRecommend?id=127398
+    新闻接口：
+    https://www.apiopen.top/journalismApi
+    随机推荐热门段子（包含文字、图片、GIF、视频）：
+    https://www.apiopen.top/satinApi?type=1&page=1
+    随机推荐热门段子【神评版本】（包含文字、图片、GIF、视频）：
+    https://www.apiopen.top/satinGodApi?type=1&page=1
+</div>
+
+</body>
+<script>
+    Promise.all([
+        $.ajax({url:"https://api.apiopen.top/videoRecommend?id=127398",dataType:"json"}),
+        $.ajax({url:"https://www.apiopen.top/journalismApi",dataType:"json"}),
+        $.ajax({url:"https://www.apiopen.top/satinApi?type=1&page=1",dataType:"json"}),
+        $.ajax({url:"https://www.apiopen.top/satinGodApi?type=1&page=1",dataType:"json"})
+    ]).then(result=>{
+        let [data1,data2,data3,data4] = result;
+        console.log(JSON.stringify(data1));
+        console.log(JSON.stringify(data2));
+        console.log(JSON.stringify(data3));
+        console.log(JSON.stringify(data4))
+    },err=>{
+        console.log('失败了')
+    })
+</script>
+
+</html>

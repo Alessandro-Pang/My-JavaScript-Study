@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 在元素和template中使用v-if指令 -->
+        <p v-if="seen">现在你看到我了</p>
+        <template v-if="ok">
+            <h1>菜鸟教程</h1>
+            <p>学的不仅是技术，更是梦想</p>
+            <p>哈哈哈，打字真辛苦!!!</p>
+        </template>
+    </div>
+
+    <script>
+        // 这里v-if指令根据表达式seen的值(true or false)来决定是否插入p元素
+        new Vue({
+            el: "#app",
+            data: {
+                seen: true,
+                ok: true
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <!-- if - else语句 -->
+    <!-- 随机生成一个数字，判断是否大于0.5，然后输出响应的信息 -->
+    <div id="app2">
+        <div v-if="Math.random() > 0.5">
+            Sorry
+        </div>
+        <div v-else>
+            No Sorry
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app2"
+        })
+    </script>
+</body>
+
+<body>
+    <!-- if-else-if语句 -->
+    <!-- 判断type的值 -->
+    <!-- v-else,v-else-if 必须跟在v-if或者v-else-if之后 -->
+    <div id="app3">
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else-if="type ==='C'">
+            C
+        </div>
+        <div v-else>
+            Note A/B/C
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app3",
+            data: {
+                type: 'C'
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <!-- v-show指令，根据条件展示元素 -->
+    <div id="app4">
+        <h1 v-show="ok">Hello!</h1>
+    </div>
+
+    <script>
+        new Vue({
+            el: "app4",
+            data: {
+                ok: true
+            }
+        })
+    </script>
+</body>
+
+</html>

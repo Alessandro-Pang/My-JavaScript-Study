@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="./BS/bootstrap.min.css">
+    <script src="/jquery.js"></script>
+    <script src="./BS/bootstrap.bundle.min.js"></script>
+    <script src="./BS/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- 
+        Bootstrap4 文字排版
+        Bootstrap 4 默认的 font-size 为 16px, line-height 为 1.5。
+        默认的 font-family 为 "Helvetica Neue", Helvetica, Arial, sans-serif。
+        此外，所有的 <p> 元素 margin-top: 0 、 margin-bottom: 1rem (16px)。 
+    -->
+
+    <div class="container">
+        <!-- bootstrap定义了所有h标签 -->
+        <h1>h1 Bootstrap 标题 (2.5rem = 40px)</h1>
+        <h2>h2 Bootstrap 标题 (2rem = 32px)</h2>
+        <h3>h3 Bootstrap 标题 (1.75rem = 28px)</h3>
+        <h4>h4 Bootstrap 标题 (1.5rem = 24px)</h4>
+        <h5>h5 Bootstrap 标题 (1.25rem = 20px)</h5>
+        <h6>h6 Bootstrap 标题 (1rem = 16px)</h6>
+    </div>
+
+    <div class="container">
+        <!-- 
+            Display 标题类
+
+            Bootstrap 还提供了四个 Display 类来控制标题的样式: 
+            .display-1, .display-2, .display-3, .display-4。 
+        -->
+        <h1>Display 标题</h1>
+        <p>Display 标题可以输出更大更粗的字体样式。</p>
+        <h1 class="display-1">Display 1</h1>
+        <h1 class="display-2">Display 2</h1>
+        <h1 class="display-3">Display 3</h1>
+        <h1 class="display-4">Display 4</h1>
+    </div>
+
+    <div class="container">
+        <!-- small 用于创建字体更小，颜色浅的字体 -->
+
+        <h1>更小文本标题</h1>
+        <p>small 元素用于字号更小的颜色更浅的文本:</p>
+        <h1>h1 标题 <small>副标题</small></h1>
+        <h2>h2 标题 <small>副标题</small></h2>
+        <h3>h3 标题 <small>副标题</small></h3>
+        <h4>h4 标题 <small>副标题</small></h4>
+        <h5>h5 标题 <small>副标题</small></h5>
+        <h6>h6 标题 <small>副标题</small></h6>
+    </div>
+
+    <div class="container">
+        <!-- 
+            <mark>
+            Bootstrap 4 定义 <mark> 为黄色背景及有一定的内边距: 
+        -->
+        <h1>高亮文本</h1>
+        <p>使用 mark 元素来 <mark>高亮</mark> 文本。</p>
+    </div>
+
+    <!-- Bootstrap 4 定义 HTML <abbr> 元素的样式为显示在文本底部的一条虚线边框: -->
+    <div class="container">
+        <h1>Abbreviations</h1>
+        <p>The abbr element is used to mark up an abbreviation or acronym:</p>
+        <p>The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.</p>
+    </div>
+
+    <div class="container">
+        <h2>模态框实例</h2>
+        <!-- 按钮：用于打开模态框 -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+              打开模态框
+            </button>
+
+        <!-- 模态框 -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- 模态框头部 -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">模态框头部</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- 模态框主体 -->
+                    <div class="modal-body">
+                        模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br> 模态框内容.. <br>
+                    </div>
+
+                    <!-- 模态框底部 -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

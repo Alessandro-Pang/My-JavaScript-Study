@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+</body>
+<!--
+    1.执行时间
+        window.onload必须等到页面内包括图片的所有元素加载完毕后才能执行。
+
+        $(document).ready()是DOM结构绘制完毕后就执行，不必等到加载完毕。
+
+    2.编写个数
+         window.onload不能同时编写多个，如果有多个window.onload方法，只会执行一个
+
+         $(document).ready()可以同时编写多个，并且都可以得到执行
+
+    3.简化写法
+         window.onload没有简化写法
+
+         $(document).ready(function(){})可以简写成$(function(){});
+
+    $(window).load(function(){}）和window.onload区别在于$(window).load(function(){}）可以写多个
+-->
+<div id="a1" style="display: none">
+	<div tag="t1"></div>
+	<div tag="t1"></div>
+	<div tag="t1"></div>
+	<div tag="t1"></div>
+</div>
+
+<div id="a2">
+	<div tag="t1"></div>
+	<div tag="t1"></div>
+	<div tag="t1"></div>
+</div>
+<script>
+
+    window.onload = () => {
+        console.log('window.onload只能执行一个，不能执行两个，当存在两个及以上时，会执行最后一个')
+    };
+
+    $(document).ready(()=> {
+        console.log('$(document).ready()方法可以声明多个')
+    });
+
+    $().ready(()=> {
+        console.log('$().ready() 是 $(document).ready()的缩写')
+    });
+
+    $(()=>{
+        console.log('$(()=>{}) 最简的缩写')
+    });
+
+    $(window).load('/',function(){
+        console.log('$(window).load 也是等待页面加载完毕后执行，并且也能同时执行多个')
+    });
+    $(window).load('/',function(){
+        console.log('$(window).load 但区别是它有两个参数，第一个是URL，"/"代表的是当前页面')
+    });
+
+    $(function(){
+    	$('div[tag=t1]').text('hahahahah');
+    	$('#a2').click(function(){
+    		$(this).hide();
+    		$('#a1').show();
+    	})
+    })
+</script>
+</html>

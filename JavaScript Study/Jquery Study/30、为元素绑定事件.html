@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <input type="button" value="按钮绑定事件" id='btn'>
+    <input type="button" value="按钮绑定事件" id='btn2'>
+    <div id="dv"></div>
+    <input type="button" value="按钮绑定事件" id='btn3'>
+    <div id="dv3"></div>
+    <input type="button" value="按钮绑定事件" id='btn4'>
+    <div id="dv4"></div>
+    <input type="button" value="按钮绑定事件" id='btn5'>
+    <div id="dv5"></div>
+    <script>
+        let clickEvent = () => {
+            alert('弹出一句话')
+        };
+
+        let mouseenterEvent = () => {
+            $('#btn').css({
+                background: " red "
+            })
+        };
+
+        let mouseleaveEvent = () => {
+            $('#btn').css({
+                background: "green "
+            })
+        };
+        // 常规为元素绑定事件
+        // $('#btn').click(clickEvent);
+        // $('#btn').mouseenter(mouseenterEvent);
+        // $('#btn').mouseleave(mouseleaveEvent);
+
+        // 链式编程
+        // $('#btn').click(clickEvent).mouseenter(mouseenterEvent).mouseleave(mouseleaveEvent);
+
+        // bind绑定事件 + 链式编程
+        //$('#btn').bind('click', clickEvent).bind('mouseenter', mouseenterEvent).bind('mouseleave', mouseleaveEvent);
+
+        // bind 传入对象绑定事件
+        $('#btn').bind({
+            'click': clickEvent,
+            'mouseenter': mouseenterEvent,
+            'mouseleave': mouseleaveEvent
+        })
+
+        //一个元素可以同时绑定多个相同的事件
+        $('#btn2').click(function() {
+            $('#dv').width(100).height(100)
+        }).click(function() {
+            $('#dv').css('background', 'red')
+        })
+
+        //bind 链式写法，绑定相同事件
+        $('#btn3').bind('click', function() {
+            $('#dv3').width(100).height(100)
+        }).bind('click', function() {
+            $('#dv3').css('background', 'green')
+        });
+
+        //bind 传入对象绑定相同事件  ---这样是不可以的，只会执行最后一个
+        $('#btn4').bind({
+            'click': function() {
+                $('#dv4').width(100).height(100).css('border', '3px solid red')
+            },
+            'click': function() {
+                $('#dv4').width(50).height(50).css('background', 'green')
+            }
+        })
+
+        //同时使用bind绑定 和 使用事件可以触发
+        $('#btn5').bind('click', function() {
+            $('#dv5').width(100).height(100).css('border', '3px solid red')
+        }).click(function() {
+            $('#dv5').css('background', 'green')
+        })
+    </script>
+</body>
+
+</html>

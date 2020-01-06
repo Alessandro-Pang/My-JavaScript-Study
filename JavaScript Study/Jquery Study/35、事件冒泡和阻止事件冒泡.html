@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        #dv1 {
+            width: 500px;
+            height: 500px;
+            border: 1px solid seagreen;
+            background: aqua;
+        }
+        
+        #dv2 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid purple;
+            background: slateblue;
+        }
+        
+        #dv3 {
+            width: 100px;
+            height: 100px;
+            border: 1px solid greenyellow;
+            background: gold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="dv1">
+        <div id="dv2">
+            <div id="dv3"></div>
+        </div>
+    </div>
+
+    <script>
+        $('#dv1').click(function(e) {
+            console.log('test code ,debuger', this.localName, this.id, e.type);
+            return false
+        })
+        $('#dv2').click(function(e) {
+            console.log('test code ,debuger', this.localName, this.id, e.type);
+            return false
+        })
+        $('#dv3').click(function(e) {
+            console.log('test code ,debuger', this.localName, this.id, e.type);
+            return false
+        })
+
+        /**
+         *  原生JS 阻止事件冒泡：
+         * 
+         *  Chrome ,Firfox:
+         *  e.stopPropagation;
+         *  
+         *  IE8 ~
+         *  window.event.cancelBubble = true;
+         * 
+         *  JQuery 阻止事件冒泡：
+         *  return false
+         */
+    </script>
+</body>
+
+</html>

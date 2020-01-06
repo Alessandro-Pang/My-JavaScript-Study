@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+	<video width="640px"  controls id="videoObj" poster = "background/bj1.jpg">
+		<!--autoplay 打开页面自动播放-->
+		<!--controls 设置或返回音频/视频是否显示控件(暂停/开始)-->
+
+		<source src="video/v1.mp4" type="video/mp4">
+		当您看到这段话
+		这说明：
+			您的浏览器不支持video标签！
+		另注：
+			1、目前浏览器貌似不支持直接使用video标签引用路径
+			  必须使用sourse标签引用音频
+			2、video视频格式只支持 MP4(xdiv),mpg4(xvid),avc(h264)三种
+			  如果mp4视频加载不出来，可以尝试转换格式为 H264!
+			  H264为公认的MP4编码格式
+	</video>
+	<br>
+	<input type="button" name="" id="palyBtn" value="开始">
+	<input type="button" name="" id="pauseBtn" value="暂停">
+	<script type="text/javascript">
+		let v = document.getElementById('videoObj');
+
+		my$("palyBtn").onclick = function(){
+			v.play(); 
+		} 
+		my$("pauseBtn").onclick = function(){
+			v.pause(); 
+		} 
+	</script>
+</body>
+</html>

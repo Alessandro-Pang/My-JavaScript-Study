@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+
+		td{
+			border:1px solid;
+		}
+
+		tr{
+			background-color: rgb(0,125,255);
+		}
+	</style>
+</head> 
+<body>
+<div id=table>
+	<table style ="width: 300px;height: 100px;border : 1px solid ;margin:0 auto;text-align: center">
+		<thead>
+		<tr style="background-color: rgb(255,125,0);"><td><input type="checkbox" name="" id="checkAll"></td><td>菜名</td><td>掌勺</td></tr>
+		</thead>
+		<tbody id="check">
+		<tr><td><input type="checkbox" name=""></td><td>红烧茄子</td><td>李师傅</td></tr>
+		<tr><td><input type="checkbox" name=""></td><td>清蒸鱼</td><td>王师傅</td></tr>
+		<tr><td><input type="checkbox" name=""></td><td>酸辣土豆丝</td><td>孙师傅</td></tr>
+		<tr><td><input type="checkbox" name=""></td><td>水煮鱼</td><td>张师傅</td></tr>
+		</tbody>
+	</table>
+</div>
+</body>
+<script type="text/javascript" src="./common.js"></script>
+<script type="text/javascript">
+	/**
+	var ckA = my$("checkAll");
+	//纯节点代码实现全选反选
+	ckA.onclick = function(){
+		var ck = my$("check").children;
+		for (var i = 0 ;i < ck.length ; i++) {
+			var ckd = ck[i].children;
+			for (var n = 0 ; n < ckd.length ; n++){
+				var checkbox = ckd[n].children;
+				for (var j = 0 ; j<checkbox.length ;j++){
+					if (ckA.checked == true) {
+						if(checkbox[j].nodeName =="INPUT" && checkbox[j].nodeType == 1){
+							checkbox[j].checked = true;
+						}
+					}else{
+						if(checkbox[j].nodeName =="INPUT" && checkbox[j].nodeType == 1){
+							checkbox[j].checked = false;
+						}
+					}	
+				}		
+			}
+		}
+	};
+	*/
+
+	//dom实现全选反选
+	var ckA = my$("checkAll");
+	var checkbox = my$("check").getElementsByTagName("input");
+	ckA.onclick = function(){
+
+		for (var i = 0 ; i < checkbox.length;i++){
+			checkbox[i].checked = this.checked; //ckA.checked==true ? true : false;
+		}
+
+	}
+	//当所有子复选框全被选中，自动选中父级复选框
+	var ckS = my$("checkAll");
+	var checks = my$("check").getElementsByTagName("input");
+	for (var i = 0 ; i < checks.length ;i++) {
+		checks[i].onclick = function(){
+			for (var j = 0;j < checks.length;j++) {
+				var falg = true  //默认所有复选框都被选中
+				if (!checks[j].checked) { //遍历所有复选框 如果有未选中的 则执行
+					falg = false	//将变量值修改为false
+					break;	//结束循环，不在往下执行遍历
+				}
+			}
+			ckS.checked = falg;
+		}
+	}
+	
+</script>
+</html>

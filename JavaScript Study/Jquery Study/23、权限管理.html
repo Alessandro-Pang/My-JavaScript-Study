@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        body,
+        html {
+            display: flex;
+            display: -webkit-flex;
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .cls {
+            flex-grow: 1;
+            height: 20px;
+        }
+        
+        .center {
+            flex-grow: 2;
+            /* text-align: center; */
+            float: left;
+            flex-wrap: wrap;
+            flex-direction: row
+        }
+        
+        .tag {
+            width: 60px;
+            flex-wrap: wrap;
+            display: inline-block
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cls"></div>
+    <div class="center">
+        <select multiple style="width: 60px ;height: 100px " name="" id="sel1">
+            <option value="">增加</option>
+            <option value="">删除</option>
+            <option value="">修改</option>
+            <option value="">查询</option>
+            <option value="">添加</option>
+        </select>
+
+        <span class="tag">
+            <button id="toRight"> 》 </button>
+            <button id="toLeft"> 《 </button>
+            <button id="toRightAll"> >>> </button>
+            <button id="toLeftAll"> <<< </button>
+        </span>
+
+        <select multiple style="width: 60px ;height: 100px " name="" id="sel2"></select>
+    </div>
+    <div class="cls"></div>
+</body>
+<script>
+    $('#toRightAll').click(function() {
+        $('#sel1>option').appendTo($('#sel2'))
+    });
+
+    $('#toLeftAll').click(function() {
+        $('#sel2>option').appendTo($('#sel1'))
+    });
+
+    $('#toRight').click(function() {
+        $('#sel1>option:selected').appendTo($('#sel2'))
+    })
+
+    $('#toLeft').click(function() {
+        $('#sel2>option:selected').appendTo($('#sel1'))
+    })
+</script>
+
+</html>

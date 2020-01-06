@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="define-core">
+    <!--style="background-image:url(../iali/iali5.jpg)"-->
+    <div class="logo" style="background-image:url(./images/logo.png)">
+
+    </div>
+    <div class="define">
+        <div> 1、px 相当于屏幕上的一个点，每个屏幕分辨率不同，点的多少也不同</div>
+        <div> 2、em 是相对于父级字体的大小</div>
+        <div> 3、rem 是相对于HTML根级字体的大小</div>
+        <div> 4、vh,vw 相对于视口的高度，1vh相当于 1/100 的视口高度，1vw相当于 1/100 的视口宽度</div>
+    </div>
+
+    <div class="width-xs height-xs" style="border:1px solid seagreen">
+        xs -- extra samll &nbsp;最小 sm -- small &nbsp;小 md -- middle &nbsp;中 lg -- large &nbsp;大
+    </div>
+
+    <div class="width-md height-md" style="border: 1px solid sienna">
+        <div class="width-half-md height-half-md" style="border:1px solid teal"></div>
+        <div class="width-half-md height-half-md" style="border:1px solid red"></div>
+    </div>
+
+    <div class="width-xl height-md" style="background:blueviolet">
+        <div class="width-half-md float-left" style="height:100%;border:1px solid springgreen;">
+            <div class="sub-box-left" style="background:darkorange"></div>
+        </div>
+        <div class="width-md float-left" style="height:100%;border:1px solid aqua">
+            <div class="sub-box-left" style="background:darkorange"></div>
+        </div>
+        <div class="width-half-md float-left" style="height:100%;border:1px solid springgreen">
+            <div class="sub-box-left" style="background:darkorange"></div>
+        </div>
+    </div>
+
+    <div class="height-md width-xl flex-container flex-trisection" style=" border :1px solid red">
+        <div class=" flex-trisection" style="border:1px solid chartreuse;"></div>
+        <div class=" flex-trisection" style="border:1px solid cyan"></div>
+        <div class=" flex-trisection" style="border:1px solid darkorange"></div>
+    </div>
+
+    <div class="width-pct height-50pct">
+        <div class="float-left sub-box width-25pct" style=" border:1px solid springgreen;">
+            <div class="charts-box" style="background:darkorange"></div>
+        </div>
+        <div class="float-left sub-box width-50pct" style="border:1px solid aqua">
+            <div class="charts-box" style="background:darkorange"></div>
+        </div>
+        <div class="float-left sub-box width-25pct" style="border:1px solid springgreen">
+            <div class="charts-box" style="background:darkorange"></div>
+        </div>
+    </div>
+</body>
+
+</html>

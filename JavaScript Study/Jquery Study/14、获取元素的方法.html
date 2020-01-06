@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <div id="demo">
+        <ul>
+            <li>1111111</li>
+            <li>2222222</li>
+            <li>3333333</li>
+            <li>4444444</li>
+            <li>5555555</li>
+            <li>6666666</li>
+            <li>7777777</li>
+            <li>8888888</li>
+            <li>9999999</li>
+            <li>0000000</li>
+        </ul>
+    </div>
+
+    <div id="demo2">
+        eq,gt,lt选择器
+        <ul>
+            <li>1111111</li>
+            <li>2222222</li>
+            <li>3333333</li>
+            <li>4444444</li>
+            <li>5555555</li>
+            <li>6666666</li>
+            <li>7777777</li>
+            <li>8888888</li>
+            <li>9999999</li>
+            <li>0000000</li>
+        </ul>
+    </div>
+
+    <div id="demo3">
+        prevAll 、nextAll方法和断链
+        <ul>
+            <li>1111111</li>
+            <li>2222222</li>
+            <li>3333333</li>
+            <li>4444444</li>
+            <li>5555555</li>
+            <li>6666666</li>
+            <li>7777777</li>
+            <li>8888888</li>
+            <li>9999999</li>
+            <li>0000000</li>
+        </ul>
+    </div>
+    <script>
+        $(function() {
+            $("#demo>ul>li").css({
+                fontSize: "30px",
+            });
+
+            //获取当前元素前面的第一个元素
+            $("#demo>ul>li:eq(5)").prev().css("background", "yellow");
+            //获取当前元素前面所有的元素
+            $("#demo>ul>li:eq(5)").prevAll().css({
+                color: "green",
+            });
+            //获取当前元素后面的第一个元素
+            $("#demo>ul>li:eq(5)").next().css("background", "blue");
+            //获取当前元素后面所有的元素
+            $("#demo>ul>li:eq(5)").nextAll().css({
+                color: "#00afaf",
+            });
+            //获取当前元素的父级元素
+            $("#demo>li>li:eq(5)").parent().css("fontFamily", "楷体");
+        });
+
+        $(function() {
+            $("#demo2>ul>li").css({
+                fontSize: "30px",
+                color: "green",
+                fontFamily: "全新硬笔行书简",
+                cursor: "pointer",
+                margin: "10px"
+            });
+
+            $("#demo2>ul>li").hover(function() {
+                $("#demo2>ul>li").css("opacity", "0.5");
+                $(this).css({
+                    background: "#00fafa",
+                    opacity: 1
+                });
+            }, function() {
+                $("#demo2>ul>li").css({
+                    opacity: "1",
+                    background: ""
+                });
+            }).click(function() {
+                let index = $(this).index();
+                $("#demo2>ul>li").css("opacity", 1);
+                $(this).css("background", "#3399ff");
+                $("#demo2>ul>li:lt(" + index + ")").css("background", "#99ff33");
+                $("#demo2>ul>li:gt(" + index + ")").css("background", "#ff9933");
+            })
+        });
+
+        $(function() {
+            $("#demo3>ul>li").css({
+                fontSize: "30px",
+                color: "green",
+                fontFamily: "全新硬笔行书简",
+                cursor: "pointer",
+                margin: "10px"
+            }).hover(function() {
+                $("#demo3>ul>li").css("opacity", "0.5");
+                $(this).css({
+                    background: "#00fafa",
+                    opacity: 1
+                });
+            }, function() {
+                $("#demo3>ul>li").css({
+                    opacity: "1",
+                    background: ""
+                });
+            }).click(function() {
+                let index = $(this).index();
+                $("#demo3>ul>li").css("opacity", 1);
+                //断链 ： 对象调用方法后，返回来的不是之前的对象了，此时被称之为断链
+                //在断链的方法后面调用 .end() 方法，可以修复断链，恢复链式编程
+                $(this).css("background", "#3399ff").prevAll().css("background", "#99ff33").end().nextAll().css("background", "#ff9933");
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./common.js"></script>
+</head>
+
+<body>
+    <table style="border: deeppink 1px solid">
+        <tr style="border: deeppink 1px solid">
+            <td></td>
+            <td></td>
+            <td style="border: deeppink 1px solid">hehe</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border: deeppink 1px solid">
+            <td style="border: deeppink 1px solid">222</td>
+            <td style="border: deeppink 1px solid">222</td>
+            <td style="border: deeppink 1px solid">222</td>
+            <td style="border: deeppink 1px solid">222</td>
+            <td style="border: deeppink 1px solid">222</td>
+        </tr>
+    </table>
+</body>
+
+<script>
+    let arr = [
+        function() {
+            console.log('第一个函数 ')
+        },
+        function() {
+            console.log('第22222个函数 ')
+        },
+        function() {
+            console.log('第sansansan个函数 ')
+        },
+        function() {
+            console.log('第四个函数 ')
+        },
+        function() {
+            console.log('第5555555个函数 ')
+        },
+        function() {
+            console.log('第llllll个函数 ')
+        },
+        function() {
+            console.log('第777777777个函数 ')
+        }
+    ];
+
+    //回调函数，把函数当参数就是回调函数
+    //forEach 遍历
+    arr.forEach(function(ele) {
+        ele(); //输出所有元素
+    })
+</script>
+
+</html>b

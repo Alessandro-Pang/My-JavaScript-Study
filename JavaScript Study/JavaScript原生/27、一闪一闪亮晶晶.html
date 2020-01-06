@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		#box{
+			position: absolute;
+			width: 800px;
+			height: 600px;
+			border: 1px solid yellow;
+			background: rgb(0,0,0);
+		}
+		#dv{
+			position: absolute;
+			width: 15px;
+			height: 20px;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+	<div id="dv"></div>
+</div>
+</body>
+<script type="text/javascript">
+	my$("dv").innerHTML = "<span>★<span>";
+	my$("dv").firstElementChild.style = "color:yellow";
+
+	window.setInterval(function(){
+		var x = parseInt(Math.random()*800);
+		var y = parseInt(Math.random()*600);
+
+		my$("dv").style.top = y+"px";
+		my$("dv").style.left = x+"px";
+	},10)
+
+</script>
+</html>

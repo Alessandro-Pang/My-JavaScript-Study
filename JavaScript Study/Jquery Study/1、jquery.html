@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+<button id="btn">Clik Me</button>
+<div id="app">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+</div>
+
+<div id="dv"></div>
+
+<button id="jBtn">Clik me!!</button>
+<div id="jDv">
+    <p></p>
+</div>
+<script>
+    $('#btn').click(
+        () =>{
+            $('#app p').text('JQuery 第一天学习')
+        }
+    );
+
+    //DOM对象调用Jquery对象-->$(DomObj)
+    //DOM的方法叫做DOM对象，jQuery的方法叫做jQuery对象
+    //DOM不可以直接调用jQuery方法
+    let dv = document.getElementById('dv');
+    $(dv).css({height:"300px",width:"300px",background:"#11ffff"})
+
+    //jQuery()方法简写 --> $()
+    //jquery对象调用DOM方法 --> jQueryObj[0]
+    let jqBtn = jQuery('#jBtn');
+    jqBtn[0].onclick = () =>{
+        $('#jDv p').text('哈哈，我又变帅了！！')
+    }
+
+    //$(dv)[0]--> dv(DOM) --> $(dv)-->Jquery --> $(dv)[0]-->DOM
+    //$(jqbtn[0])[0]--> jqBtn(Jquery) -->jqbtn[0](DOM)--> $(jqbtn[0])(JQ)-->$(jqbtn[0])[0]-->DOM
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<input type="button" name="" value="按钮" id="btn1">
+</body>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript">
+	console.log(window.location)
+	console.log(window.location.hash)
+	console.log(window.location.host)
+	console.log(window.location.hostname)
+	console.log(window.location.pathname)
+	console.log(window.location.port)
+	console.log(window.location.portocol)
+	console.log(window.location.search)
+	console.log(window.location.href)
+
+	my$("btn1").onclick = function(){
+		location.href="http://www.baidu.com";
+		location.assign("http://www.baidu.com");
+		//刷新
+		location.reload();
+		//更换本地地址，没有历史记录
+		location.replace("http://www.baidu.com")
+	}
+</script>
+</html>

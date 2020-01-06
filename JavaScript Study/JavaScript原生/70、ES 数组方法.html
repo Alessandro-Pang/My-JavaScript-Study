@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /*******************************************************************************************/
+    /************************************map 映射方法********************************************/
+    /*******************************************************************************************/
+
+    let arr = [12, 3, 13, 232, 55, 86, 12, 8, 5, 21, 44, 66, 11, 444];
+
+    //map 映射
+    //进来一个，出去一个
+    arr.map(function(item) {
+        // alert(item * 2)
+        console.log(item * 2) //将arr数值，每个x2
+    })
+
+    let result = arr.map(function(item) {
+        //数组中每一个元素进行对比，大于50的返回'太贵了'，否则返回‘可以接受’
+        return item > 50 ? '太贵了' : '可以接受'
+    })
+
+    console.log(result)
+
+    //箭头函数 + map 函数
+    let result2 = arr.map(item => item < 50 ? '太便宜了' : '差不多')
+    console.log(result2)
+
+    /*******************************************************************************************/
+    /************************************reduce 汇总方法*****************************************/
+    /*******************************************************************************************/
+
+    let arr2 = [12, 34, 56, 77, 11, 22, 44]
+
+    //参数一：是本次和上次的临时结果，
+    //参数二：是本次的数值
+    //参数三：是本次的数值在数组中的下标
+    arr2.reduce(function(temp, item, index) {
+        console.log(temp, item, index)
+    })
+
+    let result3 = arr2.reduce(function(temp, item, index) {
+        return temp + item
+    })
+    console.log(result3)
+
+    //reduce求平均数
+    let result4 = arr2.reduce(function(temp, item, index) {
+        if (index == arr2.length - 1) { //当index是数组中的最后一个
+            return (temp + item) / arr2.length
+        } else {
+            return (temp + item)
+        }
+    })
+    console.log('平均数：===' + result4)
+
+    /*******************************************************************************************/
+    /************************************filter 过滤器方法***************************************/
+    /*******************************************************************************************/
+
+    let arr3 = [12, 5, 63, 24, 45, 21, 55, 36, 48];
+    //返回能被三整除的数值
+    let result5 = arr3.filter(function(item) {
+        //通过true，false决定是不是要返回值
+        return item % 3 == 0 ? true : false;
+    })
+    console.log(result5)
+
+    //返回能被2整除的
+    let result6 = arr3.filter(item => item % 2 == 0)
+    console.log(result6)
+
+    let arr4 = [{
+        title: "中西衬衫",
+        price: 175
+    }, {
+        title: "男士衬衫",
+        price: 75
+    }, {
+        title: "女士衬衫",
+        price: 375
+    }, {
+        title: "男士皮鞋",
+        price: 775
+    }, {
+        title: "女士包包",
+        price: 995
+    }]
+    let result7 = arr4.filter(json => json.price >= 500);
+    console.log("result7",result7)
+    /*******************************************************************************************/
+    /************************************forEach 迭代器方法**************************************/
+    /*******************************************************************************************/
+
+    let arr5 = [12, 5, 8, 9, 21]
+    arr5.forEach(function(item) {
+        console.log(item)
+    })
+
+    arr5.forEach((item, index) => {
+        console.log(item, index)
+    })
+</script>
+
+</html>

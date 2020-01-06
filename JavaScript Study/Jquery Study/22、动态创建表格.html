@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        
+        table {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">点击创建表格</button>
+    <button id="btn3">点击删除表格1</button>
+    <button id="btn4">点击删除表格2</button>
+    <button id="btn2">点击删除表格3</button>
+    <div style="height:300px ;width: 300px ; border :1px solid red" id="dv">
+        <table border='1px' cellspacing="0" cellpadding="0">
+            <tr>
+                <td>标题</td>
+                <td>文章</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>文文章文章文章章</td>
+            </tr>
+            <tr>
+                <td>mode</td>
+                <td>文章文章文章</td>
+            </tr>
+            <tr>
+                <td>hover</td>
+                <td>文章文章文章文章文章</td>
+            </tr>
+            <tr>
+                <td>focus</td>
+                <td>文章文章文章文章</td>
+            </tr>
+            <tr>
+                <td>blur</td>
+                <td>文章文章文章文章文章</td>
+            </tr>
+        </table>
+    </div>
+
+    <input type="text" placeholder="title" id="t1">
+    <input type="text" placeholder="article" id="t2">
+    <button id="myBtn">点击上传</button>
+</body>
+
+<script>
+    let arr = [{
+        title: '菜鸟学编程',
+        artcle: '呜啦啦啦啦。。。。'
+    }, {
+        title: '老鸟学编程',
+        artcle: '滴滴答答的。。。。'
+    }, {
+        title: '鸟叔学编程',
+        artcle: 'bilinmgbiling。。'
+    }, {
+        title: '骷髅学编程',
+        artcle: 'aaaaaaaaaa........'
+    }, {
+        title: '我不学编程',
+        artcle: '??asasa???as......'
+    }, ];
+
+    $(function() {
+        $('#btn').click(function() {
+            let table = $('<table border="1px" cellspacing="0" cellpadding="0"></table>');
+            let tbody = table.append('<tbody></tbody>')
+            $('#dv').append(tbody);
+            for (let i = 0; i < arr.length; i++) {
+                let dt = arr[i];
+                let tr = $('<tr></tr>');
+                tbody.append(tr);
+                let td = $(`<td>${dt.title}</td><td>${dt.artcle}</td>`)
+                tr.append(td);
+
+                //JQuery 无法直接获取动态生成的元素
+                tr.mouseenter(function() {
+                    $(this).css({
+                        backgroundColor: "green"
+                    })
+                }).mouseleave(function() {
+                    $(this).css({
+                        backgroundColor: "",
+                    })
+                })
+            }
+        });
+
+        //$().click()无法获取元素
+        //通过 $().on('事件','子元素',fn)获取动态元素，绑定事件
+        $('#dv').on('mouseenter', 'table>tbody>tr', function() {
+            $(this).css('color', 'yellow')
+        }).on('mouseleave', 'table>tbody>tr', function() {
+            $(this).css('color', '')
+        });
+        //on()可以获取动态元素，必须有事件
+        //delegate() 可以获取动态元素，可以没事件
+        //live() 可以获取动态元素，jQuery 1.9已弃用，必须有事件
+        //bind() 只能获取静态元素，不能获取动态元素，必须有事件
+
+        $('#btn2').click(function() {
+            $(this).next().empty()
+        });
+
+        $('#btn3').click(function() {
+            $('#dv').children('table').remove()
+        });
+
+        $('#btn4').click(function() {
+            // :first 前面需要空格，否则会直接删除第一个#dv元素
+            $('#dv :first').remove()
+        });
+
+        $('#myBtn').click(function() {
+            let val1 = $('#dv').next().val();
+            let val2 = $('#dv').next().next().val();
+
+            let tr = `<tr><td>${val1}</td><td>${val2}</td></tr>`;
+
+            $('#dv>table>tbody').append(tr)
+        })
+
+    })
+</script>
+
+</html>

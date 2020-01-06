@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="./common.js"></script>
+	<style type="text/css">
+		.mianBoxStyle{
+			text-align: center;
+			text-align-last: justify;
+			width: 500px;
+			height: 300px;
+			border: solid;
+			background-color: blue;
+		}
+		.selectBoxStyle{
+			width:500px;
+			height: 20px;
+		}
+		.spanStyle{
+			width : 50px;
+			height : 20px;
+		}
+		.subBoxStyle{
+			text-align-last: auto;
+		}
+	</style>
+</head>
+<body>
+<center>
+<div id = "box" class="mianBoxStyle">
+	<div id="selectBox" class="selectBoxStyle">
+		<span>新闻</span>
+		<span>编程</span>
+		<span>游戏</span>
+		<span>鬼畜</span>
+		<span>二次元</span>
+	</div>
+	<div id="subBox" class="subBoxStyle">
+		<span>我是新闻模块</span>
+		<span>我是编程模块</span>
+		<span>新闻游戏模块</span>
+		<span>我是鬼畜模块</span>
+		<span>我是二次元模块</span>
+	</div>	
+</div>
+</center>
+</body>
+<script type="text/javascript">
+	var selectBox = my$("selectBox").getElementsByTagName('span');
+	var subBox = my$("subBox").getElementsByTagName('span');
+	
+	//默认显示第一项区块
+	for (var i = 0 ;i < subBox.length ; i++){
+		subBox[i].style.display = "none";	
+	}
+	subBox[0].style.display = "block";
+
+	for (var i = 0 ; i < selectBox.length ; i++){
+		selectBox[i].setAttribute("index",i);
+		selectBox[i].className = "spanStyle";
+		selectBox[i].style.backgroundColor = "#FFFF";
+		selectBox[0].style.backgroundColor = "blue";
+		selectBox[i].onmouseover = function(){
+			//发生事件后，初始所有span标签为白色
+			for(var n = 0 ; n < selectBox.length ; n++){
+				selectBox[n].style.backgroundColor = "#FFFF"
+			}
+			//将发生事件的标签修改颜色
+			this.style.backgroundColor = "blue";
+			index = this.getAttribute("index");
+			
+			//获取index属性值，并匹配相应区块 
+			//隐藏所有区块显示	
+			for (var i = 0 ;i < subBox.length ; i++){
+				subBox[i].style.display = "none";	
+				subBox[index].style.display = "block";	
+			}
+			
+
+		}
+	}
+
+</script>
+</html>

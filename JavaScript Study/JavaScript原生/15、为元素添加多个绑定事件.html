@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+
+<input type="button" name="" value="点击执行事件" id="btn">
+<input type="button" name="" value="测试" id="btn2">
+<input type="button" name="" value="清除所有事件" id="clear_event">
+
+
+</body>
+<script type="text/javascript" src="./common.js"></script>
+<script type="text/javascript">
+	
+	function fun1() {
+		console.log("哈哈哈，函数1 触发了")
+	}
+	function fun2() {
+		console.log("哈哈哈，函数2 触发了")
+	}	
+	function fun3() {
+		console.log("哈哈哈，函数3 触发了")
+	}
+	//addEventListener 有三个参数：事件类型，处理函数，布尔结果
+	// 火狐，谷歌支持，IE8不支持
+	// my$("btn").addEventListener("click",fun1,false)
+	// my$("btn").addEventListener("click",fun2,false)
+	// my$("btn").addEventListener("click",fun3,false)
+	// my$("btn").addEventListener("click",function(){
+	// 	console.log("哈哈哈哈，匿名函数触发了")
+	// },false)
+
+	//这里的函数，只需要函数名，不需要括号，否则会直接执行函数
+	addEventListener(my$("btn"),"click",fun1);
+	addEventListener(my$("btn"),"click",fun2);
+	addEventListener(my$("btn"),"click",fun3);
+	addEventListener(my$("btn"),"click",function(){
+		console.log("哈哈哈哈，匿名函数触发了")
+	});
+
+	function funB1(){
+		console.log("测试");
+	}
+	function funB2(){
+		console.log("测试2");
+	}
+	
+	addEventListener(my$("btn2"),"click",funB1);
+	addEventListener(my$("btn2"),"click",funB2);
+
+
+	// //解绑元素事件
+	// my$("clear_event").onclick = function(){
+	// 	//my$("btn2").onclick = null;
+	// 	my$("btn2").removeEventListener("click",funB2,false)
+	// }
+
+	my$("clear_event").onclick = function(){
+		removeEventListener(my$("btn2"),"click",funB2)
+	}
+</script>
+</html>

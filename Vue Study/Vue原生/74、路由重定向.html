@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+    <style>
+        * {
+            font-size: 18px;
+            margin: 10px;
+        }
+        /**
+            会让脚本失去本身的作用，并将代码显示到文档上
+            script { display: block; }
+        */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/top/pang chao">Clik Me</router-link><br>
+        <router-link to="/bom/xiao xiao long">重定向-->top</router-link><br>
+        <router-link to="/hello/wuhahaha">重定向-->bom</router-link><br>
+        <router-link to="/fn/didididid">重定向-->hello</router-link>
+        <router-link to="/rename/alias">alias redirect --> fn</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        let tp = {
+            template: '<div> {{ $route.params.name }} </div>'
+        };
+        let fn = {
+            template: "<div> fn --> the fan </div>"
+        };
+
+        /*  
+            redirect --> 重定向、重新导向、重新寄送、使改变方向
+
+            重定向通过 routes 配置来完成 redirect:'/foo'
+            重定向的目标也可以是一个命名的路由 redirect: {name: 'foo'}
+            甚至是一个方法，动态返回重定向目标 redirect : to => '/foo'
+        */
+        const router = new VueRouter({
+            routes: [{
+                path: '/top/:name',
+                name: 'tp',
+                component: tp
+            }, {
+                //重定向到 /top/:name
+                path: '/bom/:name',
+                redirect: {
+                    name: 'tp'
+                }
+            }, {
+                //重定向到 /hello/:name
+                path: '/hello/:name',
+                redirect: '/bom/:name'
+            }, {
+                path: '/fn/:name',
+                // 方法接收 目标路由 作为参数
+                // return 重定向的 字符串路径/路径对象
+                redirect: to => {
+                    /*
+                        to ==> Object {                        
+                            fullPath: "/fn/didididid"
+                            hash: ""
+                            matched: Array [ {…} ]
+                            meta: Object {  }
+                            name: undefined
+                            params: Object { name: "didididid" }
+                            path: "/fn/didididid"   
+                        }                         ​
+                    */
+                    return '/hello/:name'
+                },
+                /*
+                    注意导航守卫并没有应用在跳转路由上，而仅仅应用在其目标上。
+                */
+            }, {
+                /**
+                    alias 别名:
+                    
+                    “重定向”的意思是，当用户访问 /a时，URL 将会被替换成 /b，然后匹配路由为 /b，那么“别名”又是什么呢？
+                    /a 的别名是 /b，意味着，当用户访问 /b 时，URL 会保持为 /b，但是路由匹配则为 /a，就像用户访问 /a 一样。
+                    “别名”的功能让你可以自由地将 UI 结构映射到任意的 URL，而不是受限于配置的嵌套路由结构。
+                */
+                path: '/alias/:name',
+                redirect: to => '/fn/:name',
+                alias: '/rename/:name'
+            }],
+
+        });
+        new Vue({
+            router
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>

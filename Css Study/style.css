@@ -1,0 +1,312 @@
+/* Body define core */
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.define-core {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #1E1E1E;
+    background-size: 100%;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/* define box-sizing */
+
+div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* width,height style in vw,wh unit! Begin */
+
+
+/* width */
+
+.width-xl {
+    width: 100vw;
+}
+
+.width-lg {
+    width: 70vw;
+}
+
+.width-md {
+    width: 50vw;
+}
+
+.width-half-lg {
+    width: 35vw;
+}
+
+.width-ms {
+    width: 30vw;
+}
+
+.width-half-md {
+    width: 25vw;
+}
+
+.width-half-ms {
+    width: 15vw;
+}
+
+.width-xs {
+    width: 10vw
+}
+
+
+/* height */
+
+.height-xl {
+    height: 100vh;
+}
+
+.height-lg {
+    height: 70vh;
+}
+
+.height-md {
+    height: 50vh;
+}
+
+.height-half-lg {
+    height: 35vh;
+}
+
+.height-ms {
+    height: 30vh;
+}
+
+.height-half-md {
+    height: 25vh;
+}
+
+.height-half-ms {
+    height: 15vh;
+}
+
+.height-xs {
+    height: 10vh
+}
+
+
+/*  width,height style in vw,wh unit! End */
+
+
+/*  width,height style in Percentage ! Begin
+    PCT : percentage。 
+*/
+
+
+/* width */
+
+.width-pct {
+    width: 100%;
+}
+
+.width-70pct {
+    width: 70%;
+}
+
+.width-50pct {
+    width: 50%;
+}
+
+.width-35pct {
+    width: 35%;
+}
+
+.width-30pct {
+    width: 30%;
+}
+
+.width-25pct {
+    width: 25%;
+}
+
+.width-15pct {
+    width: 15%;
+}
+
+.width-10pct {
+    width: 1010%
+}
+
+
+/* height */
+
+.height-pct {
+    height: 100%;
+}
+
+.height-70pct {
+    height: 70%;
+}
+
+.height-50pct {
+    height: 50%;
+}
+
+.height-35pct {
+    height: 35%;
+}
+
+.height-30pct {
+    height: 30%;
+}
+
+.height-25pct {
+    height: 25%;
+}
+
+.height-15pct {
+    height: 15%;
+}
+
+.height-10pct {
+    height: 10%
+}
+
+
+/* width,height style in Percentage! End */
+
+
+/* border */
+
+.border-right-top {
+    width: 10px;
+    height: 10px;
+    border-right: 1px solid;
+    border-top: 1px solid;
+    border-color: aqua;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+}
+
+.border-right-bottom {
+    width: 10px;
+    height: 10px;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: aqua;
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+}
+
+.border-left-top {
+    width: 10px;
+    height: 10px;
+    border-left: 1px solid;
+    border-top: 1px solid;
+    border-color: aqua;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+}
+
+.border-left-bottom {
+    width: 10px;
+    height: 10px;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    border-color: aqua;
+    position: absolute;
+    left: -1px;
+    bottom: -1px;
+}
+
+
+/* float */
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+
+/* sub box sizing */
+
+.root-box {
+    height: 90%;
+}
+
+.sub-box {
+    padding: 0 1vw 1vw 1vw;
+}
+
+.charts-box {
+    height: 95%;
+    width: 100%;
+    position: relative;
+}
+
+.top {
+    width: 100vw;
+    height: 10%;
+    background: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+
+/* logo */
+
+.logo {
+    height: 100%;
+    text-align: center;
+    background: no-repeat;
+    background-position: center;
+    background-size: 30%;
+    color: #aaffff;
+    font-size: 28px;
+    font-weight: blod;
+}
+
+
+/* charts title */
+
+.charts-title {
+    display: inline-block;
+    width: 100%;
+    height: 3vh;
+    color: #aaffff;
+    text-align: center;
+    font-size: 1.1rem;
+    background-size: 100% 100%;
+}
+
+.charts-border-left {
+    margin-right: 10px;
+    width: 20%;
+    height: 3vh;
+    background: no-repeat;
+    background-size: 100%;
+    display: inline-block
+}
+
+.charts-border-right {
+    margin-left: 10px;
+    width: 20%;
+    height: 3vh;
+    background: no-repeat;
+    background-size: 100%;
+    display: inline-block;
+    transform: rotateX(180deg);
+    transform: rotateY(180deg);
+}

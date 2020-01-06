@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <input type="button" value="点击选中" id="btn1">
+    <input type="button" value="点击选中" id="btn2">
+    <input type="button" value="点击选中" id="btn3">
+    <label for="rd1"><input type="radio" value="1" name="sex" id="rd1">男</label>
+    <label for="rd2"><input type="radio" value="2" name="sex" id="rd2">女</label>
+    <label for="rd3"><input type="radio" value="3" name="sex" id="rd3">保密</label>
+    <br>
+    <a id="tagA">A标签</a>
+    <br>
+    <input type="button" value="点击选中" id="bt1">
+    <input type="button" value="点击选中" id="bt2">
+    <input type="button" value="点击选中" id="bt3">
+    <input type="button" value="点击选中" id="bt4">
+    <input type="button" value="点击随机取消" id="bt5">
+    <label for="ck1"><input type="checkbox" value="1" name="game" id="ck1">王者荣耀</label>
+    <label for="ck2"><input type="checkbox" value="2" name="game" id="ck2">英雄联盟</label>
+    <label for="ck3"><input type="checkbox" value="3" name="game" id="ck3">绝地求生</label>
+    <label for="ck4"><input type="checkbox" value="1" name="game" id="ck4">和平精英</label>
+    <label for="ck6"><input type="checkbox" value="2" name="game" id="ck5">火线精英</label>
+    <label for="ck6"><input type="checkbox" value="3" name="game" id="ck6">穿越火线</label>
+</body>
+
+<script>
+    $('#btn1').click(function() {
+        $('#rd1')[0].checked = true;
+    })
+
+    $('#btn2').click(function() {
+        $('#rd2').get(0).checked = true;
+    })
+
+    $('#btn3').click(function() {
+        //attr 设置自定义属性，但不适合 checked 属性，存在一定的BUG问题
+        let isChecked = $('#rd3').attr('checked') == undefined ? false : true;
+        isChecked ? $('#rd3').attr('checked', false) : $('#rd3').attr('checked', "checked")
+    })
+
+    //JS 原生 设置自定义属性
+    let v1 = document.getElementById('rd3').setAttribute('core', '123');
+    //JS 原生 获取自定义属性
+    let v2 = document.getElementById('rd3').getAttribute('core');
+
+    $('#tagA').attr('href', 'http://www.ismepangcy.xyz');
+
+    //关于选择框 选择 问题，应该使用 prop()
+    $('#bt1').click(function() {
+        $('#ck1').prop('checked', true)
+    })
+
+    $('#bt2').click(function() {
+        $('#ck3').prop('checked', true);
+    })
+
+    $('#bt3').click(function() {
+        $('#ck5').prop('checked', true);
+    })
+
+    $('#bt4').click(function() {
+        $('#ck6').prop('checked', true)
+    })
+
+    $('#bt5').click(function() {
+        //实现随机勾选、取消
+        let random = Math.ceil(Math.random() * 6);
+
+        let randomId = $('#ck' + random);
+
+        let isChecked = randomId.prop('checked') == true ? true : false;
+
+        isChecked ? randomId.prop('checked', false) : randomId.prop('checked', true)
+
+    })
+</script>
+
+</html>

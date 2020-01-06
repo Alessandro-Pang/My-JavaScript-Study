@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="common.js"></script>
+</head>
+
+<body>
+    <input type="button" name="" value="跳转" id="btn1">
+    <input type="button" name="" value="前进" id="btn2">
+    <input type="button" name="" value="后退" id="btn3">
+</body>
+<script type="text/javascript">
+    my$("btn1").onclick = function() {
+        window.location.href = "23、Canvas模拟太阳系动画.html"
+    }
+    my$("btn2").onclick = function() {
+        window.history.forward(); //前进
+    }
+    my$("btn3").onclick = function() {
+        window.history.back(); //后退
+    }
+
+
+    //获取当前操作系统类型
+    var platform = window.navigator.platform;
+    console.log(platform);
+
+    //获取用户当前浏览器配置
+    var userAgent = window.navigator.userAgent;
+    console.log(userAgent);
+</script>
+
+</html>

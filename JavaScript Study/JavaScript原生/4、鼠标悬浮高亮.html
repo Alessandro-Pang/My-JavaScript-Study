@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		#uu{
+			list-style-type: none;
+			cursor: pointer;
+		}
+		.hide{
+			display: none;
+		}
+		.show{
+			display: block;
+		}
+		.myImage{
+			float: right;
+		}
+	</style>
+</head>
+<body>
+<ul id="uu">
+	<li>钢铁侠</li>
+	<li>灭霸</li>
+	<li>浩克</li>
+	<li>雷神</li>
+	<li>黑豹</li>
+</ul>
+<div>
+	<img src="./images/js010.png" id="ima1">
+	
+	<div class="hide" id="ima2">
+		<img src="./images/js01.png"> 
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	
+	//获取指定ul下的li标签
+	var li_Id=document.getElementById('uu').getElementsByTagName("li");
+	//循环遍历，提取出每一个li标签
+	//onmouseover --当悬浮到标签；onmouseout --离开标签
+	for (var i = 0 ; i < li_Id.length ; i++){
+		//当鼠标悬浮到该标签，修改背景颜色
+		li_Id[i].onmouseover=function(){
+			this.style.backgroundColor="rgb(100,100,255)";
+		};
+		//当鼠标离开该标签，恢复默认颜色
+		li_Id[i].onmouseout=function(){
+			this.style.backgroundColor="";
+		};
+	};
+
+	var getImg1Id = document.getElementById("ima1");
+	var getImg2Id = document.getElementById("ima2");
+	getImg1Id.onmouseover = function(){
+		getImg2Id.className="show"
+	}
+	getImg1Id.onmouseout=function(){
+		getImg2Id.className="hide";
+	}
+</script>
+</html>

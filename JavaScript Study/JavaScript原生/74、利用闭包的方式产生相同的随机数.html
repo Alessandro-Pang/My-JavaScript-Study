@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //函数模式的闭包：一个函数内有另一个函数
+    function f1() {
+        let num = 100;
+
+        function f2() {
+            console.log(num)
+        }
+        f2()
+    }
+    f1();
+
+    //对象模式闭包：函数中有一个对象
+    function fnc() {
+        let num = 99;
+        let obj = {
+            age: num
+        }
+        console.log(obj.age)
+    }
+    fnc()
+
+    function showRandom() {
+        var num = parseInt(Math.random() * 10 + 1);
+        console.log(num);
+    }
+    showRandom();
+    showRandom();
+    showRandom();
+
+    //闭包的方式，产生的随机数，都是相同的
+    function fn() {
+        var num = parseInt(Math.random() * 10 + 1)
+        return function() {
+            console.log(num);
+        }
+    }
+    let ff = fn()
+    ff()
+    ff()
+    ff()
+
+    /*
+        如果想要缓存数据，就把这个数据放在内层函数，和外层函数的中间
+        闭包的作用：缓存数据
+
+        正常执行：函数内有一个变量，函数执行完毕后，函数内的变量就被释放掉了
+        闭包执行：因为外面不停地访问这个变量，变量没有及时的释放掉
+
+        闭包的优点：缓存数据，缺点：变量没有及时释放
+
+        局部变量在函数内，函数使用结束之后，局部变量就会被自动释放
+        闭包后，里面的局部变量的使用作用域链就会被延长
+    */
+
+    function fn2() {
+        let num = 10;
+        return () => ++num
+    }
+    let ff2 = fn2(); //这个位置是缓存的数据
+    console.log(ff2()) //这个位置获取的缓存数据，在执行函数
+    console.log(ff2())
+    console.log(ff2())
+</script>
+
+</html>

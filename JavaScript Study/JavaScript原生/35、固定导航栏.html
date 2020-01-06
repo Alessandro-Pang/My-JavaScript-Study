@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		body{
+			margin: 0px;
+			padding: 0px;
+			position: absolute;
+		}
+		.navFlex{
+			position: fixed;
+			top: 0px;
+			width: 100%;
+		}
+
+	</style>
+
+</head>
+<body>
+	<header>
+		<img src="./background/bj1.jpg" width="100%" height="100">
+	</header>
+	<nav id="navBar">
+		<img src="./background/bj2.jpg" width="100%" height="50" >
+	</nav>
+	<section id="section">
+		<img src="./background/bj3.jpg" width="100%" height="100%">
+	</section>
+</body>
+<script type="text/javascript">
+
+	window.onscroll = function(){
+		
+		if (window.pageYOffset>my$("navBar").offsetHeight) {
+			my$("navBar").className="navFlex";
+			my$("section").style.marginTop = my$("navBar").offsetHeight +"px";
+		}else{
+			my$("navBar").className="";
+			my$("navBar").style.width="100%";
+			my$("navBar").style.height="50px";
+			my$("section").style.marginTop = "5px";
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            width: 500px;
+            list-style-image: url(./images/ico1.png);
+        }
+        
+        #dv1 {
+            width: 500px;
+            height: 50px;
+            border: 0px;
+            border-left: 22px;
+            border-color: blueviolet;
+            border-style: solid;
+            background: chartreuse;
+        }
+        
+        #dv2 {
+            width: 200px;
+            height: 200px;
+            background: chocolate;
+            transition: width 2s, height 2s
+        }
+        
+        #dv2:hover {
+            width: 300px;
+            height: 300px;
+        }
+        
+        #dv2:hover::after {
+            /* 鼠标悬浮，在文本最后添加 */
+            counter-increment: test;
+            content: counter(test)';';
+        }
+        /* 
+            使用计数器自动编号
+            CSS 计数器根据规则来递增变量。
+
+            CSS 计数器使用到以下几个属性：
+
+            counter-reset - 创建或者重置计数器
+            counter-increment - 递增变量
+            content - 插入生成的内容
+            counter() 或 counters() 函数 - 将计数器的值添加到元素
+            要使用 CSS 计数器，得先用 counter-reset 创建：
+
+            以下实例在页面创建一个计数器 (在 body 选择器中)，
+            每个 <h2> 元素的计数值都会递增，并在每个 <h2> 元素前添加 "Section <计数值>:"
+         */
+        
+        #dv2:hover::before {
+            counter-increment: action;
+            content: "CSS Counter "counter(action) ":"
+        }
+        
+        #dv3 {
+            width: 100px;
+            height: 100px;
+            float: left;
+            border: 1px solid lightcoral;
+        }
+        
+        #dv3-1 {
+            float: left;
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            background: brown;
+        }
+        
+        #dv3-2 {
+            float: left;
+            width: 50px;
+            height: 50px;
+            /* clear:both 清除浮动 */
+            /* clear: both; */
+            background-color: coral;
+            box-sizing: border-box;
+            border: 1px solid wheat;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>11111</li>
+        <li>2222222</li>
+        <li>33333</li>
+        <li>4444444</li>
+        <li>555555</li>
+    </ul>
+
+    <div id="dv1"></div>
+
+    <div id="dv2"></div>
+
+    <div id="dv3">
+        <div id="dv3-1"></div>
+        <div id="dv3-2"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <div id="box" style="border:1px solid red ;background:slateblue;width: 300px;height: 300px;"></div>
+    <input type="button" id="btn1" value="show">
+    <input type="button" id="btn2" value="hide">
+    <input type="button" id="btn3" value="slideUp">
+    <input type="button" id="btn4" value="slideDown">
+    <input type="button" id="btn5" value="slideToggle"><br>
+    <input type="button" id="btn6" value="fadeOut">
+    <input type="button" id="btn7" value="fadeIn">
+    <input type="button" id="btn8" value="fadeToggle">
+
+    <script>
+        $(() => {
+            $('#btn1').click(function() {
+                $('#box').show(1000, function() {
+                    alert('显示了')
+                })
+            });
+            $('#btn2').click(function() {
+                $('#box').hide(1000, function() {
+                    alert('关闭了')
+                })
+            });
+            $('#btn3').click(function() {
+                $('#box').slideUp(1000, function() {
+                    alert('滑入动画')
+                })
+            });
+            $('#btn4').click(function() {
+                $('#box').slideDown(1000, function() {
+                    alert('滑出动画')
+                })
+            });
+            $('#btn5').click(function() {
+                $('#box').slideToggle(1000, function() {
+                    alert('滑入，滑出动画切换')
+                })
+            });
+            $('#btn6').click(function() {
+                $('#box').fadeOut(2000, function() {
+                    alert('淡出动画')
+                })
+            });
+            $('#btn7').click(function() {
+                $('#box').fadeIn(2000, function() {
+                    alert('淡入动画结束')
+                })
+            });
+            $('#btn8').click(function() {
+                $('#box').fadeToggle(2000, function() {
+                    alert('淡入，淡出动画切换')
+                })
+            });
+        })
+    </script>
+</body>
+
+</html>

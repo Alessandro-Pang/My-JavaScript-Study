@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+    <style>
+        * {
+            margin: 5px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        除了使用 <router-link> 创建 a 标签来定义导航链接，我们还可以借助 router 的实例方法，通过编写代码来实现。
+        
+        router.push(location, onComplete?, onAbort?)
+
+        注意：在 Vue 实例内部，你可以通过 $router 访问路由实例。因此你可以调用 this.$router.push。
+
+        想要导航到不同的 URL，则使用 router.push 方法。
+        这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
+
+        当你点击 <router-link> 时，这个方法会在内部调用，所以说，点击 <router-link :to="..."> 等同于调用 router.push(...)。
+     -->
+    <div id="app">
+        <router-link to="/user/pang chao">pang chao</router-link>
+        <router-link to="/user/li xiao long">li xiao long</router-link>
+        <div @click="link" style="color: darkturquoise;">link push1</div>
+        <div @click="link2" style="color: darkgoldenrod;">link push2</div>
+        <div @click="link3" style="color:hotpink;">link push2</div>
+        <router-link to="/user/foo/sub1">sub1</router-link>
+        <router-link to="/user/bar/sub2" replace>sub2</router-link>
+        <div @click="link4" style="color:violet;">link push children</div>
+        <div @click="replaceLink" style="color:teal;">replace link path</div>
+        <div @click="routerGo" style="color:chartreuse;">history Go path</div>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        'use strict';
+        /*
+            router.push() 方法的参数可以是一个字符串路径，或者一个描述地址的对象。
+            
+            例如：
+                // 字符串
+                router.push('home')
+
+                // 对象
+                router.push({ path: 'home' })
+
+                // 命名的路由
+                router.push({ name: 'user', params: { userId: '123' }})
+
+                // 带查询参数，变成 /register?plan=private
+                router.push({ path: 'register', query: { plan: 'private' }})
+
+                注意：
+                    如果提供了 path，params 会被忽略，上述例子中的 query 并不属于这种情况。
+                    取而代之的是下面例子的做法，你需要提供路由的 name 或手写完整的带有参数的 path：
+
+                    const userId = '123'
+                    router.push({ name: 'user', params: { userId }}) // -> /user/123
+                    router.push({ path: `/user/${userId}` }) // -> /user/123
+                    
+                    // 这里的 params 不生效
+                    router.push({ path: '/user', params: { userId }}) // -> /user
+         */
+        let User = {
+            template: `<div>
+                        <h3> Hi! {{ $route.params.name}} !</h3> 
+                        <h4> welecome to vue study park</h4>
+                        <router-view></router-view>  
+                      </div>
+                    `
+        };
+
+        let UserChild1 = {
+            template: '<div> this is first children router</div>'
+        }
+
+        let userChild2 = {
+            template: '<div> this is last children router! </div>'
+        };
+        /*
+        命名路由:
+
+            有时候，通过一个名称来标识一个路由显得更方便一些，特别是在链接一个路由，或者是执行一些跳转的时候。
+            可以在创建 Router 实例的时候，在 routes 配置中给某个路由设置名称。
+
+            const router = new VueRouter({
+                routes: [
+                    {
+                    path: '/user/:userId',
+                    name: 'user',
+                    component: User
+                    }
+                ]
+            })
+
+            要链接到一个命名路由，可以给 router-link 的 to 属性传一个对象：
+
+            <router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link>
+
+            这跟代码调用 router.push() 是一回事：
+
+            router.push({ name: 'user', params: { userId: 123 }})
+
+            这两种方式都会把路由导航到 /user/123 路径。
+        */
+        const router = new VueRouter({
+            routes: [{
+                path: '/user/:name',
+                name: "user",
+                component: User,
+                children: [{
+                    path: 'sub1',
+                    component: UserChild1
+                }, {
+                    path: 'sub2',
+                    component: userChild2
+                }]
+            }]
+        });
+
+        /*
+            同样的规则也适用于 router-link 组件的 to 属性。
+
+            在 2.2.0+，可选的在 router.push 或 router.replace 中提供 onComplete 和 onAbort 回调作为第二个和第三个参数。
+            这些回调将会在导航成功完成 (在所有的异步钩子被解析之后) 
+            或终止 (导航到相同的路由、或在当前导航完成之前导航到另一个不同的路由) 的时候进行相应的调用。
+            
+            在 3.1.0+，可以省略第二个和第三个参数，此时如果支持 Promise，router.push 或 router.replace 将返回一个 Promise。
+
+            注意：
+                如果目的地和当前路由相同，只有参数发生了改变 (比如从一个用户资料到另一个 /users/1 -> /users/2)，
+                你需要使用 beforeRouteUpdate 来响应这个变化 (比如抓取用户信息)。
+            
+            router.replace(location, onComplete?, onAbort?)
+
+            跟 router.push 用户感官一致，
+            唯一的不同的是：
+                它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
+            
+            声明式                              	编程式
+            <router-link :to="..." replace>    	router.replace(...)
+        */
+        new Vue({
+            router,
+            methods: {
+                /*
+                    vue-router : / --> 代表根目录，不加则会以当前目前追加路径
+                */
+                link() {
+                    router.push('/user/sun lei')
+                },
+                link2() {
+                    router.push({
+                        path: '/user/zhang'
+                    })
+                },
+                link3() {
+                    router.push({
+                        name: 'user',
+                        params: {
+                            name: 'xiao xiao long'
+                        }
+                    })
+                },
+                link4() {
+                    router.push({
+                        path: "/user/xiao zei/sub1"
+                    })
+                },
+                replaceLink() {
+                    router.replace('/user/xiao zei/sub2')
+                },
+                routerGo() {
+                    router.go(-3)
+                }
+            }
+        }).$mount('#app');
+        /*
+            router.go(n)
+
+                这个方法的参数是一个整数，意思是在 history 记录中向前或者后退多少步，类似 window.history.go(n)。
+
+                例子:
+                    // 在浏览器记录中前进一步，等同于 history.forward()
+                    router.go(1)
+
+                    // 后退一步记录，等同于 history.back()
+                    router.go(-1)
+
+                    // 前进 3 步记录
+                    router.go(3)
+
+                    // 如果 history 记录不够用，那就默默地失败呗
+                    router.go(-100)
+                    router.go(100)
+
+        
+                操作 History:
+
+                    router.push、 router.replace 和 router.go 效仿的window.history API:
+                    window.history.pushState、 window.history.replaceState 和 window.history.go
+
+                    Vue Router 的导航方法 (push、 replace、 go) 
+                    在各类路由模式 (history、 hash 和 abstract) 下表现一致。
+            */
+    </script>
+</body>
+
+</html>

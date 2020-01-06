@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="elementUI.css">
+    <script src="elementUI.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+            要使用 Radio 组件，只需要设置v-model绑定变量，
+            选中意味着变量的值为相应 Radio label属性的值，
+            label可以是String、Number或Boolean。 
+        -->
+        <el-radio v-model="radio" label="1">radio1</el-radio>
+        <el-radio v-model="radio" label="2">radio2</el-radio>
+        <el-radio v-model="radio" label="3">radio3</el-radio>
+
+        <br><br><br>
+
+        <el-radio-group v-model="radioGroup">
+            <el-radio label="3">radio group 3</el-radio>
+            <el-radio label="6">radio group 6</el-radio>
+            <el-radio label="9">radio group 9</el-radio>
+        </el-radio-group>
+
+        <br><br><br>
+
+        <el-radio-group v-model="radioGroupButton">
+            <el-radio-button label="2">radio button 1</el-radio-button>
+            <el-radio-button label="4">radio button 2</el-radio-button>
+            <el-radio-button label="6">radio button 3</el-radio-button>
+        </el-radio-group>
+
+        <br><br><br>
+
+        <el-checkbox v-model="checkbox" label="ck1">cheackbox 1</el-checkbox>
+        <el-checkbox v-model="checkbox" label="ck2">cheackbox 2</el-checkbox>
+        <el-checkbox v-model="checkbox" label="ck3">cheackbox 3</el-checkbox>
+
+        <br><br><br>
+
+        <el-checkbox-group v-model="checkboxGroup">
+            <el-checkbox label="ck2">checkbox group 1</el-checkbox>
+            <el-checkbox label="ck4">checkbox group 1</el-checkbox>
+            <el-checkbox label="ck6">checkbox group 1</el-checkbox>
+            <el-checkbox label="禁用" disabled></el-checkbox>
+            <el-checkbox label="禁用且选中" disabled></el-checkbox>
+        </el-checkbox-group>
+
+        <br><br><br>
+
+        <i class="el-icon-edit"></i>
+        <i class="el-icon-share"></i>
+        <i class="el-icon-delete"></i>
+        <el-button type="primary" icon="el-icon-search">搜索</el-button>
+
+        <br><br><br>
+
+        <el-row>
+            <el-button>默认按钮</el-button>
+            <el-button type="primary">主要按钮</el-button>
+            <el-button type="success">成功按钮</el-button>
+            <el-button type="info">信息按钮</el-button>
+            <el-button type="warning">警告按钮</el-button>
+            <el-button type="danger">危险按钮</el-button>
+        </el-row>
+        <br>
+        <el-row>
+            <el-button plain>朴素按钮</el-button>
+            <el-button type="primary" plain>主要按钮</el-button>
+            <el-button type="success" plain>成功按钮</el-button>
+            <el-button type="info" plain>信息按钮</el-button>
+            <el-button type="warning" plain>警告按钮</el-button>
+            <el-button type="danger" plain>危险按钮</el-button>
+        </el-row>
+        <br>
+        <el-row>
+            <el-button round>圆角按钮</el-button>
+            <el-button type="primary" round>主要按钮</el-button>
+            <el-button type="success" round>成功按钮</el-button>
+            <el-button type="info" round>信息按钮</el-button>
+            <el-button type="warning" round>警告按钮</el-button>
+            <el-button type="danger" round>危险按钮</el-button>
+        </el-row>
+        <br>
+        <el-row>
+            <el-button icon="el-icon-search" circle></el-button>
+            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="success" icon="el-icon-check" circle></el-button>
+            <el-button type="info" icon="el-icon-message" circle></el-button>
+            <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+        </el-row>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: app,
+            data: {
+                radio: "1",
+                radioGroup: '6',
+                radioGroupButton: '6',
+                checkbox: ["ck3"],
+                checkboxGroup: ["禁用且选中"]
+            },
+            watch: {
+                wt(oldval, newval) {
+                    console.log(this.radioGroupButton + oldval)
+                }
+            }
+        })
+
+        vm.$watch('radioGroupButton', function(oldval, newval) {
+            console.log(this.radioGroupButton)
+            console.log('新的值：' + newval)
+        })
+    </script>
+</body>

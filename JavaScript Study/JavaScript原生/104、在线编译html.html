@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #news,
+        textarea {
+            width: 48%;
+            height: 500px;
+            border: 1px solid saddlebrown;
+            margin-left: 20px;
+        }
+        
+        textarea,
+        div {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+	<button id="btn">Update</button>
+    <textarea name="" id="his"></textarea>
+    <div id="news"></div>
+    <script>
+        let $id = id => document.getElementById(id);
+        let his = $id('his').value;
+        $id('news').innerHTML = his
+        $id('his').onkeyup = function() {
+            let his = $id('his').value;
+            $id('news').innerHTML = his;
+        }
+
+        class UpdateScript{
+        	runScript(script) {
+                return new Promise((reslove, rejected) => {
+                    // 直接 document.head.appendChild(script) 是不会生效的，需要重新创建一个
+                    const newScript = document.createElement('script');
+                    // 获取 inline script
+                    newScript.innerHTML = script.innerHTML;
+                    // 存在 src 属性的话
+                    const src = script.getAttribute('src');
+                    if (src) newScript.setAttribute('src', src);
+
+                    // script 加载完成和错误处理
+                    newScript.onload = () => reslove();
+                    newScript.onerror = err => rejected();
+                    document.head.appendChild(newScript);
+                    document.head.removeChild(newScript);
+                    if (!src) {
+                        // 如果是 inline script 执行是同步的
+                        reslove();
+                    }
+                })
+            };
+            setHTMLWithScript() {
+                const container = document.getElementById('his');
+                const rawHTML = html;
+                const scripts = container.querySelectorAll('script');
+
+                return Array.prototype.slice.apply(scripts).reduce((chain, script) => {
+                    return chain.then(() => this.runScript(script));
+                }, Promise.resolve());
+            }
+        }
+
+        let us = new UpdateScript();
+        document.getElementById('btn').onclick = function(){
+        	us.setHTMLWithScript();
+        }
+    </script>
+</body>
+
+</html>

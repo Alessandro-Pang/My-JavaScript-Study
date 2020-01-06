@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+</head>
+<body id="body" class="body" name="body">
+<input type="button" id="btn" value="Click Me">
+<input type="button" id="btn2" value="Click Me">
+</body>
+<script>
+    //根据ID获取元素
+    document.getElementById('body');
+    //根据Class属性获取元素
+    document.getElementsByClassName('body');
+    //获取Name属性获取元素
+    document.getElementsByName('body');
+    //根据标签名获取元素
+    document.getElementsByTagName('body');
+    //根据选择器返回一个元素
+    document.querySelector('body');
+    //根据选择器返回所有元素
+    document.querySelectorAll('body');
+    //获取body元素
+    document.body;
+
+    $('#body').load('/',
+        ()=>{ console.log(12345)}
+    );
+
+    $('.body').ready(
+        ()=>{console.log(67890)}
+    );
+
+    $('body').ready(
+        ()=>{console.log(123123)}
+    );
+
+    $('#btn').click(function(){
+        //这里获取的是jquery中 #btn 的dom对象，所以可用使用this.value
+        this.value="哈哈哈"
+        //但是要注意的是，this是dom对象，.val()方法是jquery的，不能使用this.val()
+    });
+
+    $('#btn2').click(function () {
+        $(this).val('jQuery')
+        //jquery中使用this对象
+    })
+</script>
+</html>

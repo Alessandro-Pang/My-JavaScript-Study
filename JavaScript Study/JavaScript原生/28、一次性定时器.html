@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+	<input type="button" name="" id="btn1" value="清理定时器">
+</body>
+<script type="text/javascript">
+	//设置一次性定时器
+	//定时器只会触发一次
+	//参数一：处理函数
+	//参数二：触发事件 1000毫秒 == 1秒
+	var timeId = window.setTimeout(function(){
+		alert("定时器触发");
+	},1000)
+
+	console.log(timeId);
+
+	//清理定时器
+	//如不清理，废弃的定时器会占用空间
+	my$("btn1").onclick = function(){
+		window.clearTimeout(timeId);
+		console.log(timeId);
+	}
+</script>
+</html>

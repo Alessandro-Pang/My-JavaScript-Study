@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="runner.js"></script>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+根据ID推荐接口：
+https://api.apiopen.top/videoRecommend?id=127398
+新闻接口：
+https://www.apiopen.top/journalismApi
+随机推荐热门段子（包含文字、图片、GIF、视频）：
+https://www.apiopen.top/satinApi?type=1&page=1
+随机推荐热门段子【神评版本】（包含文字、图片、GIF、视频）：
+https://www.apiopen.top/satinGodApi?type=1&page=1
+
+小说搜索接口
+https://www.apiopen.top/novelSearchApi?name=盗墓笔记
+小说详情接口
+https://www.apiopen.top/novelInfoApi?name=盗墓笔记
+天气获取接口
+https://www.apiopen.top/weatherApi?city=成都
+美图获取接口
+https://www.apiopen.top/meituApi?page=1
+</body>
+<script>
+    //generator ajax
+    runner(function* () {
+        let data1 = yield $.ajax({url: "https://api.apiopen.top/videoRecommend?id=127398", dataType: "json"})
+        let data2 = yield $.ajax({url: "https://www.apiopen.top/journalismApi", dataType: "json"})
+        let data3 = yield $.ajax({url: "https://www.apiopen.top/satinGodApi?type=1&page=1", dataType: "json"})
+        let data4 = yield $.ajax({url: "https://www.apiopen.top/satinApi?type=1&page=1", dataType: "json"})
+
+        console.log(data1, data2, data3, data4);
+    });
+
+    //基本的ajax书写方式
+    //ajax 返回的就是一个promise
+    $.ajax({
+        url:"https://www.apiopen.top/novelSearchApi?name=盗墓笔记",
+        dataType:"json",
+        success(data1){
+            console.log(data1);
+            $.ajax({
+                url:"https://www.apiopen.top/novelInfoApi?name=盗墓笔记",
+                dataType:"json",
+                success(data2){
+                    console.log(data2);
+                    $.ajax({
+                        url:"https://www.apiopen.top/weatherApi?city=成都",
+                        dataType:"json",
+                        success(data3){
+                            console.log(data3);
+                            $.ajax({
+                                url:"https://www.apiopen.top/meituApi?page=1",
+                                dataType:"json",
+                                success(data4){
+                                    console.log(data4);
+
+                                },error(e){
+                                    console.log(e)
+                                }
+                            })
+                        },error(e){
+                            console.log(e)
+                        }
+                    })
+                },error(e){
+                    console.log(e)
+                }
+            })
+        },error(e){
+            console.log(e)
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <!-- <script src="./axios.js"></script> -->
+</head>
+
+<!--  
+    单个根元素
+
+    当构建一个 <blog-post> 组件时，你的模板最终会包含的东西远不止一个标题：
+    <h3>{{ title }}</h3>
+
+    最最起码，你会包含这篇博文的正文：
+    <h3>{{ title }}</h3>
+    <div v-html="content"></div>
+
+    然而如果你在模板中尝试这样写，Vue 会显示一个错误，
+    并解释道 every component must have a single root element (每个组件必须只有一个根元素)。
+    你可以将模板的内容包裹在一个父元素内，来修复这个问题，例如：
+
+    <div class="blog-post">
+        <h3>{{ title }}</h3>
+        <div v-html="content"></div>
+    </div>
+
+    看起来当组件变得越来越复杂的时候，我们的博文不只需要标题和内容，还需要发布日期、评论等等。
+    为每个相关的信息定义一个 prop 会变得很麻烦：
+
+    <blog-post
+    v-for="post in posts"
+    v-bind:key="post.id"
+    v-bind:title="post.title"
+    v-bind:content="post.content"
+    v-bind:publishedAt="post.publishedAt"
+    v-bind:comments="post.comments"
+    ></blog-post>
+-->
+
+<body>
+    <div id="blog">
+        <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post"></blog-post>
+    </div>
+
+    <!-- 
+        监听子组件事件
+
+        在我们开发 <blog-post> 组件时，它的一些功能可能要求我们和父级组件进行沟通。
+        例如我们可能会引入一个辅助功能来放大博文的字号，同时让页面的其它部分保持默认的字号。 
+
+        有了这个 v-on:enlarge-text="postFontSize += 0.1" 监听器，
+        父级组件就会接收该事件并更新 postFontSize 的值。
+
+        需要在子组件内 加入 $emit方法 调用才有效
+    -->
+    <div id="demo">
+        <div :style="{ fontSize:blogFontSize + 'em' }">
+            <!-- enlarge-text 是内建方法 -->
+            <blog-demo v-for="item of items" v-bind:key="item.id" v-bind:item="item" v-on:enlarge-text="blogFontSize += 0.1"></blog-demo>
+        </div>
+    </div>
+
+    <!-- 
+        然后当在父级组件监听这个事件的时候，我们可以通过 $event 访问到被抛出的这个值：
+
+        <blog-post
+        //通过 $event 抛出值并没有这么简单，根据官方案例，经测试未能实现
+        v-on:enlarge-text="postFontSize += $event"
+        ></blog-post>
+
+        或者，如果这个事件处理函数是一个方法：
+
+        <blog-post
+        //这个的实现原理还是通过事件增加字体大小
+        v-on:enlarge-text="onEnlargeText"
+        ></blog-post> 
+    -->
+    <div id="app">
+        <div :style="{ fontSize:blogFontSize + 'em' }">
+            <!-- enlarge-text 是内建方法 -->
+            <demo v-for="item of items" v-bind:key="item.id" v-bind:item="item" v-on:enlarge-text="blogFontSize = onEnlargeText(1)"></demo>
+        </div>
+    </div>
+
+    <script>
+        Vue.component('blog-post', {
+            props: ["post"],
+            template: `
+                <div class="blog-post">
+                    <h3>{{post.title}}</h3>
+                    <div v-html="post.content"></div>
+                </div>
+            `
+        });
+        /*
+            上述的这个和一些接下来的示例使用了 JavaScript 的模板字符串来让多行的模板更易读。
+            它们在 IE 下并没有被支持，\
+            所以如果你需要在不 (经过 Babel 或 TypeScript 之类的工具) 编译的情况下支持 IE，
+            请使用折行转义字符取而代之。
+
+            现在，不论何时为 post 对象添加一个新的属性，它都会自动地在 <blog-post> 内可用 
+        */
+        new Vue({
+            el: blog,
+            data: {
+                posts: [{
+                    id: 1,
+                    title: "少林寺",
+                    content: "这是文章内容"
+                }, {
+                    id: 2,
+                    title: "武当派",
+                    content: "这是文章内容"
+                }, {
+                    id: 3,
+                    title: "轩辕门",
+                    content: "这是文章内容"
+                }, {
+                    id: 4,
+                    title: "峨眉山",
+                    content: "这是文章内容"
+                }, {
+                    id: 5,
+                    title: "地中海",
+                    content: "这是文章内容"
+                }, ]
+
+
+            }
+        });
+
+        Vue.component('blog-demo', {
+            props: ["item"],
+            // 子组件可以通过调用内建的 $emit 方法，并传入一个事件名称触发事件
+            template: `
+                <div class="blog-post">
+                    <button v-on:click="$emit('enlarge-text')">加大字体</button>
+                    <h3>{{item.title}}</h3>
+                    <div v-html="item.content"></div>
+                </div>
+            `
+        });
+
+        new Vue({
+            el: demo,
+            data: {
+                items: [{
+                    id: 1,
+                    title: "可乐鸡翅",
+                    content: "这是文章内容"
+                }, {
+                    id: 2,
+                    title: "炸鸡排",
+                    content: "这是文章内容"
+                }, {
+                    id: 3,
+                    title: "汉堡",
+                    content: "这是文章内容"
+                }, {
+                    id: 4,
+                    title: "烤鸭",
+                    content: "这是文章内容"
+                }, {
+                    id: 5,
+                    title: "面包",
+                    content: "这是文章内容"
+                }, ],
+                blogFontSize: 1,
+            },
+
+        });
+
+        Vue.component('demo', {
+            props: ["item"],
+            // 子组件可以通过调用内建的 $emit 方法，并传入一个事件名称触发事件
+            template: `
+                <div class="blog-post">
+                    <button v-on:click="$emit('enlarge-text')">加大字体</button>
+                    <h3>{{item.title}}</h3>
+                    <div v-html="item.content"></div>
+                </div>
+            `
+        });
+        new Vue({
+            el: app,
+            data: {
+                items: [{
+                    id: 1,
+                    title: "少林寺",
+                    content: "这是文章内容"
+                }, {
+                    id: 2,
+                    title: "武当派",
+                    content: "这是文章内容"
+                }, {
+                    id: 3,
+                    title: "轩辕门",
+                    content: "这是文章内容"
+                }, {
+                    id: 4,
+                    title: "峨眉山",
+                    content: "这是文章内容"
+                }, {
+                    id: 5,
+                    title: "地中海",
+                    content: "这是文章内容"
+                }, ],
+                blogFontSize: 1,
+            },
+            methods: {
+                onEnlargeText: function(enlargeAmount) {
+                    return this.blogFontSize += enlargeAmount
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

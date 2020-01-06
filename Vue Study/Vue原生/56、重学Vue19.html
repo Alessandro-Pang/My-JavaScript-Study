@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <!-- <script src="./axios.js"></script> -->
+</head>
+
+<body id="body">
+    <!-- 
+        因为组件是可复用的 Vue 实例，
+        所以它们与 new Vue 接收相同的选项，
+        例如 data、computed、watch、methods 以及生命周期钩子等。
+        仅有的例外是像 el 这样根实例特有的选项。 
+    -->
+
+    <div class="div">
+        <!-- 
+            注意当点击按钮时，每个组件都会各自独立维护它的 count。
+            因为你每用一次组件，就会有一个它的新实例被创建。 
+        -->
+        <!-- JS原生 需要通过闭包实现该功能 -->
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+
+    <div id="div">
+        <div class="div">
+            <!-- 注意： v-bind 绑定prpos传输的变量 -->
+            <!-- 如果不加 v-bind:变量 则不显示值 -->
+            <!-- 如果只有 变量="..." 则会只显示后面的值,不会绑定data中的值 -->
+            <!-- v-bind:key 如果不写,则会有一个警告,他应该绑定 一个独有的key -->
+            <my-template v-for="title of titles" v-bind:title="title" v-bind:key="title.id"></my-template>
+            <!-- 
+                如上所示，可以使用 v-bind 来动态传递 prop。
+                这在一开始不清楚要渲染的具体内容，比如从一个 API 获取博文列表的时候，是非常有用的。
+            -->
+        </div>
+    </div>
+    <script>
+        //定义BUTTON-COUNTER组件
+        Vue.component('button-counter', {
+            /*
+                data 必须是一个函数
+
+                当我们定义这个 <button-counter> 组件时，
+                你可能会发现它的 data 并不是像这样直接提供一个对象
+
+                取而代之的是，一个组件的 data 选项必须是一个函数，
+                因此每个实例可以维护一份被返回对象的独立的拷贝：
+            */
+            //如果 Vue 没有这条规则，点击一个按钮就会影响到其它所有实例
+
+            //实例链接: https://cn.vuejs.org/v2/guide/components.html
+            data: function() {
+                return {
+                    counter: 0
+                }
+            },
+            template: "<button @click='counter++'>你点击了{{counter}}次</button>"
+        });
+
+        //vue 元素选择器不能通过任何方式选中 body 元素
+        new Vue({
+            el: ".div"
+        })
+
+
+        /*
+            组件的组织
+
+            通常一个应用会以一棵嵌套的组件树的形式来组织：
+
+            Component Tree
+
+            例如，你可能会有页头、侧边栏、内容区等组件，每个组件又包含了其它的像导航链接、博文之类的组件。
+
+            为了能在模板中使用，这些组件必须先注册以便 Vue 能够识别。
+            这里有两种组件的注册类型：全局注册和局部注册。
+
+            全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，
+            也包括其组件树中的所有子组件的模板中。
+        */
+
+        Vue.component('my-template', {
+            props: ["title"],
+            template: "<h3>{{title}}</h3>"
+        })
+        new Vue({
+            el: "#div>.div",
+            data: {
+                titles: ["第一篇", "第二篇", "第三篇", "第四篇", "第五篇"]
+            }
+        })
+    </script>
+</body>
+
+</html>

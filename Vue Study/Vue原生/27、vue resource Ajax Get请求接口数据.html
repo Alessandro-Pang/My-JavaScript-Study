@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-resource.js"></script>
+</head>
+<body>
+<div id="box">
+    <input type="button" @click="get()" value="点我异步获取数据(GET)">
+</div>
+<div id="box2">
+    <input type="button" @click="get2()" value="点我异步获取数据(GET ages)">
+    <div v-for="site in msg">
+        <div v-if="site.key == null ? false : true">
+            key:{{site.key}}<br>
+            电话:{{site.phone}}<br>
+            姓名:{{site.name}}<br>
+            密码：{{site.passwd}}<br>
+            签名:{{site.text}}<br>
+            图片链接：{{site.img}}<br>
+            备注1：{{site.other}}<br>
+            备注2：{{site.other2}}<br>
+            创建时间：{{site.createTime}}<br>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        let vm = new Vue({
+            el: "#box",
+            data: {
+                msg: "hellow world!",
+            },
+            methods: {
+                get: function () {
+                    this.$http.get('./data/json_demo.json')
+                        .then(function (res) {
+                            document.write(JSON.stringify(res.body));
+                        }), function () {
+                        console.log('error')
+                    }
+                }
+            }
+        })
+    };
+    //如果需要传递数据，可以使用 this.$http.get('get.php',{params : jsonData}) 格式，
+    // 第二个参数 jsonData 就是传到后端的数据。
+
+    window.onload = function () {
+        let vm = new Vue({
+            el: "#box2",
+            data: {
+                msg: null,
+            },
+            methods: {
+                get2: function () {
+                    this.$http.get('https://www.apiopen.top/login', {
+                        params: {
+                            key: "00d91e8e0cca2b76f515926a36db68f5",
+                            phone: "13594347817",
+                            passwd: 123456
+                        }
+                    }).then(function (res) {
+                        this.msg = res.body
+                    }),function (res) {
+                        console.log('error'+res.status)
+                    }
+                }
+            }
+        })
+    }
+</script>
+</body>
+
+</html>

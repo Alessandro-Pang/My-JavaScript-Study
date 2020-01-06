@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        table {
+            text-align: center;
+            margin: auto;
+            transform: translateY(50%);
+            border: 1px solid #aaa;
+            width: 300px;
+            height: 200px;
+        }
+        
+        tr>td {
+            border: 1px solid #aaa
+        }
+        
+        thead>tr {
+            background: cornflowerblue
+        }
+        
+        tbody>tr:nth-child(odd) {
+            background: #eee
+        }
+        
+        tbody>tr:nth-child(even) {
+            background: #ddd
+        }
+        
+        #dv {
+            width: 200px;
+            height: 100px;
+            border: 1px solid springgreen;
+            background: turquoise
+        }
+        
+        #dv1 {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+        
+        #dvs {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            border: 1px solid springgreen;
+            background: violet
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <table cellspacing='0' cellpadding='0'>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" name="stydy" id="ck"></th>
+                    <th>开发语言</th>
+                    <th>所属部门</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" name="stydy"></td>
+                    <td>JAVA</td>
+                    <td>后端开发</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="stydy"></td>
+                    <td>C、C++、C#</td>
+                    <td>系统开发</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="stydy"></td>
+                    <td>Python</td>
+                    <td>大数据分析</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="stydy"></td>
+                    <td>HTML、CSS、JS</td>
+                    <td>前端开发</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="stydy"></td>
+                    <td>GO、Lisp、R</td>
+                    <td>其他开发</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <input type="button" id="btn1" value="点击修改宽和高">
+        <input type="button" id="btn2" value="点击修改宽和高">
+        <input type="button" id="btn3" value="点击修改宽和高">
+        <div id="dv"></div>
+    </div>
+
+    <div id="dv1">
+        <button id="btn5">on Click</button>
+        <button id="btn6">on Click</button>
+        <div id="dvs"></div>
+    </div>
+</body>
+<script>
+    let iele = 'tbody tr td input';
+
+    // $('#ck').bind('click', function() {
+    //     let isChecked = $(this).prop('checked');
+    //     isChecked ? $(iele).prop('checked', true) : $(iele).prop('checked', false);
+    // });
+
+    $('#ck').bind('click', function() {
+        //直接传入 $(this).prop('checked') 的返回值
+        $(iele).prop('checked', $(this).prop('checked'))
+    })
+
+    // $('tbody').find('input').bind('click', function() {
+    //     //获取 tbody 中的 input 标签个数
+    //     let cks = $('tbody').find('input').length;
+    //     //获取 tbody 中input 被选中的个数
+    //     let ckdLen = $('tbody input:checked').length;
+    //     cks === ckdLen ? $('#ck').prop('checked', true) : $('#ck').prop('checked', false)
+    // })
+
+    $('tbody').find('input').bind('click', function() {
+        let cks = $('tbody input').length;
+        let ckdLen = $('tbody input:checked').length;
+        $('#ck').prop('checked', cks === ckdLen)
+    })
+
+    $('#btn1').click(function() {
+        //获取的是 string 类型 width + px
+        let dvWidth = parseInt($('#dv').css('width'));
+        let dvHeight = parseInt($('#dv').css('height'));
+        $('#dv').css({
+            width: dvWidth + 100 + 'px',
+            height: dvHeight + 100 + 'px'
+        })
+    })
+
+    $('#btn2').click(function() {
+        //获取的是 number 类型
+        let w = $('#dv').width();
+        let h = $('#dv').height();
+
+        $('#dv').css({
+            width: w / 5 + 'vw',
+            height: h / 5 + 'vw'
+        })
+    });
+
+    $('#btn3').click(function() {
+        $('#dv').width($('#dv').width() / 3 + 'vw');
+        $('#dv').height($('#dv').height() + 'vw');
+    });
+
+
+    //window.getComputedStyle(ele).style
+    let dvW = window.getComputedStyle($('#dv')[0]).width;
+
+    //jQuery 没有直接设置 left , top 的方法
+    //使用offset方法，设置 left ,top 的属性值
+    //offset 获取的是 left + margin-left 和 top + margin-top的属性值
+    $('#btn5').click(function() {
+        $('#dvs').css('left', $('#dvs').offset().left / 5 + 2 + 'vw');
+        $('#dvs').css('top', $('#dvs').offset().top / 5 + 2 + 'vw');
+    })
+
+    //通过 offset 方法 直接传入 left、top值、
+    //只能设置 px，px 不需要写，写后方法则不会生效（且，不会报错）
+    $('#btn6').click(function() {
+        $('#dvs').offset({
+            'left': $('#dvs').offset().left + 20,
+            'top': $('#dvs').offset().top + 20
+        })
+    })
+</script>
+
+</html>

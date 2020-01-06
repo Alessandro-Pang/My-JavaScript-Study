@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/user/pangcaho">pangchao</router-link>
+        <router-link to="/user/李小龙/bar/3306">李小龙</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        let login = {
+            props: ["name"],
+            template: '<div>Hello {{ name }}! welecome to this!</div>'
+        }
+        let user = {
+            props: ["name"],
+            template: '<div>you name is {{ name }}<router-view></router-view></div>'
+        };
+        let children = {
+            props: ["id"],
+            template: '<div>you id is {{ id }}</div>'
+        };
+        /*
+            路由元信息
+            定义路由的时候可以配置 meta 字段：
+        */
+        const router = new VueRouter({
+            routes: [{
+                path: '/login',
+                component: login,
+                props: true
+            }, {
+                path: '/user/:name',
+                component: user,
+                props: true,
+                children: [{
+                    path: 'bar/:id',
+                    component: children,
+                    props: true,
+                    // a meta field
+                    meta: {
+                        requiresAuth: false
+                    }
+                }]
+            }]
+        });
+
+        /*
+            访问 meta 字段
+                我们称呼 routes 配置中的每个路由对象为 路由记录。
+                路由记录可以是嵌套的，因此，当一个路由匹配成功后，他可能匹配多个路由记录
+
+            例如，根据上面的路由配置，/foo/bar 这个 URL 将会匹配父路由记录以及子路由记录。
+
+            一个路由匹配到的所有路由记录会暴露为 $route 对象 (还有在导航守卫中的路由对象) 的 $route.matched 数组。
+            因此，我们需要遍历 $route.matched 来检查路由记录中的 meta 字段。
+        */
+        // 在全局导航守卫中检查元字段：
+        router.beforeEach((to, from, next) => {
+            if (to.matched.some(record => record.meta.requiresAuth)) {
+                // this route requires auth, check if logged in
+                // if not, redirect to login page.
+                if (!auth.loggedIn()) {
+                    next({
+                        path: '/login',
+                        query: {
+                            redirect: to.fullPath
+                        }
+                    })
+                } else {
+                    next()
+                }
+            } else {
+                next() // 确保一定要调用 next()
+            }
+        })
+
+        new Vue({
+            router
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>

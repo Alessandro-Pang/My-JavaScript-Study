@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dv {
+            width: 200px;
+            height: 200px;
+            border: 1px solid saddlebrown;
+        }
+        
+        #dv:hover {
+            /* hover 鼠标悬浮事件 */
+            /* hover 必须声明在active 前面，否在无法触发active 事件 */
+            background: slategrey;
+        }
+        
+        #dv:active {
+            /* active 点击时事件 */
+            /* 事件生命周期: 鼠标按下-->触发,鼠标抬起-->事件结束 */
+            background: seagreen;
+        }
+        
+        a:link {
+            /* 未访问的连接 */
+            color: blue;
+        }
+        
+        a:visited {
+            /* 已访问的连接 */
+            color: purple;
+        }
+        
+        a:hover {
+            /* 鼠标悬浮 */
+            /* a:hover 必须在 a:link 和 a:visited 之后，需要严格按顺序才能看到效果。 */
+            color: saddlebrown;
+        }
+        
+        a:active {
+            /* 点击时 */
+            /* a:active 必须在 a:hover之后 */
+            color: seagreen;
+        }
+        
+        ol {
+            list-style: none;
+            width: 100px;
+        }
+        
+        ol>li {
+            counter-increment: index;
+            width: 20px;
+            height: 20px;
+            float: left;
+            border: 1px solid red;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        li::after {
+            /* :after CSS2, ::after CSS3 */
+            /* ::为元素  ，:伪类 */
+            content: counter(index);
+        }
+        
+        #ipt:focus {
+            /* focus 焦点 */
+            border-color: blue;
+        }
+        
+        p {
+            font-size: 18px;
+        }
+        
+        p::first-letter {
+            color: blue;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        
+        p::first-line {
+            color: chocolate;
+        }
+        
+        p::after {
+            content: '    ::first-line修改整行样式';
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dv"></div>
+    <a href="#">anchor 伪类</a>
+
+    <ol>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+    <br><br>
+    <br><br>
+    <input id="ipt" type="text" placeholder="来啊、来啊、">
+
+    <p>first-letter 为元素，选择指定元素内的首字母</p>
+</body>
+
+</html>

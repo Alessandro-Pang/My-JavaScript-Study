@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 200px;
+            height: 200px;
+            border: 1px solid slateblue;
+            border-radius: 25px;
+            box-shadow: 10px 20px 10px 0px slateblue;
+        }
+        
+        #app2 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid springgreen;
+            /* border-image 根据边框大小展示 */
+            border-image: url(./images/border.png) 30 round;
+            -webkit-border-image: url(./images/border.png) 30 round;
+        }
+        
+        #app3 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid steelblue;
+            border-image: url(./images/title-left.png) repeat;
+            border-image-width: 10px;
+        }
+        
+        #dv1 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid #fbc;
+            background: saddlebrown;
+            /* source 图片资源位置 */
+            border-image-source: url(./images/title-left.png);
+            /* 图片宽度 */
+            /* */
+            border-image-width: 2
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <!-- 
+        border-image: source slice width outset repeat|initial|inherit;
+
+        border-image-source	用于指定要用于绘制边框的图像的位置
+        border-image-slice	图像边界向内偏移
+        border-image-width	图像边界的宽度
+        border-image-outset	用于指定在边框外部绘制 border-image-area 的量
+        border-image-repeat	用于设置图像边界是否应重复（repeat）、拉伸（stretch）或铺满（round）。 
+    -->
+
+    <div id="app2"></div>
+    <!-- 
+        border-image-outset: length|number;
+        注意： border-image-outset用于指定在边框外部绘制 border-image-area 的量。
+        包括上下部和左右部分。如果第四个值被省略，它和第二个是相同的。
+        如果也省略了第三个，它和第一个是相同的。如果也省略了第二个，它和第一个是相同的。不允许border-im-outset拥有负值。
+
+        length	 设置边框图像与边框（border-image）的距离，默认为0.
+        number	代表相应的 border-width 的倍数
+     -->
+    <div id="app3"></div>
+    <!-- 
+
+        border-image-width: number|%|auto;
+        注意： border-image -width的4个值指定用于把border图像区域分为九个部分。
+        他们代表上，右，底部，左，两侧向内距离。如果第四个值被省略，它和第二个是相同的。
+        如果也省略了第三个，它和第一个是相同的。如果也省略了第二个，它和第一个是相同的。负值是不允许的。
+
+        number	表示相应的border-width 的倍数
+        %	边界图像区域的大小：横向偏移的宽度的面积，垂直偏移的高度的面积
+        auto	如果指定了，宽度是相应的image slice的内在宽度或高度
+    -->
+    <div id="dv1"></div>
+
+</body>
+
+</html>

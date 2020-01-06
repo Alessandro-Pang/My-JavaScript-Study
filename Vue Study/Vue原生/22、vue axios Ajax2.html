@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <script src="./axios.js"></script>
+</head>
+
+<body>
+<div id="app">
+    {{info}}
+</div>
+
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                info: null
+            }
+        },
+        mounted() {
+            //get方法传递参数，直接在URL上添加参数 num=12345
+            axios.get('./data/json_demo.json?num=12345')
+                .then(function (response) {
+                    console.log(response)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+    })
+</script>
+</body>
+<body>
+<div id="app2">{{info}}</div>
+<script>
+    new Vue({
+        el: app2,
+        data() {
+            return {info: null}
+        },
+        mounted() {
+            //通过params设置参数
+            axios.get('./data/json_demo.json', {
+                params: {
+                    ID: 12345
+                }
+            })
+                .then(function (response) {
+                    console.log(response)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+    })
+</script>
+</body>
+<body>
+<div id="app3">{{info}}</div>
+<script>
+    new Vue({
+        el: app3,
+        data() {
+            return {
+                info: null
+            }
+        },
+        //post传递参数
+        //目前用方法有问题
+        mounted() {
+            axios
+                .post('http://localhost:63342/javaScript/Vue%20Study/Vue%E5%8E%9F%E7%94%9F/data/json_demo.json')
+                .then(response => (this.info = response))
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+    })
+    //post传递参数格式如下：
+    // axios.post('/user', {
+    //     firstName: 'Fred',        // 参数 firstName
+    //     lastName: 'Flintstone'    // 参数 lastName
+    // })
+    //     .then(function (response) {
+    //         console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
+</script>
+</body>
+</html>

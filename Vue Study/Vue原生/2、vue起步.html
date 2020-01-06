@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .class1 {
+            background: #444;
+            color: #eee;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <div v-text="message"></div>
+        <div v-html="message"></div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: '<h1>pangchao学编程</h1>'
+            }
+        })
+    </script>
+</body>
+
+<body>
+    <div id="app2">
+        <label>修改颜色</label><input type="checkbox" v-model="use" id="r1">
+
+        <br><br>
+
+        <div v-bind:class="{'class1': use}">
+            v-bind:class指令
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app2',
+            data: {
+                use: false
+            }
+        })
+    </script>
+
+</body>
+
+<body>
+    <!-- 
+        当一个 Vue 实例被创建时，
+        它向 Vue 的响应式系统中加入了其 data 对象中能找到的所有的属性。
+        当这些属性的值发生改变时，html 视图将也会产生相应的变化。 
+    -->
+    <div id="vue_det">
+        <h1>site:{{site}}</h1>
+        <h1>url:{{url}}</h1>
+        <h1>Alexa:{{alexa}}</h1>
+    </div>
+
+    <script>
+        var data = {
+            site: "菜鸟学VUE",
+            url: "www.runoob.com",
+            alexa: 10000
+        }
+
+        var vm = new Vue({
+            el: '#vue_det',
+            data: data
+        })
+
+        // 它们引用相同的对象！
+        document.write(vm.site === data.site) // true
+        document.write("<br>")
+            // 设置属性也会影响到原始数据
+        vm.site = "菜鸡"
+        document.write(data.site + "<br>") // Runoob
+
+        // ……反之亦然
+        data.alexa = 1234
+        document.write(vm.alexa) // 1234
+    </script>
+</body>
+
+<body>
+    <div id="vue_det2">
+        <h1>site:{{site}}</h1>
+        <h1>url:{{url}}</h1>
+        <h1>Alexa:{{alexa}}</h1>
+    </div>
+
+    <script>
+        // 除了数据属性，Vue 实例还提供了一些有用的实例属性与方法。
+        // 它们都有前缀 $，以便与用户定义的属性区分开来。
+        var data2 = {
+            site: "菜鸟学VUE",
+            url: "www.runoob.com",
+            alexa: 10000
+        }
+        var vm2 = new Vue({
+            el: "#vue_det2",
+            data: data2
+        })
+        vm2.url = "www.baidu.com";
+
+        document.write(vm2.$data === data2) // true
+        document.write("<br>")
+        document.write(vm2.$el === document.getElementById('vue_det2')) // true
+    </script>
+</body>
+
+</html>

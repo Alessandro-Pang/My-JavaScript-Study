@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            height: 50px;
+            background-color: #fa2;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="frm1" action="http://127.0.0.1:3300/db/queryUser">
+        <input type="text" name="username" id="username" placeholder="username"><br>
+        <input type="button" onclick="formSubmit() " value="提交表单 ">
+    </form>
+
+    <div id="app"></div>
+
+    <form id="frm2" action="http://127.0.0.1:3300/db/register" method="POST">
+        <input type="text" name="username" id="username" placeholder="username"><br>
+        <input type="password" name="password" id="password" placeholder="password"><br>
+        <input type="button" onclick="onSubmit() " value="提交表单 ">
+    </form>
+
+    <div id="result"></div>
+</body>
+
+<script>
+    function formSubmit() {
+        document.getElementById("frm1").submit();
+    }
+
+    function onSubmit() {
+        document.getElementById('frm2').submit();
+    }
+</script>
+
+
+</html>

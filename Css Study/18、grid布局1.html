@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            /*================================================
+                grid-template-columns 属性，
+                grid-template-rows 属性
+                    容器指定了网格布局以后，接着就要划分行和列。
+                    grid-template-columns属性定义每一列的列宽，
+                    grid-template-rows属性定义每一行的行高。
+            ================================================== */
+            display: grid;
+            border: 1px solid darkblue;
+            width: 500px;
+            height: 500px;
+            /* grid-template-columns: 20% 20% 20% 20% 20%;
+            grid-template-rows: 20% 20% 20% 20% 20%; */
+            grid-template-columns: repeat(5, 20%);
+            grid-template-rows: repeat(5, 20%);
+        }
+        /*==========================================
+            注意：
+                设为网格布局以后，容器子元素（项目）的
+                    float、
+                    display: inline-block、
+                    display: table-cell、
+                    vertical-align、
+                    column-*等设置都将失效。 
+        ==================================================*/
+        
+        .item {
+            border: 1px solid rebeccapurple;
+        }
+        
+        .item:nth-of-type(even) {
+            background-color: darkorange;
+        }
+        
+        .item:nth-of-type(odd) {
+            background-color: slateblue;
+        }
+        
+        #app2 {
+            /* ================================
+                grid 布局时
+                grid-template-rows默认平分
+            ================================ */
+            display: grid;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rebeccapurple;
+            grid-template-columns: repeat(3, 33.33%);
+            grid-template-rows: repeat(3, 33.33%);
+        }
+        
+        .item2:nth-of-type(2n+1) {
+            background: red;
+        }
+        
+        .item2:nth-of-type(2n) {
+            background: rebeccapurple;
+        }
+        
+        #demo {
+            /* =====================================================
+                fr 关键字
+
+                为了方便表示比例关系，
+                网格布局提供了fr关键字（fraction 的缩写，意为"片段"）。
+                如果两列的宽度分别为1fr和2fr，就表示后者是前者的两倍。 
+            ========================================================*/
+            display: grid;
+            width: 300px;
+            height: 500px;
+            grid-template-columns: repeat(2, 1fr);
+            border: 1px solid deepskyblue;
+        }
+        
+        .style {
+            background: chocolate;
+            border: 1px solid aqua;
+        }
+        
+        .style:nth-of-type(3n+1) {
+            background: dodgerblue;
+        }
+        
+        .style:nth-of-type(3n) {
+            background: blueviolet;
+        }
+        
+        #demo2 {
+            display: grid;
+            width: 400px;
+            height: 500px;
+            grid-template-columns: 1fr 2fr 1fr;
+            border: 5px solid springgreen;
+            box-sizing: border-box;
+        }
+        
+        .style2 {
+            border: 1px solid slateblue;
+        }
+        
+        .style2:nth-of-type(odd) {
+            /* ===============
+                odd  -- 奇数
+                even -- 偶数
+            ==================*/
+            background: darkgoldenrod;
+        }
+        
+        .style2:nth-of-type(2n) {
+            background: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        grid 布局
+            行和列
+                column  rows
+
+        单元格
+            行和列的交叉区域，称为"单元格"（cell）。】
+            正常情况下，n行和m列会产生n x m个单元格。比如，3行3列会产生9个单元格。
+
+        网格线
+            划分网格的线，称为"网格线"（grid line）。水平网格线划分出行，垂直网格线划分出列。
+            正常情况下，n行有n + 1根水平网格线，m列有m + 1根垂直网格线，比如三行就有四根水平网格线。
+    -->
+    <div id="app">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <br>
+    <div id="app2">
+        <div class="item2"></div>
+        <div class="item2"></div>
+        <div class="item2"></div>
+        <div class="item2"></div>
+        <div class="item2"></div>
+        <div class="item2"></div>
+        <div class="item2"></div>
+        <div class="item2"></div>
+        <div class="item2"></div>
+    </div>
+
+    <br>
+
+    <div id="demo">
+        <div class="style"></div>
+        <div class="style"></div>
+        <div class="style"></div>
+        <div class="style"></div>
+        <div class="style"></div>
+        <div class="style"></div>
+        <div class="style"></div>
+        <div class="style"></div>
+        <div class="style"></div>
+        <div class="style"></div>
+    </div>
+
+    <br>
+
+    <div id="demo2">
+        <div class="style2"></div>
+        <div class="style2"></div>
+        <div class="style2"></div>
+        <div class="style2"></div>
+        <div class="style2"></div>
+        <div class="style2"></div>
+        <div class="style2"></div>
+        <div class="style2"></div>
+        <div class="style2"></div>
+    </div>
+</body>
+
+</html>

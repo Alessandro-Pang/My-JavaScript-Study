@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+<script type="text/javascript">
+    /* Canavs动画基本步骤
+     * 1、清空Cnavas ：
+     *      在绘制每一帧动画前，需要清空画布所有对象。
+     *      清空最简单的做法就是 clearRect()方法
+     * 2、保存Cnavas状态:
+     *      如果在绘制过程中，会更改canvas状态(颜色，移动了原坐标等)，
+     *      又在绘制每一帧时都是原始状态的话，则最好保存下canvas的状态
+     * 3、绘制动画图形
+     *      这一步是真正的绘制动画帧
+     *      可以使用setInterval()定时器制作动画
+     * 4、恢复Canvas状态：
+     *      如果你之前保存了canvas状态，
+     *      则应该在绘制完成一帧之后恢复canvas状态
+     */
+
+    //主方法
+    (function () {
+        let canvas = document.querySelector("#canvas");
+        if (!canvas.getContext) return;
+
+        let ctx = canvas.getContext("2d");
+        //设置Canvas宽高
+        canvas.width  = '300';
+        canvas.height = '300';
+        draw(ctx);
+    })();
+
+    //绘画函数
+    function draw(ctx) {
+        //动画函数
+        requestAnimationFrame(function step() {
+            drawDial(ctx);//调用绘制表盘函数
+            drawAllHands(ctx);//调用绘制时分秒指针函数
+            requestAnimationFrame(step);
+        })
+    }
+
+    //绘制时分秒指针函数
+    function drawAllHands(ctx) {
+        let time = new Date();
+
+        let s = time.getSeconds();
+        let m = time.getMinutes();
+        let h = time.getHours();
+
+        let pi = Math.PI;
+
+        //计算时分秒指针的弧度
+        let secondAngle = pi / 180 * 6 * s;
+        let minuteAngle = pi / 180 * 6 * m + secondAngle / 60;
+        let hourAngle = pi / 180 * 30 * h + minuteAngle / 12;
+
+        //绘制时分秒指针
+        drawHand(hourAngle, 60, 6, "red", ctx);
+        drawHand(minuteAngle, 106, 4, "green", ctx);
+        drawHand(secondAngle, 129, 2, "blue", ctx);
+
+    }
+
+    /*
+     * 时分秒指针移动函数
+     *
+     * @param angle：要绘制指针的角度
+     * @param len：  要绘制指针的长度
+     * @param width：要绘制指针的宽度
+     * @param color：要绘制指针的颜色
+     * @param ctx
+     */
+    function drawHand(angle, len, width, color, ctx) {
+        ctx.save();
+        //把坐标轴的原点平移到原来的中心
+        ctx.translate(150, 150);
+        //旋转坐标轴，x轴就是针的角度
+        ctx.rotate(-Math.PI / 2 + angle);
+        ctx.beginPath();
+        ctx.moveTo(-4, 0);
+        //沿着 x 轴绘制指针
+        ctx.lineTo(len, 0);
+        ctx.lineWidth = width;
+        ctx.strokeStyle = color;
+        ctx.lineCap = "round";
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+    }
+
+    /*
+     * 绘制表盘
+     * @param ctx
+     */
+    function drawDial(ctx) {
+        let pi = Math.PI;
+
+        //清除所有内容
+        ctx.clearRect(0, 0, 300, 300);
+        ctx.save();
+
+        //移动坐标原点到原来的中心
+        ctx.translate(150, 150);
+        ctx.beginPath();
+        //绘制圆周
+        ctx.arc(0, 0, 148, 0, 2 * pi);
+        ctx.stroke();
+        ctx.closePath();
+
+        //绘制刻度
+        for (let i = 0; i < 60; i++) {
+            ctx.save();
+            //旋转坐标轴，坐标轴x的正方形从上开始算起
+            ctx.rotate(-pi / 2 + i * pi / 30);
+            ctx.beginPath();
+            ctx.moveTo(110, 0);
+            ctx.lineTo(140, 0);
+            ctx.lineWidth = i % 5 ? 2 : 4;
+            ctx.strokeStyle = i % 5 ? "blue" : "red";
+
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+        }
+        ctx.restore();
+    }
+</script>
+</html>

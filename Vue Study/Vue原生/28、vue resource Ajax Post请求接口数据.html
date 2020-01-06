@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-resource.js"></script>
+</head>
+<body>
+<div id="box">
+    <input type="button" @click="post()" value="点我异步获取数据(POST)">
+    <div v-for="site in msg">
+        <div v-if="site.key==null?false:true">
+            key:{{site.key}}<br>
+            电话:{{site.phone}}<br>
+            姓名:{{site.name}}<br>
+            密码：{{site.passwd}}<br>
+            签名:{{site.text}}<br>
+            图片链接：{{site.img}}<br>
+            备注1：{{site.other}}<br>
+            备注2：{{site.other2}}<br>
+            创建时间：{{site.createTime}}<br>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    window.onload = function () {
+        let vm = new Vue({
+            el: "#box",
+            data: {
+                msg: "hellow world!",
+            },
+            methods: {
+                post: function () {
+                    this.$http.post('https://www.apiopen.top/login', {
+                        key: "00d91e8e0cca2b76f515926a36db68f5",
+                        phone: "13594347817",
+                        passwd: 123456
+                    }, {emulateJSON: true})
+                        .then(function (res) {
+                            this.msg = (res.body);
+                        }), function () {
+                        console.log('error')
+                    }
+                }
+            }
+        })
+    };
+    // 语法 & API
+    //
+    // 你可以使用全局对象方式 Vue.http
+    // 或者在一个Vue实例的内部使用 this.$http来发起HTTP请求。
+
+    // 基于全局Vue对象使用http
+    // Vue.http.get('/someUrl', [options]).then(successCallback, errorCallback);
+    // Vue.http.post('/someUrl', [body], [options]).then(successCallback, errorCallback);
+
+    // 在一个Vue实例内使用$http
+//     this.$http.get('/someUrl', [options]).then(successCallback, errorCallback);
+//     this.$http.post('/someUrl', [body], [options]).then(successCallback, errorCallback);
+//
+//     vue - resource提供了7种请求API(REST风格)：
+//
+// get(url, [options])
+//     head(url, [options])
+//     delete (url, [options])
+//     jsonp(url, [options])
+//     post(url, [body], [options])
+//     put(url, [body], [options])
+//     patch(url, [body], [options])
+</script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <img src="../iali/iali11.jpg" alt="">
+        <img src="../iali/iali18.jpg" alt="">
+        <img src="../iali/iali19.jpg" alt="">
+        <img src="../iali/iali20.jpg" alt="">
+        <img src="../iali/iali21.jpg" alt="">
+        <img src="../iali/iali22.jpg" alt="">
+        <img src="../iali/iali24.jpg" alt="">
+    </div>
+
+    <input type="button" id="btn" value="点击生成P标签">
+    <div id="demo2"></div>
+
+    <input type="button" id="btn2" value="点击生成div标签">
+    <div id="demo3"></div>
+    <script>
+        $('#demo>img').click(function() {
+            $(this).hide(1000)
+        });
+
+        $('#btn').click(function() {
+            let obj = $('<p>这是一个P标签，用于生成元素测试</p>');
+            $('#demo2').append(obj);
+        });
+
+        $('#btn2').click(function() {
+            $('<div>生成了一个div标签</div>').appendTo($('#demo3'))
+        })
+    </script>
+</body>
+
+</html>

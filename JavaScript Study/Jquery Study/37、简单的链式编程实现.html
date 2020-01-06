@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+
+</head>
+
+<body>
+    <div id="apps"></div>
+
+    <script>
+        class App {
+            sayHi() {
+                console.log('hello world!');
+                return this
+            }
+
+            eat() {
+                console.log('you see see you ,\n one day day just eat eat eat')
+                return this
+            }
+
+            juck() {
+                console.log('I don\'t kown ,what is juck?')
+                return this
+            }
+
+            text(ele, value) {
+                let getEle = document.querySelector(ele);
+                if (value) {
+                    getEle.innerHTML = value;
+                    return this;
+                } else {
+                    let val = getEle.innerHTML;
+                    console.log(val);
+                    return this
+                }
+
+            }
+        }
+
+        let app = new App();
+
+        //链式编程，基本原理
+        //在 函数结束时，返回当前对象
+        app.sayHi().eat().juck();
+
+        //模拟jquery .val()方法
+        //有参数时插入参数，没有时，返回参数对象值
+        app.text('#apps', 'hhhhh').text('#apps')
+    </script>
+</body>
+
+</html>

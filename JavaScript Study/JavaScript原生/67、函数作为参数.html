@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 验证引入的css中路径，
+         是以css文件为相对路径，
+         和导入的html没有关系 -->
+    <link rel="stylesheet" href="../test.css">
+
+</head>
+
+<body>
+
+</body>
+<script>
+    function f1(fn) {
+        console.log('f1的函数')
+        fn()
+    }
+
+    f1(function(param) {
+        console.log('匿名函数')
+    })
+
+    function f2() {
+        console.log('f2的函数')
+    }
+
+    f1(f2);
+
+    function f3(fn) {
+        setInterval(function() {
+            console.log('开始定时器');
+            fn();
+            console.log('结束定时器');
+        }, 1000)
+    }
+    f3(function() {
+        console.log('往定时器中传递函数参数')
+    })
+</script>
+
+</html>

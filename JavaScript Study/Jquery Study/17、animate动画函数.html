@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+        
+        #demo>img {
+            width: 300px;
+            height: 300px;
+            margin: 30px
+        }
+        
+        #demo2>img {
+            width: 300px;
+            height: 300px;
+            margin-left: 350px
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">点击开始动画</button>
+    <br>
+    <img src="../iali/iali5.jpg" alt="" id="img" style="left: 1000px">
+    <button id="btn2">点击消失</button>
+    <div id="demo">
+        <img src="../iali/iali0.jpg" alt="">
+        <img src="../iali/iali2.jpg" alt="">
+        <img src="../iali/iali3.jpg" alt="">
+        <img src="../iali/iali4.jpg" alt="">
+        <img src="../iali/iali6.jpg" alt="">
+    </div>
+    <button id="btn3">点击消失</button>
+    <div id="demo2">
+        <img src="../iali/iali16.jpg" alt="">
+        <img src="../iali/iali14.jpg" alt="">
+        <img src="../iali/iali19.jpg" alt="">
+        <img src="../iali/iali12.jpg" alt="">
+        <img src="../iali/iali11.jpg" alt="">
+    </div>
+    <script>
+        $(function() {
+            /**
+             * animate 动画函数
+             * agement : 1:元素属性 ,2:动画执行时间,3:执行效果 ,4:回调函数
+             * 执行效果：swing--缓动,linear--匀速 （可以忽略,直接写回调函数）
+             */
+            $('#btn').click(() => {
+                $('#img').animate({
+                    'width': 300,
+                    'height': 300,
+                    "top": 350,
+                    "left": 500
+                }, 5000, "linear", function() {
+                    $(this).animate({
+                        'width': 500,
+                        'height': 500,
+                        "top": 100,
+                        "left": 700
+                    }, 3000, function() {
+                        $(this).animate({
+                            'width': 100,
+                            'height': 100,
+                            "top": 200,
+                            "left": 500
+                        }, 1000)
+                    })
+                })
+            })
+        });
+
+        $(() => {
+            $('#btn2').click(() => {
+                $('#demo>img:last').hide(5000, function() {
+                    //arguments.callee 执行当前匿名函数，执行回调（递归）
+                    //Jquery 官方声明该方法效率低，不建议使用
+                    //方法等同于 回调函数 为命名函数调用
+                    $(this).prev().hide(5000, arguments.callee);
+                    // $(this).prev() 找到当前元素的上一个元素
+                })
+            })
+        })
+
+        //递归调用回调函数
+        $('#btn3').click(() => {
+            $('#demo2>img:last').hide(3000, function f() {
+                $(this).prev().hide(3000, f)
+            })
+        })
+    </script>
+</body>
+
+</html>

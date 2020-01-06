@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        #warp {
+            top: 100px;
+            transform: translate(40%);
+            position: relative;
+            text-align: center;
+        }
+        
+        div>ul {
+            margin: 0 auto;
+            padding: 0;
+            position: absolute;
+            width: 300px;
+            height: 20px;
+        }
+        
+        div>ul>li {
+            width: 100px;
+            background: darkorchid;
+            list-style: none;
+            float: left;
+        }
+        
+        a~ul {
+            margin: 0;
+            padding: 0;
+            background: darkorchid;
+            display: none;
+        }
+        
+        a~ul>li {
+            list-style: none;
+        }
+        
+        .wapper {
+            background: darkred;
+            width: 100px;
+        }
+        
+        .wapper>h1 {
+            background: darksalmon
+        }
+        
+        .wapper>p {
+            background: darkturquoise
+        }
+        
+        .wapper2 {
+            background: darkred;
+            width: 100px;
+        }
+        
+        .wapper2>h1 {
+            background: darksalmon
+        }
+        
+        .wapper2>p {
+            background: darkturquoise
+        }
+        
+        .wapper3 {
+            background: darkred;
+            width: 100px;
+        }
+        
+        .wapper3>h1 {
+            background: darksalmon
+        }
+        
+        .wapper3>p {
+            background: darkturquoise
+        }
+        
+        .wapper4 {
+            background: darkred;
+            width: 100px;
+        }
+        
+        .wapper4>h1 {
+            background: darksalmon
+        }
+        
+        .wapper4>p {
+            background: darkturquoise
+        }
+        
+        span {
+            display: block
+        }
+    </style>
+</head>
+
+<body>
+    <div id="warp">
+        <ul>
+            <li>
+                <a href="javascript:;">动画片</a>
+                <ul>
+                    <li>葫芦娃</li>
+                    <li>西游记</li>
+                    <li>山海经</li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">动漫</a>
+                <ul>
+                    <li>葫芦娃</li>
+                    <li>西游记</li>
+                    <li>山海经</li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">卡通</a>
+                <ul>
+                    <li>葫芦娃</li>
+                    <li>西游记</li>
+                    <li>山海经</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="wapper">
+        <h1>hhh</h1>
+        mouseover ,mouseout
+        <p>ppp</p>
+    </div>
+
+    <div class="wapper2">
+        <h1>hhh</h1>
+        mouseenter , mouseleave
+        <p>ppp</p>
+    </div>
+
+    <div class="wapper3">
+        <h1>hhh</h1>
+        mouseenter , mouseleave 链式编程
+        <p>ppp</p>
+    </div>
+
+    <div class="wapper4">
+        <h1>哈哈哈啊</h1>
+        <span>哭泣哭泣哭泣哦</span>
+        <p>这真的是太棒了！</p>
+    </div>
+</body>
+<script>
+    /**
+     *  mouseover ,mouseout   是指鼠标指针在穿过/离开被选元素或其子元素时触发。
+     *  mouseenter,mouseleave 是指鼠标指针在穿过/离开被选元素时触发。
+     */
+    $(() => {
+        //jquery 中舍弃了 mouseover 和 mouseleave
+        //jquery 使用 mouseenter 和 mouseleave
+        $('div>ul>li').mouseenter(function() {
+            //show() hide() 参数是毫秒， stop是结束上一次动画
+            $(this).children('ul').stop().show(500);
+        })
+
+        $('div>ul>li').mouseleave(function() {
+            $(this).children('ul').stop().hide(500);
+        })
+    })
+
+
+    $(() => {
+        $('.wapper').mouseover(function() {
+            $(this).width(500)
+        });
+        $('.wapper').mouseout(function() {
+            $(this).width(100)
+        })
+    });
+
+    $(() => {
+        $('.wapper2').mouseenter(function() {
+            $(this).width(500)
+        });
+        $('.wapper2').mouseleave(function() {
+            $(this).width(100)
+        })
+    })
+
+    //链式编程
+    $(() => {
+        $('.wapper3').mouseenter(function() {
+            $(this).width(500)
+        }).mouseleave(function() {
+            $(this).width(100)
+        })
+    });
+    /**
+     * hover的效果等同于mouseenter，mouseleave。
+     */
+    $(() => {
+        $('.wapper4').hover(function() {
+            $(this).height(500);
+        }, function() {
+            $(this).height('auto');
+        })
+    });
+
+    $(() => {
+        $('.wapper4>h1,.wapper4>p,.wapper4>span').click(function() {
+            $(this).css({
+                background: "#999933",
+                color: "#0fff0f",
+                fontSize: "30px",
+                fontFamily: "全新硬笔行书简"
+            })
+        })
+    })
+</script>
+
+</html>

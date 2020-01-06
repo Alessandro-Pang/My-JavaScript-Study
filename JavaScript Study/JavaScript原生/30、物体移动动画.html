@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		#dv1{
+			width: 200px;
+			height: 100px;
+			position: absolute;
+			background: green;
+			top:40px;
+		}
+	</style>
+</head>
+<body>
+<div id="dv1"></div>
+<input type="button" name="" id="target-500" value="移动到-500px">
+<input type="button" name="" id="target0" value="移动到0px">
+<input type="button" name="" id="target200" value="移动到200px">
+<input type="button" name="" id="target400" value="移动到400px">
+<input type="button" name="" id="target600" value="移动到600px">
+<input type="button" name="" id="target800" value="移动到800px">
+<input type="button" name="" id="target1200" value="移动到1200px">
+
+</body>
+<script type="text/javascript">
+	
+	var tag = false;//定时器开启标签
+	my$("target400").onclick = function(){
+
+		if (tag) { //如果定时器开启了，则不能再次开启定时器
+			return
+		}
+
+		var next = 13;//物体移动前进步数初始化 
+		var back = 10;//物体移动后退步数初始化 
+		var timeId = window.setInterval(function(){ //定时器任务
+
+			//获取当前div位置
+			var dvPath = my$("dv1").offsetLeft;
+
+			console.log("hhh",dvPath)
+			//如果div位置小于400 ,则往前移动
+			if (dvPath < 400) {
+
+				dvPath = dvPath+next;
+
+				//如果当前定时器每次移动不是2的倍数
+				//且当前位置大于400 
+				//且当前位置小于400+ 每步前进步数
+				//则修正当前位置为400
+				if (next % 2 !== 0 && dvPath > 400 && dvPath <= 400+next) {
+
+					dvPath = 400;
+				}
+
+			//如果div位置大于400 ,则往后移动
+			}else if(dvPath > 400){
+
+				dvPath = dvPath-back;
+
+				//如果当前定时器每次移动不是2的倍数
+				//且当前位置小于400 
+				//且当前位置大于400 - 每步后退步数
+				//则修正当前位置为400
+				if (back % 2 !== 0 && dvPath < 400 && dvPath >= 400-back) {
+
+					dvPath = 400;
+				}
+			}
+			
+			//定时器开启标识
+			tag = true;
+	
+			//执行每次移动后的位置
+			my$("dv1").style.left=dvPath+"px";
+
+			//当前==400 结束定时器任务
+			if (dvPath == 400) {
+
+				tag = false;//定时器关闭标识
+				window.clearInterval(timeId);
+
+				return
+			}
+
+		},20)
+	}
+
+
+	var tag2 = false;//定时器开启标签
+	my$("target800").onclick = function(){
+
+		if (tag) { //如果定时器开启了，则不能再次开启定时器
+			return
+		}
+
+		var next = 13;//物体移动前进步数初始化 
+		var back = 13;//物体移动后退步数初始化 
+		var timeId = window.setInterval(function(){ //定时器任务
+
+			//获取当前div位置
+			var dvPath = my$("dv1").offsetLeft;
+
+			//如果div位置小于800 ,则往前移动
+			if (dvPath < 800) {
+
+				dvPath = dvPath+next;
+				//如果当前定时器每次移动不是2的倍数
+				//且当前位置大于800 
+				//且当前位置小于800 + 每步前进步数
+				//则修正当前位置为800
+				if (next % 2 !== 0 && dvPath > 800 && dvPath <= 800+next) {
+
+					dvPath = 800;
+				}
+
+			//如果div位置大于800 ,则往后移动
+			}else if(dvPath > 800){
+
+				dvPath = dvPath-back;
+				//如果当前定时器每次移动不是2的倍数
+				//且当前位置小于800 
+				//且当前位置大于800 - 每步后退步数
+				//则修正当前位置为800
+				console.log(dvPath);
+				if (next % 2 !== 0 && dvPath < 800 && dvPath >= 800-next) {
+
+					dvPath = 800;
+				}
+			}
+			
+			//定时器开启标识
+			tag = true;
+			
+			//执行每次移动后的位置
+			my$("dv1").style.left=dvPath+"px";
+
+			//当前==800 结束定时器任务
+			if (dvPath == 800) {
+
+				tag = false;//定时器关闭标识
+				window.clearInterval(timeId);
+
+				return
+			}
+
+		},20)
+	}
+
+	animation("target1200","dv1",1200,17,10);
+	animation("target200","dv1",200,11,13);
+	animation("target600","dv1",600,19,17);
+	animation("target0","dv1",0,3,7);
+	animation("target-500","dv1",-500,10,10);
+	console.log(dv1.offsetLeft)
+</script>
+</html>

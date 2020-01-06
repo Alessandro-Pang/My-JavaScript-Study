@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        .cls {
+            border: blue
+        }
+    </style>
+</head>
+
+<body>
+    <button>Click Me</button>
+    <p class="cls"></p>
+    <p class="cls"></p>
+    <p class="cls"></p>
+    <p class="cls"></p>
+    <p class="cls"></p>
+    <p class="cls"></p>
+    <p class="cls"></p>
+    <p class="cls"></p>
+    <p class="cls"></p>
+    <div id="app"></div>
+</body>
+<script>
+    //隐式迭代
+    $('button').click(() => {
+        $('p').text('我们都是p标签');
+        $('.cls').css({
+            border: "1px solid red",
+            background: "#55ffff"
+        })
+    })
+    $("#app").html('<input type="text" value="这是一个input文本框">')
+        //.val() 获取或插入value值
+        //.text() 获取或插入标签中间的文本   ---innerText
+        //.css() 获取或插入 css样式
+        //.html() 获取或加入html   ---innerHTML
+</script>
+
+</html>

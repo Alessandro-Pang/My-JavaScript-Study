@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <button id="get">点击发送GET请求</button>
+    <br>
+    <br>
+    <input type="text" name="username" id="username" placeholder="username">
+    <br>
+    <input type="password" name="password" id="password" placeholder="password">
+    <br>
+    <button id="post">发起POST跨越请求</button>
+    <br>
+    <br>
+    <button id="get2">GET 请求发送数据</button>
+</body>
+<script>
+    $('#get').click(function() {
+        /** 
+         * $.get(URL,function(data,status,xhr),dataType)
+
+         */
+        $.get('../../Vue%20Study/Vue原生/data/musicRankings.json', {
+            'colors[]': ["Red ", "Green ", "Blue "]
+        }, function(data, state) {
+            console.log(data)
+        })
+
+
+    })
+
+    /**
+        DataType:
+            可选。规定预期的服务器响应的数据类型。
+            默认地，jQuery 会智能判断。
+            可能的类型：
+            "xml " - 一个 XML 文档
+            "html " - HTML 作为纯文本
+            "text " - 纯文本字符串
+            "script " - 以 JavaScript 运行响应，并以纯文本返回
+            "json " - 以 JSON 运行响应，并以 JavaScript 对象返回
+            "jsonp " - 使用 JSONP 加载一个 JSON 块，将添加一个 "?callback=? " 到 URL 来规定回调
+    */
+    $('#post').click(function() {
+        /**
+         * @param {:string} url
+         * @param {:string | object} data
+         * @param {:function} callback
+         * @param {:string} datatype
+         * callback function
+         *      data   - 包含来自请求的结果数据
+         *      status - 包含请求的状态（"success "、"notmodified "、"error "、"timeout "、"parsererror "）
+         *      xhr    - 包含 XMLHttpRequest 对象 
+         */
+
+        let data = {
+            username: $('#username').val(),
+            password: $('#password').val()
+        };
+
+        $.post('http://127.0.0.1:3300/db/register', data,
+            function(data) {
+                console.log(data)
+            }, 'json')
+    });
+
+    $('#get2').click(function() {
+        let data = {
+            username: '大天使'
+        }
+        $.get(`http://127.0.0.1:3300/db/queryUser`, data, function(data) {
+            console.log(data)
+        }, 'json')
+    })
+</script>
+
+</html>

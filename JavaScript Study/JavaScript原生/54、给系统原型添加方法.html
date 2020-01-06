@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //冒泡排序
+    //给系统原型增加方法
+    Array.prototype.mySort = function() {
+        for (var i = 0; i < this.length - 1; i++) {
+            for (var j = 0; j < this.length - 1 - i; j++) {
+                if (this[j] < this[j + 1]) {
+                    var temp = this[j];
+                    this[j] = this[j + 1];
+                    this[j + 1] = temp;
+                }
+            }
+        }
+    };
+
+    var arr = [20, 10, 5, 11, 22, 86, 12];
+    arr.mySort();
+    console.log(arr);
+
+    //局部变量，提升为全局变量
+    //将变量写入widow
+    (function(win) {
+        var num = 10;
+        win.number = num;
+    })(window)
+
+    //可以访问到window全局变量
+    console.log(number);
+
+
+    //给window对象，添加随机数方法
+    /*
+    1、自调用函数
+    2、创建Random构造函数
+    3、给random原型添加方法，返回一个随机数
+    4、将构造函数Random添加到window对象中		
+    */
+    (function(win) {
+        function Random() {}
+
+        Random.prototype.getRandom = function(min, max) {
+            //max - min == 50-10
+            //先取0-40之间的值(不包括40)
+            //0-40 + min == 无论值是多少 都会加上最小值，所以即使是 0 ，+10后最小值=10
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        //把Random对象暴露给顶级Window对象
+        //从而导致外面可以直接使用Random对象
+        win.Random = Random;
+
+        //给window实例化对象
+        //win.random = new Random();
+    })(window)
+
+    var rm = new Random();
+    console.log(rm.getRandom(10, 50));
+    //测试getRandom，最大值到最小值
+    //		var i = 0;
+    //		while(i < 100){
+    //			var r = rm.getRandom(10,50);
+    //			if(r<10){
+    //				console.log(r);
+    //				break;
+    //			}else if (i>=50){
+    //				console.log(r);
+    //				break;
+    //		}
+    //			i++;
+    //			
+    //		}
+
+
+    //window对象调用方法
+    //console.log(random.getRandom())
+</script>
+
+</html>

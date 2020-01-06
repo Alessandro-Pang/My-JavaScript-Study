@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <!-- <script src="./axios.js"></script> -->
+</head>
+
+<body>
+    <div id="demo">
+        searchModel:<input type="text" v-model="searchModel"><br>
+        <span style="font-size: 30px ;font-family: 全新硬笔行书简;color:blueviolet">
+            v-demol === v-bind:value + v-on:input 这是等价的</span><br> searchText:
+        <input type="text" v-bind:value="searchText" v-on:input="searchText = $event.target.value">
+        <br> searchModel:{{searchModel}}
+        <br> searchText:{{searchText}}
+    </div>
+    <!-- 在组件上使用v-model -->
+    <div id="app">
+        <demo v-model="message"></demo>
+        <br>message:{{message}}<br>
+        <demo2 v-bind:value="message2" v-on:input="message2 = $event"></demo2>
+        <br>message2:{{message2}}
+    </div>
+    <script>
+        new Vue({
+            el: demo,
+            data: {
+                searchModel: null,
+                searchText: null
+            }
+        })
+
+        //为了让它正常工作，这个组件内的 <input> 必须：
+        //将其 value 特性绑定到一个名叫 value 的 prop 上
+        //在其 input 事件被触发时，将新的值通过自定义的 input 事件抛出
+        Vue.component('demo', {
+            props: ['value'],
+            template: `
+                <input v-bind:value="value" v-on:input="$emit('input',$event.target.value)">
+            `
+        })
+
+        let templ = {
+            props: ['message'],
+            template: `<input v-on:input="$emit('input', $event.target.value)">`
+        }
+        new Vue({
+            el: app,
+            data: {
+                message: null,
+                message2: null
+            },
+            components: {
+                'demo2': templ
+            }
+        })
+    </script>
+</body>
+
+</html>

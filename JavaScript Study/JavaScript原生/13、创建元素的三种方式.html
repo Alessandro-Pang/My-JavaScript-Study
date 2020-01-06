@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<button id="btn1">document.write</button>
+<br>
+<button id="btn2">innerHTML</button>
+<div id="dv1"></div>
+<br>
+<button id="btn3">create</button>
+<div id="dv2"></div>
+</body>
+<script type="text/javascript" src="./common.js"></script>
+<script type="text/javascript">
+	//document.write ，当页面加载完毕后，触发事件会清空当前所有元素，
+	//在页面加载前使用，则不会受到影响
+	my$("btn1").onclick = function(){
+		document.write("<p>document.write测试，这是一个p标签</p>")
+	}
+
+	var dv1 = my$("dv1");
+	my$("btn2").onclick = function(){
+		dv1.innerHTML = "<p style='background-color:red'>innerHTML测试，这也是一个p标签</p>"
+	}
+
+	var dv2 = my$("dv2");
+	//触发一次点击事件，就会创建一次
+	my$("btn3").onclick = function(){
+		//创建元素 传入参数是 标签
+		var textObj = document.createElement("p");
+		textObj.innerHTML = "pppppp";
+		//追加子元素
+		dv2.appendChild(textObj)
+	}
+</script>
+</html>

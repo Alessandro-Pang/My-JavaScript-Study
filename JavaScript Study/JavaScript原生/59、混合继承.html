@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    //-------------通过原型继承-------------------
+    function Person(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+    Person.prototype.eat = function() {
+        console.log(this.name + "----------吃东西")
+    }
+    Person.prototype.sleep = function() {
+        console.log("人需要睡觉-----------" + this.age)
+    }
+    Person.prototype.play = function() {
+        console.log("游戏人生------------" + this.sex)
+    }
+
+    function Student(name, age, sex, score) {
+        //Person.call调用父类属性，借用构造函数
+        Person.call(this, name, age, sex)
+        this.score = score;
+    }
+    //----------------改变原型指向------------------------
+    Student.prototype = new Person();
+
+    //给子类创建方法
+    Student.prototype.study = function() {
+
+        console.log('学生学习很累，-----------该学员成绩：' + this.score + '分');
+    }
+
+    //--------------------实例化子类对象--------------------------------------------------
+    //---------注意：Person.call()只能调用父类的属性，不能调用父类的方法---------------------
+    //---------所以还需要通过改变原型指向来调用父类的方法------------------------------------
+    //---------需注意，应该在创建子类后，就改变原型指向，之后对子类创建方法，原型直接指向父类---
+    //-----------------------------------------------------------------------------------
+    var st = new Student('小李', '19', 'boy', '100');
+
+    //只通过.call调用父类，这里父类的方法会报错
+    //先给子类原型添加方法，在改变原型指向，子类的方法会报错
+    st.eat();
+    st.play();
+    st.sleep();
+    st.study();
+
+    var st2 = new Student('小张', '21', 'girl', '123');
+    st2.eat();
+    st2.play();
+    st2.sleep();
+    st2.study();
+</script>
+
+</html>

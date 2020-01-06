@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ol>
+            <!-- 创建一个 todo-item 组件的实例 -->
+            <todo-item></todo-item>
+        </ol>
+    </div>
+
+    <div id="app2">
+        <ol>
+            <test></test>
+        </ol>
+    </div>
+
+    <div id="app3">
+        <input type="text" v-model="message">
+        <ol id="appends">
+            <proptest v-bind:message="message"></proptest>
+        </ol>
+    </div>
+</body>
+<script>
+    // 定义名为 todo-item 的新组件
+    //component第一个参数是，组件名，第二个参数 模板样式
+    Vue.component('todo-item', {
+        template: '<li>这是一个li标签</li>'
+    });
+
+    //必须创建实例
+    new Vue({
+        el: app
+    });
+
+    let test = {
+        template: "<li>只声明在实例中的模板</li>"
+    }
+    new Vue({
+        el: app2,
+        components: {
+            'test': test
+        }
+    })
+
+    let propTest = {
+        props: ['message'],
+        template: "<li>{{message}}</li>"
+    }
+
+    let vm = new Vue({
+        el: app3,
+        data: {
+            message: null,
+        },
+        components: {
+            'proptest': propTest
+        }
+    })
+</script>
+
+</html>

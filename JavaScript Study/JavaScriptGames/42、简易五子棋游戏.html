@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pcy的五子棋游戏</title>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+<div style="width:380px;height: 30px;text-align: center;font-size:28px;color: #23b7e5;">PangCy五子棋</div>
+<br>
+<canvas id="canvas" width="380" height="380" style="background: #CC6600;"></canvas>
+</body>
+<script type="text/javascript">
+	let my$ = id => document.querySelector(id);
+    /**
+     * 创建19 * 19 的棋盘
+     */
+    var canvas = my$('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    for (var i = 0; i < 19; i++) {
+        ctx.moveTo(10 + i * 20, 10);
+        ctx.lineTo(10 + i * 20, 370);
+        ctx.moveTo(10, 10 + i * 20);
+        ctx.lineTo(370, 10 + i * 20);
+    }
+
+    ctx.stroke();
+    /*
+     * blorwh --> black or white
+     *
+     */
+    var blorwh = false;
+    /**
+     * @type {*[]}
+     *
+     * arr是引用类型，arrs中的三个元素其实都是指向的arr。
+     *
+     * arrs[0] arrs[1] arrs[2] 指向了同一块内存地址，
+     * 所以修改[1][2]  --[0][2]...[18][2] 一起变化
+     */
+        // var arr = [];
+        // var matrix = [];
+        // for (var j = 0; j < 19; j++) {
+        //     arr.push(0);
+        // }
+        // for (var n = 0; n < 19; n++) {
+        //     matrix.push(arr);
+        // }
+    var matrix = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+
+    /**
+     * 事件执行函数
+     */
+    $('#canvas').click(function (event) {
+        var mtxPosX, mtxPosY;
+        var arcPosX, arcPosY;
+
+        /*
+        * 将用户点击事件取绝对值(相近位置)
+        * 将位置在数组中标记出来
+        */
+        for (var x = 0; x < 19; x++) {
+            if (Math.abs(event.offsetX - (10 + x * 20)) < 10) {
+                arcPosX = 10 + x * 20;
+                mtxPosX = x;
+            }
+            if (Math.abs(event.offsetY - (10 + x * 20)) < 10) {
+                arcPosY = 10 + x * 20;
+                mtxPosY = x;
+            }
+        }
+
+        blorwh = placingStone(blorwh, mtxPosX, mtxPosY);
+
+        check0(mtxPosX, mtxPosY) == 1 ? victory(blorwh) : 0;
+        check90(mtxPosX, mtxPosY) == 1 ? victory(blorwh) : 0;
+        check45(mtxPosX, mtxPosY) == 1 ? victory(blorwh) : 0;
+        check135(mtxPosX, mtxPosY) == 1 ? victory(blorwh) : 0;
+
+    });
+
+    //输出下一个是谁出棋
+    var writeMessage = function () {
+        if (blorwh)
+            console.log("black is next!");
+        else
+            console.log("white is next!");
+    };
+
+    /*
+    * 胜利后执行函数
+    *
+    */
+    var victory = function (stoneColor) {
+
+        if (blorwh) {
+            alert("黑棋胜利了 QAQ ")
+        } else {
+            alert("白棋胜利了 QAQ ")
+        }
+
+    };
+    /*
+     * 判断黑白棋子
+     * 判断用户点击位置有没有棋子
+     */
+    var placingStone = function (stoneColor, stoneX, stoneY) {
+        var matrixNum = matrix[stoneX][stoneY];
+        if (matrixNum === 0) {
+            writeMessage();
+            stoneColor = !stoneColor;
+            ctx.beginPath();
+            if (stoneColor) {
+                ctx.fillStyle = "black";
+                ctx.arc(10 + stoneX * 20, 10 + stoneY * 20, 10, 0, Math.PI * 2, false);
+                matrix[stoneX][stoneY] = 1;
+            } else {
+                ctx.fillStyle = "white";
+                ctx.arc(10 + stoneX * 20, 10 + stoneY * 20, 10, 0, Math.PI * 2, false);
+                ctx.stroke();
+                matrix[stoneX][stoneY] = 2;
+
+            }
+            ctx.fill();
+        }
+        return stoneColor;
+    };
+
+    /*
+     * 判断胜利条件
+     * check0 为横向5子连珠
+     */
+    var check0 = function (stoneX, stoneY) {
+        if (matrix[stoneX - 1][stoneY] == matrix[stoneX][stoneY]) {
+            if (matrix[stoneX - 2][stoneY] == matrix[stoneX][stoneY]) {
+                if (matrix[stoneX - 3][stoneY] == matrix[stoneX][stoneY]) {
+                    if (matrix[stoneX - 4][stoneY] == matrix[stoneX][stoneY]) {
+                        return 1;
+                    } else {
+                        if (matrix[stoneX + 1][stoneY] != matrix[stoneX][stoneY]) {
+                            return 0;
+                        }
+                    }
+                } else {
+                    for (var w = 0; w < 2; w++) {
+                        if (matrix[stoneX + w + 1][stoneY] != matrix[stoneX][stoneY]) {
+                            return 0;
+                        }
+                    }
+                }
+            } else {
+                for (var w = 0; w < 3; w++) {
+                    if (matrix[stoneX + w + 1][stoneY] != matrix[stoneX][stoneY]) {
+                        return 0;
+                    }
+                }
+            }
+        } else {
+            for (var w = 0; w < 4; w++) {
+                if (matrix[stoneX + w + 1][stoneY] != matrix[stoneX][stoneY]) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    };
+
+    /*
+     * 判断胜利条件
+     * check90 为纵向5子连珠
+     */
+    var check90 = function (stoneX, stoneY) {
+        if (matrix[stoneX][stoneY - 1] == matrix[stoneX][stoneY]) {
+            if (matrix[stoneX][stoneY - 2] == matrix[stoneX][stoneY]) {
+                if (matrix[stoneX][stoneY - 3] == matrix[stoneX][stoneY]) {
+                    if (matrix[stoneX][stoneY - 4] == matrix[stoneX][stoneY]) {
+                        return 1;
+                    } else {
+                        if (matrix[stoneX][stoneY + 1] != matrix[stoneX][stoneY]) {
+                            return 0;
+                        }
+                    }
+                } else {
+                    for (var w = 0; w < 2; w++) {
+                        if (matrix[stoneX][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                            return 0;
+                        }
+                    }
+                }
+            } else {
+                for (var w = 0; w < 3; w++) {
+                    if (matrix[stoneX][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                        return 0;
+                    }
+                }
+            }
+        } else {
+            for (var w = 0; w < 4; w++) {
+                if (matrix[stoneX][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    };
+
+    /*
+     * 判断胜利条件
+     * check45 为纵向右下斜角5子连珠
+     */
+    var check45 = function (stoneX, stoneY) {
+        if (matrix[stoneX - 1][stoneY - 1] == matrix[stoneX][stoneY]) {
+            if (matrix[stoneX - 2][stoneY - 2] == matrix[stoneX][stoneY]) {
+                if (matrix[stoneX - 3][stoneY - 3] == matrix[stoneX][stoneY]) {
+                    if (matrix[stoneX - 4][stoneY - 4] == matrix[stoneX][stoneY]) {
+                        return 1;
+                    } else {
+                        if (matrix[stoneX + 1][stoneY + 1] != matrix[stoneX][stoneY]) {
+                            return 0;
+                        }
+                    }
+                } else {
+                    for (var w = 0; w < 2; w++) {
+                        if (matrix[stoneX + w + 1][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                            return 0;
+                        }
+                    }
+                }
+            } else {
+                for (var w = 0; w < 3; w++) {
+                    if (matrix[stoneX + w + 1][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                        return 0;
+                    }
+                }
+            }
+        } else {
+            for (var w = 0; w < 4; w++) {
+                if (matrix[stoneX + w + 1][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    };
+
+    /*
+     * 判断胜利条件
+     * check135 为纵向左下斜角5子连珠
+     */
+    var check135 = function (stoneX, stoneY) {
+        if (matrix[stoneX + 1][stoneY - 1] == matrix[stoneX][stoneY]) {
+            if (matrix[stoneX + 2][stoneY - 2] == matrix[stoneX][stoneY]) {
+                if (matrix[stoneX + 3][stoneY - 3] == matrix[stoneX][stoneY]) {
+                    if (matrix[stoneX + 4][stoneY - 4] == matrix[stoneX][stoneY]) {
+                        return 1;
+                    } else {
+                        if (matrix[stoneX - 1][stoneY + 1] != matrix[stoneX][stoneY]) {
+                            return 0;
+                        }
+                    }
+                } else {
+                    for (var w = 0; w < 2; w++) {
+                        if (matrix[stoneX - w - 1][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                            return 0;
+                        }
+                    }
+                }
+            } else {
+                for (var w = 0; w < 3; w++) {
+                    if (matrix[stoneX - w - 1][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                        return 0;
+                    }
+                }
+            }
+        } else {
+            for (var w = 0; w < 4; w++) {
+                if (matrix[stoneX - w - 1][stoneY + w + 1] != matrix[stoneX][stoneY]) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
+</script>
+</html>

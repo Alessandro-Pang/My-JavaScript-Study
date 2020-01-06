@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		#img1{
+			position: absolute;
+			height: 50px;
+			width:70px;
+		}
+	</style>
+</head>
+<body>
+	<img id= "img1" src="background/bj1.jpg" >
+</body>
+	<script type="text/javascript">
+		
+		document.onmousemove = function(e){
+			my$('img1').style.left = e.clientX + 'px';
+			my$('img1').style.top = e.clientY + 'px';
+		}
+	</script>
+</html>

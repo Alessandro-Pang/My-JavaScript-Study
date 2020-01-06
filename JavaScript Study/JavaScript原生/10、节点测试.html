@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<div id="dv">
+		<ul id="uu">
+			<li>哈哈哈</li>
+			<li>噜噜噜</li>
+			<li id="li3">嘻嘻嘻</li>
+			<li>噗噗噗</li>
+			<li>唧唧唧</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	var ulObj = document.getElementById("uu");
+	var li3Obj = document.getElementById("li3");
+	//查找父级节点
+	console.log(ulObj.parentNode);
+	//查找父级元素
+	console.log(ulObj.parentElement);
+
+	//查找子级节点
+	console.log(ulObj.childNodes);
+	//查找子级元素
+	console.log('查找子元素',ulObj.children);
+
+	//查找第一个子节点
+	console.log("第一个子节点：",ulObj.firstChild);
+	//查找第一个子元素
+	console.log("第一个子元素：",ulObj.firstElementChild);
+
+	//查找最后一个子节点
+	console.log("最后一个子节点：",ulObj.lastChild);
+	//查找最后一个子元素
+	console.log("最后一个子元素:",ulObj.lastElementChild);
+
+	//查找上一个兄弟节点
+	console.log("li3 上一个兄弟节点：", li3Obj.previousSibling);
+	//查找上一个兄弟元素
+	console.log("li3 上一个兄弟元素：", li3Obj.previousElementSibling);
+
+	console.log("li3 上一个兄弟节点类型：", li3Obj.previousSibling.nodeType);
+
+	console.log("li3 上一个兄弟元素类型：",li3Obj.previousElementSibling.nodeType)
+
+	//查找下一个兄弟节点
+	console.log("li3 下一个兄弟节点：", li3Obj.nextSibling);
+	//查找下一个兄弟元素
+	console.log("li3 下一个兄弟元素：", li3Obj.nextElementSibling)
+
+</script>
+<body>
+	<button id="btn">点击选中P标签</button>
+	<div id="dv2">
+		<span>12345span</span>
+		<p>56789p</p>
+		<span>121212span</span>
+		<p>34343434p</p>
+		<span>我是span</span>
+		<a href="">我是a标签</a>
+		<p>ppppppp</p>
+	</div>
+</body>
+<script type="text/javascript" src = "./common.js"></script>
+<script type="text/javascript">
+	
+	//nodeType   类型是 1 -->标签  ；类型 2 -->属性   ；类型 3 -->文本
+	//通过节点获取p标签,通过点击事件改变p标签背景颜色
+	my$("btn").onclick = function () {
+		var nodes = my$("dv2").childNodes;
+		for (var i = 0; i < nodes.length ;i++) {
+			if(nodes[i].nodeType == 1 && nodes[i].nodeName=="P"){
+				nodes[i].style.backgroundColor = "red";
+				console.log(nodes[i].nodeType)
+			}
+		}
+	}
+
+</script>
+<body>
+	<button id="btn1">隔行变色</button>
+	<div id="dv3">
+			<li>列表1</li>
+			<li>列表2</li>
+			<li>列表3</li>
+			<li>列表4</li>
+			<li>列表5</li>
+			<li>列表6</li>
+			<li>列表7</li>
+			<li>列表8</li>
+			<li>列表9</li>
+
+	</div>
+</body>
+<script type="text/javascript">
+	my$("btn1").onclick = function(){
+		var dvLi = my$("dv3").getElementsByTagName("li");
+		for(var i = 0 ; i < dvLi.length ;i++){
+			if (i%2 == 1) {
+				dvLi[i].style.backgroundColor = "red";
+			}else{
+				dvLi[i].style.backgroundColor="green";
+			}
+		}
+	}
+</script>
+<body>
+	<button id="btn2">隔行变色</button>
+	<div id="dv4">
+		<ol id = "ol1">
+			<li>列表1</li>
+			<li>列表2</li>
+			<li>列表3</li>
+			<li>列表4</li>
+			<li>列表5</li>
+			<li>列表6</li>
+			<li>列表7</li>
+			<li>列表8</li>
+			<li>列表9</li>
+		</ol>
+		<a href="">a1</a>
+		<a href="">a2</a>
+		<a href="">a3</a>
+		<a href="">a4</a>
+		<a href="">a5</a>
+		<span>dididi</span>
+	</div>
+</body> 
+<script type="text/javascript">
+	my$("btn2").onclick = function(){
+		var list = my$("ol1").childNodes;
+		var count = 1;		//因为节点中不仅仅包括标签，还包括文本，所以不能直接使用i的值
+		for (var i = 0 ; i < list.length ; i++) {
+			if (list[i].nodeName == "LI" && list[i].nodeType==1) {
+				count ++ ;
+				list[i].style.backgroundColor = count%2==0 ?"red":"green";
+			}
+		}
+	}
+	console.log(getFirstElementChild(my$("dv4")))
+	console.log(getLastElementChild(my$("dv4")))
+</script>
+</html>

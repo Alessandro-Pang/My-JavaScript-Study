@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="password" id="passw" placeholder="请输入密码">
+</body>
+
+<script>
+
+    let str = '我是王小二12341';
+
+    //JS中正则表达式用/../引起来
+    let reg = new RegExp(/^\W{5}\d{5}$/);
+    let flag = reg.test(str);
+    console.log(flag);
+
+    let reg2 = new RegExp(/[^a-zA-Z0-9_]{5}[0-9]{5}/);
+    let flag2 = reg2.test(str);
+    console.log(flag2);
+
+    let pass = document.getElementById('passw');
+
+    pass.onkeydown = function () {
+        let passValue = pass.value;
+
+        let regPass = new RegExp(/([0-9]{0,10})|([a-z]{0,10})|([A-Z]{0,10})/);
+        let regPass2 = new RegExp(/([A-Z]|[a-z]{0,10})|([A-Z0-9]{0,10})|([0-9a-z]{0,10})/);
+        let regPass3 = new RegExp(/[A-Z]*[a-z]*[0-9]*/);
+
+        let p1 = regPass.test(passValue);
+        let p2 = regPass2.test(passValue);
+        let p3 = regPass3.test(passValue);
+        console.log(p1,p2,p3);
+        if (p1 && !p2 && !p3) {
+            console.log('超弱的密码')
+        } else if (p1 && p2 && !p3) {
+            console.lo2('密码强度还行')
+        } else if (p1 && p2 && p3) {
+            console.log('可以了，密码够强了')
+        }
+    }
+//escape('') -->中文转义unicode
+    //unescape('') -->unicode 转义中文
+</script>
+</html>

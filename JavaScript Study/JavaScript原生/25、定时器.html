@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+	<input type="button" name="" value="停止" id="btn1">
+</body>
+<script type="text/javascript">
+	
+	//setInterval()设置定时器
+	//参数一：触发函数
+	//参数二：定时触发时间
+	//1000 == 1秒
+	//返回值是定时器的ID
+	var timeId = window.setInterval(function(){
+		alert("hello");
+	},2000);
+
+	//clearInterval 清理/停止定时器
+	//参数：需要停止的定时器的ID
+	my$("btn1").onclick = function(){
+		window.clearInterval(timeId);
+	}
+</script>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vue.js"></script>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+        
+        table {
+            width: 100%;
+        }
+        
+        th {
+            height: 50px;
+        }
+        
+        th,
+        td {
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 监听属性watch,我们可以通过watch来相应数据的变化 -->
+        <p style="font-size:25px">计数器：{{counter}}</p>
+        <button @click="counter++" style="font-size:25px">点我</button>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                counter: 1
+            }
+        })
+
+        vm.$watch('counter', function(nova, oval) {
+            console.log('计数器变化：' + oval + " 变为：" + nova + "!")
+        })
+    </script>
+</body>
+
+<body>
+    <!-- 计算千米与米之间的换算 -->
+    <div id="app2">
+        <div id="computed_props">
+            千米：<input type="text" v-model="kilometers">
+            <br>米 ：<input type="text" v-model="meters">
+        </div>
+        <p id="info"></p>
+    </div>
+
+    <script>
+        let vm2 = new Vue({
+            el: "#app2",
+            data: {
+                kilometers: 0,
+                meters: 0
+            },
+            methods: {},
+            computed: {},
+            watch: {
+                kilometers: function(val) {
+                    this.kilometers = val,
+                        this.meters = val * 1000
+                },
+                meters: function(val) {
+                    this.kilometers = val / 1000,
+                        this.meters = val
+                }
+            }
+        })
+
+        //watch是一个实例方法
+        vm2.$watch('kilometers', function(newValue, oldValue) {
+            // 这个回调将在 vm.kilometers 改变后调用
+            document.getElementById("info").innerHTML =
+                "修改前值为: " + oldValue + "，修改后值为: " + newValue;
+        })
+    </script>
+</body>
+
+<body>
+    <!-- 实现简单的购物车 -->
+    <br><br><br>
+    <div id="app3">
+        <table>
+            <tr>
+                <th>序号</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>购买数量</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="iphone in Ip_Json">
+                <td>{{ iphone.id }}</td>
+                <td>{{ iphone.name }}</td>
+                <td>{{ iphone.price }}</td>
+                <td>
+                    <button v-bind:disabled="iphone.count === 0" v-on:click="iphone.count-=1">-</button> {{ iphone.count }}
+                    <button v-on:click="iphone.count+=1">+</button>
+                </td>
+                <td>
+                    <button v-on:click="iphone.count=0">移除</button>
+                </td>
+            </tr>
+        </table>
+        总价：${{totalPrice()}}
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app3',
+            data: {
+                Ip_Json: [{
+                    id: 1,
+                    name: 'iphone 8',
+                    price: 5099,
+                    count: 1
+                }, {
+                    id: 2,
+                    name: 'iphone xs',
+                    price: 8699,
+                    count: 1
+                }, {
+                    id: 3,
+                    name: 'iphone xr',
+                    price: 6499,
+                    count: 1
+                }]
+
+            },
+            methods: {
+                totalPrice: function() {
+                    var totalP = 0;
+                    for (var i = 0, len = this.Ip_Json.length; i < len; i++) {
+                        totalP += this.Ip_Json[i].price * this.Ip_Json[i].count;
+                    }
+                    return totalP;
+                }
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>

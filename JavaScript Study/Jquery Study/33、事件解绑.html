@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+            background: aqua;
+        }
+        
+        p {
+            width: 100px;
+            height: 100px;
+            border: 1px solid springgreen;
+            background: darkorange
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="加入事件" id="btn1">
+    <input type="button" value="解绑事件" id="btn2">
+    <input type="button" value="解绑所有事件" id="btn3">
+    <input type="button" value="解绑多个事件" id="btn4">
+    <div id="dv"></div>
+    <input type="button" value="undelegate" id="btn5">
+    <div id="dv1">
+        <p></p>
+    </div>
+    <script>
+        $('#btn1').click(function() {
+            $('#dv').bind({
+                'click': function() {
+                    alert('trigger!')
+                },
+                'mouseenter': function() {
+                    $(this).css('background', 'red')
+                },
+                'mouseleave': function() {
+                    $(this).css('background', 'green')
+                }
+            }).click(function() {
+                alert('这是第二个click事件')
+            })
+        });
+
+        //unbind 会解除该元素 所有的指定事件
+        $('#btn2').click(function() {
+            $('#dv').unbind('click')
+        })
+
+        //当unbind没有指定事件时，则会解绑该元素的所有时事件
+        $('#btn3').click(function() {
+            $('#dv').unbind()
+        })
+
+        //事件为多个时，使用空格分隔
+        $('#btn4').click(function() {
+            $('#dv').unbind('mouseenter mouseleave')
+        })
+
+        $(function() {
+            $('#dv1').delegate('p', 'click', function() {
+                console.log('p点击事件')
+            })
+            $('#dv1').delegate('p', 'mouseenter', function() {
+                console.log('p进入事件')
+            })
+            $('#dv1').delegate('p', 'mouseleave', function() {
+                console.log('p移出事件')
+            })
+
+            //undelegate 用法和 bind移除事件一样
+            $('#btn5').click(function() {
+                $('#dv1').undelegate('p', 'mouseenter mouseleave')
+            })
+        })
+    </script>
+</body>
+
+</html>

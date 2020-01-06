@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <style>
+        .active {
+            border: 1px solid red;
+            background: #a0ffff;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .text-danger {
+            background: brown;
+        }
+        
+        .foo {
+            color: rgb(238, 55, 238)
+        }
+        
+        .bar {
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="app">
+        <my-component class='active'></my-component>
+    </div>
+
+    <div id="app2">
+        <div v-bind:style="{color:'red',fontFamily:'全新硬笔行书简',fontSize:fontSize+'px'}">
+            绑定style样式属性,对象格式
+        </div>
+    </div>
+
+    <div id="app3">
+        <div v-bind:style='styles'>
+            直接绑定Style对象
+        </div>
+    </div>
+
+    <div id="app4">
+        <div v-bind:style='[styles1,styles2]'>
+            绑定多个Style对象
+        </div>
+    </div>
+
+    <!-- 当 v-bind:style 使用需要添加浏览器引擎前缀的 CSS 属性时，
+        如 transform，Vue.js 会自动侦测并添加相应的前缀。 -->
+
+    <div id="app5">
+        <div v-bind:style='{backgroundColor:"#ff00ff",width:"100px",height:"100px"}'></div>
+    </div>
+
+    <div id="app6">
+        从 2.3.0 起你可以为 style 绑定中的属性提供一个包含多个值的数组，常用于提供多个带前缀的值，例如：
+        <div :style="[{ display: ['-webkit-box', '-ms-flexbox', 'flex'] },styles1,styles2]">
+            这样写只会渲染数组中最后一个被浏览器支持的值。在本例中，如果浏览器支持不带浏览器前缀的 flexbox，那么就只会渲染 display: flex。
+
+        </div>
+    </div>
+</body>
+<script>
+    //当在一个自定义组件上使用 class 属性时，这些类将被添加到该组件的根元素上面。
+    //这个元素上已经存在的类不会被覆盖。
+    Vue.component('my-component', {
+        template: "<p class='foo bar'>Hi</p>"
+    })
+
+    new Vue({
+        el: "#app",
+    })
+
+    new Vue({
+        el: "#app2",
+        data: {
+            fontSize: 30,
+        }
+    })
+
+    new Vue({
+        el: "#app3",
+        data: {
+            styles: {
+                fontFamily: "全新硬笔行书简",
+                fontSize: "30px",
+                color: "green"
+            }
+        }
+    })
+
+    new Vue({
+        el: "#app4",
+        data: {
+            styles1: {
+                fontFamily: "全新硬笔行书简",
+                fontSize: "30px",
+                color: "green"
+            },
+            styles2: {
+                width: '150px',
+                height: "100px",
+                border: "1px solid red"
+            }
+        }
+    })
+
+    new Vue({
+        el: "#app5",
+    })
+
+    new Vue({
+        el: app6,
+        data: {
+            styles1: {
+                fontFamily: "全新硬笔行书简",
+                fontSize: "20px",
+                color: "green"
+            },
+            styles2: {
+                width: '150px',
+                height: "200px",
+                border: "1px solid red"
+            }
+        }
+    })
+</script>
+
+</html>

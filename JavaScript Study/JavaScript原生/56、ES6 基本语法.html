@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //箭头函数
+    let a = (a, b) => {
+        return a * b;
+    };
+
+    //只有一个参数可以省略括号，
+    //只有返回值可以省略花括号
+    let b = c => c * c;
+
+    console.log(a(2, 3));
+    console.log(b(5));
+
+    let test = () => {
+        let a = 10;
+        let b = 20;
+        const c = 40;
+        console.log(a * b * c)
+    }
+    test()
+
+    //省略参数 ...
+    //参数收集，数组展开                      
+    function canshu(a, b, ...agms) {
+        console.log(a, b, ...agms)
+    }
+
+    canshu(10, 20, 1, 2, 3, 4)
+
+    //数组展开  
+    let n = [1, 2, 3, 4, 5, 6, 7, 8]
+    console.log(...n)
+
+    //解构赋值
+    let [p1, p2, p3] = [10, 'aaaa', '30']
+    console.log(p1, p2, p3)
+
+    //对于json解构，必须变量必须是Key值
+    let {
+        s1,
+        s2,
+        s3
+    } = {
+        s1: 10,
+        s2: 20,
+        s3: 30
+    }
+    console.log(s1, s2, s3)
+
+    //混合赋值
+    let [q1, q2, {
+            b1,
+            b2
+        },
+        [q3, q4, q5]
+    ] = [102, 'haha', {
+            b1: 20,
+            b2: 30
+        },
+        [20, 30, 60]
+    ]
+    console.log(q1, q2, b1, b2, q3, q4)
+
+    let [t1, t2, t3, t4] = [102, 'haha', {
+            b1: 20,
+            bt: 30
+        },
+        [20, 30, 60]
+    ]
+    console.log(t1, t2, t3, t4)
+</script>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        #dv {
+            width: 200px;
+            height: 100px;
+            border: 1px solid springgreen
+        }
+        
+        p {
+            display: block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid aqua;
+            background: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dv">
+
+        <p></p>
+    </div>
+    <script>
+        //delegate -->代表 ，委派 ， 任命 ， 授权
+
+        //为父级元素注册事件 （代替子级元素绑定事件）
+        $('#dv').delegate('p', 'click', function() {
+            $(this).css('background', 'burlywood')
+        })
+
+        /*
+           event : click ,mouseenter ,mouseleave ,scroll ,mousemove ,mousedown ,focus ,bulr
+
+           1.  $(ele).event(fn); 
+           2.  $(ele).bind({'event':fn,'event',fn})
+           3.  $(ele).delegate('sub ele','event',fn)
+        */
+    </script>
+</body>
+
+</html>

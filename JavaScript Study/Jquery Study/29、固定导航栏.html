@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="./background/head.png" alt="">
+        <nav>
+            <img src="./background/cloud.jpg" alt="" style="width:100%;height: 200px">
+        </nav>
+    </header>
+    <article>
+        <img src="./background/bj1.jpg" alt="">
+    </article>
+
+    <script>
+        $(window).scroll(function() {
+            let domScroll = $(document).scrollTop();
+            let headerHeight = $('header img').height();
+            console.log(domScroll, headerHeight)
+            if (domScroll >= headerHeight) {
+                $('nav img').css({
+                    top: 0,
+                    position: 'fixed'
+                });
+                //处理 nav 元素改为fixed 直接跳动上去的BUG
+                $('article img').css('margin-top', $('nav img').height())
+            } else {
+                $('nav img').css({
+                    position: "static",
+                });
+                $('article img').css('margin-top', 0)
+            }
+        })
+    </script>
+</body>
+
+</html>

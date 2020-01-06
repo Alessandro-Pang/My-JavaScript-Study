@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <input type="button" name="" id="btn1" value="点击清空.html()">
+    <input type="button" name="" id="btn2" value="点击清空.empty()">
+    <input type="button" name="" id="btn3" value="点击清空.remove()">
+    <input type="button" name="" id="btns" value="恢复">
+    <div style="width:200px;height:200px;border:1px solid red" id="dv">
+        <p>yyyyyy</p>
+        <p>tttttt</p>
+        <p>ffffff</p>
+    </div>
+</body>
+<script>
+    $(function() {
+        $('#btn1').click(function() {
+            //不推荐：会造成内存泄露
+            $('#dv').html("");
+        })
+
+        $('#btn2').click(() => {
+            $('#dv').empty();
+        })
+
+        $('#btn3').click(() => {
+            $('#dv').remove();
+        })
+
+        $('#btns').click(() => {
+            $("#dv")[0] ? true : $('body').append($('<div style="width:200px;height:200px;border:1px solid red" id="dv"></div>'));
+            $("#dv").append($('<p>yyyyyy</p><p>tttttt</p><p>ffffff</p>'))
+        })
+
+    })
+</script>
+
+</html>

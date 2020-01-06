@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        .cls {
+            width: 300px;
+            height: 200px;
+            text-align: center;
+            color: red;
+            background: springgreen;
+            font-size: 30px;
+            font-family: 全新硬笔行书简;
+        }
+        
+        .cls2 {
+            color: slateblue;
+            background: seagreen;
+            border: 2px solid rebeccapurple;
+            border-radius: 2px;
+        }
+        
+        .open {
+            padding: 0;
+            margin: 0
+        }
+        
+        #dvs {
+            width: 1000px;
+            height: 500px;
+        }
+        
+        .dvs {
+            background: chartreuse;
+            border: 5px solid aqua;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <button id="btn">Click Me</button>
+        <div></div>
+    </div>
+
+    <div id="demo2">
+        <button id="btn1">添加类样式</button>
+        <button id="btn2">移除类样式</button>
+        <div id="dv"></div>
+    </div>
+
+    <div id="demo3">
+        <button class="click">点击更换背景颜色</button>
+    </div>
+
+    <div id="demo4">
+        <button>toggleClass</button>
+        <div id="dvs"></div>
+    </div>
+    <script>
+        function randomInt(from, to) {
+            return parseInt(Math.random() * (to - from + 1) + from);
+        }
+
+        $(function() {
+            $("#btn").click(function() {
+                $("#demo>div").text("这是一个可以点击的div标签！").css({
+                    color: "green",
+                    fontFamily: "全新硬笔行书简",
+                    fontSize: "30px",
+                    fontWeight: "blod",
+                    background: "#55fafa"
+                }).mouseenter(function() {
+                    $(this).css({
+                        color: "blue",
+                        background: "#fafa55"
+                    })
+                }).mouseleave(function() {
+                    $(this).css({
+                        color: "green",
+                        background: "#fa55fa"
+                    })
+                }).click(function() {
+                    var colorR = randomInt(0, 255);
+                    var colorG = randomInt(0, 255);
+                    var colorB = randomInt(0, 255);
+                    $(this).text("我被点击了！！！").css("color", "rgb(" + colorR + "," + colorG + "," + colorB + ")")
+
+                    let timeId = setTimeout(() => {
+                        $(this).text("五秒过去了！！").css("color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
+                        clearTimeout(timeId);
+                    }, 5000)
+                })
+            })
+        });
+
+        $(function() {
+            $("#btn1").click(function() {
+                //addClass 添加类样式
+                $("#dv").addClass("cls cls2");
+            });
+            $("#btn2").click(function() {
+                //removeClass 移除类样式
+                $("#dv").removeClass("cls2")
+            })
+        })
+
+        $(function() {
+            //选择器中使用 , 逗号 有或者的意思
+            $("#btn1,#btn2").click(function() {
+                let hasCls = $("#dv").hasClass("cls2");
+                hasCls ? $("#dv").text("应用了cls2类样式") : $("#dv").text("没有应用cls2类样式")
+            })
+
+        })
+
+        $(function() {
+            $("#demo3>.click").click(function() {
+                let colorR = randomInt(0, 255),
+                    colorG = randomInt(0, 255),
+                    colorB = randomInt(0, 255)
+                let isOpen = $("body").hasClass('open');
+                isOpen ? $("body").removeClass("open").css("background", "") : $("body").addClass('open').css("background", "rgb(" + colorR + "," + colorG + "," + colorB + ")")
+            })
+        })
+
+        $(function() {
+            $("#demo4>button").click(function() {
+                //toggleClass 切换类样式
+                //判断类样式是否存在，存在则移除，不存在则添加
+                $("#dvs").toggleClass("open dvs");
+
+            })
+        })
+    </script>
+</body>
+
+</html>

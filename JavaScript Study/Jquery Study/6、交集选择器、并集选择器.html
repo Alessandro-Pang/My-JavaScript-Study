@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <button>Click Me</button>
+    <span>
+        <p class="cls"></p>
+        <p class="cls"></p>
+        <p class="cls"></p>
+        <p class="cls"></p>
+        <p class="cls"></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <div class="cls"></div>
+        <div class="cls"></div>
+        <div class="cls"></div>
+        <div class="cls"></div>
+        <div class="cls"></div>
+    </span>
+    <input type="button" value="click me" id="btn1">
+    <input type="button" value="click me" id="btn2">
+    <div>
+        <p>????????</p>
+        <p>????????</p>
+        <p>???????</p>
+        <span>div div div</span><br>
+        <span>div div div</span><br>
+        <span>
+            <p>???????</p>
+            <p>???????</p>
+            <p>???????</p>
+        </span>
+    </div>
+</body>
+<script>
+    $(() => {
+        //并集选择器，逗号分隔
+        $('span p,span div').text('不是P标签，就是div标签');
+
+        $('p').css({
+            border: "1px solid red",
+            background: "#99ffff"
+        })
+
+        $('.cls').css({
+            border: "1px solid blue",
+            background: "#ffff99"
+        })
+
+        //交集选择器 中间不能有空格
+        $('button').click(() => {
+            $('p.cls').css({
+                border: "2px solid green",
+                background: "#ff99ff"
+            })
+        })
+
+        //层级选择器--后代选择器
+        //只影响当前层
+        $('#btn1').click(() => {
+            $('div>p').css({
+                border: "3px solid #009999",
+                background: "#abab88"
+            })
+        })
+
+        //层级选择器 空格分隔
+        //影响至所有子元素
+        $('#btn2').click(() => {
+            $('div p').css({
+                border: "3px solid #009999",
+                background: "#abab88"
+            })
+        })
+
+        // ~ 获取父级元素后面的兄弟元素
+        $('span~input').css({
+            border: "1px solid red",
+            background: "#336699"
+        })
+
+        // + 获取父级元素第一个兄弟元素
+        $('p+span').css({
+            display: "block",
+            border: "1px solid red",
+            background: "#336699"
+        })
+    })
+</script>
+
+</html>

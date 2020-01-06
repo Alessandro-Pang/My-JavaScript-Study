@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    'use strict';
+
+    function Student(a, b) {
+        this.a = a;
+        this.b = b;
+        this.s = '========='
+        console.log(this.a, this.s, this.b, this.s, this)
+    }
+
+    let st = new Student(10, 20);
+
+    //>>> 非严格模式下，this指向 window
+    //>>> 严格模式下 this指向 undefined
+    function fn2(a, b) {
+        console.log(a, b, this)
+        return 'return'
+    }
+    fn2(10, '========')
+
+    //apply 改变this指向，
+    //第一个参数是this的指向参数，第二个参数十个数组，是函数参数
+    //在严格模式下，指向NULL，非严格模式下，指向window
+    let applyTest = fn2.apply(null, [10, 20])
+    console.log(applyTest)
+
+    //call 改变this指向，
+    //第一个参数是this的指向参数，后面就参数就是函数参数
+    //在严格模式下，指向NULL，非严格模式下，指向window
+    let callTest = fn2.call(null, 10, 50)
+    console.log(callTest)
+
+    let obj = {
+        sex: 'boy',
+        age: "20"
+    }
+
+    //这里的 this指向了obj
+    let applyt2 = fn2.apply(obj, [109, 222]);
+    console.log(applyt2)
+
+    //这里的 this指向了obj
+    let callt2 = fn2.call(obj, 111, 222);
+    console.log(callt2)
+
+    //--------------------------------------------------------------------------------------------------\
+
+    function Person(param) {
+        this.sex = param;
+    }
+    Person.prototype.sayHi = function(x, y) {
+        console.log((x + y) + '----------' + this.sex)
+    }
+
+    function Son(param) {
+        this.sex = param;
+    }
+
+    let ps = new Person('boy');
+    let son = new Son('girl');
+
+    //正常调用，this指向Person原型的实例对象
+    //ps.sayHi，sex === boy
+    ps.sayHi(1111, 2222)
+
+    //通过call,apply改变this的指向
+    //this.sex 指向 Son的sex
+    ps.sayHi.call(son, 100, 200)
+    ps.sayHi.apply(son, [100, 200])
+</script>
+
+</html>

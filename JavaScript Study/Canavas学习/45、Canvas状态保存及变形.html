@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../common.js"></script>
+    <style type="text/css">
+        canvas {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<!-- 状态保存和恢复 -->
+<canvas id="canvas" width="300" height="300"></canvas>
+
+<!-- translate移动 -->
+<canvas id="canvas2" width="300" height="300"></canvas>
+
+<!-- rotate旋转 -->
+<canvas id="canvas3" width="300" height="300"></canvas>
+
+<!-- transform变形矩阵 -->
+<canvas id="canvas4" width="300" height="300"></canvas>
+
+<!-- scale -->
+<canvas id="canvas5" width="300" height="300"></canvas>
+
+</body>
+<script type="text/javascript">
+    //saving and restoring state 是绘制复杂图形时必不可少的操作
+    //save()方法是用来保存canvas状态
+    //restore()方法是用来恢复canvas状态
+    //canvas状态就是当前画面应用的所有样式和变形的一个快照
+
+    //关于save()，canvas状态存储在栈中，每当save()方法被调用，当前状态就被推送到栈中保存
+    //一个canvas绘画状态包括：
+    //  1、当前应用的变形(即移动，旋转和缩放)
+    //  2、stroke，fillStyle,globalAlpha,lineWidth,lineCap,lienJoin，miterLimit
+    //     shadounOffsetX,shadowOffsetY,shadowBlur,shadowColor,globalCompositeOperation 的值
+    //  3、当前的裁切路径(clipping path)
+    //可任意调用多次save()方法(类似数组的push())
+    //save()只保存状态，不会保存图形镜像
+
+    //关于restore()，每调用一次restore方法，
+    //上一个保存的状态就会从栈中弹出，所有设定都恢复(类似数组的pop())
+    var ctx = my$("canvas").getContext('2d');
+
+    function draw() {
+        if (!ctx) return;
+        ctx.fillRect(0, 0, 150, 150);//使用默认设置绘制一个矩形
+        ctx.save();//保存默认状态
+        ctx.fillStyle = "red";//在原有配置基础上对样色做改变
+        ctx.fillRect(15, 15, 120, 120);//使用新的设置绘制一个矩形
+        ctx.save();//保存当前状态
+        ctx.fillStyle = '#fff';//再次改变颜色设置
+        ctx.restore();//重新加载之前的颜色状态
+        ctx.fillRect(45, 45, 60, 60);//使用上一次的配置绘制一个矩形
+        ctx.restore();//加载默认颜色配置
+        ctx.fillRect(60, 60, 30, 30);//使用加载的配置绘制一个矩形
+    }
+
+    draw()
+
+    //translate变形
+    var ctx2 = my$("canvas2").getContext('2d');
+
+    function draw2() {
+        //translate(x,y);
+        //用来移动canvas的原点到指定的位置
+        //translate方法接受两个参数，x是左右偏移量，y是上下偏移量
+
+        //在做变形前保存状态是一个良好的习惯，
+        //大多数情况下，调用restore方法闭手动恢复原先的状态要简单的多，
+        //如果你是在一个循环中做位移但没有保存和恢复canvas的状态
+        //很可能到最后会发现怎么有些东西不见了，
+        //因为那是因为它很可能已经超出Canavs范围以外了
+
+        //注意：translate移动的是canvas的坐标原点(坐标变换)
+        //     translate执行完以后，当前坐标便是 (0,0)
+        let ctx = ctx2;
+        if (!ctx) return;
+        ctx.save();
+        ctx.translate(100, 100);
+        ctx.strokeRect(0, 0, 100, 100);
+        ctx.restore();
+        ctx.translate(200, 200);
+        ctx.fillRect(0, 0, 100, 100)
+    }
+
+    draw2();
+
+    //rotate(angle)
+    var ctx3 = my$("canvas3").getContext('2d');
+
+    function draw3() {
+        //rotate()旋转坐标轴
+        //这个方法只接受一个参数：旋转的角度（angle）
+        //他是顺时针方向的，以弧度为单位的值，旋转的中心是坐标原点
+        let ctx = ctx3;
+        if (!ctx) return;
+
+        ctx.fillStyle = "red";
+        ctx.save();
+
+        ctx.translate(100, 100);
+        ctx.rotate(Math.PI / 180 * 45);
+        ctx.fillStyle = "blue";
+        ctx.fillRect(0, 0, 100, 100);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(0, 0);
+        ctx.fillRect(0, 0, 50, 50);
+        ctx.restore()
+    }
+
+    draw3();
+
+    //transform(变形矩阵)
+    function draw4() {
+
+        //transform(a,b,c,d,e,f)
+
+        //a(m11):Horizontal scaling
+        //b(m12):Horizontal skewing
+        //c(m21):vertical skewing
+        //d(m22):vertical scaling
+        //e(dx):Horizontal moveing
+        //f(dy):vertical moveing
+
+        let ctx = my$('canvas4').getContext('2d');
+        if (!ctx) return;
+
+        ctx.transform(1, 1, 0, 1, 0, 0);
+        ctx.fillRect(0, 0, 100, 100)
+    }
+
+    draw4();
+
+    //scale图形缩放(缩小，放大)
+    function draw5() {
+        //scale(x,y)
+        //scale()缩放，执行后,再次绘制的图形会根据参数缩小或放大
+        let ctx = my$('canvas5').getContext('2d');
+        if (!ctx) return;
+        //绘制一个原型图
+        ctx.fillRect(0,0,100,100);
+        ctx.fillStyle = "red";
+        ctx.save();
+        //绘制一个对比图
+        ctx.translate(100,100);
+        ctx.fillRect(0,0,100,100);
+        //将图形缩放对比图大小的一半
+        ctx.scale(0.5,0.5);
+        ctx.restore();
+        //绘制缩放后的图型
+        ctx.translate(100,100);
+        ctx.fillStyle = 'pink';
+        ctx.fillRect(0,0,50,50);
+        //在上一个基础上再次缩放一半
+        ctx.scale(0.5,0.5);
+        ctx.fillStyle="blue";
+        //绘制缩放后的图形
+        ctx.fillRect(0,0,50,50)
+    }
+    draw5()
+</script>
+</html>

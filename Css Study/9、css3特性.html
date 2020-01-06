@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            border: 1px solid red;
+            background: yellowgreen;
+        }
+        
+        div[class*=t] {
+            display: inline-block;
+            margin-top: 40px;
+        }
+        
+        .t1 {
+            transform: rotate(30deg)
+        }
+        
+        .t2 {
+            transform: rotateX(50deg)
+        }
+        
+        .t3 {
+            transform: rotateY(30deg)
+        }
+        
+        .t4 {
+            transform: rotateZ(30deg)
+        }
+        
+        .t5 {
+            transform: rotateX(30deg);
+            transform: rotateY(30deg)
+        }
+        
+        .fenjie {
+            width: 100%;
+            height: 10vh;
+            background: none;
+            border: none;
+        }
+        
+        div[class*=p] {
+            margin: 5px;
+            display: inline-block;
+        }
+        
+        .p1 {
+            /* transition 过渡,是四种属性的缩写 */
+            /* transirion ：
+                transition-propertry  定义CSS属性,
+                transition-duration  定义动画时间,
+                transition-timing-function 定义过渡效果的时间曲线,
+                transition-delay 定义延迟时间*/
+            transition: width 2s;
+        }
+        
+        .p1:hover {
+            width: 300px;
+        }
+        
+        .p2 {
+            transition: height 2s, width 2s;
+        }
+        
+        .p2:hover {
+            width: 333px;
+            height: 333px;
+        }
+        
+        .p3 {
+            transition: width 1s, height 1s, transform 2s;
+        }
+        
+        .p3:hover {
+            width: 111px;
+            height: 111px;
+            transform: rotate(30deg)
+        }
+        
+        .p4 {
+            opacity: .6;
+            color: purple;
+            text-align: center;
+            transition: width 2s, height 2s, transform 2s, opacity 2s, color 2s, font-size 2s;
+        }
+        
+        .p4:hover {
+            opacity: 1;
+            width: 300px;
+            height: 200px;
+            color: teal;
+            transform: rotate(360deg);
+            font-size: 20px;
+        }
+        
+        .p5 {
+            /* transition-property:定义属性 */
+            transition-property: width;
+            /* transition-duration:定义过渡花费时间 */
+            transition-duration: 2s;
+            /* transition-timing-function:定义动画过渡时间曲线，默认ease */
+            transition-timing-function: linear;
+            /* transition-delay:定义动画延迟时间 */
+            transition-delay: 2s;
+        }
+        
+        .p5:hover {
+            width: 450px;
+        }
+        
+        .pBox {
+            width: 500px;
+            height: 500px;
+        }
+        
+        .pBox>div[class*=tp] {
+            height: 50px;
+            padding: 5px;
+            background: skyblue;
+        }
+        
+        .tp1 {
+            width: 300px;
+            transition-property: width;
+            transition-duration: 3s;
+            /* 快 -> 慢 -> 快 */
+            transition-timing-function: ease
+        }
+        
+        .tp2 {
+            width: 300px;
+            transition-property: width;
+            transition-duration: 3s;
+            /* 匀速 */
+            transition-timing-function: linear;
+        }
+        
+        .tp3 {
+            width: 300px;
+            transition-property: width;
+            transition-duration: 3s;
+            /* 渐快 */
+            transition-timing-function: ease-in;
+        }
+        
+        .tp4 {
+            width: 300px;
+            transition-property: width;
+            transition-duration: 3s;
+            /* 渐慢 */
+            transition-timing-function: ease-out;
+        }
+        
+        .tp5 {
+            width: 300px;
+            transition-property: width;
+            transition-duration: 3s;
+            /* 慢 -> 快 -> 慢 */
+            transition-timing-function: ease-in-out;
+        }
+        
+        .tp6 {
+            transition-property: width;
+            transition-duration: 3s;
+            /* 贝塞尔曲线 */
+            transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1)
+        }
+        /* 
+            linear 	规定以相同速度开始至结束的过渡效果（等于 cubic-bezier(0,0,1,1)）。
+            ease 	规定慢速开始，然后变快，然后慢速结束的过渡效果（cubic-bezier(0.25,0.1,0.25,1)）。
+            ease-in 	规定以慢速开始的过渡效果（等于 cubic-bezier(0.42,0,1,1)）。
+            ease-out 	规定以慢速结束的过渡效果（等于 cubic-bezier(0,0,0.58,1)）。
+            ease-in-out 	规定以慢速开始和结束的过渡效果（等于 cubic-bezier(0.42,0,0.58,1)）。
+            cubic-bezier(n,n,n,n) 	在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值。 
+        */
+        
+        .tp1:hover,
+        .tp2:hover,
+        .tp3:hover,
+        .tp4:hover,
+        .tp5:hover,
+        .tp6:hover {
+            width: 500px;
+        }
+        
+        .bezier-test {
+            transition-property: width, height, transform;
+            transition-duration: 2s;
+            transition-timing-function: cubic-bezier(1, 1, 0, 0)
+        }
+        
+        .bezier-test:hover {
+            width: 700px;
+            height: 300px;
+            transform: rotate(360deg)
+        }
+        
+        .scale {
+            /* scale()方法，该元素增加或减少的大小，取决于宽度（X轴）和高度（Y轴）的参数： */
+            transform: scale(2, 3)
+        }
+        
+        .scale2 {
+            background: peru;
+            /* scale 缩小： */
+            /* scale X,Y轴 取 0-1之间的小数 */
+            /* 当其中一个值为0时，则无法显示该元素 */
+            /* 当值等于1时，则显示原本的形状 */
+            /* 当值大于1时则放大元素 */
+            transform: scale(0.2, 0.3)
+        }
+        
+        .skew {
+            transform: skew(30deg, 30deg)
+        }
+        
+        .skew-animation {
+            background: darkorchid;
+            transition: transform;
+            transition-duration: 2s;
+        }
+        
+        .skew-animation:hover {
+            /* skew 角度最高90度，当成为90度时，会变成一条线 */
+            /* 
+                包含两个参数值，分别表示X轴和Y轴倾斜的角度，
+                如果第二个参数为空，则默认为0，参数为负表示向相反方向倾斜。 
+                skewX(<angle>); 表示只在X轴(水平方向)倾斜。 
+                skewY(<angle>); 表示只在Y轴(垂直方向)倾斜。     
+             */
+            transform: skewX(90deg)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="t1">哈哈哈</div>
+    <div class="t2">哈哈哈</div>
+    <div class="t3">哈哈哈</div>
+    <div class="t4">哈哈哈</div>
+    <div class="t5">哈哈哈</div>
+    <div class="fenjie"></div>
+    <!-- 多个过渡效果应以逗号分隔，不可多次声明transition-->
+    <!-- 多个transition,只会以最后一个为有效 -->
+    <div class="p1">鼠标放上来，触发过渡效果</div>
+    <div class="p2">鼠标放上来，触发过渡效果</div>
+    <div class="p3">鼠标放上来，触发过渡效果</div>
+    <div class="p4">鼠标放上来，触发过渡效果</div>
+    <div class="p5">鼠标放上来，触发过渡效果,动画会在2S后触发</div>
+    <div class="fenjie"></div>
+    <div class="pBox">
+        <div class="tp1">tp1</div>
+        <div class="tp2">tp2</div>
+        <div class="tp3">tp3</div>
+        <div class="tp4">tp4</div>
+        <div class="tp5">tp5</div>
+        <div class="tp6">tp6</div>
+    </div>
+    <div class="bezier-test">
+        贝塞尔曲线测试
+    </div>
+
+    <div class="scale">
+        scale 测试
+    </div>
+    <div class="scale2"></div>
+
+    <div class="fenjie"></div>
+    <div class="skew"></div>
+    <div class="skew-animation">skew animation</div>
+</body>
+
+</htm>

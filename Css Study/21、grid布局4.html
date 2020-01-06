@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 300px;
+            height: 300px;
+            border: 1px solid slateblue;
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            grid-template-rows: repeat(3, 30%);
+            /* =====================================================================================================
+                .container {
+                    justify-content: start | end | center | stretch | space-around | space-between | space-evenly;
+                    align-content:   start | end | center | stretch | space-around | space-between | space-evenly;  
+                }
+                start - 对齐容器的起始边框。
+                end   - 对齐容器的结束边框。
+                stretch - 项目大小没有指定时，拉伸占据整个网格容器。
+                space-around - 每个项目两侧的间隔相等。所以，项目之间的间隔比项目与容器边框的间隔大一倍。
+                space-between - 项目与项目的间隔相等，项目与容器边框之间没有间隔。
+                space-evenly - 项目与项目的间隔相等，项目与容器边框之间也是同样长度的间隔。
+            ========================================================================================================= */
+            justify-content: center;
+            align-content: center;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        #app>.item:nth-child(odd) {
+            background: slateblue;
+        }
+        
+        #app>.item:nth-child(even) {
+            background: springgreen;
+        }
+        
+        #app2 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid darkorange;
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            grid-template-rows: repeat(3, 30%);
+            /* =================================================================
+                justify-items
+                沿着 inline（行）轴线对齐网格项(grid items)
+                （相反的属性是 align-items 沿着 block（列）轴线对齐）。
+                此值适用于容器内的所有网格项。
+
+                值：
+
+                start：将网格项对齐到其单元格的左侧起始边缘（左侧对齐）
+                end：将网格项对齐到其单元格的右侧结束边缘（右侧对齐）
+                center：将网格项对齐到其单元格的水平中间位置（水平居中对齐）
+                stretch：填满单元格的宽度（默认值）
+            ================================================================= */
+            justify-content: center;
+            align-content: center;
+            justify-items: center;
+            align-items: center
+        }
+        
+        #app2>.item:nth-child(odd) {
+            background: slateblue;
+        }
+        
+        #app2>.item:nth-child(even) {
+            background: springgreen;
+        }
+        
+        #app,
+        #app2,
+        #app3,
+        #app4 {
+            float: left;
+            margin: 20px;
+        }
+        
+        #app3 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid darkmagenta;
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            grid-template-rows: repeat(3, 30%);
+            /* ===================================================
+                items:
+                    设置元素中的 内容 在容器里面的水平位置
+                content:
+                    设置整个内容区域在容器里面的水平位置
+                place-content: <justify-content> <align-conten>
+                place-items:   <justify-items>   <align-items>
+            ==================================================== */
+            place-content: center center;
+        }
+        
+        #app3>.item {
+            display: grid;
+            place-items: center center;
+        }
+        
+        #app3>.item:nth-of-type(odd) {
+            background: darkslateblue;
+        }
+        
+        #app3>.item:nth-of-type(even) {
+            background: deeppink;
+        }
+        
+        #app4 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid darkorange;
+            display: grid;
+            grid-template-columns: repeat(3, 33%);
+            grid-template-rows: repeat(3, 33%);
+            /* ==========================================================================================
+                有时候，一些项目的指定位置，在现有网格的外部。
+                比如网格只有3列，但是某一个项目指定在第5行。
+                这时，浏览器会自动生成多余的网格，以便放置项目。
+
+                grid-auto-columns属性和grid-auto-rows属性用来设置，浏览器自动创建的多余网格的列宽和行高。
+                它们的写法与grid-template-columns和grid-template-rows完全相同。
+                如果不指定这两个属性，浏览器完全根据单元格内容的大小，决定新增网格的列宽和行高。
+
+                下面的例子里面，划分好的网格是3行 x 3列，但是，8号项目指定在第4行，9号项目指定在第5行。
+            ============================================================================================= */
+            grid-auto-rows: 150px;
+            grid-auto-columns: 150px;
+            place-content: start;
+        }
+        
+        #app4>.item {
+            background: deepskyblue;
+            border: 1px solid slateblue;
+            place-items: center center;
+            display: grid
+        }
+        
+        #app4>.item:nth-child(8) {
+            /* =================================
+                指定当前元素 在 网格布局下的位置    
+                grid-column-start 从列数 第几列
+                grid-colmn-end 从行数 第几行
+            ================================== */
+            grid-column-start: 2;
+            grid-row-start: 4;
+        }
+        
+        #app4>.item:nth-child(9) {
+            grid-column-start: 3;
+            grid-row-start: 5;
+        }
+        
+        #app4>.item:nth-child(10) {
+            /* =====================================
+                当 grid-column-start 大于父级设置项时
+                    列数将会以 当前最大列 为准 重新布局
+
+                    比如父级设置 3 * 3
+                    子级 row = 4, col = 4,
+                    那么 该grid为 4 * 4
+            ======================================= */
+            grid-column-start: 4;
+            grid-row-start: 6
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">9</div>
+    </div>
+
+    <div id="app2">
+        <div class="item">11111</div>
+        <div class="item">22222</div>
+        <div class="item">33333</div>
+        <div class="item">44444</div>
+        <div class="item">55555</div>
+        <div class="item">66666</div>
+        <div class="item">77777</div>
+        <div class="item">88888</div>
+        <div class="item">99999</div>
+    </div>
+
+    <div id="app3">
+        <div class="item">11111</div>
+        <div class="item">22222</div>
+        <div class="item">33333</div>
+        <div class="item">44444</div>
+        <div class="item">55555</div>
+        <div class="item">66666</div>
+        <div class="item">77777</div>
+        <div class="item">88888</div>
+        <div class="item">99999</div>
+    </div>
+
+    <div id="app4">
+        <div class="item">11111</div>
+        <div class="item">22222</div>
+        <div class="item">33333</div>
+        <div class="item">44444</div>
+        <div class="item">55555</div>
+        <div class="item">66666</div>
+        <div class="item">77777</div>
+        <div class="item">88888</div>
+        <div class="item">99999</div>
+        <div class="item">00000</div>
+    </div>
+</body>
+
+</html>

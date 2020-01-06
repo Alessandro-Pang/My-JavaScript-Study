@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./common.js"></script>
+    <style>
+        #box {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            border: 1px solid green;
+            /* background: url(./background/cloud.jpg); */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 贪吃蛇游戏背景 -->
+    <div id="box"></div>
+</body>
+
+<script>
+    // 创建贪吃蛇食物对象
+    (function(window) {
+        function Food() {};
+        //创建食物元素
+        Food.prototype.createFood = function(x, y) {
+            let food = document.createElement("DIV");
+            food.setAttribute("id", "food"); //id
+            food.style.position = "absolute";
+            food.style.width = "20px"; //大小
+            food.style.height = "20px";
+            food.innerHTML = "★"; //食物样式
+            food.style.color = "#ffaa00";
+            food.style.left = x + 'px';
+            food.style.top = y + 'px';
+            my$("box").appendChild(food);
+        }
+
+        window.Food = Food;
+    })(window);
+
+    //随机数对象
+    (function(window) {
+        function Random() {};
+
+        Random.prototype.getRandom = function(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        window.Random = Random;
+    })(window);
+
+    //贪吃蛇对象
+    (function(window) {
+        function Snake() {};
+
+        Snake.prototype.body = function(x, y) {
+            let snake = document.createElement("DIV");
+            snake.setAttribute('id', 'snake');
+            snake.style.position = "absolute";
+            snake.style.background = "green";
+            snake.style.left = x + 'px';
+            snake.style.top = y + 'px';
+            my$('box').appendChild(snake);
+        }
+        window.Snake = Snake;
+    })(window);
+
+    var rm = new Random;
+
+    var boxWidth = my$('box').offsetWidth;
+    var boxHeight = my$('box').offsetHeight;
+    var randomWidth = rm.getRandom(0, boxWidth);
+    var randomHeight = rm.getRandom(0, boxWidth);
+
+    //食物在边界范围内刷新
+    var x = randomWidth > boxWidth - 21 ? boxWidth - 21 : randomWidth;
+    var y = randomHeight > boxHeight - 21 ? boxHeight - 21 : randomHeight;
+
+    //食物刷新位置应当取整数
+    x = x % 20 == 0 ? x : x - x % 20;
+    y = y % 20 == 0 ? y : y - y % 20;
+
+    var food = new Food;
+
+    food.createFood(x, y);
+    // my$('box').removeChild(my$('food'))
+
+    var snake = new Snake;
+
+    function SnakeBody() {
+        this.body = [
+            [20, 20],
+            [20, 0],
+            [20, 0]
+        ]
+    }
+
+    Snake.prototype.header = function(direction) {
+        var snakeBody = new SnakeBody;
+        var bodyLength = snakeBody.body;
+
+        if (direction == 'top' || direction == 'bottom') {
+            for (let i = 0; i < bodyLength.length; i++) {
+                let snakeWidth = my$('snake').offsetWidth;
+                let snakeHeight = my$('snake').offsetHeight;
+                let h = bodyLength[i][0];
+                let w = bodyLength[i][1];
+                my$('snake').style.height = snakeHeight + h + 'px';
+                my$('snake').style.width = snakeWidth + w + 'px';
+            }
+
+        } else if (direction == 'left' || direction == 'right') {
+            for (let i = 0; i < bodyLength.length; i++) {
+                let snakeWidth = my$('snake').offsetWidth;
+                let snakeHeight = my$('snake').offsetHeight;
+                let w = bodyLength[i][0];
+                let h = bodyLength[i][1];
+                my$('snake').style.height = snakeHeight + h + 'px';
+                my$('snake').style.width = snakeWidth + w + 'px';
+            }
+        }
+    }
+
+    Snake.prototype.move = function() {
+        var snakeBody = new SnakeBody;
+        var bodyLength = snakeBody.body;
+        for (let i = 0; i < bodyLength.length; i++) {
+            let snakeWidth = my$('snake').offsetWidth;
+            let snakeHeight = my$('snake').offsetHeight;
+            let w = bodyLength[i][0];
+            let h = bodyLength[i][1];
+            my$('snake').style.height = snakeHeight + h + 'px';
+            my$('snake').style.width = snakeWidth + w + 'px';
+        }
+    }
+
+    snake.body(60, 150);
+    snake.header('left');
+
+    snake.move()
+        //按键事件判断
+    document.onkeydown = function(event) {
+        let key = event.keyCode;
+        let x = my$('snake').offsetLeft;
+        let y = my$('snake').offsetTop;
+        if (key === 87) {
+            //w --- 上
+            my$('box').removeChild(my$('snake'));
+            snake.body(x, y);
+            snake.header('top');
+
+        }
+        if (key === 83) {
+            //s --- 下
+            my$('box').removeChild(my$('snake'));
+            snake.body(x, y);
+            snake.header('bottom');
+        }
+        if (key === 65) {
+            //a --- 左
+            my$('box').removeChild(my$('snake'));
+            snake.body(x, y);
+            snake.header('left');
+        }
+        if (key === 68) {
+            //d --- 右
+            my$('box').removeChild(my$('snake'));
+            snake.body(x, y);
+            snake.header('right');
+        }
+    }
+</script>
+
+</html>

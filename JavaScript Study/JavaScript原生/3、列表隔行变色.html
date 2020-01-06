@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <input type="button" name="" value="点击变色" id="on" />
+    <ul id="uu">
+        <li>保安</li>
+        <li>保洁</li>
+        <li>受益人</li>
+        <li>IT民工</li>
+        <li>职业经理人</li>
+        <li>投资人</li>
+    </ul>
+</body>
+<script type="text/javascript">
+    function my$(id) {
+        return document.getElementById(id);
+    }
+
+    //实现随点击 展示 奇红偶黄
+    //因为数组下标从0开始，而在用户看来，第一个li标签是 “1”
+    //所以 如果 i % 2 == 0 时 展示红色
+    my$("on").onclick = function() {
+
+        var list = my$("uu").getElementsByTagName('li');
+
+        for (var i = 0; i < list.length; i++) {
+
+            if (i % 2 == 0) {
+                //偶数
+                list[i].style.backgroundColor = "red";
+            } else {
+                //奇数
+                list[i].style.backgroundColor = "#fff123";
+            }
+        }
+
+    }
+</script>
+
+<body>
+    <input type="button" name="" value="点击按钮，隔行变色" id="myButton" />
+    <ol id="oo">
+        <li>哈哈哈</li>
+        <li>呵呵呵</li>
+        <li>嘿嘿嘿</li>
+        <li>咻咻咻</li>
+        <li>啧啧啧</li>
+    </ol>
+</body>
+<script type="text/javascript">
+    function myId$(id) {
+        return document.getElementById(id);
+    }
+    myId$("myButton").onclick = function() {
+
+        var list = myId$("oo").getElementsByTagName("li");
+
+        /*
+        for (var i = 0 ; i < list.length ;i++){
+        	//注意，这里不能用this ，如果用this，那么会作用在button身上
+        	if (i % 2 == 0){
+        		list[i].style.backgroundColor="rgb(125,0,255)";
+        	}
+        	else{
+        		list[i].style.backgroundColor="rgb(125,255,0)";
+        	}
+        }
+        */
+        //简化一:
+        /*
+        for (var i = 0 ; i < list.length ;i++){
+        	i % 2 ==0 ? 
+        	list[i].style.backgroundColor = "rgb(125,0,255)" :
+        	list[i].style.backgroundColor="rgb(125,255,0)"
+        }
+        */
+        //简化二:
+        for (var i = 0; i < list.length; i++) {
+
+            list[i].style.backgroundColor = i % 2 == 0 ? "rgb(125,0,255)" : "rgb(125,255,0)";
+        }
+    }
+</script>
+
+</html>
