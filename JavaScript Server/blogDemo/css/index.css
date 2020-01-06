@@ -1,0 +1,179 @@
+body{
+	margin:0px;
+	padding: 0px;
+	/*background: url(../images/header/bj1.jpg);*/
+}
+#header{
+	/*background: black;*/
+	background: url(../images/header/bj1.jpg);
+
+}
+h1{  
+	display: block;
+	color: rgb(0,210,210);
+	margin: 0px;
+	padding: 0px;
+}
+.headerTitle{
+	height: 50px;
+}
+.headerBox{
+	position: relative;
+	text-align: center;
+}
+.nav{
+	height: 30px;
+}
+.nav>a{
+	position: relative;
+	display: inline-block;
+	text-align-last: justify;
+	margin-top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-decoration:none;
+	color: rgb(100,100,100)
+}
+
+.headerTitle>hr{
+	display: block;
+	color: green;
+}
+.search{
+	height: 45px;
+	border: 1px solid rgb(255,100,100);
+	font-size:16px;
+	border-radius: 3px;
+	position: relative;
+}
+.searchTool{
+	font-size: 0px;
+}
+#searchBox{
+	width: 450px;
+}
+
+#searchBtn{
+	width: 60px;
+	background: rgb(255,100,100);
+	color: white;
+	left: 1px;
+}
+#section{
+	background: #FFFFBF;
+	position: absolute;
+	width: 100%;
+	height:850px;
+}
+#asideLeft{
+	position: absolute;
+	left: 0px;
+	/*top:150px;*/
+}
+#article{
+	position: absolute;
+	width: 38%;
+	text-align: center;
+	left: 31%;
+	/*top:150px;*/
+}
+#asideRight{
+	position: absolute;
+	width: 30%;
+	height: 100px;
+	right:0px;
+	border: 1px solid blue;
+	/*top:150px;*/
+}
+
+#asideLeft .screen{
+	height: 200px;
+	width: 410px;
+}
+#asideLeft .screen img{
+	height: 200px;
+	width: 410px;
+}
+#asideLeft .projectGit{
+	height: 300px;
+	width:500px; 
+	position: relative;
+}
+
+#asideLeft .projectGit h3{
+	background: rgb(0,0,0);
+	color: rgb(155,200,255);
+	text-align: center;
+	width: 410px;
+}
+
+#asideLeft .projectGit .projectLink{
+	font-size: 0px;
+	left: 0px;
+}
+#asideLeft .projectGit .projectLink img{
+	height: 200px;
+	width: 410px;
+}
+
+#asideLeft .projectGit .projectLink span{
+	display: inline-block;
+	font-size: 18px;
+}
+#article .single{
+	font-size: 0px;
+	position: relative;
+}
+#article .single .text .textTitle{
+	position: relative;
+	border: 1px solid rgb(150,150,150);
+	width: 100%;
+	height: 150px;	
+	background:white; 
+}
+#article .single .text .textTitle h3{
+	color: black;
+	text-align: left;
+	font-size:18px;
+	display: block;
+	margin: 0px;
+	padding: 0px;
+}
+#article .single .text .textTitle .info{
+	display: inline-block;
+	color: rgb(150,150,150);
+	font-size: 16px;
+	position: relative;
+	margin-top: 5px;
+	text-align: left;
+}
+#article .single .text .people span{
+	display: inline-block;
+	color: rgb(150,150,150);
+	font-size: 16px;
+	position: relative;
+	float: left;
+	margin-top: -20px;
+}
+#article .single .text .people .author{
+	display: inline;
+	color: black;
+}
+
+#article .single .text .redy{
+	font-size: 16px;
+	float: right;
+	margin-top: -20px;
+	position: relative;
+}
+
+#article .single .text .redy .radyNum{
+	color: rgb(155,200,255);
+}
+
+
+#footer{	
+	position: absolute;
+	top: 860px;
+	width: 100%
+}
