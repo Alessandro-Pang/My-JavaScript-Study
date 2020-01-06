@@ -1,0 +1,15 @@
+{
+  "name": "server3-nodeemailserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "email.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "nodemailer": "^6.4.2"
+  }
+}
