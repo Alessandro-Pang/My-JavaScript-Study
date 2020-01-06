@@ -1,3 +1,4 @@
+import echo from './common.js';
 /**
  * 软件工程中，我们不仅要创建一致的定义良好的API，同时也要考虑可重用性。
  * 组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型，这在创建大型系统时为你提供了十分灵活的功能。
@@ -6,7 +7,7 @@
  */
 
 /** 封装一个输出函数 */ 
-let echo = (...any:any)=>console.log(...any);
+// var echo = (...any:any)=>console.log(...any);
 
 // 泛型的作用
 // 如果不使用泛型，则会写死参数类型
@@ -188,31 +189,3 @@ echo(myfs6(1000,'啦啦啦'))
 function create<T>(c: {new(): T; }): T {
     return new c();
 }
-
-//一个更高级的例子，使用原型属性推断并约束构造函数与类实例的关系。
-class BeeKeeper {
-    hasMask: boolean;
-}
-
-class ZooKeeper {
-    nametag: string;
-}
-
-class Animal {
-    numLegs: number;
-}
-
-class Bee extends Animal {
-    keeper: BeeKeeper;
-}
-
-class Lion extends Animal {
-    keeper: ZooKeeper;
-}
-
-function createInstance<A extends Animal>(c: new () => A): A {
-    return new c();
-}
-
-//createInstance(Lion).keeper.nametag;  // undefined!
-// createInstance(Bee).keeper.hasMask;   // undefined!

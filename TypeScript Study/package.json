@@ -1,5 +1,16 @@
 {
-  "devDependencies": {
-    "@types/jquery": "^3.3.31"
-  }
+    "name": "typescript-study",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc -p ./TS/tsconfig.json"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/jquery": "^3.3.31",
+        "commonjs": "0.0.1"
+    }
 }
