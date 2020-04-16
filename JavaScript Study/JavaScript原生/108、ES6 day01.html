@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //可计算属性名
+        let objName = "pang";
+        let objName2 = "alex";
+        let obj = {
+            id: 1,
+            name: "alex",
+            [objName + "chao"]: {
+                print() {
+                    document.write("哈哈，我是计算属性名");
+                }
+            },
+            [objName2 + "pang"]: "biu,biu,biu"
+        }
+
+        console.log(`id = ${obj.id},name = ${obj.name} , computeName = ${obj.alexpang}`);
+        obj.pangchao.print();
+
+        //this 指向问题
+        //函数柯里化
+        function fn1() {
+            var birth = 1999;
+            return function() {
+                var birth = 2000;
+                for (let args in arguments) {
+                    console.log(args)
+                }
+                console.log(this.birth);
+            }
+        }
+
+        fn1("a", "b", "c")(1, 2, 3);
+
+        function fn2() {
+            var birth = 1999; //this 指向 fn2
+            return () => {
+                var birth = 2000;
+                for (let args in arguments) {
+                    console.log(args)
+                }
+                console.log(this.birth); //this 指向window
+            }
+        }
+
+        fn2("a", "b", "c")(1, 2, 3)
+    </script>
+</body>
+
+</html>
