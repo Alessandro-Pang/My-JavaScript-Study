@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="app2"></div>
+
+    <script type="text/babel">
+      //第一步：创建组件
+      function Name(props) {
+        return <h1>网站名称：{props.name}</h1>;
+      }
+      function Url(props) {
+        return <h2>网站地址：{props.url}</h2>;
+      }
+      function NickName(props) {
+        return <h3>网站子名称：{props.nickname}</h3>;
+      }
+
+      //第二步：合成组件
+      class App extends React.Component {
+        render() {
+          return (
+            <div>
+              <Name name="zi yang Blog" />
+              <Url url="http://www.alexpang.cn" />
+              <NickName nickname="welcom to ziyang Blog" />
+            </div>
+          );
+        }
+      }
+
+      //第三部：实例化组件
+      ReactDOM.render(<App />, document.getElementById("app"));
+
+      /**
+        React State(状态)
+            React 把组件看成是一个状态机（State Machines）。
+            通过与用户的交互，实现不同状态，然后渲染 UI，让用户界面和数据保持一致。
+            React 里，只需更新组件的 state，然后根据新的 state 重新渲染用户界面（不要操作 DOM）。
+            以下实例创建一个名称扩展为 React.Component 的 ES6 类，在 render() 方法中使用 this.state 来修改当前的时间。
+            添加一个类构造函数来初始化状态 this.state，类组件应始终使用 props 调用基础构造函数。
+         */
+      class Clock extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { date: new Date() };
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>Hello Pangchao</h1>
+              <h2>現在是：{this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Clock />, document.getElementById("app2"));
+      
+    </script>
+  </body>
+</html>

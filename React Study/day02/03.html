@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../react.development.js"></script>
+  <script src="../react-dom.development.js"></script>
+  <script src="../babel.js"></script>
+</head>
+<body>
+  <button onmouseover="alert('绑定多个事件')" onclick="alert('abc')">绑定多个事件</button>
+  <button onclick="alert('abc1');alert('abc2');alert('abc3');alert('abc4')">onclick 可以触发多个函数</button>
+
+  <div id="app"></div>
+  <div id="app2"></div>
+  <div id="app3"></div>
+  <div id="app4"></div>
+  <script type="text/babel">
+    // state 和 props 主要的区别在于 props 是不可变的，而 state 可以根据与用户交互来改变。
+    // 这就是为什么有些容器组件需要定义 state 来更新和修改数据。 
+    // 而子组件只能通过 props 来传递数据。
+
+    function HelloMessag(props){
+      return <h2> Hello {props.name} </h2>
+    }
+
+    const element = <HelloMessag name="ziyang"/>
+
+    ReactDOM.render(
+      element,
+      document.getElementById("app")
+    )
+
+    /*-----------------------------------------Demo2---------------------------------*/
+
+    class Demo extends React.Component{
+       
+      constructor(props){
+        super(props)
+        this.state = {date:new Date()}
+      }
+
+      componentDidMount(){
+        this.timerID = setInterval(()=>this.tick(),1000)
+      }
+
+      componentWillUnmount(){
+        clearInterval(this.timerID)
+      }
+
+      tick(){
+        // 通过setState 修改date值
+        // 通过 声明周期钩子 制作定时器，每秒钟调用一次，达到修改的目的
+        this.setState({
+          date:new Date()
+        })
+      }
+
+      render(){
+        return(
+          <div>
+            <h1> 哈哈。{this.props.message} </h1>
+            <h2> {this.state.date.toLocaleTimeString()} </h2>
+          </div>
+        )
+      }
+    }
+
+    //通过组件类的 defaultProps 属性为 props 设置默认值
+    Demo.defaultProps={
+      message:"没想到吧，我又回来了！"
+    }
+
+    ReactDOM.render(
+      <Demo/>,
+      document.getElementById('app2')
+    )
+
+    /*-----------------------------------------Demo3---------------------------------*/
+
+    class Demo3 extends React.Component{
+      
+      constructor(props){
+        super(props)
+        this.state={
+          username : "ziyang",
+          message : "哈哈哈，没想到吧，我又回来了！",
+          date : new Date()
+        }
+      }
+
+      componentDidMount(){
+        this.timeID = setInterval(()=>this.clock(),1000)
+      }
+
+      componentWillUnmount(){
+        clearInterval(this.timeID)
+      }
+
+      clock(){
+        this.setState({
+          date:new Date()
+        })
+      }
+
+      render(){
+        return(
+          <div>
+            <Component1 username={this.state.username}/>
+            <Component2 message={this.state.message}/>  
+            <Component3 date={this.state.date}/>
+          </div>
+        )
+      }
+    }
+
+    class Component1 extends React.Component{
+      render(){
+        return(
+          <div> {this.props.username} </div>
+        )
+      }
+    }
+
+    class Component2 extends React.Component{
+      render(){
+        return(
+          <div> {this.props.message} </div>
+        )
+      }
+    }
+
+    class Component3 extends React.Component{
+      render(){
+        return (
+          <div>{this.props.date.toLocaleTimeString()}</div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Demo3 />,
+      document.getElementById('app3')
+    )
+    
+    /*-----------------------------------------Demo4---------------------------------*/
+    class Demo4 extends React.Component{
+      constructor(props){
+        super(props)
+        this.state={
+          date:new Date(),
+          message:"这是一段话、、、、、"
+        }
+      }
+
+      componentDidMount(){
+        this.timerID = setInterval(()=>this.tick(),1000)
+      }
+
+      componentWillUnmount(){
+        clearInterval(timerID)
+      }
+
+      tick(){
+        this.setState({
+          date:new Date()
+        })
+      }
+
+      render(){
+        return(
+          <div>
+            <App message={this.state.message}/>
+            <h3>{this.state.date.toLocaleTimeString()}</h3>  
+          </div>
+        )
+      }
+    }
+
+    class App extends React.Component{
+      render(){
+        return(
+          <div>
+            {this.props.message}
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Demo4 />,
+      document.getElementById('app4')
+    )
+  </script>
+</body>
+</html>

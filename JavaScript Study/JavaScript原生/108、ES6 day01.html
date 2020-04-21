@@ -31,26 +31,20 @@
         //this 指向问题
         //函数柯里化
         function fn1() {
-            var birth = 1999;
             return function() {
-                var birth = 2000;
                 for (let args in arguments) {
                     console.log(args)
                 }
-                console.log(this.birth);
             }
         }
 
         fn1("a", "b", "c")(1, 2, 3);
 
         function fn2() {
-            var birth = 1999; //this 指向 fn2
             return () => {
-                var birth = 2000;
                 for (let args in arguments) {
-                    console.log(args)
+                    console.log(arguments[args])
                 }
-                console.log(this.birth); //this 指向window
             }
         }
 
