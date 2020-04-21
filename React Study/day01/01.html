@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+  </head>
+
+  <body>
+    <!-- 
+          React 是一个用于构建用户界面的 JAVASCRIPT 库。
+            React 主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。
+            React 起源于 Facebook 的内部项目，用来架设 Instagram 的网站，并于 2013 年 5 月开源。
+            React 拥有较高的性能，代码逻辑非常简单，越来越多的人已开始关注和使用它。
+    -->
+    <div id="app"></div>
+    <div id="app2"></div>
+    <div id="app3"></div>
+    <!-- 
+        React 特点
+
+        1.声明式设计 −React采用声明范式，可以轻松描述应用。
+        2.高效 −React通过对DOM的模拟，最大限度地减少与DOM的交互。
+        3.灵活 −React可以与已知的库或框架很好地配合。
+        4.JSX − JSX 是 JavaScript 语法的扩展。React 开发不一定使用 JSX ，但我们建议使用它。
+        5.组件 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。
+        6.单向响应的数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。
+    -->
+    <script type="text/babel">
+      let query = (id) => document.getElementById(id);
+
+      ReactDOM.render(<div>Hello,React</div>, document.getElementById("app"));
+      /**
+          React 元素渲染
+            元素是构成 React 应用的最小单位，它用于描述屏幕上输出的内容。
+            const element = <h1>Hello, world!</h1>;
+            与浏览器的 DOM 元素不同，
+            React 当中的元素事实上是普通的对象，React DOM 可以确保 浏览器 DOM 的数据内容与 React 元素保持一致。
+        */
+      let app = <h1>Hello world</h1>;
+      /*
+        在此 div 中的所有内容都将由 React DOM 来管理，所以我们将其称为 "根" DOM 节点。
+        我们用 React 开发应用时一般只会定义一个根节点。
+        但如果你是在一个已有的项目当中引入 React 的话，你可能会需要在不同的部分单独定义 React 根节点。
+        要将React元素渲染到根DOM节点中，我们通过把它们都传递给 ReactDOM.render() 的方法来将其渲染到页面上：
+      */
+      ReactDOM.render(app, document.getElementById("app"));
+      let v_str = "React 通过花括号传入变量";
+      ReactDOM.render(
+        <h3>
+          <div>{1 + 1}</div>
+          <div>{99 * 99}</div>
+          <div>{v_str}</div>
+        </h3>,
+        query("app2")
+      );
+
+    </script>
+  </body>
+</html>

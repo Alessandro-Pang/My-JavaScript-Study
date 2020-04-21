@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <div id="app3"></div>
+    <div id="app4"></div>
+    <script type="text/babel">
+      /**
+      更新元素渲染
+          React 元素都是不可变的。当元素被创建之后，你是无法改变其内容或属性的。
+          目前更新界面的唯一办法是创建一个新的元素，然后将它传入 ReactDOM.render() 方法：
+          来看一下这个计时器的例子:
+       */
+
+      function tick() {
+        const element = (
+          <div>
+            <h1>Hello World!</h1>
+            <h2>现在是：{new Date().toLocaleTimeString()}.</h2>
+          </div>
+        );
+        ReactDOM.render(element, document.getElementById("app"));
+      }
+
+      //每秒调用一次 React实例
+      setInterval(tick, 1000);
+
+      //组件封装 / 复用
+      function Clock(props) {
+        return (
+          <div>
+            <h1>Hello Zi yang</h1>
+            <h2>现在是：{props.data.toLocaleTimeString()}.</h2>
+          </div>
+        );
+      }
+
+      function tick2() {
+        ReactDOM.render(
+          <Clock data={new Date()} />,
+          document.getElementById("app2")
+        );
+      }
+
+      setInterval(tick2, 2000);
+
+      //除了函数外我们还可以创建一个 React.Component 的 ES6 类，
+      //该类封装了要展示的元素，需要注意的是在 render() 方法中，需要使用 this.props 替换 props：
+
+      class Clocks extends React.Component {
+        render() {
+          return (
+            <div>
+              <h1>Hello React</h1>
+              <h2>
+                现在的时间是：{this.props.data.toLocaleDateString()}&nbsp;
+                {this.props.data.toLocaleTimeString()}.
+              </h2>
+            </div>
+          );
+        }
+      }
+
+      function tick3() {
+        ReactDOM.render(
+          <Clocks data={new Date()} />,
+          document.getElementById("app3")
+        );
+      }
+      //React 只会更新必要的部分
+
+      //值得注意的是 React DOM 首先会比较元素内容先后的不同，而在渲染过程中只会更新改变了的部分。
+      setInterval(tick3, 1000);
+
+      class MyReact extends React.Component{
+        render(){
+          return(
+            <div>
+              <div>網站名稱：{this.props.name}</div>
+              <div>網站地址：{this.props.url}</div>
+              <div>網站時間：{this.props.date.toLocaleTimeString()}</div>  
+            </div>
+          )
+        }
+      }
+
+      function task(){
+        ReactDOM.render(
+          <MyReact name="ziyangBlog" url="https://www.alexpang.cn" date={new Date()}/>,
+          document.getElementById("app4")
+        )
+      }
+
+      setTimeout(task,5000);
+    </script>
+  </body>
+</html>

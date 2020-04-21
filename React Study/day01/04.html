@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <script type="text/babel">
+      let fontSize = 20,
+        color = "rgb(100,80,150)";
+      var myStyle = {
+        fontSize,
+        color,
+      };
+      //样式
+
+      //React 推荐使用内联样式。
+      //我们可以使用 camelCase 语法来设置内联样式. React 会在指定元素数字后自动添加 px 。
+      class App extends React.Component {
+        render() {
+          return (
+            <h1 style={myStyle}>
+              Hello React, {/*說出來你可能不信，我要在花括號例寫注釋*/}my Name
+              is {this.props.name}
+            </h1>
+          );
+        }
+      }
+      ReactDOM.render(<App name="pangchao" />, document.getElementById("app"));
+      /**
+       * 注释
+            注释需要写在花括号中
+         数组
+            JSX 允许在模板中插入数组，数组会自动展开所有成员
+        */
+      var arr = [
+        <h1>Hello World</h1>,
+        <h2>当前时间：{new Date().toLocaleTimeString()}</h2>,
+      ];
+      ReactDOM.render(<div>{arr}</div>, document.getElementById("app2"));
+    </script>
+  </body>
+</html>
