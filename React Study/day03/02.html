@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      let c = new Common();
+
+      class Demo extends React.Component{
+        /*
+          每个列表元素分配一个 key，
+            不然会出现警告 a key should be provided for list items，
+            意思就是需要包含 key：
+        */
+        render(){
+          let arr = ["xiaomi","zhongxing","huawei","Apple","lenove"]
+          let amp = arr.map(val=><li key={val}>{val}</li>);
+          return(
+            <ol>{amp}</ol>
+          )
+        }
+      }
+      let app = c.create();
+      ReactDOM.render(
+        <Demo />,app
+      )
+
+      /**********************************************Demo2************************************************/
+
+      let app2 = c.create();
+      class Demo2 extends React.Component{
+        render(){
+          //如果列表可以重新排序，不建议使用索引来进行排序，因为这会导致渲染变得很慢。
+          let list = this.props.listItem.map((item,index)=><li key={index}>{item}</li>);
+          return(
+            <ul>{list}</ul>
+          )
+        }
+      }
+      let list = ["pang","chao","yue","alex","alessandro"];
+      ReactDOM.render(
+        <Demo2 listItem={list}/>,
+        app2
+      )
+
+      /**********************************************Demo3*********************************************/
+      /**
+        用keys提取组件
+            元素的 key 只有在它和它的兄弟节点对比时才有意义。
+            比方说，如果你提取出一个 ListItem 组件，
+            你应该把 key 保存在数组中的这个 <ListItem /> 元素上，
+            而不是放在 ListItem 组件中的 <li> 元素上。
+      */
+
+      let app3 = c.create();
+      class Demo3 extends React.Component{
+        render(){
+          return (
+            <li>{this.props.value}</li>
+          )
+        }
+      }
+
+      class Demo3$ extends React.Component{
+        render(){
+          //item 必须是数组
+          let item=[];
+          //当你在 map() 方法的内部调用元素时，你最好随时记得为每一个元素加上一个独一无二的 key。
+          for(let val in this.props.listItem){
+            let v = this.props.listItem[val];
+            //此处 JSON.stringify用于测试
+            item.push(<Demo3 key={val} value={JSON.stringify(v)}/>);
+          }
+          return(
+            //item 必须是个数组，如果他是个变量，就会输出对象 [Object]
+            /**
+             * 错误写法：
+             *    item += <Demo3 key={val} value={JSON.stringify(v)}/>
+             *    --> undefined[object Object][object Object] ....
+             *    这里使用 JSON.stringify 也无济于事
+             */
+            <ol>{item}</ol>
+          )
+        }
+      }
+
+      let list2 = {"pid#1":"react","pid#2":"vue","pid#3":"redux","pid#4":"vuex","pid#5":"jquery","pid#6":"nodejs"};
+      ReactDOM.render(
+        <Demo3$ listItem={list2}/>,
+        app3
+      )
+
+      /**********************************************Demo4*********************************************/
+
+      let app4 = c.create();
+      class Demo4 extends React.Component{
+        render(){
+          let sideBar = (
+            <ul>
+                {
+                  this.props.posts.map(item=>(<li key={item.id}>{item.title}</li>))
+                }
+            </ul>
+          );
+
+          let content = this.props.posts.map(item=>(
+            <div key={item.id}>
+              <h3>{item.title}</h3>
+              <h4>{item.content}</h4>
+            </div>
+          ))
+
+          return(
+            <div>
+              {sideBar}
+              {content}
+            </div>
+          )
+        }
+      }
+
+      const posts = [
+        {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+        {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+      ];
+
+      ReactDOM.render(
+        <Demo4 posts={posts}/>,
+        app4
+      )
+    </script>
+  </body>
+</html>

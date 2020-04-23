@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <div id="app3"></div>
+    <script type="text/babel">
+      class Hello extends React.Component {
+        render() {
+          return <h1>Hello ,Welcome to ziyang Blog</h1>;
+        }
+      }
+      class Gobye extends React.Component {
+        render() {
+          return <h1>Oh,Go Bye!</h1>;
+        }
+      }
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            who: true,
+          };
+          this.login = this.login.bind(this);
+        }
+        login() {
+          this.setState((prevState) => ({
+            who: !prevState.who,
+          }));
+        }
+        render() {
+          let element = (
+            <button onClick={this.login}>
+              {this.state.who ? "退出登录" : "登录"}
+            </button>
+          );
+          if (this.state.who) {
+            return (
+              <div>
+                {element}
+                <Hello />
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                {element}
+                <Gobye />
+              </div>
+            );
+          }
+        }
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("app"));
+
+      /*******************************************Demo2*******************************************/
+
+      class Demo2 extends React.Component {
+        render() {
+          if (this.props.isLogin) {
+            return <Hello />;
+          } else {
+            return <Gobye />;
+          }
+        }
+      }
+      //通过传入 true or false 改变组件
+      ReactDOM.render(
+        <Demo2 isLogin={false} />,
+        document.getElementById("app2")
+      );
+
+      /****************************************Demo3****************************************/
+      // && 运算符
+      class Demo3 extends React.Component{
+        render(){
+          return(
+            <div>
+              <h1>Hello!</h1>
+              {/*
+                在 JavaScript 中，true && expression 总是返回 expression，而 false && expression 总是返回 false。
+                因此，如果条件是 true，&& 右侧的元素就会被渲染，如果是 false，React 会忽略并跳过它。
+              */}
+              {this.props.unreadMessage.length > 0 && 
+                <h2> 您有{this.props.unreadMessage.length}条未读信息 </h2>
+              }
+            </div> 
+          )
+        }
+      }
+
+      const messages = ['React', 'Re: React', 'Re:Re: React'];
+      ReactDOM.render(
+        <Demo3 unreadMessage={messages}/>,
+        document.getElementById('app3')
+      )
+
+      /*************************************************Demo4*********************************************/
+
+      class Demo4 extends React.Component{
+        render(){
+          let isRender = this.props.isRender;
+          return(
+            isRender ?
+              (<div>渲染啦</div>):
+              (<div>没渲染</div>)
+          )
+        }
+      }
+
+      let app = document.createElement('div');
+      document.body.appendChild(app);
+
+      ReactDOM.render(
+        <div>
+          <Demo4 isRender={true}/>
+          <Demo4 isRender={false}/>
+        </div>,
+        app
+      )
+
+      /*****************************************Demo5***********************************************/
+      /**
+       阻止组件渲染
+        在极少数情况下，你可能希望隐藏组件，即使它被其他组件渲染。
+        让 render 方法返回 null 而不是它的渲染结果即可实现。
+        在下面的例子中，<WarningBanner /> 根据属性 warn 的值条件渲染。
+        如果 warn 的值是 false，则组件不会渲染：
+       */
+      let c = new Common();
+      let app2 = c.create();
+
+      //props必须以参数的形式传入function
+      function WarnTest(props){
+        //必须返回null,返回‘’会报错
+        if(!props.warn){
+          return null
+        }
+        return (
+          <div>少时诵诗书</div>
+        )
+      }
+      class Demo5 extends React.Component{
+        constructor(props){
+          super(props)
+          this.state={
+            isWran:true
+          }
+          this.showClick = this.showClick.bind(this)
+        }
+
+        showClick(){
+          this.setState((prevState)=>({
+            isWran:!prevState.isWran
+          }))
+        }
+        
+        // warn 的方式，只能作用于自定义控件
+        render(){
+          return(
+            <div>
+              <WarnTest warn={this.state.isWran}/>
+              <button onClick={this.showClick}>en</button>
+            </div>
+          )
+        }
+      }
+      /*
+       组件的 render 方法返回 null 并不会影响该组件生命周期方法的回调。
+       例如，componentWillUpdate 和 componentDidUpdate 依然可以被调用。
+      */
+      ReactDOM.render(
+        <Demo5/>,
+        app2
+      )
+    </script>
+  </body>
+</html>
