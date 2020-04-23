@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+    <script src="../axios.js"></script>
+  </head>
+  <body>
+    <!-- https://api.apiopen.top/getJoke?page=2&count=&type=video -->
+
+    <script type="text/babel">
+      let c = new Common();
+      let app = c.create();
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            // 这里不可以设置为 null !!
+            result: [],
+          };
+          this.task = this.task.bind(this);
+        }
+
+        componentDidMount() {
+          axios
+            .get("https://api.apiopen.top/getJoke?page=2&count=&type=video")
+            .then((response) => {
+              this.task(response);
+            })
+            .catch((e) => console.error("请求失败:\n" + e));
+        }
+
+        task(response) {
+          this.setState({
+            result: response.data.result,
+          });
+        }
+
+        render() {
+          //注意这里是map,foreach是会报错的！
+          let content = this.state.result.map((element) => (
+            <ul key={element.sid}>
+              <li>上传时间：{element.passtime}</li>
+              <li>段子ID：{element.sid}</li>
+              <li>段子描述：{element.text}</li>
+              <li>段子链接：{element.thumbnail}</li>
+            </ul>
+          ));
+          return <div>{content}</div>;
+        }
+      }
+
+      ReactDOM.render(<Demo />, app);
+    </script>
+  </body>
+</html>

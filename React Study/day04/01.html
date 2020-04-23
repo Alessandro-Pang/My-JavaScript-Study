@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      let c = new Common();
+      let app = c.create();
+
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            date: new Date().toLocaleTimeString(),
+            date2:null
+          };
+          this.testReplaceDate = this.testReplaceDate.bind(this)
+        }
+
+        //FIXME: TypeError: this.replaceState is not a function
+        testReplaceDate() {
+          //这个代码有问题！！！
+          this.replaceState((state)=>({
+              date:state.date2
+          }));
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>{this.state.date}</h2>
+              <button onClick={this.testReplaceDate}>Button</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Demo />, app);
+    </script>
+  </body>
+</html>

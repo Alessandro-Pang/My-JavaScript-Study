@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../react.development.js"></script>
+  <script src="../react-dom.development.js"></script>
+  <script src="../babel.js"></script>
+  <script src="../common.js"></script>
+  <script src="../../JavaScript Study/jquery.js"></script>
+
+</head>
+<body>
+  
+  <script type="text/babel">
+    
+    let c = new Common();
+    let app = c.create();
+    class Demo extends React.Component{
+      constructor(...args){
+        super(...args)
+        this.state={
+          result:[]
+        }
+      }
+
+      componentDidMount(){
+        let _this = this;
+        $.ajax({
+          type:'Get',
+          url:'https://5b5e71c98e9f160014b88cc9.mockapi.io/api/v1/lists',
+          dataType:'json',
+          success(data){
+            _this.setState({
+              result:data
+            })
+          }
+        })
+      }
+
+      render() {
+        //如果加入花括号，要用return！！
+        let element = this.state.result.map((el)=>{return(
+          <ul key={el.id}>
+            <li>{el.name}</li>
+            <li>{el.age}</li>
+            <li>{el.sex}</li>
+          </ul>
+        )})
+        
+        return (
+          <div>
+            {element}
+          </div>
+        )
+      };
+    }
+
+    ReactDOM.render(
+      <Demo />,app
+    )
+  </script>
+</body>
+</html>

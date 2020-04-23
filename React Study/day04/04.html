@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      /*
+    React 表单与事件
+      HTML 表单元素与 React 中的其他 DOM 元素有所不同,因为表单元素生来就保留一些内部状态。
+
+      在 HTML 当中，像 <input>, <textarea>, 和 <select> 这类表单元素会维持自身状态，并根据用户输入进行更新。
+      但在React中，可变的状态通常保存在组件的状态属性中，并且只能用 setState() 方法进行更新。
+
+      在实例中我们设置了输入框 input 值 value = {this.state.data}。
+      在输入框值发生变化时我们可以更新 state。我们可以使用 onChange 事件来监听 input 的变化，并修改 state。
+  */
+      class Demo extends React.Component {
+        constructor(...args) {
+          super(...args);
+          //在任何时候都不要给state传入null值
+          //否则它将可能无法动态赋值
+          this.state = {
+            value: "",
+          };
+          this.inputChangeUpdate = this.inputChangeUpdate.bind(this);
+        }
+
+        inputChangeUpdate(e) {
+          this.setState({
+            value: e.target.value,
+          });
+        }
+
+        render() {
+          return (
+            <div>
+              {/*input这里value，只能命名为value*/}
+              <input
+                type="text"
+                onChange={this.inputChangeUpdate}
+                name=""
+                id=""
+                value={this.state.value}
+              />
+              <div>看看你输入了什么：{this.state.value}</div>
+            </div>
+          );
+        }
+      }
+
+      let c = new Common();
+      let app = c.create();
+      ReactDOM.render(<Demo />, app);
+
+      /************************************* Demo2 ****************************************/
+
+      //事件、值 ---> 父传子
+      function Content(props) {
+        // 函数组件通过参数传入 props
+        // 类组件，通过 this.props 获取
+        return (
+          <div>
+            <input onChange={props.change} type="text" value={props.value} />
+            <div>瞅瞅你写了啥：{props.value}</div>
+          </div>
+        );
+      }
+
+      let app2 = c.create();
+      class Demo2 extends React.Component {
+        constructor(...args) {
+          super(...args);
+          this.state={
+            value: "",
+          };
+          this.onChangeState = this.onChangeState.bind(this);
+        }
+
+        onChangeState(event) {
+          this.setState({
+            value: event.target.value,
+          });
+        }
+
+        render() {
+          return (
+            <div>
+              <Content change={this.onChangeState} value={this.state.value} />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Demo2 />, app2);
+
+      /***************************************** Demo3 ***************************************/
+      class Demo3 extends React.Component{
+        constructor(props){
+          super(props)
+          this.state={
+            value:'zhongxing'
+          }
+          this.selectChange=this.selectChange.bind(this)
+        }
+
+        selectChange(event){
+          this.setState({
+            value:event.target.value
+          })
+        }
+
+        render(){
+          return(
+            <div>
+              <select onChange={this.selectChange} value={this.state.value}>
+                <option value="huawei">huawei</option>
+                <option value="apple">apple</option>
+                <option value="zhongxing">zhongxing</option>
+                <option value="alixin">alixin</option>
+                <option value="nuojiya">nuojiya</option>
+              </select>
+              <div>
+                你的选择有：{this.state.value}
+              </div>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(
+        <Demo3 />,
+        c.create()
+      )
+
+      /**
+       * TODO:
+       *      todo :这代表这里有功能（代码）需要实现，这里会留下功能说明
+       * 
+       * FIXME:
+       *      fixme:标识处代码需要修正，甚至代码是错误的，不能工作，需要修复
+       */
+    </script>
+  </body>
+</html>
