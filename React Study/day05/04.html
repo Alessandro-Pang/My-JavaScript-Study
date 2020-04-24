@@ -1,0 +1,97 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-24 17:00:46
+ * @LastEditTime: 2020-04-24 17:53:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\day05\04.html
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      /**
+      React Refs
+          React 支持一种非常特殊的属性 Ref ，你可以用来绑定到 render() 输出的任何组件上。
+          这个特殊的属性允许你引用 render() 返回的相应的支撑实例（ backing instance ）。
+          这样就可以确保在任何时间总是拿到正确的实例。 
+
+          使用方法
+
+            绑定一个 ref 属性到 render 的返回值上：
+            <input ref="myInput" />
+
+            在其它代码中，通过 this.refs 获取支撑实例:
+            var input = this.refs.myInput;
+            var inputValue = input.value;
+            var inputRect = input.getBoundingClientRect();
+    */
+      class RefDemo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isClick: true,
+            message: "",
+          };
+        }
+        focusTest() {
+          // 使用原生的 DOM API 获取焦点
+          this.refs.myInp.focus();
+          // 调用JS原生方法
+          this.refs.myInp.value = "hhhh";
+
+          console.log(this.refs.myInp);
+        }
+        clickDiv = () => {
+          this.setState((prevState) => ({
+            isClick: false,
+            message: "哈哈哈哈哈啊",
+          }));
+        };
+
+        clickToNever() {
+          this.refs.todo.click();
+          let dom = document.createElement("div");
+          dom.innerText = "通过 refs 调用原生方法";
+          this.refs.todo.appendChild(dom);
+        }
+
+        render() {
+          let styles = {
+            width: 250,
+            height: 50,
+            border: "1px solid green",
+            boxShadow: "1px 5px 5px 5px rgba(0,200,200,.8)",
+          };
+          return (
+            <div>
+              <input type="text" name="" id="" ref="myInp" />
+              <button onClick={this.focusTest.bind(this)}>Click Me</button>
+              <button onClick={this.clickToNever.bind(this)}>Click Me</button>
+              <br />
+              <br />
+              <div ref="todo" style={styles} onClick={this.clickDiv}>
+                {this.state.isClick ? "点击我！" : this.state.message}
+              </div>
+            </div>
+          );
+        }
+      }
+
+      let c = new Common();
+      //可以使用 getDOMNode()方法获取DOM元素
+      ReactDOM.render(<RefDemo />, c.create());
+    </script>
+  </body>
+</html>

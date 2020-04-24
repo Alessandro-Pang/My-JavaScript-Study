@@ -1,0 +1,89 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-24 17:57:20
+ * @LastEditTime: 2020-04-24 19:33:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\day05\05.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      class Button extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { data: 0 };
+          this.setNewNumber = this.setNewNumber.bind(this);
+        }
+
+        setNewNumber() {
+          this.setState({ data: this.state.data + 1 });
+        }
+        render() {
+          return (
+            <div>
+              <button onClick={this.setNewNumber}>INCREMENT</button>
+              <Content myNumber={this.state.data}/>
+            </div>
+          );
+        }
+      }
+
+      class Content extends React.Component {
+        //页面创建
+        componentWillMount() {
+          alert("Component WILL MOUNT!");
+        }
+        //页面渲染完成
+        componentDidMount() {
+          alert("Component DID MOUNT!");
+        }
+        //组件更新前，接收到了参数
+        componentWillReceiveProps(newProps) {
+          alert("Component WILL RECEIVE PROPS!");
+        }
+        //组件是否更新
+        shouldComponentUpdate(newProps, newState) {
+          return true;
+        }
+        //元素更新前
+        componentWillUpdate(nextProps, nextState) {
+          alert("Component WILL UPDATE!");
+        }
+        //元素更新完成
+        componentDidUpdate(prevProps, prevState) {
+          alert("Component DID UPDATE!");
+        }
+        //元素销毁
+        componentWillUnmount() {
+          alert("Component WILL UNMOUNT!");
+        }
+
+        render() {
+          return (
+            <div>
+              <h3>{this.props.myNumber}</h3>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(
+        <div>
+          <Button />
+        </div>,
+        new Common().create()
+      );
+    </script>
+  </body>
+</html>

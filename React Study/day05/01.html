@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      let c = new Common();
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            myInp: "11111",
+            mySel: true,
+            message: "设置一个默认值",
+          };
+
+          this.onChangeTo = this.onChangeTo.bind(this);
+        }
+
+        onChangeTo(event) {
+          let target = event.target;
+          let value =
+            target.type === "checkbox" ? target.checked : target.value;
+          let name = target.name;
+          /*
+            通过name获取元素的关键点是：
+              name与变量名称一致
+
+              name:attr
+              value:{this.state.attr}
+          */
+          this.setState({
+            [name]: value,
+          });
+        }
+
+        render() {
+          return (
+            <div>
+              <input type="text" defaultValue={this.state.message} />
+              <form action="">
+                {/*
+                  您向没有“onChange”处理程序的窗体字段提供了“value”属性。
+                  如果字段应该是可变的，请使用“defaultValue”。
+                  否则，请设置“onChange”或“readOnly”
+
+                  os:
+                    如果只需要设置一个默认值在input显示，那么需要设置为defaultValue,
+                      否则该值将无法变动，将呈现只读字段
+                    如果你需要获取这个字段的状态（是可变的）需要设置onChange事件处理
+
+                  注：
+                    如果你对添加了事件的元素，使用了defualtValue
+              */}
+                <label>
+                  <input
+                    type="number"
+                    name="myInp"
+                    onChange={this.onChangeTo}
+                    value={this.state.myInp}
+                  />
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="mySel"
+                    onChange={this.onChangeTo}
+                    checked={this.state.mySel}
+                  />
+                </label>
+              </form>
+              <div>
+                {this.state.message},&nbsp;
+                {this.state.myInp},&nbsp;
+                {this.state.mySel ? "ON" : "OFF"}
+              </div>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Demo />, c.create());
+    </script>
+  </body>
+</html>
