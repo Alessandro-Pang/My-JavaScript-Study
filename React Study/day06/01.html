@@ -1,0 +1,124 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-25 10:35:12
+ * @LastEditTime: 2020-04-25 22:04:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\day06\01.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+    <script src="../axios.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      let c = new Common();
+
+      class List extends React.Component {
+        render() {
+          return (
+            <li>
+              {this.props.text}
+              {this.props.result}
+            </li>
+          );
+        }
+      }
+
+      class Video extends React.Component {
+        constructor(...args) {
+          super(...args);
+          this.styles = {
+            width: 150,
+          };
+        }
+        render() {
+          return (
+            <li>
+              <video
+                style={this.styles}
+                poster={this.props.image}
+                src={this.props.href}
+                controls
+              >
+                您的浏览器不支持该视频播放
+              </video>
+            </li>
+          );
+        }
+      }
+
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            result: [],
+            page:1
+          };
+          this.styles = {
+            listStyle: "none",
+          };
+          this.ajax = this.ajax.bind(this)
+        }
+
+        componentDidMount() {
+          this.ajax(this.state.page)
+        } 
+
+        componentDidUpdate(){
+          this.ajax(this.state.page)
+        }
+
+        ajax(page){
+          axios
+            .get("https://api.apiopen.top/getJoke?page="+page+"&count=&type=video")
+            //注：此时必须this指向axios
+            .then(response=>{
+              let result = response.data.result;
+              this.setState({
+                result,
+              });
+            })
+            .catch(function (e) {
+              console.log(e);
+            });
+        }
+
+        nextPageVideo=()=>{
+          this.setState({
+            page:this.state.page+1
+          })
+        }
+
+        render() {
+          let result = this.state.result;
+          return (
+            <div>
+              {result.map((ele) => (
+                <ul style={this.styles} key={ele.sid}>
+                  <List result={ele.name} text="上传人：" />
+                  <List result={ele.text} text="简述：" />
+                  <List result={ele.passtime} text="上传时间：" />
+                  <Video href={ele.video} image={ele.thumbnail}  />
+                </ul>
+              ))}
+
+              <button onClick={this.nextPageVideo}>下一页</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Demo />, c.create());
+    </script>
+  </body>
+</html>

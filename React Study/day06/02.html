@@ -1,0 +1,168 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-25 22:02:07
+ * @LastEditTime: 2020-04-25 23:52:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\day06\02.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+
+    <style>
+      body {
+        font: 14px "Century Gothic", Futura, sans-serif;
+        margin: 20px;
+      }
+
+      ol,
+      ul {
+        padding-left: 30px;
+      }
+
+      .board-row:after {
+        clear: both;
+        content: "";
+        display: table;
+      }
+
+      .status {
+        margin-bottom: 10px;
+      }
+
+      .square {
+        background: #fff;
+        border: 1px solid #999;
+        float: left;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 34px;
+        height: 34px;
+        margin-right: -1px;
+        margin-top: -1px;
+        padding: 0;
+        text-align: center;
+        width: 34px;
+      }
+
+      .square:focus {
+        outline: none;
+      }
+
+      .kbd-navigation .square:focus {
+        background: #ddd;
+      }
+
+      .game {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .game-info {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/babel">
+      let c = new Common();
+      class Square extends React.Component {
+        /**
+          注意
+            在 JavaScript class 中，每次你定义其子类的构造函数时，都需要调用 super 方法。
+            因此，在所有含有构造函数的的 React 组件中，构造函数必须以 super(props) 开头。
+        */
+        constructor(props) {
+          super(props);
+        }
+        
+        render() {
+          return (
+            <button className="square" onClick={()=>this.props.onClick()}>
+              {this.props.value}
+            </button>
+          );
+        }
+      }
+
+      class Board extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            //Array(9) 创建一个长度为9的数组，同时填充数组的值都为NULL
+            squares: Array(9).fill(null),
+            xIsNext:true
+          };
+        }
+
+        handelClick(i){
+          const squares = this.state.squares.slice();
+          squares[i] = this.state.xIsNext ? 'X' : 'O';
+          this.setState({
+            squares:squares,
+            xIsNext : !this.state.xIsNext
+          })
+        }
+
+        renderSquare(i) {
+          console.log(this.state.squares[i])
+          return <Square value={this.state.squares[i]} onClick={()=>this.handelClick(i)}/>;
+        }
+
+        render() {
+          const status = "Next player: "+(this.state.xIsNext?'X':'O');
+
+          return (
+            <div>
+              <div className="status">{status}</div>
+              <div className="board-row">
+                {this.renderSquare(0)}
+                {this.renderSquare(1)}
+                {this.renderSquare(2)}
+              </div>
+              <div className="board-row">
+                {this.renderSquare(3)}
+                {this.renderSquare(4)}
+                {this.renderSquare(5)}
+              </div>
+              <div className="board-row">
+                {this.renderSquare(6)}
+                {this.renderSquare(7)}
+                {this.renderSquare(8)}
+              </div>
+            </div>
+          );
+        }
+      }
+
+      class Game extends React.Component {
+        render() {
+          return (
+            <div className="game">
+              <div className="game-board">
+                <Board />
+              </div>
+              <div className="game-info">
+                <div>{/* status */}</div>
+                <ol>{/* TODO */}</ol>
+              </div>
+            </div>
+          );
+        }
+      }
+
+      // ========================================
+
+      ReactDOM.render(<Game />, c.create());
+    </script>
+  </body>
+</html>
