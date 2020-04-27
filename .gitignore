@@ -1,3 +1,4 @@
 node_modules
 .vscode
 my-app
+package-lock.json
