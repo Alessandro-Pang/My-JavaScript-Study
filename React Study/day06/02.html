@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-25 22:02:07
- * @LastEditTime: 2020-04-25 23:52:24
+ * @LastEditTime: 2020-04-26 08:27:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day06\02.html
@@ -83,11 +83,36 @@
         */
         constructor(props) {
           super(props);
+          this.state = {
+            styles: {
+              borderColor: "rgba(0,0,0)",
+            },
+          };
         }
-        
+        handelMouseOver = () => {
+          this.setState({
+            styles: {
+              borderColor: "rgba(50,200,200)",
+            },
+          });
+        };
+        handelMouseOut = () => {
+          this.setState({
+            styles: {
+              borderColor: "rgba(0,0,0)",
+            },
+          });
+        };
+        //style={({color:"red"})}
         render() {
           return (
-            <button className="square" onClick={()=>this.props.onClick()}>
+            <button
+              className="square"
+              style={this.state.styles}
+              onClick={() => this.props.onClick()}
+              onMouseOver={() => this.handelMouseOver()}
+              onMouseOut={() => this.handelMouseOut()}
+            >
               {this.props.value}
             </button>
           );
@@ -100,26 +125,32 @@
           this.state = {
             //Array(9) 创建一个长度为9的数组，同时填充数组的值都为NULL
             squares: Array(9).fill(null),
-            xIsNext:true
+            xIsNext: true,
           };
         }
 
-        handelClick(i){
+        handelClick(i) {
           const squares = this.state.squares.slice();
-          squares[i] = this.state.xIsNext ? 'X' : 'O';
+          squares[i] = this.state.xIsNext ? "X" : "O";
+
           this.setState({
-            squares:squares,
-            xIsNext : !this.state.xIsNext
-          })
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+          });
         }
 
         renderSquare(i) {
-          console.log(this.state.squares[i])
-          return <Square value={this.state.squares[i]} onClick={()=>this.handelClick(i)}/>;
+          return (
+            <Square
+              style={this.state.styles}
+              value={this.state.squares[i]}
+              onClick={() => this.handelClick(i)}
+            />
+          );
         }
 
         render() {
-          const status = "Next player: "+(this.state.xIsNext?'X':'O');
+          const status = "Next player: " + (this.state.xIsNext ? "X" : "O");
 
           return (
             <div>

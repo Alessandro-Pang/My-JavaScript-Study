@@ -1,0 +1,49 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-26 22:41:39
+ * @LastEditTime: 2020-04-26 23:18:26
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\day07\02.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../react.development.js"></script>
+    <script src="../react-dom.development.js"></script>
+    <script src="../babel.js"></script>
+    <script src="../common.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      let c = new Common();
+
+      class Demo extends React.Component {
+        render() {
+          return (
+            <ol>
+              {React.Children.map(this.props.children, (child) => (
+                <li>{child}</li>
+              ))}
+            </ol>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <Demo>
+          <span>Jello</span>
+          <span>Pages</span>
+        </Demo>,
+        c.create()
+      );
+
+      /*******************************Demo2************************************/
+      
+    </script>
+  </body>
+</html>
