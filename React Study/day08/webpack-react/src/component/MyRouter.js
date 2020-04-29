@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-27 21:58:43
- * @LastEditTime: 2020-04-27 23:04:59
+ * @LastEditTime: 2020-04-28 12:43:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day08\webpack-react\src\component\router.js
@@ -10,7 +10,6 @@ import React from "react";
 import { HashRouter as Router, Link, Route } from "react-router-dom";
 import Header from "./Header";
 import HookStudy from "./HookStudy";
-import { DatePicker } from 'antd';
 
 const Home = () => (
   <div>

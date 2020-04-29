@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-27 08:29:04
- * @LastEditTime: 2020-04-27 20:24:03
+ * @LastEditTime: 2020-04-28 08:33:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day08\webpack-react\webpack.config.js
@@ -57,6 +57,7 @@ const config = {
     // ...
     plugins: [
         new HtmlWebPackPlugin({
+            title:"zi Yang Blog",
             template: 'view/index.html',
             filename: 'index.html',
             inject: true

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-22 10:35:51
+ * @LastEditTime: 2020-04-27 23:57:39
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\common.js
+ */
 class Common{
   create(id){
     let app = document.createElement('div');

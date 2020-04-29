@@ -1,0 +1,29 @@
+.contentBody{
+  width: 100%;
+  /*****calc 函数中，三个参数需要有空格*****/
+  min-height: calc(80vh - 100px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.content{
+  margin:auto;
+  width:300px;
+  height: 300px;
+  border-radius: 300px;
+  /* background-color: black; */
+  background-image: url('../images/bg-icon.png');
+  background-position:center ;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  animation: my-rotate 5s linear infinite;
+}
+
+@keyframes my-rotate{
+  from {
+    transform: rotate(0deg);
+  }to{
+    transform: rotate(360deg);
+  }
+}
