@@ -1,0 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-30 08:04:40
+ * @LastEditTime: 2020-04-30 08:16:57
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\day11\01.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <script src="../react.development.js"></script>
+  <script src="../react-dom.development.js"></script>
+  <!-- <script src="../babel.js"></script> -->
+  <script src="../common.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+
+    let MyDiv = React.createElement("div", { title: "myDiv" }, "React.CreateElement");
+
+    class Demo extends React.Component {
+      render() {
+        return (
+          React.createElement("div",null,`${this.props.message}`,MyDiv)
+        )
+      }
+    }
+
+    ReactDOM.render(
+      React.createElement("Demo", {message:"Render渲染出一条消息"}, null),
+      document.getElementById("app")
+    )
+  </script>
+</body>
+
+</html>

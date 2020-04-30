@@ -1,0 +1,13 @@
+html,body{
+  margin:0;
+  padding: 0;
+}
+nav.nav-router > ul{
+  list-style: none;
+  height: 25px;
+}
+
+nav.nav-router > ul >li {
+  float: left;
+  margin-left:20px
+}

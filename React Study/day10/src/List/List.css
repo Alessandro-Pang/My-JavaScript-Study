@@ -1,0 +1,34 @@
+.ranking-ul{
+  width: 40%;
+  height: 100%;
+  margin: auto;
+  list-style: none;
+}
+
+.ranking-ul > span{
+  display: block;
+  border: 2px solid dimgray;
+  height: 30px;
+  box-sizing: border-box;
+  white-space:nowrap; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 30px;
+  padding-left: 15px;
+}
+
+.ranking-ul > span:hover{
+  background-color: rgba(0,0,0,.3);
+  cursor: pointer;
+}
+
+.ranking-ul > span > *{
+  float: left;
+}
+.ranking-ul > span >li{
+  box-sizing: border-box;
+  white-space:nowrap; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 80%;
+}

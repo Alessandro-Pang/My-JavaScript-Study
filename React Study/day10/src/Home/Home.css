@@ -1,0 +1,20 @@
+.ranking-list{
+  width: 100%;
+  min-height: 80vh;
+}
+.ranking-titles{
+  margin: auto;
+  text-align: center;
+}
+.nextBtn{
+  width: 80px;
+  height: 40px;
+  border: 0;
+  border-radius: 20px;
+  background-color: deepskyblue;
+  transition: all .5s;
+  float: right;
+}
+.nextBtn:hover{
+  background-color: orange;
+}

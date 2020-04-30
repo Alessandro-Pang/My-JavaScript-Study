@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-28 08:19:07
- * @LastEditTime: 2020-04-28 13:00:24
+ * @LastEditTime: 2020-04-29 09:52:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day09\webpack.config.js
@@ -30,11 +30,11 @@ const config = {
           options: {
             // babel 转义的配置选项
             babelrc: false,
-            presets: [
-              // 添加 preset-react
-              require.resolve("@babel/preset-react"),
-              [require.resolve("@babel/preset-env"), { modules: false }],
-            ],
+            // presets: [
+            //   // 添加 preset-react
+            //   require.resolve("@babel/preset-react"),
+            //   [require.resolve("@babel/preset-env"), { modules: false }],
+            // ],
             cacheDirectory: true,
           },
         },
