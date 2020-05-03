@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-30 08:04:40
- * @LastEditTime: 2020-04-30 08:16:57
+ * @LastEditTime: 2020-04-30 08:49:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day11\01.html
@@ -20,24 +20,83 @@
   <script src="../common.js"></script>
 </head>
 
+<!-- 
+  原生React 创建虚拟DOM
+  个 JSX 元素只是调用 React.createElement(component, props, ...children) 的语法糖。
+  因此，使用 JSX 可以完成的任何事情都可以通过纯 JavaScript 完成。
+ -->
+
 <body>
   <div id="app"></div>
   <script>
-
-    let MyDiv = React.createElement("div", { title: "myDiv" }, "React.CreateElement");
+    let MyDiv = React.createElement(
+      "div",
+      { title: "myDiv" },
+      "React.CreateElement"
+    );
 
     class Demo extends React.Component {
       render() {
         return (
-          React.createElement("div",null,`${this.props.message}`,MyDiv)
-        )
+          // 元素属性、props都通过第二个参数传递rt
+          React.createElement("div", null, `${this.props.message}`, MyDiv)
+        );
       }
     }
 
     ReactDOM.render(
-      React.createElement("Demo", {message:"Render渲染出一条消息"}, null),
+      React.createElement(Demo, { message: "Render渲染出一条消息" }, null),
       document.getElementById("app")
-    )
+    );
+
+    // React 快捷方式
+    const react = React.createElement;
+    const c = new Common();
+    let styles = {
+      width: 300,
+      height: 300,
+      border: "1px solid red",
+      margin: "auto",
+    };
+
+    // function div(){
+    //   return(
+    //     react.createElement("div",null,...this.props.message)
+    //   )
+    // }
+
+    class div extends React.Component{
+      render(){
+        return(
+          react("div",null,this.props.message)
+        )
+      }
+    }
+    class Demo2 extends React.Component {
+      render() {
+        return (
+          react(
+            "div",
+            { style: styles },
+            null,
+            `这是一个DIV块:`,
+            //字符串中的 div标签 无法渲染成html元素
+            `\n<div>用户传来一些消息${this.props.message}</div>`,
+            //创建虚拟DIV DOM对象
+            react(div,{message:"嘎嘎嘎嘎嘎"},null),
+            react(div,{message:"啧啧啧啧啧啧"},null),
+            react(div,{message:"啦啦啦啦啦啦啦"},null)
+          )
+          );
+      }
+    }
+
+    //react 渲染对象必须是 继承了React.Component的类
+    //不能直接将 React.createElement 创建的虚拟DOM作为组件传递
+    ReactDOM.render(
+      react(Demo2, { message: "啊,我吐了！！" }, null),
+      c.create()
+    );
   </script>
 </body>
 

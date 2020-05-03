@@ -14,6 +14,13 @@
   background-color: deepskyblue;
   transition: all .5s;
   float: right;
+  /*-----------------------
+   | react 默认渲染outline
+   | 这个鼠标、键盘的焦点事件是属于 无障碍设计
+   | 没有显示的情况下，不应该将它去掉
+   | https://zh-hans.reactjs.org/docs/accessibility.html#keyboard-focus-and-focus-outline
+   |----------------------*/
+  outline:0;
 }
 .nextBtn:hover{
   background-color: orange;

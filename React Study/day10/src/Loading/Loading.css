@@ -24,4 +24,7 @@
   transform: translateY(30%);
   text-align: center;
   line-height: 50vh;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }

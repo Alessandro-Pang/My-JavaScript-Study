@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+
+import { BrowserRouter as Router, Route, Link ,Switch } from "react-router-dom";
 import Home from "./Home/Home";
 import "./App.css";
 
@@ -32,25 +33,29 @@ class App extends Component {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to={JSpath}>Javascript</Link>
+              <Link to="/javascript">Javascript</Link>
             </li>
             <li>
-              <Link to={JAVApath}>JAVA</Link>
+              <Link to="/java">JAVA</Link>
             </li>
             <li>
-              <Link to={Nodepath}>NodeJS</Link>
+              <Link to="/nodejs">NodeJS</Link>
             </li>
             <li>
-              <Link to={TSpath}>Typescript</Link>
+              <Link to="/typescrpt">Typescript</Link>
             </li>
           </ul>
         </nav>
         <hr />
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/Javascript" exact component={Home}></Route>
-        <Route path="/JAVA" exact component={Home}></Route>
-        <Route path="/NodeJS" exact component={Home}></Route>
-        <Route path="/Typescript" exact component={Home}></Route>
+        <Switch>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/:type" exact children={ <Home /> }></Route>
+        </Switch>
+       
+        {/* <Route path="/Javascript" component={Home}></Route>
+        <Route path="/JAVA" component={Home}></Route>
+        <Route path="/NodeJS" component={Home}></Route>
+        <Route path="/Typescript" component={Home}></Route> */}
       </Router>
     );
   }
