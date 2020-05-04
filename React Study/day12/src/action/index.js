@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-04 16:32:30
- * @LastEditTime: 2020-05-04 23:21:16
+ * @LastEditTime: 2020-05-05 00:01:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day12\src\action\index.js
@@ -36,6 +36,12 @@ export const add_todo = (todo,todoId)=>({
   todo,
   todoId
 })
+/**
+ * store 里能直接通过 store.dispatch() 调用 dispatch() 方法，
+ * 但是多数情况下你会使用 react-redux 提供的 connect() 帮助器来调用。
+ * bindActionCreators() 可以自动把多个 action 创建函数 绑定到 dispatch() 方法上。
+ * @param {*} todoId 
+ */
 export const remove_todo = (todoId)=>({
   type:REMOVE_TODO,
   todoId
