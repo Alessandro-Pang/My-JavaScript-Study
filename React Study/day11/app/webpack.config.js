@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-30 19:58:05
- * @LastEditTime: 2020-04-30 23:25:20
+ * @LastEditTime: 2020-05-04 13:13:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day11\app\webpack.config.js
@@ -11,16 +11,18 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const config = {
+  target:"web",
   mode: "development",
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[hash:8]-bundle.js",
+    publicPath: '/'
   },
   resolve: {
     extensions: [".js", ".jsx", ".json"],
     alias: {
-      "@": path.join(__dirname, "src"),
+      "@": path.join(__dirname, "src/component/"),
     },
   },
 
@@ -65,6 +67,7 @@ const config = {
     overlay: {
       error: true,
     },
+    historyApiFallback: true
   },
 
   plugins: [
