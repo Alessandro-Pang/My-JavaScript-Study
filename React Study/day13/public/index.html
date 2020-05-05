@@ -1,0 +1,92 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-05 09:00:24
+ * @LastEditTime: 2020-05-05 10:10:37
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\day13\public\index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Redux Study</title>
+</head>
+<body>
+  <!-- 
+      1、Redux 与 React 没有实际关系  
+          Redux 和 React 之间没有关系。
+          Redux 支持 React、Angular、Ember、jQuery 甚至纯 JavaScript。
+
+          尽管如此，Redux 还是和 React 和 Deku 这类库搭配起来用最好，
+          因为这类库允许你以 state 函数的形式来描述界面，Redux 通过 action 的形式来发起 state 变化。
+      
+      2、Redux 由 Action 、 reducers 、 Store 、数据流 四个部分组成
+          (1)Action 是把数据从应用传到 store 的有效载荷。
+            (这里之所以不叫 view 是因为这些数据有可能是服务器响应，用户输入或其它非 view 的数据)
+              它是 store 数据的唯一来源。
+              一般来说你会通过 store.dispatch() 将 action 传到 store。
+          
+          (2)Reducers 指定了应用状态的变化如何响应 actions 并发送到 store 的，
+              actions 只是描述了有事情发生了这一事实，并没有描述应用如何更新 state。
+              reducer 就是一个纯函数，接收旧的 state 和 action，返回新的 state。
+
+          (3)Store 就是把它们联系到一起的对象。
+            Store 有以下职责：
+              维持应用的 state；
+              提供 getState() 方法获取 state；
+              提供 dispatch(action) 方法更新 state；
+              通过 subscribe(listener) 注册监听器;
+              通过 subscribe(listener) 返回的函数注销监听器。
+              再次强调一下 Redux 应用只有一个单一的 store。
+              当需要拆分数据处理逻辑时，你应该使用 reducer 组合 而不是创建多个 store。
+
+              根据已有的 reducer 来创建 store 是非常容易的。
+              使用 combineReducers() 将多个 reducer 合并成为一个。
+              现在我们将其导入，并传递 createStore()。
+          
+          (4)数据流
+              严格的单向数据流是 Redux 架构的设计核心。
+              这意味着应用中所有的数据都遵循相同的生命周期，这样可以让应用变得更加可预测且容易理解。
+              同时也鼓励做数据范式化，这样可以避免使用多个且独立的无法相互引用的重复数据。
+
+              如果这些理由还不足以令你信服，读一下 动机 和 Flux 案例，这里面有更加详细的单向数据流优势分析。
+              虽然 Redux 并不是严格意义上的 Flux，但它们有共同的设计思想。
+
+            Redux 应用中数据的生命周期遵循下面 4 个步骤：
+
+              1、调用 store.dispatch(action)。
+
+                  Action 就是一个描述“发生了什么”的普通对象。
+                  你可以在任何地方调用 store.dispatch(action)，包括组件中、XHR 回调中、甚至定时器中。
+
+              2、Redux store 调用传入的 reducer 函数。
+
+                  Store 会把两个参数传入 reducer： 
+                    当前的 state 树和 action。
+
+              3、根 reducer 应该把多个子 reducer 输出合并成一个单一的 state 树。
+
+                  根 reducer 的结构完全由你决定。
+                  Redux 原生提供combineReducers()辅助函数，来把根 reducer 拆分成多个函数，用于分别处理 state 树的一个分支。
+
+
+              4、Redux store 保存了根 reducer 返回的完整 state 树。
+
+                  这个新的树就是应用的下一个 state！
+                  所有订阅 store.subscribe(listener) 的监听器都将被调用；
+                  监听器里可以调用 store.getState() 获得当前 state。
+
+                  如果你使用了 React Redux 这类的绑定库，这时就应该调用 component.setState(newState) 来更新。
+
+
+          总结：
+            action : 描述了应用发生的事实，没有描述如何发生
+            reducers : 描述了应用发生的经过，如何响应actions 发送新的状态给 store
+            store ：就是将action,reduces 联系到一起，维持应用的state
+            数据流 ： 包含数据的生命周期
+  -->  
+</body>
+</html>
