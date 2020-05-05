@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-05 09:00:24
- * @LastEditTime: 2020-05-05 10:10:37
+ * @LastEditTime: 2020-05-05 17:00:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day13\public\index.html
@@ -13,6 +13,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Redux Study</title>
+  <style>
+    .del{
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border: 1px solid red;
+      border-radius: 10px;
+      transform: translateY(40%);
+    }
+    .del::before{
+      content: "x";
+      display: block;
+      margin:auto;
+      color:red;
+      transform: translateY(-30%);
+    }
+    .del:hover{
+      border-color:aqua;
+      color:aqua
+    }
+  </style>
 </head>
 <body>
   <!-- 
@@ -88,5 +109,20 @@
             store ：就是将action,reduces 联系到一起，维持应用的state
             数据流 ： 包含数据的生命周期
   -->  
+  <input type="text" placeholder="TODO List" name="" id="inp">
+  <input type="button"  id="add" value="添加TODO">
+  <input type="button"  id="remove" value="移除TODO">
+  <br>
+  <i style="color:green;font-size: 14px;">先点击 移除TODO 按钮,再点击红色x号移除</i>
+  <div style="width: 350px;border: 1px solid red;min-height: 300px;" id="store"></div>
+
+  <div>
+    <strong>Redux 生命周期遵循下面 4 个步骤：</strong><br>
+    Action 就是一个描述“发生了什么”的普通对象。<br>
+    Store 会把两个参数传入 reducer： 当前的 state 树和 action。 <br>
+    根 reducer 应该把多个子 reducer 输出合并成一个单一的 state 树。 <br>
+    Redux store 保存了根 reducer 返回的完整 state 树。<br>
+  </div>
+  <br>
 </body>
 </html>

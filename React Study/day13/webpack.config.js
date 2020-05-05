@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-05 08:58:58
- * @LastEditTime: 2020-05-05 09:29:07
+ * @LastEditTime: 2020-05-05 14:25:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day13\webpack.config.js
@@ -27,6 +27,7 @@ const config = {
     rules:[
       {
         test:/\.js$/,
+        exclude:/node_modules/,
         loader:"babel-loader"
       }
     ]

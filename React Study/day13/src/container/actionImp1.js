@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-05 11:54:08
- * @LastEditTime: 2020-05-05 12:02:29
+ * @LastEditTime: 2020-05-05 16:49:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day13\src\container\actionImp.js
@@ -24,7 +24,7 @@ let store = createStore(todo);
  * 只要传入参数相同，返回计算得到的下一个 state 就一定相同。
  * 没有特殊情况、没有副作用，没有 API 请求、没有变量修改，单纯执行计算。
  */
-store.subscribe(()=>{
+let unsubscribe = store.subscribe(()=>{
   console.info("\n------------------分割线--------------------\n")
   console.log("%c show state : %c"+store.getState().showState ,"font-size:16px;color:green;font-weight:bold","color:black")
   console.log("%ctodos : %c"+JSON.stringify(store.getState().todos),"font-size:16px;color:green;font-weight:bold","color:black")
@@ -42,7 +42,8 @@ store.dispatch(add_todo("第三条TODO信息"));
 store.dispatch(remove_todo(1))
 store.dispatch(set_todo_state("SHOW_SCRNNER"))
 
-
+//通过subscribe返回的函数，注销更新订阅
+unsubscribe();
 /*********************************************Object.assign Demo*************************************************/
 
 let obj = {a:"abc",b:"123",c:"a1w2e3",d:"password"}
