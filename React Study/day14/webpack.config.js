@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-30 19:58:05
- * @LastEditTime: 2020-05-05 20:00:44
+ * @LastEditTime: 2020-05-05 21:39:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day11\app\webpack.config.js
@@ -22,8 +22,8 @@ const config = {
   resolve: {
     extensions: [".js", ".jsx", ".json"],
     alias: {
-      "@": path.join(__dirname, "src/component/"),
-      "@src":path.join(__dirname,"src")
+      "@": path.join(__dirname, "src/components"),
+      "@src":path.join(__dirname, "src"),
     },
   },
 

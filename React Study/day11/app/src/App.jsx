@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Footer from '@/Todo/Footer'
+import AddTodo from '@src/container/AddTodo'
+import VisibleTodoList from '@src/container/VisibleTodoList'
 // import "@/App.css";
 import Home from "@/Home";
 import NodeJS from "@/NodeJS";
@@ -12,6 +15,9 @@ export default class App extends Component {
     return (
       <div>
         {/* <div id="loading"></div> */}
+        <AddTodo />
+          <VisibleTodoList />
+        <Footer />
         <Router>
           <ul>
             <li>
@@ -53,3 +59,4 @@ export default class App extends Component {
     );
   }
 }
+

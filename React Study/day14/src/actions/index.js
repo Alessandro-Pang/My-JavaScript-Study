@@ -1,10 +1,10 @@
 /*
  * @Author: your name
- * @Date: 2020-05-05 17:31:48
- * @LastEditTime: 2020-05-05 19:55:13
+ * @Date: 2020-05-05 22:45:20
+ * @LastEditTime: 2020-05-05 23:46:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \My-JavaScript-Study\React Study\day11\app\src\action\index.js
+ * @FilePath: \My-JavaScript-Study\React Study\day14\src\actions\index.js
  */
 let nextTodoId = 0
 export const addTodo = text => {
@@ -22,7 +22,7 @@ export const setVisibilityFilter = filter => {
   }
 }
 
-export const toggleTodo = id => {
+export const ToggleTodo = id => {
   return {
     type: 'TOGGLE_TODO',
     id
