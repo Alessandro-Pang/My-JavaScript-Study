@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-06 08:22:55
- * @LastEditTime: 2020-05-06 08:54:34
+ * @LastEditTime: 2020-05-07 00:28:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day15\webpack.config.js
@@ -37,15 +37,20 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
+        exclude: /node_modules/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "postcss-loader" },
+        ],
       },
       {
         test: /\.(jpe?g|png|svg|gif)$/,
         loader: "url-loader",
-        options: { 
+        options: {
           limit: "2048",
-          name:'[name].[ext]'
-        } 
+          name: "[name].[ext]",
+        },
       },
     ],
   },

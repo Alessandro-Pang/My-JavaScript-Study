@@ -1,0 +1,73 @@
+/* $ 声明变量 */
+$fontsize: 1rem;
+$mainColor: #30aaaa;
+
+/* % 声明代码块 */
+%centered {
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 300px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color:inherit
+}
+
+body {
+  font-size: $fontsize;
+  background-color: $mainColor;
+}
+
+nav {
+  background-color: white;
+  height: 40px;
+  ol {
+    list-style: none;
+    transition: font-size .5s linear;
+
+    li {
+      float: left;
+      color:black;
+      margin-left :10px;
+      margin-top:10px;
+    }
+
+    li:hover {
+      color: green;
+    }
+    /*-----------------------------
+     |  & 代表当级，用于设置伪类样式  
+     |  这里的 & ----> ol 元素        
+     -----------------------------*/
+    &:hover{
+      font-size:calc( $fontsize + 5px)
+    }
+  }
+
+  &:hover{
+    animation:opacitys 2s linear;
+  }
+}
+/**
+  动画函数要声明在类样式外面，否则会被当作样式处理！
+*/
+@keyframes opacitys{
+  from{
+    background: #30aaaa;
+  }to{
+    background:#ffffff;
+  }
+}
+
+.centered {
+  @extend %centered;
+}
