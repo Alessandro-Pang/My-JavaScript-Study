@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-30 19:58:05
- * @LastEditTime: 2020-05-05 21:39:31
+ * @LastEditTime: 2020-05-06 08:44:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day11\app\webpack.config.js
@@ -11,19 +11,19 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const config = {
-  target:"web",
+  target: "web",
   mode: "development",
   entry: "./src/index.jsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[hash:8]-bundle.js",
-    publicPath: '/'
+    publicPath: "/",
   },
   resolve: {
     extensions: [".js", ".jsx", ".json"],
     alias: {
       "@": path.join(__dirname, "src/components"),
-      "@src":path.join(__dirname, "src"),
+      "@src": path.join(__dirname, "src"),
     },
   },
 
@@ -50,9 +50,9 @@ const config = {
         use: [
           {
             loader: "url-loader",
-            options:{
-              limit:2048
-            }
+            options: {
+              limit: 2048,
+            },
           },
         ],
       },
@@ -68,7 +68,8 @@ const config = {
     overlay: {
       error: true,
     },
-    historyApiFallback: true
+    //解决路由刷新地址丢失
+    historyApiFallback: true,
   },
 
   plugins: [
@@ -77,7 +78,7 @@ const config = {
       template: path.join(__dirname, "public/index.html"),
       filename: "index.html",
       inject: "body",
-      showErrors:true
+      showErrors: true,
     }),
   ],
 };

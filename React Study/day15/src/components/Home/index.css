@@ -1,0 +1,129 @@
+/* 使用precss 就不可以在 :root 中声明代码块变量了 */
+:root {
+  --colors: yellow;
+}
+
+:global(.my-home) {
+}
+:global(.test-at-root) {
+}
+
+/* 声明代码块不可以添加冒号,否则会被渲染成类样式 */
+%fontFamliy {
+  font-size: 18px;
+  color: orange;
+  text-shadow: green 5px 5px;
+}
+
+%block-box {
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  line-height: 150px;
+}
+
+$background-color: rgba(50, 10, 10);
+
+/* 
+  custom-selecor
+  :-- 前缀声明 自定义选择器
+  后面是选择器元素，以逗号分隔
+*/
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+
+/**
+  * custom-selector
+  * -- 前缀声明 自定义media 
+  */
+@custom-media --viewprot-width (width <= 800px);
+
+:--heading {
+  color: rgb(80, 50, 200);
+  font-weight: bolder;
+  transition: color 0.5s linear;
+  /*
+    媒体查询不可以用vw,vh单位
+      因为他们始终是当前屏幕的100%
+  */
+  @media (--viewprot-width) {
+    color: rgb(50, 255, 80);
+  }
+}
+
+:global(.home) {
+  @extend %fontFamliy;
+  @extend %block-box;
+  background: $background-color;
+  transform: rotate(30deg);
+}
+
+.my-home .home2 {
+  /* var() 调用 root 声明的变量  */
+  color: var(--colors);
+
+  /* @at-root 直接作用于根元素下,主要目的适用于不打乱标签书写顺序 */
+  @at-root {
+    .test-at-root {
+      color: yellow;
+      background: black;
+    }
+  }
+}
+
+$dir: ../../images;
+
+.ol {
+  position: absolute;
+  top: 350px;
+  left: 0;
+  list-style: none;
+  height: 100px;
+}
+
+$four: 100px;
+
+@each $img in (iali0, iali2, iali3, iali4, iali5, iali6) {
+  .$img {
+    float: left;
+    width: $four;
+    height: 100px;
+    margin-left: 15px;
+    background-image: url("../../images/$img.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+}
+
+@for $count from 1 to 5 by 2 {
+  @if $count > 2 {
+    /* 
+      直接使用 #{$count}会报错，这里需要使用计算函数实例化
+      不可以使用 '#{$count}'px 字符串拼接,虽然他可以解析出 count 的值，但他是个字符串，css无法识别
+     */
+    .abc {
+      width: calc(#{$count}px + 5vw);
+    }
+    .abc::before {
+      /* content 是个字符串  */
+      content: "$count";
+    }
+  }
+}
+
+@for $i from i to 5 by 1 {
+  @if $i <> 0 {
+    .abc {
+      .my-home li:ntn-child($i) {
+        width: calc(100px + #{$i}px) !important;
+      }
+    }
+  }
+}
+
+.abc {
+  position: absolute;
+  top: 500px;
+  height: 100px;
+  border: 1px solid red;
+}

@@ -2,10 +2,10 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import counter from "src/reducers/counter";
+import reducers from "src/reducers";
 import App from "@/App";
 
-let store = createStore(counter);
+let store = createStore(reducers);
 // store.subscribe(()=>{
 //   console.log(store.getState())
 // })

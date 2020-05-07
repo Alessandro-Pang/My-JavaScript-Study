@@ -1,0 +1,45 @@
+@at-root{
+  @viewport{max-width:100vw}
+}
+
+/* 
+  mixin 混合类型
+  @mixin 声明一个函数
+  当他没有（）时，可以作为代码块使用
+  当他有括号时，可以传递参数，可以添加默认值
+  注意：
+    如果声明时 函数名与括号之间有空格，那么调用时也必须有空格，且空格字符数一致
+    所以尽量不要在函数之间使用空格     
+*/
+@mixin font-style($size:18px,$color:yellow){
+  color:$color;
+  font-size:$size;
+  font-weight:bold;
+}
+
+/* mixin 作为代码块使用 */
+@mixin backg {
+  background-color:#aaa
+}
+
+.precss{
+  /* include 调用 mixin */
+  @include backg;
+  @include font-style(20px,blue);
+}
+
+$size:3;
+
+/*
+  @(属性名)：调用内部属性
+    实际是将内部属性的值复制了一遍,并非是获取计算好的值
+  @(属性名)：注意这里是复制的属性，所以不能在里面写变量,但是可以在计算函数中写
+*/
+.abc{
+  width:100px;
+  height: @width;
+  padding-left:10px;
+  padding-right:@padding-left;
+  line-height:$size;
+  font-size:calc(@(line-height)em - 10px)
+}

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-06 08:36:45
- * @LastEditTime: 2020-05-06 08:52:53
+ * @LastEditTime: 2020-05-07 21:31:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day15\public\index.html
@@ -10,10 +10,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
   <title>Document</title>
 </head>
 <body>
   <div id="root"></div>
+  <!-- 
+    Css 模块化后
+    域样式无法使用层级选择器
+    应当避免使用元素选择器，多使用ID选择器和类选择器
+   -->
+
+   <!-- 
+      避免模块化的个人开发方法
+        1、只有 元素选择器作为公共样式
+        2、每个模块的顶级元素，按照 模块名称+元素名称+标识名 作为类名 / 或者使用ID
+        3、子元素、样式使用由 模块顶级元素作为父级元素，使用层级选择器
+        4、子元素命名规范  模块名称+元素名称+标识名 
+        5、公共样式套件命名 元素名称+标识名
+    -->
 </body>
 </html>

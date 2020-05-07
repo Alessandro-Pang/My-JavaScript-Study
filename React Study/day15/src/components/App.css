@@ -27,7 +27,7 @@ body {
   background-color: $mainColor;
 }
 
-nav {
+nav.nav {
   background-color: white;
   height: 40px;
   ol {
@@ -59,6 +59,7 @@ nav {
 }
 /**
   动画函数要声明在类样式外面，否则会被当作样式处理！
+  动画函数也会被模块导出
 */
 @keyframes opacitys{
   from{
@@ -68,6 +69,14 @@ nav {
   }
 }
 
-.centered {
+:local(.centered) {
   @extend %centered;
 }
+
+
+@media screen and (width <= 500px){
+  .centered{
+    width:100%;
+  }
+}
+
