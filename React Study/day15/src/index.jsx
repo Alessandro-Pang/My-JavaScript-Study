@@ -6,9 +6,9 @@ import reducers from "src/reducers";
 import App from "@/App";
 
 let store = createStore(reducers);
-// store.subscribe(()=>{
-//   console.log(store.getState())
-// })
+store.subscribe(()=>{
+  console.log(store.getState())
+})
 render(
   <Provider store={store}>
     <App />

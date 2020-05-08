@@ -38,7 +38,7 @@ export default class App extends Component {
               <Precss></Precss>
             </Route>
             <Route path="/Todos">
-              {/* <Todos></Todos> */}
+              <Todos></Todos>
             </Route>
           </Switch>
         </div>

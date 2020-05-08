@@ -7,7 +7,7 @@ import { add, substract } from "src/actions";
  */
 const mapStateToProps = (state) => {
   return {
-    counter: state,
+    counter: state.counter,
   };
 };
 
