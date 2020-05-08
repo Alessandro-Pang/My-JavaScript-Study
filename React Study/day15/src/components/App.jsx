@@ -4,7 +4,7 @@ import Home from '@/Home'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import {centered,nav} from './App.css'
 import Precss from '@/Precss';
-import Todos from '@/Todo'
+import Todos from '@/Todo';
 export default class App extends Component {
   render() {
     return (

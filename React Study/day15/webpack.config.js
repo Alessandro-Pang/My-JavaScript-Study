@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-06 08:22:55
- * @LastEditTime: 2020-05-07 20:53:53
+ * @LastEditTime: 2020-05-08 12:41:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day15\webpack.config.js
@@ -9,7 +9,6 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const autoprefixer = require("autoprefixer");
 
 const config = {
   target: "web",
