@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-08 22:13:47
- * @LastEditTime: 2020-05-09 00:06:38
+ * @LastEditTime: 2020-05-12 19:26:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day16\webpack.conifg.js
@@ -38,7 +38,8 @@ const config = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
+        // include:path.resolve(__dirname,'~antd/dist/antd.css'),
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
@@ -67,7 +68,6 @@ module.exports = function (env) {
     config.watchOptions = {
       aggregateTimeout: 1000, // in ms
       // 将多个更改聚合到单个重构建(rebuild)
-  
       poll: true,
       poll: 500, // 间隔单位 ms
       // 启用轮询观察模式
@@ -79,10 +79,10 @@ module.exports = function (env) {
       port: 8080,
       //设置 0.0.0.0 可以使其他设备访问
       host: "127.0.0.1",
-      // open: "Chrome",
+      open: "Chrome",
       openPage: "index",
       hot: true,
-      noInfo: true,
+      noInfo: false,
       contentBase: path.join(__dirname, "dist"),
       overlay: {
         warnings: true,
@@ -95,6 +95,5 @@ module.exports = function (env) {
   config.mode = env === "development" ? "development" : "production";
   config.devtool = env === "developement" ? "eval" : "source-map";
 
-  console.log(env === "production")
   return config;
 };

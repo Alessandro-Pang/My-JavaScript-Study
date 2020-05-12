@@ -1,0 +1,45 @@
+html,
+body,
+header,
+nav,
+section,
+article,
+aside,
+ol,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  height: 40px;
+
+  ul {
+    list-style: none;
+    height: 40px;
+
+    li {
+      float: left;
+      margin-left: 10px;
+      line-height:40px;
+      a {
+        text-decoration: none;
+        transition:color 0.8s linear;
+        font-size:18px;
+        font-weight:bolder;
+        color: orange;
+        
+        &:hover {
+          color: rgb(0, 255, 80);
+        }
+      }
+    }
+  }
+}

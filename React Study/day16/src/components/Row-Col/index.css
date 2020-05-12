@@ -1,0 +1,19 @@
+.ant-row {
+  .ant-col {
+    /* &:不允许一个元素使用两次及以上的选择器 */
+     &:nth-of-type(odd) {
+      background: orange;
+    }
+    /*
+    &:nth-of-type(even) {
+      background: yellow;
+    } 
+    */
+  }
+  .ant-col:nth-of-type(even) {
+    background: yellow;
+  }
+  .ant-col:nth-of-type(3n+1){
+    background:rgb(0,100,255)
+  }
+}
