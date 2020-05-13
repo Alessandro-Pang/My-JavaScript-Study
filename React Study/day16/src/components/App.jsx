@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import GridLayout from "@/Row-Col";
-import { Col, Row, Divider } from "antd";
+import { Divider } from "antd";
 import "./App.css";
 import Home from "@/Home";
+import GridLayout from "@/Row-Col";
 import MenuManger from "@/MenuManger";
+import Menu2 from '@/Menu2'
 
 export default class App extends Component {
   render() {
@@ -22,6 +23,9 @@ export default class App extends Component {
               <li>
                 <Link to="/GridLayout">GridLayout</Link>
               </li>
+              <li>
+                <Link to="/Menu2">Menu2</Link>
+              </li>
             </ul>
           </nav>
           <Divider style={{ margin: "10px 0" }} />
@@ -34,6 +38,9 @@ export default class App extends Component {
             </Route>
             <Route path="/GridLayout">
               <GridLayout></GridLayout>
+            </Route>
+            <Route path="/Menu2">
+              <Menu2></Menu2>
             </Route>
           </Switch>
         </Router>

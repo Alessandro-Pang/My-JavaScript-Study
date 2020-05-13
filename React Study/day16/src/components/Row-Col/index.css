@@ -1,4 +1,4 @@
-.ant-row {
+.learing.ant-row {
   .ant-col {
     /* &:不允许一个元素使用两次及以上的选择器 */
      &:nth-of-type(odd) {

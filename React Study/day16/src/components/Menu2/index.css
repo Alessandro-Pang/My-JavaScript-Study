@@ -1,0 +1,15 @@
+.my-lay > header> .logo{
+  width:120px;
+  height: 31px;
+  background:#aaaa;
+  float:left;
+  margin:16px 28px 10px 0
+}
+.my-lay > section {
+  min-height:300px;
+}
+
+.my-lay > footer{
+  text-align:center;
+  border-top:1px solid #aaaa
+}

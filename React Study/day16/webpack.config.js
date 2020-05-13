@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-08 22:13:47
- * @LastEditTime: 2020-05-12 19:26:50
+ * @LastEditTime: 2020-05-13 08:06:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day16\webpack.conifg.js
@@ -20,7 +20,7 @@ const config = {
     publicPath: "/",
   },
   resolve: {
-    extensions: [".js", ".jsx", ".json"],
+    extensions: [".jsx", ".js", ".json"],
     alias: {
       "@": path.join(__dirname, "src/components"),
       src: path.join(__dirname, "src"),
@@ -80,7 +80,7 @@ module.exports = function (env) {
       //设置 0.0.0.0 可以使其他设备访问
       host: "127.0.0.1",
       open: "Chrome",
-      openPage: "index",
+      openPage: "MenuManger",
       hot: true,
       noInfo: false,
       contentBase: path.join(__dirname, "dist"),
