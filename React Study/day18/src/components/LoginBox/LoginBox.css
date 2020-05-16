@@ -1,0 +1,24 @@
+#loginBox-form{
+  width: 400px;
+  height: 350px;
+  transform:translateY(35%);
+  margin: 0 auto;
+  padding: 50px;
+  padding-top:30px;
+  box-shadow:0px 0px 5px 3px #00aaff;
+  background:rgba(253,253,253);
+  border-radius:20px
+}
+
+#loginBox-form h1,
+#loginBox-form h2{
+  color:#00aaff;
+  font-weight:bolder;
+  text-shadow:2px -2px 3px #00aaff;
+  text-align:center
+}
+
+#loginBox-form button[type=submit]{
+  width:100%;
+  height: 40px;
+}

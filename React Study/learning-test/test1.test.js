@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-05-14 22:13:52
- * @LastEditTime: 2020-05-15 08:56:30
+ * @LastEditTime: 2020-05-15 13:14:16
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: Jest JS 入门
  * @FilePath: \My-JavaScript-Study\React Study\day18\src\index.test.js
  */
 
-import sum from "./test1.js";
+//import sum from "./test1.js";
+const sum = require("./test1");
 
 it('测试 sum 函数是否能正常解析结果',()=>{
   // expect 断言，判断解析出来的结果是否和 198 相等
