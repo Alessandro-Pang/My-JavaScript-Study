@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Input, Button } from "antd";
-import { Redirect } from "react-router-dom"
 import "./loginBox.css";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
