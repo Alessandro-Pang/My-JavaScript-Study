@@ -14,7 +14,7 @@
 #loginBox-form h2{
   color:#00aaff;
   font-weight:bolder;
-  text-shadow:2px -2px 3px #00aaff;
+  /* text-shadow:2px -2px 3px #00aaff; */
   text-align:center
 }
 

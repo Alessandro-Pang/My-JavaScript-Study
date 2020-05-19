@@ -4,9 +4,7 @@ import Index from '@/Index';
 class index extends Component {
   render() {
     return (
-      <div>
-        <Index/>
-      </div>
+      <Index/>
     );
   }
 }

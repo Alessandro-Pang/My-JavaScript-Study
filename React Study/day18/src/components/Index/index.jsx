@@ -2,22 +2,43 @@ import React, { Component } from "react";
 import { Layout, Menu } from "antd";
 import TodoLink from "./TodoLink";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Sys_menu from "@/Sys_menu"
 const { Header, Sider, Content, Footer } = Layout;
 const { SubMenu } = Menu;
-import { MenuFoldOutlined,MenuUnfoldOutlined, GlobalOutlined } from "@ant-design/icons";
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  GlobalOutlined,
+} from "@ant-design/icons";
+import './index.css'
+
+
 class index extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      collapsed:false
-    }
-    this.toggle = this.toggle.bind(this)
+      collapsed: false,
+      data: [],
+    };
+    this.toggle = this.toggle.bind(this);
   }
   toggle() {
     this.setState({
       collapsed: !this.state.collapsed,
     });
-  };
+  }
+
+  componentDidMount() {
+    fetch("http://127.0.0.1:3300/db/menu_name")
+      .then((res) => res.json())
+      .then(res=>{
+        this.setState(()=>({
+          data:res
+        }))
+      }).catch(err=>{
+        console.log(err)
+      });
+  }
   render() {
     return (
       <Layout>
@@ -51,63 +72,47 @@ class index extends Component {
                 textAlign: "center",
               }}
             >
-              {/* <MenuFoldOutlined /> */}
-              {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: this.toggle,
-            })}
+              {React.createElement(
+                this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+                {
+                  className: "trigger",
+                  onClick: this.toggle,
+                }
+              )}
             </div>
           </div>
         </Header>
         <Layout>
           <Router>
             <Sider
-              style={{ width: "300px", minHeight: "83vh" }}
-              trigger={null} collapsible collapsed={this.state.collapsed}
+              style={{ width: "300px", height: "83vh"}}
+              trigger={null}
+              collapsible
+              collapsed={this.state.collapsed}
             >
-              <Menu theme="dark" mode="inline">
-                <Menu.Item key="route1" icon={<GlobalOutlined/>}>
-                  <Link to="/route1" style={{width:'100%',height:"100%" ,color:"white"}}>百度</Link>
+              <Menu theme="dark" mode="inline" defaultSelectedKeys="Sys_menu">
+                <Menu.Item key="Sys_menu"  icon={<GlobalOutlined/>}>
+                  <Link to="/Sys_menu" className="nav">Sys_menu</Link>
                 </Menu.Item>
-                <Menu.Item key="route2" icon={<GlobalOutlined/>}>
-                  <Link to="/route2"  style={{width:'100%',height:"100%" ,color:"white"}}>
-                    alexpang
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="route3" icon={<GlobalOutlined />}>
-                  <Link to="/route3" style={{width:'100%',height:"100%" ,color:"white"}}>
-                    ismepangcy
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="route4" icon={<GlobalOutlined />}>
-                  <Link to="/route4" style={{width:'100%',height:"100%" ,color:"white"}}> 
-                    temp node
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="route5" icon={<GlobalOutlined />} >
-                  <Link to="/route5" style={{width:'100%',height:"100%" ,color:"white"}}>
-                    temp node api
-                  </Link>
-                </Menu.Item>
+                {this.state.data.map((el) => (
+                  <Menu.Item key={el.href} icon={<GlobalOutlined/>}>
+                    <Link to={"/" + el.href} className="nav">
+                      {el.navName}
+                    </Link>
+                  </Menu.Item>
+                ))}
               </Menu>
             </Sider>
             <Content style={{ overflow: "hidden" }}>
               <Switch>
-                <Route path="/route1">
-                  <TodoLink link="http://www.baidu.com"></TodoLink>
+                <Route key="Sys_menu" path="/Sys_menu">
+                  <Sys_menu></Sys_menu>
                 </Route>
-                <Route path="/route2">
-                  <TodoLink link="http://www.alexpang.cn"></TodoLink>
-                </Route>
-                <Route path="/route3">
-                  <TodoLink link="http://www.ismepangcy.xyz"></TodoLink>
-                </Route>
-                <Route path="/route4">
-                  <TodoLink link="http://127.0.0.1:3300/"></TodoLink>
-                </Route>
-                <Route path="/route5">
-                  <TodoLink link="http://127.0.0.1:3300/db/queryUser?username=庞超"></TodoLink>
-                </Route>
+                {this.state.data.map((el) => (
+                  <Route key={el.href} path={"/" + el.href}>
+                    <TodoLink link={el.link}></TodoLink>
+                  </Route>
+                ))}
               </Switch>
             </Content>
           </Router>
