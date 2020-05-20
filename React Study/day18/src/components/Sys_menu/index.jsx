@@ -64,7 +64,11 @@ export default class index extends Component {
         title: "Link",
         dataIndex: "link",
         key: "link",
-      },
+      },{
+        title:"Icon",
+        dataIndex:"icon",
+        key:"icon"
+      }
     ];
 
     let data = this.state.data.map((el) => ({
@@ -73,13 +77,19 @@ export default class index extends Component {
       navName: el.navName,
       href: el.href,
       link: el.link,
+      icon:el.icon
     }));
     return (
       <Fragment>
         <Button onClick={this.handleOnClick}>Add Menu</Button>
         {
-          this.state.add ? <Add_Menu handleAddMenu={this.handleAddMenu}/>:<Table dataSource={data} columns={columns} />
+          this.state.add 
+          ? 
+          <Add_Menu handleAddMenu={this.handleAddMenu}/>
+          :
+          ''
         }
+         <Table dataSource={data} scroll={{ y:'55vh'}} columns={columns} />
       </Fragment>
     );
   }

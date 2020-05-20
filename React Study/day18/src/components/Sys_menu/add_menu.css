@@ -1,7 +1,26 @@
-.ant-form.add_menu-form{
-  width:450px;
-  min-height:400px;
-  box-shadow:1px 0px 1px 3px #aaa;
-  padding:30px;
-  margin:0 auto;
+.ant-card.add_menu_card {
+  position: absolute !important;
+  top: 50vh;
+  left: 50vw;
+  z-index: 100;
+  width: 400px;
+  height: 400px;
+  transform: translate(-50%, -50%);
+  text-align: "center";
+}
+.ant-card.add_menu_card::before{
+  display: block;
+  width:100vw;
+  height: 100vh;
+  background-color:rgba(0,0,0,.3)!important
+}
+
+.ant-form.add_menu-form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.antd-button.add_menu_submit {
+  width: "100%";
+  height: 35px;
 }
