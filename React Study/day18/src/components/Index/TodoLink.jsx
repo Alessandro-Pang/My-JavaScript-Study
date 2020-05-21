@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 class TodoLink extends Component {
   render() {
     let link = this.props.link;

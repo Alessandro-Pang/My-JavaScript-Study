@@ -8,18 +8,16 @@ import reducers from "src/reducers";
 import "antd/dist/antd.css";
 import "font-awesome/css/font-awesome.min.css";
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-//   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-//   : compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  : compose;
 
-// const enhancer = composeEnhancers(
-//   applyMiddleware(thunk)
-// );
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk)
+);
 
-// console.log(enhancer)
-
-
-let store = createStore(reducers);
+//window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+let store = createStore(reducers,enhancer);
 
 render(
   <Provider store={store}>
