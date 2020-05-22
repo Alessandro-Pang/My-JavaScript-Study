@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import LoginBox from "@/LoginBox"
+// import LoginBox from "@/LoginBox"
+import Login from "src/containers/Login"
 import './index.css'
 class index extends Component {
   render() {
     return (
       <main id="login-main">
-        <LoginBox></LoginBox>
+        <Login></Login>
       </main>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Layout, Menu } from "antd";
 import TodoLink from "./TodoLink";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import Sys_menu from "@/Sys_menu"
+import Sys_menu from "@/Sys_menu";
 const { Header, Sider, Content, Footer } = Layout;
 const { SubMenu } = Menu;
 import Icon from "./Icon";
@@ -11,10 +11,10 @@ import {
   MenuUnfoldOutlined,
   GlobalOutlined,
   ChromeOutlined,
-  TaobaoCircleOutlined
+  TaobaoCircleOutlined,
 } from "@ant-design/icons";
 
-import './index.css'
+import "./index.css";
 
 class index extends Component {
   constructor(props) {
@@ -22,60 +22,36 @@ class index extends Component {
     this.state = {
       collapsed: false,
       data: [],
-      show:true
+      show: true,
     };
     this.toggle = this.toggle.bind(this);
   }
   toggle() {
     this.setState({
-      //collapsed: !this.state.collapsed,
-      show:!this.state.show
+      collapsed: !this.state.collapsed,
+      // show:!this.state.show
     });
   }
 
   componentDidMount() {
     fetch("http://127.0.0.1:3300/db/menu_name")
       .then((res) => res.json())
-      .then(res=>{
-        this.setState(()=>({
-          data:res
-        }))
-      }).catch(err=>{
-        console.log(err)
+      .then((res) => {
+        this.setState(() => ({
+          data: res,
+        }));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
   render() {
     return (
       <Layout>
-        <Header style={{ height: "10vh", paddingLeft: 0 }}>
-          <div
-            id="logo"
-          >
-            <div
-              style={{
-                height: "6vh",
-                width: "150px",
-                float: "left",
-                fontSize: "23px",
-                color: "white",
-                textAlign: "center",
-                lineHeight: "6vh",
-              }}
-            >
-              Alex&nbsp;Analysis
-            </div>
-            <div
-              style={{
-                width: "50px",
-                height: "6vh",
-                float: "left",
-                fontSize: "25px",
-                fontWeight: "bold",
-                color: "white",
-                lineHeight: "6vh",
-                textAlign: "center",
-              }}
-            >
+        <Header className="index-header">
+          <div id="logo">
+            <div className="logo-name">Alex&nbsp;Analysis</div>
+            <div className="menu-icon">
               {React.createElement(
                 this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
                 {
@@ -89,14 +65,16 @@ class index extends Component {
         <Layout>
           <Router>
             <Sider
-              style={{ width: "300px", height: "83vh", overflow:"auto",display:this.state.show}}
+              className="index-sider-menu"
               trigger={null}
               collapsible
               collapsed={this.state.collapsed}
             >
               <Menu theme="dark" mode="inline" defaultSelectedKeys="Sys_menu">
-                <Menu.Item key="Sys_menu"  icon={<ChromeOutlined/>}>
-                  <Link to="/Sys_menu" className="nav">Sys_menu</Link>
+                <Menu.Item key="Sys_menu" icon={<ChromeOutlined />}>
+                  <Link to="/Sys_menu" className="nav">
+                    Sys_menu
+                  </Link>
                 </Menu.Item>
                 {this.state.data.map((el) => (
                   <Menu.Item key={el.href} icon={Icon[el.icon]}>
@@ -107,7 +85,7 @@ class index extends Component {
                 ))}
               </Menu>
             </Sider>
-            <Content style={{ overflow: "hidden" }} className="index-content">
+            <Content className="index-content">
               <Switch>
                 <Route key="Sys_menu" path="/Sys_menu">
                   <Sys_menu></Sys_menu>
@@ -121,15 +99,7 @@ class index extends Component {
             </Content>
           </Router>
         </Layout>
-        <Footer
-          style={{
-            margin: 0,
-            padding: 0,
-            height: "7vh",
-            textAlign: "center",
-            background: "#aaa",
-          }}
-        >
+        <Footer className="index-footer" >
           <div>&copy;http://www.alexpang.cn</div>
           <div>
             Powered By{" "}

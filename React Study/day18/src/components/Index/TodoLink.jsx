@@ -1,10 +1,7 @@
-import React, { Component } from "react";
-class TodoLink extends Component {
-  render() {
-    let link = this.props.link;
-
+import React from "react";
+function TodoLink(props){
+    let link = props.link;
     return <iframe className="todolink-iframe" src={link}></iframe>;
-  }
 }
 
 export default TodoLink;
