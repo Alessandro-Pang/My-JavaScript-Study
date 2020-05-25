@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Layout, Menu } from "antd";
 import TodoLink from "./TodoLink";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import Sys_menu from "@/Sys_menu";
+import Sys_menu from "src/containers/Sys_menu";
 const { Header, Sider, Content, Footer } = Layout;
-const { SubMenu } = Menu;
 import Icon from "./Icon";
 import {
   MenuFoldOutlined,
