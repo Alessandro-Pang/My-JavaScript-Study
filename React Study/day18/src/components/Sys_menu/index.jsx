@@ -1,7 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useEffect } from "react";
 import { Table, Button } from "antd";
 import Add_Menu from "./add_menu";
 export default function index(props) {
+  const { add, data, loadMenu, handleOnClick, handleAddMenu } = props;
+
+  // 相当于 componentDidMount 和 componentDidUpdate:
+  useEffect(() => {
+    loadMenu(data);
+  });
+
   const columns = [
     {
       title: "id",
@@ -30,11 +37,6 @@ export default function index(props) {
     },
   ];
 
-  const { add, data, loadData,handleOnClick, handleAddMenu } = props;
-
-  // setInterval(()=>{
-  //   console.log(data)
-  // },1000)
   let dataSource = data.map((el) => {
     const { id, navName, href, link, icon } = el;
     return {
@@ -49,7 +51,7 @@ export default function index(props) {
 
   return (
     <Fragment>
-      <Button onClick={handleOnClick}>Add Menu</Button>
+      <Button onClick={() => handleOnClick(add)}>Add Menu</Button>
       {add ? <Add_Menu handleAddMenu={handleAddMenu} /> : ""}
       <Table dataSource={dataSource} scroll={{ y: "55vh" }} columns={columns} />
     </Fragment>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Layout, Menu } from "antd";
-import TodoLink from "./TodoLink";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Sys_menu from "src/containers/Sys_menu";
 const { Header, Sider, Content, Footer } = Layout;
@@ -91,14 +90,14 @@ class index extends Component {
                 </Route>
                 {this.state.data.map((el) => (
                   <Route key={el.href} path={"/" + el.href}>
-                    <TodoLink link={el.link}></TodoLink>
+                    <iframe className="todolink-iframe" src={el.link}></iframe>
                   </Route>
                 ))}
               </Switch>
             </Content>
           </Router>
         </Layout>
-        <Footer className="index-footer" >
+        <Footer className="index-footer">
           <div>&copy;http://www.alexpang.cn</div>
           <div>
             Powered By{" "}

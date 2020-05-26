@@ -1,14 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2020-05-19 08:11:57
- * @LastEditTime: 2020-05-25 23:18:17
+ * @LastEditTime: 2020-05-26 13:59:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day18\src\actions\index.js
  */
 
-export const ADD = "ADD";
-export const DIFF = "DIFF";
 export const INFO = "INFO";
 export const LOGIN = "LOGIN";
 export const ISLOGIN = "ISLOGIN";
@@ -79,7 +77,6 @@ export const GetMenuList = ()=>dispatch =>{
   fetch("http://127.0.0.1:3300/db/menu_name")
   .then((res) => res.json())
   .then((res) => {
-    console.log(res)
     dispatch(MenuListData(res))
   })
   .catch((err) => {
@@ -87,7 +84,7 @@ export const GetMenuList = ()=>dispatch =>{
   });
 }
 
-export const showADDmenu = state =>({
+export const showADDmenu = add =>({
   type:SHOW_ADD_MENU,
-  state
+  add
 })

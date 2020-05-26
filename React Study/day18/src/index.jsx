@@ -21,7 +21,6 @@ const enhancer = composeEnhancers(
 //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 let store = createStore(reducers,enhancer);
 
-store.dispatch(GetMenuList())
 store.subscribe(()=>{
   console.log(store.getState())
 })
