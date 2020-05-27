@@ -1,20 +1,20 @@
 /*
  * @Author: your name
  * @Date: 2020-05-19 08:11:57
- * @LastEditTime: 2020-05-26 13:59:50
+ * @LastEditTime: 2020-05-27 00:00:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day18\src\actions\index.js
  */
 
-export const INFO = "INFO";
-export const LOGIN = "LOGIN";
-export const ISLOGIN = "ISLOGIN";
+export const LOGIN_USER = "LOGIN_USER";
 export const ADD_MENU = "ADD_MENU";
-export const SHOW_ADD_MENU = "SHOW_ADD_MENU"
-export const MENU_LIST_DATA = "MENU_LIST_DATA"
+export const SHOW_ADD_MENU = "SHOW_ADD_MENU";
+export const MENU_LIST_DATA = "MENU_LIST_DATA";
+export const COLLAPSED = "COLLAPSED";
 
-export const showINFO = (info) => ({
+
+const showINFO = (info) => ({
   type: INFO,
   info,
 });
@@ -26,11 +26,10 @@ export const GetUserInfo = () => (dispatch) =>
       dispatch(showINFO(info));
     });
 
-export const Login_User = (user) => ({
-  type: LOGIN,
-  user,
-});
-
+const login_user = user =>({
+  type:LOGIN_USER,
+  user
+})
 export const GetLoginUser = (userinfo) => (dispatch) => {
   fetch("http://127.0.0.1:3300/db/login", {
     method: "POST",
@@ -42,10 +41,12 @@ export const GetLoginUser = (userinfo) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      dispatch(Login_User(res));
-      if(res[0].login!==0){
+      const {login,username} = res.data;
+      console.log(username)
+      dispatch(login_user(username))
+      if (login !== 0) {
         document.cookie = "isLogin=true";
-        location.href="/index";
+        location.path = "/index";
       }
     })
     .catch((err) => {
@@ -53,8 +54,7 @@ export const GetLoginUser = (userinfo) => (dispatch) => {
     });
 };
 
-export const handleAddMenu = value => dispatch =>{
-  console.log(value);
+export const handleAddMenu = (value) => (dispatch) => {
   if (!value.navName && !value.href && !value.link) {
     return console.log("表单不允许为空");
   }
@@ -66,25 +66,30 @@ export const handleAddMenu = value => dispatch =>{
     },
     body: JSON.stringify(value),
   });
-}
+};
 
-const MenuListData = data =>({
-  type:MENU_LIST_DATA,
-  data
+const MenuListData = (data) => ({
+  type: MENU_LIST_DATA,
+  data,
 });
 
-export const GetMenuList = ()=>dispatch =>{
+export const GetMenuList = () => (dispatch) => {
   fetch("http://127.0.0.1:3300/db/menu_name")
-  .then((res) => res.json())
-  .then((res) => {
-    dispatch(MenuListData(res))
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-}
+    .then((res) => res.json())
+    .then((res) => {
+      dispatch(MenuListData(res));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-export const showADDmenu = add =>({
-  type:SHOW_ADD_MENU,
-  add
-})
+export const showADDmenu = (add) => ({
+  type: SHOW_ADD_MENU,
+  add,
+});
+
+export const collapsed = (isClose) => ({
+  type: COLLAPSED,
+  isClose,
+});

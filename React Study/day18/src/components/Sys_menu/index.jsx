@@ -2,12 +2,7 @@ import React, { Component, Fragment, useEffect } from "react";
 import { Table, Button } from "antd";
 import Add_Menu from "./add_menu";
 export default function index(props) {
-  const { add, data, loadMenu, handleOnClick, handleAddMenu } = props;
-
-  // 相当于 componentDidMount 和 componentDidUpdate:
-  useEffect(() => {
-    loadMenu(data);
-  });
+  const { add, data, handleOnClick, handleAddMenu } = props;
 
   const columns = [
     {
@@ -51,9 +46,19 @@ export default function index(props) {
 
   return (
     <Fragment>
-      <Button onClick={() => handleOnClick(add)}>Add Menu</Button>
+      <div className="Sys_menu_top_Header">
+        <Button onClick={() => handleOnClick(add)}>Add Menu</Button>
+      </div>
       {add ? <Add_Menu handleAddMenu={handleAddMenu} /> : ""}
-      <Table dataSource={dataSource} scroll={{ y: "55vh" }} columns={columns} />
+      <Table
+        dataSource={dataSource}
+        pagination={{
+          /** 一页几条数据 */
+          pageSize: 10,
+        }}
+        scroll={{ y: "55vh" }}
+        columns={columns}
+      />
     </Fragment>
   );
 }

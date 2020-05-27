@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Sys_menu from "src/containers/Sys_menu";
 const { Header, Sider, Content, Footer } = Layout;
 import Icon from "./Icon";
-import {
+import AntIcon,{
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   GlobalOutlined,
@@ -15,35 +15,11 @@ import {
 import "./index.css";
 
 class index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapsed: false,
-      data: [],
-      show: true,
-    };
-    this.toggle = this.toggle.bind(this);
-  }
-  toggle() {
-    this.setState({
-      collapsed: !this.state.collapsed,
-      // show:!this.state.show
-    });
-  }
-
   componentDidMount() {
-    fetch("http://127.0.0.1:3300/db/menu_name")
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState(() => ({
-          data: res,
-        }));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.props.GetMenuList();
   }
   render() {
+    const { collapsed, toggle ,data} = this.props;
     return (
       <Layout>
         <Header className="index-header">
@@ -51,10 +27,10 @@ class index extends Component {
             <div className="logo-name">Alex&nbsp;Analysis</div>
             <div className="menu-icon">
               {React.createElement(
-                this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+                collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
                 {
                   className: "trigger",
-                  onClick: this.toggle,
+                  onClick: ()=>{toggle(collapsed)},
                 }
               )}
             </div>
@@ -66,7 +42,8 @@ class index extends Component {
               className="index-sider-menu"
               trigger={null}
               collapsible
-              collapsed={this.state.collapsed}
+              style={{display:collapsed?"none":"block"}}
+              // collapsed={collapsed}
             >
               <Menu theme="dark" mode="inline" defaultSelectedKeys="Sys_menu">
                 <Menu.Item key="Sys_menu" icon={<ChromeOutlined />}>
@@ -74,7 +51,7 @@ class index extends Component {
                     Sys_menu
                   </Link>
                 </Menu.Item>
-                {this.state.data.map((el) => (
+                {data.map((el) => (
                   <Menu.Item key={el.href} icon={Icon[el.icon]}>
                     <Link to={"/" + el.href} className="nav">
                       {el.navName}
@@ -88,7 +65,7 @@ class index extends Component {
                 <Route key="Sys_menu" path="/Sys_menu">
                   <Sys_menu></Sys_menu>
                 </Route>
-                {this.state.data.map((el) => (
+                {data.map((el) => (
                   <Route key={el.href} path={"/" + el.href}>
                     <iframe className="todolink-iframe" src={el.link}></iframe>
                   </Route>

@@ -24,3 +24,9 @@
   width: "100%";
   height: 35px;
 }
+
+.Sys_menu_top_Header{
+  height: 10%;
+  line-height:8vh;
+  padding-left:10px;
+}
