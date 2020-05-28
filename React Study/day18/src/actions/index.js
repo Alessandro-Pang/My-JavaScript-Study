@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-19 08:11:57
- * @LastEditTime: 2020-05-27 00:00:58
+ * @LastEditTime: 2020-05-27 08:26:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day18\src\actions\index.js
@@ -12,7 +12,6 @@ export const ADD_MENU = "ADD_MENU";
 export const SHOW_ADD_MENU = "SHOW_ADD_MENU";
 export const MENU_LIST_DATA = "MENU_LIST_DATA";
 export const COLLAPSED = "COLLAPSED";
-
 
 const showINFO = (info) => ({
   type: INFO,
@@ -26,10 +25,10 @@ export const GetUserInfo = () => (dispatch) =>
       dispatch(showINFO(info));
     });
 
-const login_user = user =>({
-  type:LOGIN_USER,
-  user
-})
+const login_user = (user) => ({
+  type: LOGIN_USER,
+  user,
+});
 export const GetLoginUser = (userinfo) => (dispatch) => {
   fetch("http://127.0.0.1:3300/db/login", {
     method: "POST",
@@ -41,12 +40,12 @@ export const GetLoginUser = (userinfo) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      const {login,username} = res.data;
-      console.log(username)
-      dispatch(login_user(username))
+      const { login, username } = res.data;
+      console.log(username);
+      dispatch(login_user(username));
       if (login !== 0) {
         document.cookie = "isLogin=true";
-        location.path = "/index";
+        location.href = "/index";
       }
     })
     .catch((err) => {
