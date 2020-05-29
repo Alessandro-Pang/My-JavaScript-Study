@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 21:12:28
- * @LastEditTime: 2020-05-28 00:00:13
+ * @LastEditTime: 2020-05-28 21:38:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\resetCss.js
@@ -98,6 +98,7 @@ video {
   font: inherit;
   vertical-align: baseline;
   box-sizing: border-box;
+  color:#969696;
   font-family:Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
