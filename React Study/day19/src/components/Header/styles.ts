@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:17:09
- * @LastEditTime: 2020-05-29 13:43:13
+ * @LastEditTime: 2020-05-29 23:50:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\styles.js
@@ -12,6 +12,7 @@ import logoPic from "../../static/logo.png";
 
 export const HeaderWrapper = style.header`
   position:relative;
+  top:0;
   width:100%;
   background-color:#fff;
   border-style:solid;

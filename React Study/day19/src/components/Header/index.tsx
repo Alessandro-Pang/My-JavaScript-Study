@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-05-29 13:58:32
+ * @LastEditTime: 2020-05-29 22:52:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 import {
   HeaderWrapper,
   Logo,
@@ -27,6 +28,7 @@ import {
 } from "./styles";
 
 const Header = (props: any) => {
+
   const { focus, handleInputFocus, handleInputBlur } = props;
   let input: any;
   return (
@@ -71,5 +73,11 @@ const Header = (props: any) => {
     </HeaderWrapper>
   );
 };
+
+Header.propTypes={
+  focus: PropTypes.bool.isRequired,
+  handleInputFocus:PropTypes.func.isRequired,
+  handleInputBlur:PropTypes.func.isRequired
+}
 
 export default Header;

@@ -2,3 +2,7 @@ node_modules
 .vscode
 React Study/my-app
 React Study/day17
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
