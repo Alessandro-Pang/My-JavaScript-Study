@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-05-29 22:52:51
+ * @LastEditTime: 2020-05-31 19:42:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
@@ -25,12 +25,32 @@ import {
   ModeWrapper,
   BetaWrapper,
   LoginWrapper,
+  SearchHotList,
 } from "./styles";
 
 const Header = (props: any) => {
-
-  const { focus, handleInputFocus, handleInputBlur } = props;
+  const { focus,mouseIn,handleInputFocus, handleInputBlur,handleMuseIn,handleMuseOut} = props;
   let input: any;
+
+  const getHotList: any = () => {
+    if (focus || mouseIn) {
+      return (
+        <SearchHotList
+          onMouseLeave={()=>handleMuseOut(mouseIn)}
+          onMouseEnter={()=>handleMuseIn(mouseIn)}
+        >
+          <div className="hot-title">热点搜索</div>
+          <span className="hot-class">热点一 </span>
+          <span className="hot-class">热点一 </span>
+          <span className="hot-class">热点一 </span>
+          <span className="hot-class">热点一 </span>
+          <span className="hot-class">热点一 </span>
+          <span className="hot-class">热点一 </span>
+          <span className="hot-class">热点一 </span>
+        </SearchHotList>
+      );
+    }
+  };
   return (
     <HeaderWrapper>
       <Logo />
@@ -38,21 +58,22 @@ const Header = (props: any) => {
         <LeftNavWrapper>
           <HomePageWrapper>首页</HomePageWrapper>
           <DownloadAPPWrapper>下载APP</DownloadAPPWrapper>
-          <SearchInputWrapper style={{ width: focus ? "220px" : "160px" }}>
+          <SearchInputWrapper>
             <SearchIcon
               className={focus ? "on-focus" : ""}
-              onClick={() => focus ? input.blur() : input.focus()}
+              onClick={() => (focus ? input.blur() : input.focus())}
             >
               <i className="iconfont">&#59016;</i>
             </SearchIcon>
             {/* 需要配置防抖节流 */}
             <SearchInput
               id="search_input"
-              ref={el => input = el}
+              ref={(el) => (input = el)}
               onFocus={() => handleInputFocus(focus)}
               onBlur={() => handleInputBlur(focus)}
-              style={{ width: focus ? "180px" : "140px" }}
+              style={{ width: focus ? "200px" : "150px" }}
             ></SearchInput>
+            {getHotList()}
           </SearchInputWrapper>
         </LeftNavWrapper>
         <RightNavWrapper>
@@ -74,10 +95,10 @@ const Header = (props: any) => {
   );
 };
 
-Header.propTypes={
+Header.propTypes = {
   focus: PropTypes.bool.isRequired,
-  handleInputFocus:PropTypes.func.isRequired,
-  handleInputBlur:PropTypes.func.isRequired
-}
+  handleInputFocus: PropTypes.func.isRequired,
+  handleInputBlur: PropTypes.func.isRequired,
+};
 
 export default Header;

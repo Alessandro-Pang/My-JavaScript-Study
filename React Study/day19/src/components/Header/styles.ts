@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:17:09
- * @LastEditTime: 2020-05-29 23:50:53
+ * @LastEditTime: 2020-05-31 21:47:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\styles.js
@@ -22,6 +22,8 @@ export const HeaderWrapper = style.header`
   position:fixed;
   height:58px;
   line-height:58px;
+  z-index:1;
+
   i,button{
     cursor:pointer;
   }
@@ -34,7 +36,7 @@ export const Logo = style.div`
   display:block;
   height:58px;
   width:100px;
-  background:url(${logoPic});
+  background-image:url(${logoPic});
   background-size:contain;
   background-position:center;
   background-repeat:no-repeat;
@@ -54,6 +56,7 @@ export const WriteWrapper = style.button`
   background-color: #ea6f5a;
   word-spacing:3px;
   font-weight:bold;
+  
   .iconfont{
     color:#fff
   }
@@ -65,10 +68,10 @@ export const NavBarWrapper = style.nav`
   right:150px;
   height:58px;
   min-width:400px;
-  max-weight:880px;
+  max-weight:calc(100vw - 220px);
   line-height:58px;
-  overflow:hidden;
   display:flex;
+  padding-left:calc(15vw - 100px);
 `;
 
 export const LeftNavWrapper = style.div`
@@ -100,24 +103,22 @@ export const DownloadAPPWrapper = style.div`
   color:#303030;
 
   :hover{
-    background:rgba(240,240,240,.8)
+    background-color:rgba(240,240,240,.8)
   }
 `;
 
 export const SearchInputWrapper = style.div`
   margin:20px;
   display:flex;
-  width:160px;
   height:38px;
   border-radius:19px;
-  background:#eee;
+  background-color:#eee;
   align-items:center;
   justify-content:center;
   position:relative;
-  transition:width 0.3s linear;
 
   .on-focus{
-    background:#ccc
+    background-color:#ccc
   }
 
   label{
@@ -149,14 +150,63 @@ export const SearchInput = style.input.attrs({ placeholder: "搜索" })`
   height:36px;
   border-radius:19px;
   border:0;
-  background:#eee;
-  padding-left:3px
+  background-color:#eee;
+  padding-left:15px;
+  transition:width 0.3s linear;
 `;
+
+export const SearchHotList = style.div`
+  position:absolute;
+  width:240px;
+  min-height:60px;
+  top:50px;
+  left:0px;
+  background-color:#fff;
+  border-radius:4px;
+  box-shadow:0 0 15px 1px #969696;
+  line-height:20px;
+  padding:5px 8px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:start;
+
+  &::before{
+    content:'';
+    width:20px;
+    height:20px;
+    position:absolute;
+    background:#fff;
+    transform:rotate(45deg);
+    margin-top:-8px;
+    margin-left:25px;
+  }
+  div.hot-title{
+    display:flex;
+    width:100%;
+    margin:5px 0 5px 3px;
+    font-size:15px;
+    z-index:1;
+  }
+
+  span.hot-class{
+    display:flex;
+    white-space:nowrap;
+    justify-content:center;
+    font-size:13px;
+    padding:3px;
+    margin:5px 3px;
+    color:#585858;
+    z-index:1;
+    border-color:#ddd;
+    border-style:solid;
+    border-width:1px;
+    border-radius:3px;
+  }
+`
 
 export const RightNavWrapper = style.div`
   display:flex;
   justify-content:end;
-  flex:1
 `;
 
 export const RegisterWrapper = style.button`
@@ -190,7 +240,7 @@ export const BetaWrapper = style.div`
   span{
     display:flex;
     align-items:center;
-    background:#ea6f5a;
+    background-color:#ea6f5a;
     height:14px;
     font-size:12px;
     color:white;
