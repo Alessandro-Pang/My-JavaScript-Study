@@ -8,6 +8,15 @@ import {
   DownloadAppImg,
   DownloadAppInfo,
   DownloadBigImg,
+  CommendAuthorWrapper,
+  CommendWrapper,
+  AuthorWrapper,
+  CommendMoreWrapper,
+  HeadPortrait,
+  AuthorName,
+  AuthorInfo,
+  AuthorArticleInfo,
+  FocusOnTheAuthor,
 } from "./style";
 
 import top1 from "../../static/commendBanner/top1.png";
@@ -15,6 +24,8 @@ import top2 from "../../static/commendBanner/top2.png";
 import top3 from "../../static/commendBanner/top3.png";
 import top4 from "../../static/commendBanner/top4.png";
 import downloadInfo from "../../static/commendBanner/download-info.png";
+import headPortrait from "../../static/commendAutorHead/author.webp";
+
 const HomePageSider: Function = (props: any) => {
   let [mouseIn, setMouseIn] = useState(false);
 
@@ -51,6 +62,65 @@ const HomePageSider: Function = (props: any) => {
         </DownloadAppInfo>
         {handleMouseDownload()}
       </DownloadAppInfoWrapper>
+      <CommendAuthorWrapper>
+        <CommendWrapper>
+          <div>推荐作者</div>
+          <div>
+            <i className="iconfont">&#58909;</i>换一批
+          </div>
+        </CommendWrapper>
+        <AuthorWrapper>
+          <HeadPortrait>
+            <img src={headPortrait} alt="" />
+          </HeadPortrait>
+          <AuthorInfo>
+            <AuthorName>董克平日记</AuthorName>
+            <AuthorArticleInfo>写了979k字 · 3.9k喜欢</AuthorArticleInfo>
+          </AuthorInfo>
+          <FocusOnTheAuthor>+关注</FocusOnTheAuthor>
+        </AuthorWrapper>
+        <AuthorWrapper>
+          <HeadPortrait>
+            <img src={headPortrait} alt="" />
+          </HeadPortrait>
+          <AuthorInfo>
+            <AuthorName>董克平日记</AuthorName>
+            <AuthorArticleInfo>写了979k字 · 3.9k喜欢</AuthorArticleInfo>
+          </AuthorInfo>
+          <FocusOnTheAuthor>+关注</FocusOnTheAuthor>
+        </AuthorWrapper>
+        <AuthorWrapper>
+          <HeadPortrait>
+            <img src={headPortrait} alt="" />
+          </HeadPortrait>
+          <AuthorInfo>
+            <AuthorName>董克平日记</AuthorName>
+            <AuthorArticleInfo>写了979k字 · 3.9k喜欢</AuthorArticleInfo>
+          </AuthorInfo>
+          <FocusOnTheAuthor>+关注</FocusOnTheAuthor>
+        </AuthorWrapper>
+        <AuthorWrapper>
+          <HeadPortrait>
+            <img src={headPortrait} alt="" />
+          </HeadPortrait>
+          <AuthorInfo>
+            <AuthorName>董克平日记</AuthorName>
+            <AuthorArticleInfo>写了979k字 · 3.9k喜欢</AuthorArticleInfo>
+          </AuthorInfo>
+          <FocusOnTheAuthor>+关注</FocusOnTheAuthor>
+        </AuthorWrapper>
+        <AuthorWrapper>
+          <HeadPortrait>
+            <img src={headPortrait} alt="" />
+          </HeadPortrait>
+          <AuthorInfo>
+            <AuthorName>董克平日记</AuthorName>
+            <AuthorArticleInfo>写了979k字 · 3.9k喜欢</AuthorArticleInfo>
+          </AuthorInfo>
+          <FocusOnTheAuthor>+关注</FocusOnTheAuthor>
+        </AuthorWrapper>
+        <CommendMoreWrapper>查看全部 &gt;</CommendMoreWrapper>
+      </CommendAuthorWrapper>
     </HomeSiderWrapper>
   );
 };

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-05-31 19:42:02
+ * @LastEditTime: 2020-06-01 23:59:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
@@ -29,7 +29,7 @@ import {
 } from "./styles";
 
 const Header = (props: any) => {
-  const { focus,mouseIn,handleInputFocus, handleInputBlur,handleMuseIn,handleMuseOut} = props;
+  const { focus,mouseIn,list,handleInputFocus, handleInputBlur,handleMuseIn,handleMuseOut} = props;
   let input: any;
 
   const getHotList: any = () => {
@@ -40,13 +40,8 @@ const Header = (props: any) => {
           onMouseEnter={()=>handleMuseIn(mouseIn)}
         >
           <div className="hot-title">热点搜索</div>
-          <span className="hot-class">热点一 </span>
-          <span className="hot-class">热点一 </span>
-          <span className="hot-class">热点一 </span>
-          <span className="hot-class">热点一 </span>
-          <span className="hot-class">热点一 </span>
-          <span className="hot-class">热点一 </span>
-          <span className="hot-class">热点一 </span>
+          <div className="in-a-batch"> <i className="iconfont">&#58909;</i>换一批</div>
+          {list.map((val:any,index:number)=>(<span className="hot-class" key={index}>{val}</span>))}
         </SearchHotList>
       );
     }

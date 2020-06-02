@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:17:09
- * @LastEditTime: 2020-05-31 21:47:42
+ * @LastEditTime: 2020-06-01 23:02:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\styles.js
@@ -182,12 +182,19 @@ export const SearchHotList = style.div`
   }
   div.hot-title{
     display:flex;
-    width:100%;
+    width:45%;
     margin:5px 0 5px 3px;
-    font-size:15px;
+    font-size:14px;
     z-index:1;
   }
 
+  div.in-a-batch{
+    display:flex;
+    font-size:14px;
+    width:50%;
+    margin:5px 0 5px 3px;
+    justify-content:end;
+  }
   span.hot-class{
     display:flex;
     white-space:nowrap;

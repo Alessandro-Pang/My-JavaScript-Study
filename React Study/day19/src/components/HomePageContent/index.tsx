@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:13:50
- * @LastEditTime: 2020-05-30 22:26:10
+ * @LastEditTime: 2020-06-01 22:55:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\index.ts
@@ -16,7 +16,8 @@ import {
   SectionAbstract,
   Content,
   SectionImg,
-  SectionTools
+  SectionTools,
+  ShowMoreAticle
 } from './style';
 
 import bannerPic from "../../static/banner.bmp"
@@ -92,6 +93,7 @@ const HomePageContent = (props: any) => {
           </Content>
           <SectionImg src={sectionImgPic}/>
         </SectionsWrapper>
+        <ShowMoreAticle>阅读更多</ShowMoreAticle>
       </ArticleWrapper>
     </HomeContentWrapper>
   )

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:14:03
- * @LastEditTime: 2020-05-31 22:39:31
+ * @LastEditTime: 2020-06-01 22:56:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\style.ts
@@ -75,4 +75,21 @@ export const SectionTools = style.div`
   width:70%;
   height:20px;
   background-color:#eee;
+`
+
+export const ShowMoreAticle = style.div`
+  display:flex;
+  color:#fff;
+  width:100%;
+  height:40px;
+  border-radius:20px;
+  background-color:#a5a5a5;
+  margin-top:30px;
+  justify-content:center;
+  align-items:center;
+  font-size:15px;
+  
+  &:hover{
+    background-color:#9b9b9b
+  }
 `

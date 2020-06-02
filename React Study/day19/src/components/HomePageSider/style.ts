@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 22:55:08
- * @LastEditTime: 2020-05-31 23:11:32
+ * @LastEditTime: 2020-06-01 12:48:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSider\style.ts
@@ -20,7 +20,6 @@ export const HomeSiderWrapper = style.aside`
   flex-direction:column;
   padding-top:26px;
   width:22.5%;
-  border:1px solid red
 `;
 
 /** 板块，专栏*/
@@ -100,3 +99,84 @@ export const DownloadBigImg = style.div`
     width:95%
   }
 `
+//commend 推荐
+export const CommendAuthorWrapper = style.div`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  
+`
+export const   CommendWrapper = style.div`
+  display:flex;
+  width:95%;
+  height:16px;
+  line-height:16px;
+  font-size:15px;
+  flex-direction:row;
+  padding:7px 0 25px 0;
+
+  div{
+    display:flex;
+    width:49%;
+    font-size:14px;
+  }
+
+  div:last-of-type{
+    justify-content:flex-end;
+  }
+`;
+
+export const AuthorWrapper = style.div`
+  display:flex;
+  width:95%;
+  margin:6px 0;
+`;
+
+// head portrait 头像
+export const HeadPortrait = style.div`
+  width:50px;
+
+  img{
+    width:100%;
+    border-radius:50%;
+  }
+`;
+
+export const AuthorInfo = style.div`
+  margin-left:13px;
+  flex:1;
+`
+
+export const AuthorName = style.div`
+  font-size:14px;
+  color:#333;
+  margin:8px 0
+`;
+
+export const  AuthorArticleInfo = style.div`
+  font-size:12px;
+`;
+
+export const FocusOnTheAuthor = style.div`
+  display:flex;
+  justify-content:end;
+  align-items:center;
+  color:#22cc58;
+  font-size:14px;
+  padding-right:5px;
+`;
+
+export const CommendMoreWrapper = style.div`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:15px;
+  width:95%;
+  height:36px;
+  background-color:#f7f7f7;
+  border:1px solid #dcdcdc;
+  color:#787878;
+  border-radius:4px;
+  font-size:13px;
+`;
