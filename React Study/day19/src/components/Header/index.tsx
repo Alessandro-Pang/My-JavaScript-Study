@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-06-01 23:59:06
+ * @LastEditTime: 2020-06-03 00:07:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
@@ -28,20 +28,44 @@ import {
   SearchHotList,
 } from "./styles";
 
+
 const Header = (props: any) => {
-  const { focus,mouseIn,list,handleInputFocus, handleInputBlur,handleMuseIn,handleMuseOut} = props;
+  const {
+    focus,
+    mouseIn,
+    list,
+    page,
+    handleInputFocus,
+    handleInputBlur,
+    handleMuseIn,
+    handleMuseOut,
+    handleClickInBatch
+  } = props;
   let input: any;
 
   const getHotList: any = () => {
+    const newList = list.toJS();
+    const pageList = [];
+    
+    for (let i = (page - 1) * 10; i < page * 10; i++) {
+      console.log(newList[0])
+      pageList.push(
+        <span className="hot-class" key={0}>
+          newList
+        </span>
+      );
+    }
     if (focus || mouseIn) {
       return (
         <SearchHotList
-          onMouseLeave={()=>handleMuseOut(mouseIn)}
-          onMouseEnter={()=>handleMuseIn(mouseIn)}
+          onMouseLeave={() => handleMuseOut(mouseIn)}
+          onMouseEnter={() => handleMuseIn(mouseIn)}
         >
           <div className="hot-title">热点搜索</div>
-          <div className="in-a-batch"> <i className="iconfont">&#58909;</i>换一批</div>
-          {list.map((val:any,index:number)=>(<span className="hot-class" key={index}>{val}</span>))}
+          <div className="in-a-batch" onClick={()=>{handleClickInBatch(page,list)}}>
+            <i className="iconfont">&#58909;</i>换一批
+          </div>
+          {pageList}
         </SearchHotList>
       );
     }
@@ -64,7 +88,7 @@ const Header = (props: any) => {
             <SearchInput
               id="search_input"
               ref={(el) => (input = el)}
-              onFocus={() => handleInputFocus(focus)}
+              onFocus={() => handleInputFocus(focus, page, list)}
               onBlur={() => handleInputBlur(focus)}
               style={{ width: focus ? "200px" : "150px" }}
             ></SearchInput>
@@ -92,6 +116,9 @@ const Header = (props: any) => {
 
 Header.propTypes = {
   focus: PropTypes.bool.isRequired,
+  mouseIn: PropTypes.bool.isRequired,
+  //这里报警告，一个对象
+  list: PropTypes.object.isRequired,
   handleInputFocus: PropTypes.func.isRequired,
   handleInputBlur: PropTypes.func.isRequired,
 };

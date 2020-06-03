@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:17:09
- * @LastEditTime: 2020-06-01 23:02:17
+ * @LastEditTime: 2020-06-02 21:59:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\styles.js
@@ -23,6 +23,7 @@ export const HeaderWrapper = style.header`
   height:58px;
   line-height:58px;
   z-index:1;
+  user-select:none;
 
   i,button{
     cursor:pointer;
@@ -195,6 +196,7 @@ export const SearchHotList = style.div`
     margin:5px 0 5px 3px;
     justify-content:end;
   }
+
   span.hot-class{
     display:flex;
     white-space:nowrap;

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:24:12
- * @LastEditTime: 2020-06-01 23:39:58
+ * @LastEditTime: 2020-06-02 23:50:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\actionCreators.ts
@@ -12,7 +12,8 @@ import {
   HEADER_INPUT_BLUR,
   HEADER_HOTBOX_MOUSEIN,
   HEADER_HOTBOX_MOUSEOUT,
-  HEADER_HOTBOX_LIST
+  HEADER_HOTBOX_LIST,
+  HEADER_HOTBOX_PAGE,
 } from "./constants";
 
 export const input_focus = (focusd: boolean) => ({
@@ -35,15 +36,20 @@ export const hotbox_mouseOut = (mouseIn: boolean) => ({
   mouseIn,
 });
 
-const hotbox_list = (list:Array<string>) =>({
-  type:HEADER_HOTBOX_LIST,
-  list
-})
+const hotbox_list = (list: object) => ({
+  type: HEADER_HOTBOX_LIST,
+  list,
+});
 
-export const get_hotbox_list = () => (dispatch:any) =>{
-  fetch('http://127.0.0.1:8888/api/hotlist')
-    .then(res => res.json())
-    .then((res)=>{
-      dispatch(hotbox_list(res.data))
-    })
-}
+export const get_hotbox_list = () => (dispatch: any) => {
+  fetch("http://127.0.0.1:3300/db/hot_list")
+    .then((res) => res.json())
+    .then((res) => {
+      dispatch(hotbox_list(res.data));
+    });
+};
+
+export const get_hotbox_page = (page: number) => ({
+  type: HEADER_HOTBOX_PAGE,
+  page,
+});
