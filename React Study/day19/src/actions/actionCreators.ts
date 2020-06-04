@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:24:12
- * @LastEditTime: 2020-06-02 23:50:00
+ * @LastEditTime: 2020-06-03 08:50:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\actionCreators.ts
@@ -14,6 +14,7 @@ import {
   HEADER_HOTBOX_MOUSEOUT,
   HEADER_HOTBOX_LIST,
   HEADER_HOTBOX_PAGE,
+  CONTENT_ARTICLE_LIST
 } from "./constants";
 
 export const input_focus = (focusd: boolean) => ({
@@ -53,3 +54,17 @@ export const get_hotbox_page = (page: number) => ({
   type: HEADER_HOTBOX_PAGE,
   page,
 });
+
+
+export const article_list = (article_list:any) =>({
+  type:CONTENT_ARTICLE_LIST,
+  article_list
+})
+
+export const get_article_list = () => (dispatch:any) =>{
+  fetch("http://127.0.0.1:3300/db/article_list")
+    .then(res => res.json())
+    .then(res=>{
+      dispatch(article_list(res.data))
+    })
+}

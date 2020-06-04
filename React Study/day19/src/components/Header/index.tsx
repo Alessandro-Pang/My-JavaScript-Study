@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-06-03 00:07:25
+ * @LastEditTime: 2020-06-03 20:19:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
@@ -9,6 +9,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import {
   HeaderWrapper,
   Logo,
@@ -28,7 +29,6 @@ import {
   SearchHotList,
 } from "./styles";
 
-
 const Header = (props: any) => {
   const {
     focus,
@@ -39,19 +39,21 @@ const Header = (props: any) => {
     handleInputBlur,
     handleMuseIn,
     handleMuseOut,
-    handleClickInBatch
+    handleClickInBatch,
   } = props;
   let input: any;
 
   const getHotList: any = () => {
     const newList = list.toJS();
     const pageList = [];
-    
+
+    //解决undefined 或 null 值的空指针问题
+    if (!newList.length) return;
+
     for (let i = (page - 1) * 10; i < page * 10; i++) {
-      console.log(newList[0])
       pageList.push(
-        <span className="hot-class" key={0}>
-          newList
+        <span className="hot-class" key={newList[i].hotID}>
+          {newList[i].hotTitle}
         </span>
       );
     }
@@ -62,7 +64,12 @@ const Header = (props: any) => {
           onMouseEnter={() => handleMuseIn(mouseIn)}
         >
           <div className="hot-title">热点搜索</div>
-          <div className="in-a-batch" onClick={()=>{handleClickInBatch(page,list)}}>
+          <div
+            className="in-a-batch"
+            onClick={() => {
+              handleClickInBatch(page, list);
+            }}
+          >
             <i className="iconfont">&#58909;</i>换一批
           </div>
           {pageList}
@@ -103,8 +110,12 @@ const Header = (props: any) => {
             <i className="iconfont">&#58882;</i>
             <span>Beta</span>
           </BetaWrapper>
-          <LoginWrapper>登录</LoginWrapper>
-          <RegisterWrapper> 注册 </RegisterWrapper>
+          <Link to="/login-register/login">
+            <LoginWrapper>登录</LoginWrapper>
+          </Link>
+          <Link to="/login-register">
+            <RegisterWrapper> 注册 </RegisterWrapper>
+          </Link>
         </RightNavWrapper>
       </NavBarWrapper>
       <WriteWrapper>
@@ -117,7 +128,6 @@ const Header = (props: any) => {
 Header.propTypes = {
   focus: PropTypes.bool.isRequired,
   mouseIn: PropTypes.bool.isRequired,
-  //这里报警告，一个对象
   list: PropTypes.object.isRequired,
   handleInputFocus: PropTypes.func.isRequired,
   handleInputBlur: PropTypes.func.isRequired,

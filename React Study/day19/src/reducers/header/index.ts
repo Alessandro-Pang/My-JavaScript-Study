@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:31:13
- * @LastEditTime: 2020-06-03 00:03:27
+ * @LastEditTime: 2020-06-03 19:55:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\reducers\header\input_focus.ts
@@ -25,7 +25,8 @@ const initState: any = fromJS({
   page:1
 });
 
-const inputFocus = (state = initState, action: any) => {
+// immutable 中 Array 也是 Object 类型（immutable 对象） 
+const headerReduces = (state = initState, action: any) => {
   switch (action.type) {
     case HEADER_INPUT_FOCUS:
       return state.set("focusd", true);
@@ -45,4 +46,4 @@ const inputFocus = (state = initState, action: any) => {
   }
 };
 
-export default inputFocus;
+export default headerReduces;
