@@ -7,6 +7,7 @@ import {
   hotbox_mouseOut,
   get_hotbox_list,
   get_hotbox_page,
+  login_user_error
 } from "../../actions/actionCreators";
 
 const mapStateToProps = (state: any) => {
@@ -15,6 +16,7 @@ const mapStateToProps = (state: any) => {
     mouseIn: state.headerReduces.get("mouseIn"),
     list: state.headerReduces.get("list"),
     page: state.headerReduces.get("page"),
+    user_login_state: state.loginReducers.get("user_login_state"),
   };
 };
 
@@ -40,6 +42,9 @@ const mapDispatchToProps = (dispatch: Function): object => ({
       dispatch(get_hotbox_page(1));
     }
   },
+  handleClickLayout:()=>{
+    dispatch(login_user_error("error"))
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

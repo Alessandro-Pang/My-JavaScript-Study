@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 21:12:28
- * @LastEditTime: 2020-06-03 20:28:45
+ * @LastEditTime: 2020-06-04 23:42:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\App.js
@@ -15,7 +15,7 @@ import { MainWrapper, CallbackTop } from "./AppStyle";
 import Header from "./containers/header";
 import HomePageContent from "./containers/content";
 import HomePageSider from "./components/HomePageSider";
-import LoginRegister from "./components/LoginRegister";
+import LoginRegister from "./containers/LoginRegister";
 function App() {
   const [showCallTop, setShowCallTop] = useState(false);
 

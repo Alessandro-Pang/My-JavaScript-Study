@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:03:03
- * @LastEditTime: 2020-06-04 00:05:09
+ * @LastEditTime: 2020-06-04 21:56:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\LoginRegister\style.js
@@ -15,6 +15,7 @@ export const LoginRegisterWrapper = style.div`
   align-items:start;
   width:100%;
   height:100vh;
+  min-height:600px;
   background-color:#f1f1f1;
   padding-top:45px;
   margin-left:-5px;
@@ -33,6 +34,7 @@ export const MainWrapper = style.div`
   justify-content:center;
   width:400px;
   height:80vh;
+  min-height:520px;
   border-radius:4px;
   box-shadow:0 0 10px #ddd;
   padding:50px 50px 30px;
@@ -90,7 +92,7 @@ export const SinginContainer = style.div`
   margin-top:35px;
 `
 
-export const LoginForm =style.form`
+export const LoginForm =style.div`
   width:100%;
   display:flex;
   flex-direction:column;
@@ -149,6 +151,7 @@ export const LoginForm =style.form`
     display:flex;
     width:50%;
     justify-content:end;
+    justify-content:flex-end;
     align-items:center;
     font-size:14px;
 
@@ -158,7 +161,7 @@ export const LoginForm =style.form`
   }
 
   input[type="checkbox"]{
-    width:5px;
+    width:15px;
     outline:none;
   }
 

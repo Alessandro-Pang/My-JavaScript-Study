@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:02:56
- * @LastEditTime: 2020-06-04 00:04:14
+ * @LastEditTime: 2020-06-05 00:28:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\LoginRegister\index.ts
@@ -9,45 +9,21 @@
 
 import React from "react";
 import { Link, Route } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   LoginRegisterWrapper,
   Logo,
   MainWrapper,
   Maintitle,
   SinginContainer,
-  LoginForm,
   MoreSignWrapper,
 } from "./style";
 import LogoPic from "../../static/logo.png";
 
-const Login: Function = (props: any) => {
-  return (
-    <LoginForm action="">
-      <div>
-        <i className="iconfont">&#58896;</i>
-        <input type="username" placeholder="手机号或邮箱" />
-      </div>
-      <div>
-        <i className="iconfont">&#58952;</i>
-        <input type="password" placeholder="密码" />
-      </div>
-      <div className="login-tools">
-        <div>
-          <input type="checkbox" name="" id="remember" />
-          <label htmlFor="remember">记住我</label>
-        </div>
-        <div>
-          <a href="javscript:;"> 登陆遇到问题？ </a>
-        </div>
-      </div>
-      <div>
-        <input type="submit" name="" id="" value="登录" />
-      </div>
-    </LoginForm>
-  );
-};
+import Login from "../../containers/LoginRegister/Login";
 
-const LoginRegister: Function = (props: any) => {
+const LoginRegister = (props: any) => {
+
   return (
     <Route to="/login-register">
       <LoginRegisterWrapper>
@@ -90,4 +66,7 @@ const LoginRegister: Function = (props: any) => {
   );
 };
 
+LoginRegister.propTypes = {
+  user_login_state: PropTypes.string,
+};
 export default LoginRegister;
