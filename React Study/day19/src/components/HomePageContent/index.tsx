@@ -40,9 +40,6 @@ const HomePageContent = (props: any) => {
       </SectionsWrapper>
     );
   });
-  // useEffect(()=>{
-  //   article_list =
-  // })
 
   return (
     <HomeContentWrapper>

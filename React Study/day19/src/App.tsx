@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 21:12:28
- * @LastEditTime: 2020-06-04 23:42:34
+ * @LastEditTime: 2020-06-06 12:26:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\App.js
@@ -57,5 +57,5 @@ function App() {
     </Fragment>
   );
 }
-//calc(123 + 70vw)
+
 export default App;

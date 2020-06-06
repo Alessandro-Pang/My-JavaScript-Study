@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:17:09
- * @LastEditTime: 2020-06-02 21:59:19
+ * @LastEditTime: 2020-06-05 08:13:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\styles.js
@@ -216,6 +216,10 @@ export const SearchHotList = style.div`
 export const RightNavWrapper = style.div`
   display:flex;
   justify-content:end;
+  
+  a{
+    text-decoration:none
+  }
 `;
 
 export const RegisterWrapper = style.button`
@@ -261,5 +265,4 @@ export const BetaWrapper = style.div`
 export const LoginWrapper = style.div`
   ${navJustifyPosition} 
   cursor:pointer;
-  
 `;

@@ -16,7 +16,9 @@ const Login = (props: any) => {
   let refs_username: any;
   let refs_password: any;
   let refs_remember: any;
-
+  const handleClick = (e:any) =>{
+    e.preventDefault();
+  }
   return (
     <LoginForm>
       <div>
@@ -52,7 +54,7 @@ const Login = (props: any) => {
           <label htmlFor="remember">记住我</label>
         </div>
         <div>
-          <a href="javscript:;"> 登陆遇到问题？ </a>
+          <a href="/" onClick={handleClick}> 登陆遇到问题？ </a>
         </div>
       </div>
       <div>

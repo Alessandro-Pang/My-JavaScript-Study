@@ -7,7 +7,10 @@ import {
   hotbox_mouseOut,
   get_hotbox_list,
   get_hotbox_page,
-  login_user_error
+  login_user_error,
+  get_username,
+  get_password,
+  login_or_register,
 } from "../../actions/actionCreators";
 
 const mapStateToProps = (state: any) => {
@@ -34,7 +37,7 @@ const mapDispatchToProps = (dispatch: Function): object => ({
   handleMuseIn: (mouseIn: boolean) => dispatch(hotbox_mouseIn(mouseIn)),
   handleMuseOut: (mouseIn: boolean) => dispatch(hotbox_mouseOut(mouseIn)),
   handleClickInBatch: (page: number, list: any) => {
-    let size = Math.floor(list.size / 10) ;
+    let size = Math.floor(list.size / 10);
     let totalPage = list.size % 10 === 0 ? size : size + 1;
     if (page <= totalPage) {
       dispatch(get_hotbox_page(page + 1));
@@ -42,9 +45,25 @@ const mapDispatchToProps = (dispatch: Function): object => ({
       dispatch(get_hotbox_page(1));
     }
   },
-  handleClickLayout:()=>{
-    dispatch(login_user_error("error"))
-  }
+  handleClickLogout: () => {
+    const logout = window.confirm("确定要退出登陆吗？");
+    if (logout) {
+      dispatch(login_user_error("error"));
+      dispatch(get_username(""));
+      dispatch(get_password(""));
+    } else {
+      return;
+    }
+    const timer = setTimeout(() => {
+      alert("退出成功!");
+      clearTimeout(timer);
+    }, 1000);
+  },
+  handleClickLoginRegister: (props: string) => {
+    if (props === "login" || props === "register") {
+      dispatch(login_or_register(props));
+    }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

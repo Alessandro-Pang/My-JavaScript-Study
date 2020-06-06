@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-06-05 00:35:47
+ * @LastEditTime: 2020-06-05 19:51:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
  */
 
-import React,{useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -41,7 +41,8 @@ const Header = (props: any) => {
     handleMuseOut,
     handleClickInBatch,
     user_login_state,
-    handleClickLayout,
+    handleClickLogout,
+    handleClickLoginRegister,
   } = props;
   let input: any;
 
@@ -80,23 +81,19 @@ const Header = (props: any) => {
     }
   };
 
-  const Login_Lgout:any = ()=>{
-    if(user_login_state !== "success"){
-      return(
+  const Login_Lgout: any = () => {
+    if (user_login_state !== "success") {
+      return (
         <Link to="/login-register/login">
-         <LoginWrapper>登录</LoginWrapper>
-       </Link>
-      )
+          <LoginWrapper onClick={() => handleClickLoginRegister("login")}>
+            登录
+          </LoginWrapper>
+        </Link>
+      );
     }
-    return(
-      <LoginWrapper onClick={handleClickLayout}>登出</LoginWrapper>
-    )
-  }
+    return <LoginWrapper onClick={handleClickLogout}>登出</LoginWrapper>;
+  };
 
-  useEffect(()=>{
-    Login_Lgout()
-  })
-  
   return (
     <HeaderWrapper>
       <Logo />
@@ -131,8 +128,12 @@ const Header = (props: any) => {
             <span>Beta</span>
           </BetaWrapper>
           {Login_Lgout()}
-          <Link to="/login-register">
-            <RegisterWrapper> 注册 </RegisterWrapper>
+          <Link to="/login-register/register">
+            <RegisterWrapper
+              onClick={() => handleClickLoginRegister("register")}
+            >
+              注册
+            </RegisterWrapper>
           </Link>
         </RightNavWrapper>
       </NavBarWrapper>
@@ -147,10 +148,15 @@ Header.propTypes = {
   focus: PropTypes.bool.isRequired,
   mouseIn: PropTypes.bool.isRequired,
   list: PropTypes.object.isRequired,
+  page: PropTypes.number.isRequired,
   handleInputFocus: PropTypes.func.isRequired,
   handleInputBlur: PropTypes.func.isRequired,
+  handleMuseIn: PropTypes.func.isRequired,
+  handleMuseOut: PropTypes.func.isRequired,
+  handleClickInBatch: PropTypes.func.isRequired,
   user_login_state: PropTypes.string,
-  handleClickLayout: PropTypes.func,
+  handleClickLogout: PropTypes.func,
+  handleClickLoginRegister: PropTypes.func,
 };
 
 export default Header;

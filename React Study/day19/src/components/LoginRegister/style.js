@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:03:03
- * @LastEditTime: 2020-06-04 21:56:55
+ * @LastEditTime: 2020-06-05 13:17:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\LoginRegister\style.js
@@ -243,5 +243,81 @@ export const MoreSignWrapper = style.div`
   }
   li:nth-of-type(3)>.iconfont{
     color:#498ad5;
+  }
+`
+
+export const RegisterForm = style.div`
+  width:100%;
+  display:flex;
+  margin-top:-7px;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  input{
+    box-sizing:border-box;
+    width:300px;
+    height:50px;
+    padding:4px 12px 4px 35px;
+    color: #a0a0a0;
+    background-color:hsla(0,0%,71%,.1);
+    border:1px solid #bbb;
+  }
+
+  & > div{
+    display:flex;
+    flex-direction:row;
+    position:relative;
+  }
+
+  .iconfont{
+    position:absolute;
+    left:10px;
+    top:14px;
+    font-size:18px;
+  }
+
+  & > div:nth-of-type(1) > input{
+    border-radius:4px 4px 0 0;
+  }
+
+  & > div:nth-of-type(2) > input{
+    border-width:0 1px;
+    border-radius: 0;
+  }
+
+  & > div:nth-of-type(3) > input{
+    border-radius: 0 0 4px 4px;
+  }
+
+  .submit-warrper{
+    margin-top:20px;
+  }
+
+  input[type="submit"]{
+    height:45px;
+    border:0px;
+    color:#fff;
+    padding:0;
+    background-color:#42c02e;
+    border-radius:25px;
+    font-size:18px;
+    transition:all 0.2s linear;
+  }
+
+  input[type="submit"]:hover{
+    background-color:#30a00e;
+  }
+
+  .user-agreenment{
+    margin-top:10px;
+    font-size:11px;
+    text-align:center;
+    line-height:20px;
+
+    a{
+      color:#3194d0;
+      text-decoration:none;
+    }
   }
 `
