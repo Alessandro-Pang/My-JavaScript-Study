@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:02:56
- * @LastEditTime: 2020-06-05 14:45:16
+ * @LastEditTime: 2020-06-07 01:37:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\LoginRegister\index.ts
@@ -19,9 +19,13 @@ import {
   MoreSignWrapper,
 } from "./style";
 import LogoPic from "../../static/logo.png";
+import loadable from "@loadable/component";
+// import LoginComponent from "../../containers/LoginRegister/Login";
+// import RegisterComponent from "../../containers/LoginRegister/Register";
 
-import Login from "../../containers/LoginRegister/Login";
-import Register from "../../containers/LoginRegister/Register";
+const LoginComponent = loadable(() => import("../../containers/LoginRegister/Login"))
+
+const RegisterComponent = loadable(()=> import("../../containers/LoginRegister/Register"))
 
 const LoginRegister = (props: any) => {
   const { login_or_register, handleClickLoginRegister } = props;
@@ -69,10 +73,10 @@ const LoginRegister = (props: any) => {
           </Maintitle>
           <SinginContainer>
             <Route path="/login-register/login">
-              <Login />
+              <LoginComponent />
             </Route>
             <Route path="/login-register/register">
-              <Register />
+              <RegisterComponent />
             </Route>
           </SinginContainer>
           <MoreSignWrapper>
@@ -109,6 +113,6 @@ const LoginRegister = (props: any) => {
 
 LoginRegister.propTypes = {
   login_or_register: PropTypes.string.isRequired,
-  handleClickLoginRegister: PropTypes.string,
+  handleClickLoginRegister: PropTypes.func,
 };
 export default LoginRegister;

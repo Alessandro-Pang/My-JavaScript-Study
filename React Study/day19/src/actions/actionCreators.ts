@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:24:12
- * @LastEditTime: 2020-06-06 13:11:11
+ * @LastEditTime: 2020-06-06 18:58:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\actionCreators.ts
@@ -76,7 +76,7 @@ export const get_hotbox_page = (page: number) => ({
 
 //#region acticle
 
-export const article_list = (article_list: any) => ({
+const article_list = (article_list: any) => ({
   type: CONTENT_ARTICLE_LIST,
   article_list,
 });

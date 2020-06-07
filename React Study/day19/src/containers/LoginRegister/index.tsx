@@ -7,11 +7,11 @@ const mapStateToPorps = (state: any) => {
     login_or_register: state.loginReducers.get("login_or_register"),
 }}
 
+type props = "login" | "register" ;
+
 const mapDispatchToProps = (dispatch: any) => ({
-  handleClickLoginRegister: (props: string) => {
-    if (props === "login" || props === "register") {
-      dispatch(login_or_register(props));
-    }
+  handleClickLoginRegister: (props: props) => {
+    dispatch(login_or_register(props));
   },
 });
 

@@ -12,6 +12,7 @@ import {
   get_password,
   login_or_register,
 } from "../../actions/actionCreators";
+import { bindActionCreators } from "redux";
 
 const mapStateToProps = (state: any) => {
   return {
@@ -23,7 +24,12 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Function): object => ({
+const mapDispatchToProps = (dispatch: any): object => ({
+  actions: bindActionCreators(
+    { input_blur, hotbox_mouseIn, hotbox_mouseOut },
+    dispatch
+  ),
+
   handleInputFocus: (focus: boolean, page: number, list: any) => {
     dispatch(input_focus(focus));
 
@@ -33,13 +39,11 @@ const mapDispatchToProps = (dispatch: Function): object => ({
     }
     dispatch(get_hotbox_page(page));
   },
-  handleInputBlur: (focus: boolean) => dispatch(input_blur(focus)),
-  handleMuseIn: (mouseIn: boolean) => dispatch(hotbox_mouseIn(mouseIn)),
-  handleMuseOut: (mouseIn: boolean) => dispatch(hotbox_mouseOut(mouseIn)),
+
   handleClickInBatch: (page: number, list: any) => {
     let size = Math.floor(list.size / 10);
     let totalPage = list.size % 10 === 0 ? size : size + 1;
-    if (page <= totalPage) {
+    if (page < totalPage) {
       dispatch(get_hotbox_page(page + 1));
     } else {
       dispatch(get_hotbox_page(1));
