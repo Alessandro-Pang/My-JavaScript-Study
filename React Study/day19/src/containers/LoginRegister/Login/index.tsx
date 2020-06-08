@@ -9,37 +9,31 @@
 
 import { connect } from "react-redux";
 import Login from "../../../components/LoginRegister/Login";
-import {
-  fetch_login_user,
-  get_username,
-  get_password,
-  get_remember,
-} from "../../../actions/actionCreators";
+import * as actionCreators from "../../../actions/actionCreators";
+import { ElementRef } from "react";
 
-const mapStateToProps = (state: any) => ({
-  username: state.loginReducers.get("username"),
-  password: state.loginReducers.get("password"),
-  checkbox: state.loginReducers.get("checkbox"),
-  user_login_state: state.loginReducers.get("user_login_state"),
+const mapStateToProps = ({ loginReducers }: any) => ({
+  username: loginReducers.get("username"),
+  password: loginReducers.get("password"),
+  checkbox: loginReducers.get("checkbox"),
+  user_login_state: loginReducers.get("user_login_state"),
 });
+
 
 const mapDispatchToProps = (dispatch: Function) => ({
   handleLoginSubmit: (username: string, password: string) => {
-    let loginInfo = {
-      username,
-      password,
-    };
-    dispatch(fetch_login_user(loginInfo));
+    let loginInfo = { username, password };
+    dispatch(actionCreators.fetch_login_user(loginInfo));
   },
 
-  handleInputChange: (ref: any) => {
+  handleInputChange: (ref: ElementRef<"input">) => {
     switch (ref.name) {
       case "username":
-        return dispatch(get_username(ref.value));
+        return dispatch(actionCreators.get_username(ref.value));
       case "password":
-        return dispatch(get_password(ref.value));
-      case "checkbox":
-        return dispatch(get_remember(ref.value));
+        return dispatch(actionCreators.get_password(ref.value));
+      case "remember":
+        return dispatch(actionCreators.get_remember(ref.checked));
       default:
         console.log(
           "%c" + new Error("not found form !"),

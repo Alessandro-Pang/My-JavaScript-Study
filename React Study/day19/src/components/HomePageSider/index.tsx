@@ -1,23 +1,18 @@
-import React, { useState } from "react";
-// import PropTypes from "prop-types";
+import React, { useState,ElementType } from "react";
+
+//#region import style component
+
 import {
-  HomeSiderWrapper,
-  BoardWrapper,
-  BoardBanner,
-  DownloadAppInfoWrapper,
-  DownloadAppImg,
-  DownloadAppInfo,
-  DownloadBigImg,
-  CommendAuthorWrapper,
-  CommendWrapper,
-  AuthorWrapper,
-  CommendMoreWrapper,
-  HeadPortrait,
-  AuthorName,
-  AuthorInfo,
-  AuthorArticleInfo,
-  FocusOnTheAuthor,
+  HomeSiderWrapper,BoardWrapper,BoardBanner,
+  DownloadAppInfoWrapper,DownloadAppImg,
+  DownloadAppInfo,DownloadBigImg,
+  CommendAuthorWrapper,CommendWrapper,
+  AuthorWrapper,CommendMoreWrapper,
+  HeadPortrait,AuthorName,AuthorInfo,
+  AuthorArticleInfo,FocusOnTheAuthor,
 } from "./style";
+
+//#endregion
 
 import top1 from "../../static/commendBanner/top1.png";
 import top2 from "../../static/commendBanner/top2.png";
@@ -26,7 +21,7 @@ import top4 from "../../static/commendBanner/top4.png";
 import downloadInfo from "../../static/commendBanner/download-info.png";
 import headPortrait from "../../static/commendAutorHead/author.webp";
 
-const HomePageSider: Function = (props: any) => {
+const HomePageSider:ElementType = (props: any) => {
   let [mouseIn, setMouseIn] = useState(false);
 
   const handleMouseDownload = () => {

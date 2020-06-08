@@ -1,54 +1,50 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:13:50
- * @LastEditTime: 2020-06-07 23:54:37
+ * @LastEditTime: 2020-06-08 23:20:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\index.ts
  */
 import React, { PureComponent } from "react";
+
+//#region import Style component
+
 import {
-  HomeContentWrapper,
-  BannerWrapper,
-  ArticleWrapper,
-  SectionsWrapper,
-  SectionTitle,
-  SectionAbstract,
-  Content,
-  SectionImg,
-  SectionTools,
+  HomeContentWrapper,BannerWrapper,
+  ArticleWrapper,SectionsWrapper,
+  SectionTitle,SectionAbstract,
+  Content,SectionImg,SectionTools,
   ShowMoreAticle,
 } from "./style";
+
+//#endregion
 
 import bannerPic from "../../static/banner.bmp";
 import immutable from "immutable";
 
-interface articleType{
-  a_id:number,
-  title:string,
-  content:string,
-  info:undefined,
-  image:string
+interface articleType {
+  a_id: number,
+  title: string,
+  content: string,
+  info: undefined,
+  image: string
 }
-interface actionsType{
-  get_article_list:Function
+interface actionsType {
+  get_article_list: Function
 }
 interface Props {
-  articleList:immutable.List<articleType>,
-  actions:actionsType
+  articleList: immutable.List<articleType>,
+  actions: actionsType
 }
 
 class HomePageContent extends PureComponent<Props> {
-  constructor(props: Props) {
-    super(props);
-    this.article_list = this.article_list.bind(this);
-  }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.actions.get_article_list();
   }
 
-  article_list(){
+  article_list = () => {
     const { articleList } = this.props;
     const newList = articleList.toJS();
 
@@ -65,7 +61,9 @@ class HomePageContent extends PureComponent<Props> {
       );
     });
   }
-  /**
+  
+  /** Warning : Functions are not valid as a React child.
+   * 
    * Warning: 
    *  Functions are not valid as a React child. 
    *  This may happen if you return a Component instead of <Component /> from render. 
@@ -78,12 +76,13 @@ class HomePageContent extends PureComponent<Props> {
    * 
    * 错误原因是调用方法没有加括号 --> this.article_list
    */
-  render() {
+  
+   render() {
     return (
       <HomeContentWrapper>
-        <BannerWrapper src={bannerPic} />
+        <BannerWrapper src={ bannerPic } />
         <ArticleWrapper>
-          {this.article_list()}
+          { this.article_list() }
           <ShowMoreAticle>阅读更多</ShowMoreAticle>
         </ArticleWrapper>
       </HomeContentWrapper>

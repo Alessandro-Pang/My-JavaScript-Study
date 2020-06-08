@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 22:55:08
- * @LastEditTime: 2020-06-01 12:48:21
+ * @LastEditTime: 2020-06-08 22:30:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSider\style.ts
- */ 
+ */
 
 import style from "styled-components";
+import { ElementType } from "react";
 
 const flexBoxLayout = `
   display:flex;
@@ -15,7 +16,7 @@ const flexBoxLayout = `
   align-items:start;
 `
 /* 侧边栏容器*/
-export const HomeSiderWrapper = style.aside`
+export const HomeSiderWrapper: ElementType = style.aside`
   display:flex;
   flex-direction:column;
   padding-top:26px;
@@ -23,24 +24,24 @@ export const HomeSiderWrapper = style.aside`
 `;
 
 /** 板块，专栏*/
-export const BoardWrapper = style.div`
+export const BoardWrapper: ElementType = style.div`
   ${flexBoxLayout}
   flex-wrap:wrap;
   justify-content:center;
 `
 
-export const BoardBanner = style.img`
+export const BoardBanner: ElementType = style.img`
   ${flexBoxLayout}
   width:95%;
   padding-top:8px;
 `
 
 /**推荐作者 */
-export const RecommendWrapper = style.div`
+export const RecommendWrapper: ElementType = style.div`
   ${flexBoxLayout}
 `;
 
-export const DownloadAppInfoWrapper = style.a`
+export const DownloadAppInfoWrapper: ElementType = style.a`
   ${flexBoxLayout}
   flex-direction:row;
   border:1px solid #eee;
@@ -50,10 +51,10 @@ export const DownloadAppInfoWrapper = style.a`
   position:relative;
 `
 
-export const DownloadAppImg = style.img`
+export const DownloadAppImg: ElementType = style.img`
   width:30%;
 `
-export const DownloadAppInfo = style.div`
+export const DownloadAppInfo: ElementType = style.div`
   ${flexBoxLayout}
   width:70%;
   margin-left:8px;
@@ -70,7 +71,7 @@ export const DownloadAppInfo = style.div`
     margin-top:8%;
   }
 `
-export const DownloadBigImg = style.div`
+export const DownloadBigImg: ElementType = style.div`
   display:flex;
   justify-content:center;
   align-items:center;
@@ -100,14 +101,14 @@ export const DownloadBigImg = style.div`
   }
 `
 //commend 推荐
-export const CommendAuthorWrapper = style.div`
+export const CommendAuthorWrapper: ElementType = style.div`
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
   
 `
-export const   CommendWrapper = style.div`
+export const CommendWrapper: ElementType = style.div`
   display:flex;
   width:95%;
   height:16px;
@@ -127,14 +128,14 @@ export const   CommendWrapper = style.div`
   }
 `;
 
-export const AuthorWrapper = style.div`
+export const AuthorWrapper: ElementType = style.div`
   display:flex;
   width:95%;
   margin:6px 0;
 `;
 
 // head portrait 头像
-export const HeadPortrait = style.div`
+export const HeadPortrait: ElementType = style.div`
   width:50px;
 
   img{
@@ -143,22 +144,22 @@ export const HeadPortrait = style.div`
   }
 `;
 
-export const AuthorInfo = style.div`
+export const AuthorInfo: ElementType = style.div`
   margin-left:13px;
   flex:1;
 `
 
-export const AuthorName = style.div`
+export const AuthorName: ElementType = style.div`
   font-size:14px;
   color:#333;
   margin:8px 0
 `;
 
-export const  AuthorArticleInfo = style.div`
+export const AuthorArticleInfo: ElementType = style.div`
   font-size:12px;
 `;
 
-export const FocusOnTheAuthor = style.div`
+export const FocusOnTheAuthor: ElementType = style.div`
   display:flex;
   justify-content:end;
   align-items:center;
@@ -167,7 +168,7 @@ export const FocusOnTheAuthor = style.div`
   padding-right:5px;
 `;
 
-export const CommendMoreWrapper = style.div`
+export const CommendMoreWrapper: ElementType = style.div`
   display:flex;
   justify-content:center;
   align-items:center;

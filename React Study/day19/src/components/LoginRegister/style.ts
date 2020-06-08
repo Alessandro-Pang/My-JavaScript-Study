@@ -1,15 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:03:03
- * @LastEditTime: 2020-06-05 13:17:45
+ * @LastEditTime: 2020-06-08 22:45:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\LoginRegister\style.js
- */ 
+ */
 
- import style from "styled-components";
+import style from "styled-components";
+import {ElementType} from "react";
 
-export const LoginRegisterWrapper = style.div`
+export const LoginRegisterWrapper: ElementType = style.div`
   display:flex;
   justify-content:center;
   align-items:start;
@@ -21,14 +22,14 @@ export const LoginRegisterWrapper = style.div`
   margin-left:-5px;
 `
 
-export const Logo = style.img`
+export const Logo: ElementType = style.img`
   position:absolute;
   top:27px;
   left:10px;
   width:180px;
 `
 
-export const MainWrapper = style.div`
+export const MainWrapper: ElementType = style.div`
   margin-top:52px;
   display:flex;
   justify-content:center;
@@ -42,7 +43,7 @@ export const MainWrapper = style.div`
   background-color:#fff;
 `
 
-export const Maintitle = style.div`
+export const Maintitle: ElementType = style.div`
   display:flex;
   height:50px;
   width:100%;
@@ -86,13 +87,13 @@ export const Maintitle = style.div`
   }
 `
 
-export const SinginContainer = style.div`
+export const SinginContainer: ElementType = style.div`
   height:calc( 100% - 200px );
   width:100%;
   margin-top:35px;
 `
 
-export const LoginForm =style.div`
+export const LoginForm = style.div`
   width:100%;
   display:flex;
   flex-direction:column;
@@ -181,7 +182,7 @@ export const LoginForm =style.div`
   }
 `
 
-export const MoreSignWrapper = style.div`
+export const MoreSignWrapper: ElementType = style.div`
   display:flex;
   justify-content:start;
   height:150px;
@@ -246,7 +247,7 @@ export const MoreSignWrapper = style.div`
   }
 `
 
-export const RegisterForm = style.div`
+export const RegisterForm: ElementType = style.div`
   width:100%;
   display:flex;
   margin-top:-7px;

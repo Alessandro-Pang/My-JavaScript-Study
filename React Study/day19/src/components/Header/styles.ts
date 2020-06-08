@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:17:09
- * @LastEditTime: 2020-06-07 12:44:05
+ * @LastEditTime: 2020-06-08 22:22:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\styles.js
@@ -9,8 +9,9 @@
 
 import style from "styled-components";
 import logoPic from "../../static/logo.png";
+import { ElementType } from "react";
 
-export const HeaderWrapper = style.header`
+export const HeaderWrapper:ElementType = style.header`
   position:relative;
   top:0;
   width:100%;
@@ -30,7 +31,7 @@ export const HeaderWrapper = style.header`
   }
 `;
 
-export const Logo = style.div`
+export const Logo:ElementType = style.div`
   position:absolute;
   top:0;
   left:0;
@@ -43,7 +44,7 @@ export const Logo = style.div`
   background-repeat:no-repeat;
 `;
 
-export const WriteWrapper = style.button`
+export const WriteWrapper:ElementType = style.button`
   position:absolute;
   right:10px;
   height:40px;
@@ -63,7 +64,7 @@ export const WriteWrapper = style.button`
   }
 `;
 
-export const NavBarWrapper = style.nav`
+export const NavBarWrapper:ElementType = style.nav`
   position:absolute;
   left:100px;
   right:150px;
@@ -75,7 +76,7 @@ export const NavBarWrapper = style.nav`
   padding-left:calc(15vw - 100px);
 `;
 
-export const LeftNavWrapper = style.div`
+export const LeftNavWrapper:ElementType = style.div`
   display:flex;
   justify-content:start;
   align-items:center;
@@ -94,12 +95,12 @@ const navJustifyPosition = `
   align-items:center;
 `;
 
-export const HomePageWrapper = style.div`
+export const HomePageWrapper:ElementType = style.div`
   ${navJustifyPosition}
   color: #ea6f5a;
 `;
 
-export const DownloadAPPWrapper = style.div`
+export const DownloadAPPWrapper:ElementType = style.div`
   ${navJustifyPosition}
   color:#303030;
 
@@ -108,7 +109,7 @@ export const DownloadAPPWrapper = style.div`
   }
 `;
 
-export const SearchInputWrapper = style.div`
+export const SearchInputWrapper:ElementType = style.div`
   margin:20px;
   display:flex;
   height:38px;
@@ -128,7 +129,7 @@ export const SearchInputWrapper = style.div`
     align-items:center;
   }
 `;
-export const SearchIcon = style.div`
+export const SearchIcon:ElementType = style.div`
   display:flex;
   align-items:center;
   justify-content:center;
@@ -142,7 +143,7 @@ export const SearchIcon = style.div`
   }
 `;
 
-export const SearchInput = style.input.attrs({ placeholder: "搜索" })`
+export const SearchInput:ElementType = style.input.attrs({ placeholder: "搜索" })`
   display:flex;
   outline:none;
   align-items: center;
@@ -156,7 +157,7 @@ export const SearchInput = style.input.attrs({ placeholder: "搜索" })`
   transition:width 0.3s linear;
 `;
 
-export const SearchHotList = style.div`
+export const SearchHotList:ElementType = style.div`
   position:absolute;
   width:240px;
   min-height:60px;
@@ -195,6 +196,8 @@ export const SearchHotList = style.div`
     width:50%;
     margin:5px 0 5px 3px;
     justify-content:end;
+    //该属性在Chrome下使用
+    justify-content:flex-end;
 
     i{
       transition:all 0.8s linear;
@@ -217,7 +220,7 @@ export const SearchHotList = style.div`
   }
 `
 
-export const RightNavWrapper = style.div`
+export const RightNavWrapper:ElementType = style.div`
   display:flex;
   justify-content:end;
   
@@ -226,7 +229,7 @@ export const RightNavWrapper = style.div`
   }
 `;
 
-export const RegisterWrapper = style.button`
+export const RegisterWrapper:ElementType = style.button`
   color: #ea6f5a;
   border:1px solid  #ea6f5a;
   border-radius: 20px;
@@ -238,7 +241,7 @@ export const RegisterWrapper = style.button`
   font-weight:bold;
 `;
 
-export const ModeWrapper = style.div`
+export const ModeWrapper:ElementType = style.div`
   ${navJustifyPosition}
   .iconfont{
     font-size:22px;
@@ -246,7 +249,7 @@ export const ModeWrapper = style.div`
   }
 `;
 
-export const BetaWrapper = style.div`
+export const BetaWrapper:ElementType = style.div`
   ${navJustifyPosition}
   .iconfont{
     color: #ea6f5a;
@@ -266,7 +269,7 @@ export const BetaWrapper = style.div`
   }
 `;
 
-export const LoginWrapper = style.div`
+export const LoginWrapper:ElementType = style.div`
   ${navJustifyPosition} 
   cursor:pointer;
 `;

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:02:56
- * @LastEditTime: 2020-06-07 11:27:08
+ * @LastEditTime: 2020-06-08 22:55:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\LoginRegister\index.ts
@@ -17,7 +17,7 @@ import {
   Maintitle,
   SinginContainer,
   MoreSignWrapper,
-} from "./style";
+} from "../../page/LoginRegister/style";
 import LogoPic from "../../static/logo.png";
 import loadable from "@loadable/component";
 

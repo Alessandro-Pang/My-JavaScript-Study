@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 21:55:51
- * @LastEditTime: 2020-06-05 14:31:01
+ * @LastEditTime: 2020-06-08 14:18:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\reducers\index.js
- */ 
+ */
+
 import { combineReducers } from "redux";
 import loginReducers from "./login";
 import headerReduces from "./header";
@@ -16,7 +17,7 @@ const reducers = combineReducers({
   loginReducers,
   headerReduces,
   contentReduces,
-  registerReduces
-})
+  registerReduces,
+});
 
 export default reducers;

@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 21:12:28
- * @LastEditTime: 2020-06-06 18:30:29
+ * @LastEditTime: 2020-06-08 22:33:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\index.js
  */
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore,applyMiddleware } from "redux";
+import { createStore,applyMiddleware, Store } from "redux";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { IcontFont } from "./static/iconfont/iconfont";
@@ -24,7 +24,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 const enhancer = composeWithDevTools(applyMiddleware(thunk));
 
-const store:any = createStore(reducers, enhancer);
+const store:Store = createStore(reducers, enhancer);
 
 // store.subscribe(()=>{
 //   console.log(store.getState().headerReduces.get("page"))

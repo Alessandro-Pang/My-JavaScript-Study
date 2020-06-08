@@ -1,30 +1,22 @@
 import { connect } from "react-redux";
 import Header from "../../components/Header/index";
-import {
-  input_focus,
-  input_blur,
-  hotbox_mouseIn,
-  hotbox_mouseOut,
-  get_hotbox_list,
-  get_hotbox_page,
-  login_user_error,
-  get_username,
-  get_password,
-  login_or_register,
-} from "../../actions/actionCreators";
+import * as actionCreators from "../../actions/actionCreators";
 import { bindActionCreators } from "redux";
-import { createSelector } from "reselect"
+import { createSelector } from "reselect";
+import immutable from "immutable";
+import { ElementRef } from "react";
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = ({ headerReduces,loginReducers}: any) => {
   return {
-    focus: state.headerReduces.get("focusd"),
-    mouseIn: state.headerReduces.get("mouseIn"),
-    list: state.headerReduces.get("list"),
-    page: state.headerReduces.get("page"),
-    user_login_state: state.loginReducers.get("user_login_state"),
+    focus: headerReduces.get("focusd"),
+    mouseIn: headerReduces.get("mouseIn"),
+    list: headerReduces.get("list"),
+    page: headerReduces.get("page"),
+    user_login_state: loginReducers.get("user_login_state"),
   };
 };
-const get_list = (list: any) => list;
+
+const get_list = (list: immutable.List<string>) => list;
 const dataSourceSelector = createSelector(get_list, (list) => {
   //避免重复计算
   let size = Math.floor(list.size / 10);
@@ -37,26 +29,29 @@ const dataSourceSelector = createSelector(get_list, (list) => {
 let tag = false;
 const mapDispatchToProps = (dispatch: any): object => ({
   actions: bindActionCreators(
-    { input_blur, hotbox_mouseIn, hotbox_mouseOut },
+    {
+      input_blur: actionCreators.input_blur,
+      hotbox_mouseIn: actionCreators.hotbox_mouseIn,
+      hotbox_mouseOut: actionCreators.hotbox_mouseOut
+    },
     dispatch
   ),
 
-  handleInputFocus: (focus: boolean, page: number, list: any) => {
-    dispatch(input_focus(focus));
+  handleInputFocus: (focus: boolean, page: number, list: immutable.List<string>):void => {
+    dispatch(actionCreators.input_focus(focus));
 
     if (!list.size) {
       //避免多次查询
-      dispatch(get_hotbox_list());
+      dispatch(actionCreators.get_hotbox_list());
     }
 
-    dispatch(get_hotbox_page(page));
+    dispatch(actionCreators.get_hotbox_page(page));
   },
 
-  handleClickInBatch: (page: number, list: any, spinIcon: any) => {
+  handleClickInBatch: (page: number, list: immutable.List<string>, spinIcon: ElementRef<"i">):void => {
     //规定用户每秒可点击一次，从而处理防抖节流
     if (tag) return
     tag = true;
-
     /*
       如果使用 360 * page 动态计算角度
       会存在一个BUG,当input失去焦点，再次获取焦点时
@@ -75,17 +70,17 @@ const mapDispatchToProps = (dispatch: any): object => ({
 
     let totalPage = dataSourceSelector(list);
     if (page < totalPage) {
-      dispatch(get_hotbox_page(page + 1));
+      dispatch(actionCreators.get_hotbox_page(page + 1));
     } else {
-      dispatch(get_hotbox_page(1));
+      dispatch(actionCreators.get_hotbox_page(1));
     }
   },
-  handleClickLogout: () => {
+  handleClickLogout: ():void => {
     const logout = window.confirm("确定要退出登陆吗？");
     if (logout) {
-      dispatch(login_user_error("error"));
-      dispatch(get_username(""));
-      dispatch(get_password(""));
+      dispatch(actionCreators.login_user_error("error"));
+      dispatch(actionCreators.get_username(""));
+      dispatch(actionCreators.get_password(""));
     } else {
       return;
     }
@@ -94,9 +89,9 @@ const mapDispatchToProps = (dispatch: any): object => ({
       clearTimeout(timer);
     }, 1000);
   },
-  handleClickLoginRegister: (props: string) => {
+  handleClickLoginRegister: (props: string):void => {
     if (props === "login" || props === "register") {
-      dispatch(login_or_register(props));
+      dispatch(actionCreators.login_or_register(props));
     }
   },
 });

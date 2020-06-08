@@ -1,65 +1,53 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-06-07 12:36:11
+ * @LastEditTime: 2020-06-08 23:17:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
  */
 
-import React from "react";
+import React, { ElementRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+//#region import Style Componentd
+
 import {
-  HeaderWrapper,
-  Logo,
-  WriteWrapper,
-  NavBarWrapper,
-  LeftNavWrapper,
-  HomePageWrapper,
-  DownloadAPPWrapper,
-  SearchInputWrapper,
-  SearchIcon,
-  SearchInput,
-  RightNavWrapper,
-  RegisterWrapper,
-  ModeWrapper,
-  BetaWrapper,
-  LoginWrapper,
-  SearchHotList,
+  HeaderWrapper, Logo, WriteWrapper,NavBarWrapper,
+  LeftNavWrapper,HomePageWrapper, DownloadAPPWrapper,
+  SearchInputWrapper,SearchIcon,SearchInput,
+  RightNavWrapper,RegisterWrapper,ModeWrapper,
+  BetaWrapper,LoginWrapper,SearchHotList,
 } from "./styles";
+
+//#endregion
 
 const Header = (props: any) => {
 
   // #region import props
-  const {
-    focus,
-    mouseIn,
-    list,
-    page,
-    actions,
-    handleInputFocus,
-    handleClickInBatch,
-    user_login_state,
-    handleClickLogout,
-    handleClickLoginRegister,
-  } = props;
-  let input: any;
-  //#endregion
   
+  const {
+    focus, mouseIn,list,page,
+    actions,handleInputFocus,
+    handleClickInBatch,user_login_state,
+    handleClickLogout,handleClickLoginRegister,
+  } = props;
+
+  //#endregion
+
   // #region getHotList
-  const getHotList: any = () => {
+  const getHotList = () => {
 
     const newList = list.toJS();
     const pageList = [];
-    let spinIcon:any = undefined;
+    let spinIcon: any = undefined;
 
     //解决undefined 或 null 值的空指针问题
     if (!newList.length) return;
 
     for (let i = (page - 1) * 10; i < page * 10; i++) {
-      if(!newList[i])break;
+      if (!newList[i]) break;
       pageList.push(
         <span className="hot-class" key={newList[i].hotID}>
           {newList[i].hotTitle}
@@ -69,27 +57,27 @@ const Header = (props: any) => {
     if (focus || mouseIn) {
       return (
         <SearchHotList
-          onMouseLeave={()=>actions.hotbox_mouseOut(mouseIn)}
-          onMouseEnter={()=> actions.hotbox_mouseIn(mouseIn)}
+          onMouseLeave={() => actions.hotbox_mouseOut(mouseIn)}
+          onMouseEnter={() => actions.hotbox_mouseIn(mouseIn)}
         >
           <div className="hot-title">热点搜索</div>
           <div
             className="in-a-batch"
             onClick={() => {
-              handleClickInBatch(page, list,spinIcon);
+              handleClickInBatch(page, list, spinIcon);
             }}
           >
-            <i className="iconfont" ref={icon => spinIcon = icon }>&#58909;</i>换一批
+            <i className="iconfont" ref={icon => spinIcon = icon}>&#58909;</i>换一批
           </div>
           {pageList}
         </SearchHotList>
       );
     }
   };
-  
+
   // #endregion
 
-  // #region Login and Lgout
+  // #region Login and Logout
   const Login_Lgout: any = () => {
     if (user_login_state !== "success") {
       return (
@@ -104,6 +92,8 @@ const Header = (props: any) => {
   };
   // #endregion
   
+  let input: ElementRef<"input">;
+
   return (
     <HeaderWrapper>
       <Logo />
@@ -121,9 +111,9 @@ const Header = (props: any) => {
             {/* 需要配置防抖节流 */}
             <SearchInput
               id="search_input"
-              ref={(el) => (input = el)}
+              ref={(el: ElementRef<"input">) => (input = el)}
               onFocus={() => handleInputFocus(focus, page, list)}
-              onBlur={()=>actions.input_blur(focus)}
+              onBlur={() => actions.input_blur(focus)}
               style={{ width: focus ? "200px" : "150px" }}
             ></SearchInput>
             {getHotList()}
