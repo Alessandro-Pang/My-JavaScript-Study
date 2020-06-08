@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-06 21:38:05
- * @LastEditTime: 2020-06-07 10:36:32
+ * @LastEditTime: 2020-06-07 10:50:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\commonReactLibrary.md
@@ -122,6 +122,44 @@
   - precss
 
   - precss-loader
+
+- webpack plugin
+
+  - CleanWebpackPlugin
+
+    _每次打包先清理build文件夹_
+  
+  - HotModuleReplacementPlugin
+
+    _webpack自带热更新插件_
+
+  - mini-css-extract-plugin
+
+    _分离CSS, 但是对于JS in css OR Functional in CSS 没有用_
+
+  - purifycss-webpack
+
+    _puirfy-css 消除冗余CSS_
+
+  - optimize-css-assets-webpack-plugin
+
+    _压缩 css_
+
+  - terser-webpack-plugin
+
+    _压缩JS_
+
+  - splitChunks
+
+    _提取公共代码。。。React 似乎并不需要_
+
+  - image-webpack-loader
+
+    _图片压缩_
+
+  - gZip
+
+    _启动 GZIP 压缩，需要服务器配置_
 
 ## 四、 React UI 库
 

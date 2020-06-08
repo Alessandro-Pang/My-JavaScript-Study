@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:14:03
- * @LastEditTime: 2020-06-01 22:56:29
+ * @LastEditTime: 2020-06-07 23:53:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\style.ts
@@ -36,7 +36,7 @@ export const ArticleWrapper = style.ul`
 export const SectionsWrapper = style.li`
   ${flexBoxLayout}
   width:100%;
-  min-height:112px;
+  min-height:115px;
   border-bottom-width:1px;
   border-bottom-style:solid;
   position:relative;
@@ -70,9 +70,9 @@ export const SectionAbstract = style.p`
 `
 
 export const SectionTools = style.div` 
-  position:absolute;
-  bottom:15px;
-  width:70%;
+  display:flex;
+  margin-top:15px;
+  width:100%;
   height:20px;
   background-color:#eee;
 `

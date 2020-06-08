@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-06-07 00:36:59
+ * @LastEditTime: 2020-06-07 12:36:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
@@ -51,9 +51,9 @@ const Header = (props: any) => {
   // #region getHotList
   const getHotList: any = () => {
 
-
     const newList = list.toJS();
     const pageList = [];
+    let spinIcon:any = undefined;
 
     //解决undefined 或 null 值的空指针问题
     if (!newList.length) return;
@@ -76,10 +76,10 @@ const Header = (props: any) => {
           <div
             className="in-a-batch"
             onClick={() => {
-              handleClickInBatch(page, list);
+              handleClickInBatch(page, list,spinIcon);
             }}
           >
-            <i className="iconfont">&#58909;</i>换一批
+            <i className="iconfont" ref={icon => spinIcon = icon }>&#58909;</i>换一批
           </div>
           {pageList}
         </SearchHotList>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:24:12
- * @LastEditTime: 2020-06-06 18:58:53
+ * @LastEditTime: 2020-06-07 23:37:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\actionCreators.ts
@@ -85,6 +85,7 @@ export const get_article_list = () => (dispatch: any) => {
   fetch(`${base_url}/article_list`)
     .then((res) => res.json())
     .then((res) => {
+      console.log(res.data)
       dispatch(article_list(res.data));
     });
 };

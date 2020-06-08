@@ -17,7 +17,6 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToPorps = (dispatch: any) => ({
-  // get_article_list:dispatch(get_article_list())
   actions:bindActionCreators({get_article_list},dispatch)
 });
 

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:17:09
- * @LastEditTime: 2020-06-05 08:13:55
+ * @LastEditTime: 2020-06-07 12:44:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\styles.js
@@ -195,6 +195,10 @@ export const SearchHotList = style.div`
     width:50%;
     margin:5px 0 5px 3px;
     justify-content:end;
+
+    i{
+      transition:all 0.8s linear;
+    }
   }
 
   span.hot-class{

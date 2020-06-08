@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:13:50
- * @LastEditTime: 2020-06-06 20:10:06
+ * @LastEditTime: 2020-06-07 23:54:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\index.ts
@@ -21,13 +21,14 @@ import {
 } from "./style";
 
 import bannerPic from "../../static/banner.bmp";
-import sectionImgPic from "../../static/section.bmp";
 import immutable from "immutable";
 
 interface articleType{
   a_id:number,
   title:string,
-  content:string
+  content:string,
+  info:undefined,
+  image:string
 }
 interface actionsType{
   get_article_list:Function
@@ -50,6 +51,7 @@ class HomePageContent extends PureComponent<Props> {
   article_list(){
     const { articleList } = this.props;
     const newList = articleList.toJS();
+
     return newList.map((items: any) => {
       return (
         <SectionsWrapper key={items.a_id}>
@@ -58,7 +60,7 @@ class HomePageContent extends PureComponent<Props> {
             <SectionAbstract>{items.content}</SectionAbstract>
             <SectionTools></SectionTools>
           </Content>
-          <SectionImg src={sectionImgPic} />
+          <SectionImg src={items.image} />
         </SectionsWrapper>
       );
     });

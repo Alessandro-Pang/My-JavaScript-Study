@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:02:56
- * @LastEditTime: 2020-06-07 01:37:11
+ * @LastEditTime: 2020-06-07 11:27:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\LoginRegister\index.ts
@@ -20,12 +20,9 @@ import {
 } from "./style";
 import LogoPic from "../../static/logo.png";
 import loadable from "@loadable/component";
-// import LoginComponent from "../../containers/LoginRegister/Login";
-// import RegisterComponent from "../../containers/LoginRegister/Register";
 
-const LoginComponent = loadable(() => import("../../containers/LoginRegister/Login"))
-
-const RegisterComponent = loadable(()=> import("../../containers/LoginRegister/Register"))
+const LoginComponent = loadable(() => import("../../containers/LoginRegister/Login"));
+const RegisterComponent = loadable(()=> import("../../containers/LoginRegister/Register"));
 
 const LoginRegister = (props: any) => {
   const { login_or_register, handleClickLoginRegister } = props;

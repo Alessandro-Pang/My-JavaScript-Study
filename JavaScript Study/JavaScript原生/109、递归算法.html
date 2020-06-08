@@ -1,0 +1,71 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-07 11:54:41
+ * @LastEditTime: 2020-06-07 12:17:25
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\JavaScript Study\JavaScript原生\109、递归算法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #dv1{
+        width:0;
+        height:0;
+        border-style:solid;
+        border-width:0 25px 40px 25px;
+        border-color:transparent transparent rgb(245,129,127) transparent;
+      }
+      /**
+        使用说明
+        用来指定全透明色彩。
+            transparent是全透明黑色(black)的速记法，即一个类似rgba(0,0,0,0)这样的值。
+            在CSS1中，transparent被用来作为background-color的一个参数值，用于表示背景透明。
+            在CSS2中，border-color也开始接受transparent作为参数值，
+              《Open eBook(tm) Publication Structure 1.0.1》[OEB101]延伸到color也接受transparent作为参数值。
+              IE6不支持border的颜色为transparent，边框色会显示为黑色。
+            在CSS3中，transparent被延伸到任何一个有color值的属性上。IE8及以下，color属性值为transparent时，文本显示为黑色。
+      */
+      #dv2{
+        width:0;
+        height:0;
+        border-style:solid;
+        border-width:40px 25px 0 25px;
+        border-color:rgb(245,129,127) transparent transparent transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dv1"></div>
+    <br>
+    <div id="dv2"></div>
+    <script>
+      var arr = [
+        [1, "a", 2],
+        [3, "b", 4],
+        [5, "c", 6],
+        [7, "d", 8],
+      ];
+
+      var res = [];
+      function fn(str, arr, index) {
+        let res = [];
+        for (let i = 0; i < arr[index].length; i++) {
+          let _str = str.slice(0).concat([arr[index][i]]);
+          if (arr[index + 1]) {
+            res = res.concat(fn(_str, arr, index + 1));
+          } else {
+            res.push(_str);
+          }
+        }
+        return res;
+      }
+
+      console.dir(fn([], arr, 0));
+    </script>
+  </body>
+</html>
