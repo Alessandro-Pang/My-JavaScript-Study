@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:13:50
- * @LastEditTime: 2020-06-08 23:20:39
+ * @LastEditTime: 2020-06-09 23:48:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\index.ts
@@ -11,10 +11,10 @@ import React, { PureComponent } from "react";
 //#region import Style component
 
 import {
-  HomeContentWrapper,BannerWrapper,
-  ArticleWrapper,SectionsWrapper,
-  SectionTitle,SectionAbstract,
-  Content,SectionImg,SectionTools,
+  HomeContentWrapper, BannerWrapper,
+  ArticleWrapper, SectionsWrapper,
+  SectionTitle, SectionAbstract,
+  Content, SectionImg, SectionTools,
   ShowMoreAticle,
 } from "./style";
 
@@ -22,6 +22,7 @@ import {
 
 import bannerPic from "../../static/banner.bmp";
 import immutable from "immutable";
+import { Link } from "react-router-dom";
 
 interface articleType {
   a_id: number,
@@ -31,7 +32,8 @@ interface articleType {
   image: string
 }
 interface actionsType {
-  get_article_list: Function
+  get_article_list: Function,
+
 }
 interface Props {
   articleList: immutable.List<articleType>,
@@ -39,9 +41,16 @@ interface Props {
 }
 
 class HomePageContent extends PureComponent<Props> {
-
+  newList: any;
+  constructor(props: Props) {
+    super(props)
+    const { articleList } = props;
+    this.newList = articleList.toJS();
+  }
   componentDidMount() {
-    this.props.actions.get_article_list();
+    if (!this.newList.length) {
+      this.props.actions.get_article_list();
+    }
   }
 
   article_list = () => {
@@ -52,8 +61,12 @@ class HomePageContent extends PureComponent<Props> {
       return (
         <SectionsWrapper key={items.a_id}>
           <Content>
-            <SectionTitle>{items.title}</SectionTitle>
-            <SectionAbstract>{items.content}</SectionAbstract>
+            <SectionTitle>
+              <Link to={"/home/article/" + items.a_id}>{items.title}</Link>
+            </SectionTitle>
+            <SectionAbstract>
+              {items.content}
+            </SectionAbstract>
             <SectionTools></SectionTools>
           </Content>
           <SectionImg src={items.image} />
@@ -61,7 +74,7 @@ class HomePageContent extends PureComponent<Props> {
       );
     });
   }
-  
+
   /** Warning : Functions are not valid as a React child.
    * 
    * Warning: 
@@ -76,13 +89,13 @@ class HomePageContent extends PureComponent<Props> {
    * 
    * 错误原因是调用方法没有加括号 --> this.article_list
    */
-  
-   render() {
+
+  render() {
     return (
       <HomeContentWrapper>
-        <BannerWrapper src={ bannerPic } />
+        <BannerWrapper src={bannerPic} />
         <ArticleWrapper>
-          { this.article_list() }
+          {this.article_list()}
           <ShowMoreAticle>阅读更多</ShowMoreAticle>
         </ArticleWrapper>
       </HomeContentWrapper>

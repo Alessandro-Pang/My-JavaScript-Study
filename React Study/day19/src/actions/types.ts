@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-08 13:45:45
- * @LastEditTime: 2020-06-08 21:41:56
+ * @LastEditTime: 2020-06-09 22:37:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\types.ts
@@ -29,4 +29,8 @@ export type registerReducer_type = {
   REGISTER_USERNAME: string,
   REGISTER_PHONE: number,
   REGISTER_PASSWORD: string
+}
+
+export type articleReducer_type = {
+  ARTICLE_ONCTNET:string
 }

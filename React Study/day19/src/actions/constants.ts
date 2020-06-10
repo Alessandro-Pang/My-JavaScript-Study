@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:23:56
- * @LastEditTime: 2020-06-08 14:16:40
+ * @LastEditTime: 2020-06-09 14:39:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\actionTypes.ts
@@ -42,3 +42,6 @@ export type REGISTER_USERNAME = typeof REGISTER_USERNAME;
 export type REGISTER_PASSWORD = typeof REGISTER_PASSWORD;
 export type REGISTER_PHONE = typeof REGISTER_PHONE;
 export type REGISTER_SUBMIT = typeof REGISTER_SUBMIT;
+
+export const ARTICLE_ONCTNET = "article/content_info";
+export type ARTICLE_ONCTNET = typeof ARTICLE_ONCTNET;

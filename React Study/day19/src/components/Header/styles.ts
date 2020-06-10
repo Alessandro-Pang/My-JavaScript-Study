@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:17:09
- * @LastEditTime: 2020-06-08 22:22:50
+ * @LastEditTime: 2020-06-09 09:00:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\styles.js
@@ -97,7 +97,12 @@ const navJustifyPosition = `
 
 export const HomePageWrapper:ElementType = style.div`
   ${navJustifyPosition}
-  color: #ea6f5a;
+  a{
+    margin-top:2px;
+    text-decoration:none;
+    color: #ea6f5a;
+    font-size:18px;
+  }
 `;
 
 export const DownloadAPPWrapper:ElementType = style.div`

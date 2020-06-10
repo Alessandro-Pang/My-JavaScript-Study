@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>贪吃蛇小游戏</title>
     <script src="../common.js" type="text/javascript"></script>
     <script src="../common.js" type="text/javascript"></script>
     <script src="jquery.js" type="text/javascript"></script>
     <style type="text/css">
-        canvas {
-            box-sizing: border-box;
-            border: 1px solid green;
-        }
+      canvas {
+        box-sizing: border-box;
+        border: 1px solid green;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <canvas id="canvas" width="400" height="400"></canvas>
-</body>
-<script type="text/javascript">
+  </body>
+  <script type="text/javascript">
     //初始化canvas对象
-    var ctx = my$('canvas').getContext('2d');
+    var ctx = my$("canvas").getContext("2d");
     //初始化游戏分数
     var score = 0;
 
@@ -28,163 +27,180 @@
      * 贪吃蛇 的身体数据
      * 每增加一节长度，new一个对象
      */
-    var Block = function(col, row, size) {
-        this.col = col; //column 列
-        this.row = row; //row 行
-        this.size = size; //大小
+    var Block = function (col, row, size) {
+      this.col = col; //column 列
+      this.row = row; //row 行
+      this.size = size; //大小
     };
 
     //绘画蛇躯
-    Block.prototype.draw = function() {
-        ctx.fillRect(this.col * this.size, this.row * this.size, this.size, this.size);
+    Block.prototype.draw = function () {
+      ctx.fillRect(
+        this.col * this.size,
+        this.row * this.size,
+        this.size,
+        this.size
+      );
     };
 
     //body 身体部分
     //direction 移动方向
     var snake = {
-        body: [
-            new Block(20, 20, 10),
-            new Block(20, 21, 10),
-            new Block(20, 22, 10)
-        ],
-        direction: "right",
+      body: [
+        new Block(20, 20, 10),
+        new Block(20, 21, 10),
+        new Block(20, 22, 10),
+      ],
+      direction: "right",
     };
 
     //绘画贪吃蛇函数
-    snake.draw = function() {
-        for (var i = 0; i < this.body.length; i++) {
-            this.body[i].draw();
-        }
+    snake.draw = function () {
+      for (var i = 0; i < this.body.length; i++) {
+        this.body[i].draw();
+      }
     };
 
     //苹果对象
     var apple = {
-        posX: Math.floor(Math.random() * 40),
-        posY: Math.floor(Math.random() * 40),
-        sizeR: 5
+      posX: Math.floor(Math.random() * 40),
+      posY: Math.floor(Math.random() * 40),
+      sizeR: 5,
     };
 
     //绘画苹果函数
-    apple.draw = function() {
-        ctx.fillStyle = "red";
-        ctx.beginPath();
-        ctx.arc((this.posX * 2 + 1) * this.sizeR, (this.posY * 2 + 1) * this.sizeR, this.sizeR, 0, Math.PI * 2, false);
-        ctx.fill();
-        ctx.fillStyle = "Black";
+    apple.draw = function () {
+      ctx.fillStyle = "red";
+      ctx.beginPath();
+      ctx.arc(
+        (this.posX * 2 + 1) * this.sizeR,
+        (this.posY * 2 + 1) * this.sizeR,
+        this.sizeR,
+        0,
+        Math.PI * 2,
+        false
+      );
+      ctx.fill();
+      ctx.fillStyle = "Black";
     };
 
     //贪吃蛇拐弯函数
-    $('body').keydown(function(event) {
-        //贪吃蛇不能直接反方向移动
-        //故：当前移动方向为右时，不能直接触发左键移动
-        //以下判定均是如此
-        if (event.keyCode === 37 && snake.direction !== "right") {
-            snake.direction = 'left';
-        }
-        if (event.keyCode === 38 && snake.direction !== 'down') {
-            snake.direction = 'up';
-        }
-        if (event.keyCode === 39 && snake.direction !== 'left') {
-            snake.direction = 'right';
-        }
-        if (event.keyCode === 40 && snake.direction !== 'up') {
-            snake.direction = 'down';
-        }
+    $("body").keydown(function (event) {
+      //贪吃蛇不能直接反方向移动
+      //故：当前移动方向为右时，不能直接触发左键移动
+      //以下判定均是如此
+      if (event.keyCode === 37 && snake.direction !== "right") {
+        snake.direction = "left";
+      }
+      if (event.keyCode === 38 && snake.direction !== "down") {
+        snake.direction = "up";
+      }
+      if (event.keyCode === 39 && snake.direction !== "left") {
+        snake.direction = "right";
+      }
+      if (event.keyCode === 40 && snake.direction !== "up") {
+        snake.direction = "down";
+      }
     });
 
     //贪吃蛇移动函数
-    snake.move = function() {
-        let newhead; //初始头部方向
-        let head = this.body[0]; //
-        //当前移动方向 向右时 col+1,向左时col-1
-        if (snake.direction === "right") {
-            newhead = new Block(head.col + 1, head.row, head.size);
+    snake.move = function () {
+      let newhead; //初始头部方向
+      let head = this.body[0]; //
+      //当前移动方向 向右时 col+1,向左时col-1
+      if (snake.direction === "right") {
+        newhead = new Block(head.col + 1, head.row, head.size);
+      }
+      if (snake.direction === "left") {
+        newhead = new Block(head.col - 1, head.row, head.size);
+      }
+      //当前移动方向 向上时 row+1,向下时row-1
+      if (snake.direction === "up") {
+        newhead = new Block(head.col, head.row - 1, head.size);
+      }
+      if (snake.direction === "down") {
+        newhead = new Block(head.col, head.row + 1, head.size);
+      }
+      //判断是否碰撞左右两边的边界
+      //整个画布 40 * 40 个的小格子
+      // 0 ~ 39 是格子的位置
+      if (newhead.col < 0 || newhead.col > 39) {
+        clearInterval(intervalId);
+        gameOver();
+      }
+      //判断是否碰撞上下两边的边界
+      if (newhead.row < 0 || newhead.row > 39) {
+        clearInterval(intervalId);
+        gameOver();
+      }
+      //判断贪吃蛇是否碰撞到自己
+      for (let i = 0; i < this.body.length; i++) {
+        if (
+          this.body[i].col === newhead.col &&
+          this.body[i].row === newhead.row
+        ) {
+          clearInterval(intervalId);
+          gameOver();
         }
-        if (snake.direction === 'left') {
-            newhead = new Block(head.col - 1, head.row, head.size);
-        }
-        //当前移动方向 向上时 row+1,向下时row-1
-        if (snake.direction === "up") {
-            newhead = new Block(head.col, head.row - 1, head.size);
-        }
-        if (snake.direction === "down") {
-            newhead = new Block(head.col, head.row + 1, head.size);
-        }
-        //判断是否碰撞左右两边的边界
-        //整个画布 40 * 40 个的小格子
-        // 0 ~ 39 是格子的位置
-        if (newhead.col < 0 || newhead.col > 39) {
-            clearInterval(intervalId);
-            gameOver()
-        }
-        //判断是否碰撞上下两边的边界
-        if (newhead.row < 0 || newhead.row > 39) {
-            clearInterval(intervalId);
-            gameOver();
-        }
-        //判断贪吃蛇是否碰撞到自己
-        for (let i = 0; i < this.body.length; i++) {
-            if (this.body[i].col === newhead.col && this.body[i].row === newhead.row) {
-                clearInterval(intervalId);
-                gameOver();
+      }
+      //在贪吃蛇头部添加元素
+      this.body.unshift(newhead);
+      //判断贪吃蛇是否吃到苹果
+      if (newhead.col === apple.posX && newhead.row === apple.posY) {
+        //迟到一个苹果+100分
+        score = score + 100;
+        //循环
+        while (true) {
+          let checkApple = false;
+          apple.posX = Math.floor(Math.random() * 40);
+          apple.posY = Math.floor(Math.random() * 40);
+          //判断苹果是否会刷新到贪吃蛇的身体上
+          //如果刷新到贪吃蛇的身体上，则继续生成刷新苹果位置
+          for (var i = 0; i < this.body.length; i++) {
+            if (
+              this.body[i].col === apple.posX &&
+              this.body[i].row === apple.posY
+            ) {
+              checkApple = true;
             }
+          }
+          //当苹果没有刷新到贪吃蛇身体上，
+          //结束循环
+          if (!checkApple) break;
         }
-        //在贪吃蛇头部添加元素
-        this.body.unshift(newhead);
-        //判断贪吃蛇是否吃到苹果
-        if (newhead.col === apple.posX && newhead.row === apple.posY) {
-            //迟到一个苹果+100分
-            score = score + 100;
-            //循环
-            while (true) {
-                let checkApple = false;
-                apple.posX = Math.floor(Math.random() * 40);
-                apple.posY = Math.floor(Math.random() * 40);
-                //判断苹果是否会刷新到贪吃蛇的身体上
-                //如果刷新到贪吃蛇的身体上，则继续生成刷新苹果位置
-                for (var i = 0; i < this.body.length; i++) {
-                    if (this.body[i].col === apple.posX && this.body[i].row === apple.posY) {
-                        checkApple = true;
-                    }
-                }
-                //当苹果没有刷新到贪吃蛇身体上，
-                //结束循环
-                if (!checkApple) break;
-            }
-        } else {
-            //因为前面移动需要加元素，
-            //所以这里每一动一次也需要减回来
-            this.body.pop();
-        }
+      } else {
+        //因为前面移动需要加元素，
+        //所以这里每一动一次也需要减回来
+        this.body.pop();
+      }
     };
 
     //定时器，游戏运行核心
-    var intervalId = setInterval(function() {
-        //清空所有元素
-        ctx.clearRect(0, 0, 400, 400);
-        snake.draw(); //贪吃蛇身体对象
-        snake.move(); //贪吃蛇移动对象
-        apple.draw(); //苹果对象
-        scoreFont(); //计分对象
-        //绘出元素
-        ctx.strokeRect(0, 0, 400, 400);
+    var intervalId = setInterval(function () {
+      //清空所有元素
+      ctx.clearRect(0, 0, 400, 400);
+      snake.draw(); //贪吃蛇身体对象
+      snake.move(); //贪吃蛇移动对象
+      apple.draw(); //苹果对象
+      scoreFont(); //计分对象
+      //绘出元素
+      ctx.strokeRect(0, 0, 400, 400);
     }, 100);
 
     //得分样式函数
-    var scoreFont = function() {
-        ctx.textBaseline = 'top';
-        ctx.font = "17px Arial";
-        ctx.fillText('当前得分：' + score, 5, 5);
+    var scoreFont = function () {
+      ctx.textBaseline = "top";
+      ctx.font = "17px Arial";
+      ctx.fillText("当前得分：" + score, 5, 5);
     };
 
     //游戏结束函数
-    var gameOver = function() {
-        ctx.font = "60px Comic Sans MS";
-        ctx.textAlign = "middle";
-        ctx.fillStyle = "orange";
-        ctx.fillText("Game Over!", 50, 150);
-        ctx.fillStyle = "black";
+    var gameOver = function () {
+      ctx.font = "60px Comic Sans MS";
+      ctx.textAlign = "middle";
+      ctx.fillStyle = "orange";
+      ctx.fillText("Game Over!", 50, 150);
+      ctx.fillStyle = "black";
     };
-</script>
-
+  </script>
 </html>

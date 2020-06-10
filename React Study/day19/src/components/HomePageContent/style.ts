@@ -1,11 +1,11 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:14:03
- * @LastEditTime: 2020-06-08 22:28:49
+ * @LastEditTime: 2020-06-09 13:28:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\style.ts
- */ 
+ */
 import style from "styled-components";
 import { ElementType } from "react";
 
@@ -15,26 +15,26 @@ const flexBoxLayout = `
   align-items:start;
 `
 
-export const HomeContentWrapper:ElementType = style.section`
+export const HomeContentWrapper: ElementType = style.section`
   ${flexBoxLayout}
   flex-direction:column;
   width:50%;
 `;
 
-export const BannerWrapper:ElementType = style.img`
+export const BannerWrapper: ElementType = style.img`
   width:calc(100% - 40px);
   margin:20px;
   border-radius:15px;
 `;
 
-export const ArticleWrapper:ElementType = style.ul`
+export const ArticleWrapper: ElementType = style.ul`
   ${flexBoxLayout}
   margin:20px;
   width:calc(100% - 40px);
   flex-direction:column
 `;
 
-export const SectionsWrapper:ElementType = style.li`
+export const SectionsWrapper: ElementType = style.li`
   ${flexBoxLayout}
   width:100%;
   min-height:115px;
@@ -45,32 +45,48 @@ export const SectionsWrapper:ElementType = style.li`
   padding-bottom:10px;
 `;
 
-export const SectionImg:ElementType = style.img`
+export const SectionImg: ElementType = style.img`
   width:30%;
   padding:15px;
   border-radius:5px;
 `
 
-export const Content:ElementType = style.section`
+export const Content: ElementType = style.section`
   ${flexBoxLayout}
   flex-direction:column;
   width:70%;
 `
 
-export const SectionTitle:ElementType = style.strong`
+export const SectionTitle: ElementType = style.strong`
   font-size:18px;
   font-weight:bold;
-  color:#333;
   margin-top:5px;
   margin-bottom:15px;
+  
+  a {
+
+    &:link{
+      color:#333;
+      text-decoration:none; 
+    }
+
+    &:visited {
+      color:#aaa
+    }  
+    
+    &:hover {
+      text-decoration:underline 2px;
+    }  
+  }     
+
 `
 
-export const SectionAbstract:ElementType = style.p`
+export const SectionAbstract: ElementType = style.p`
   font-size:14px;
   color:#aaa;
 `
 
-export const SectionTools:ElementType = style.div` 
+export const SectionTools: ElementType = style.div` 
   display:flex;
   margin-top:15px;
   width:100%;
@@ -78,7 +94,7 @@ export const SectionTools:ElementType = style.div`
   background-color:#eee;
 `
 
-export const ShowMoreAticle:ElementType = style.div`
+export const ShowMoreAticle: ElementType = style.div`
   display:flex;
   color:#fff;
   width:100%;

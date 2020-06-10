@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 22:15:17
- * @LastEditTime: 2020-06-08 23:17:05
+ * @LastEditTime: 2020-06-09 08:57:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\Header\index.js
@@ -99,7 +99,7 @@ const Header = (props: any) => {
       <Logo />
       <NavBarWrapper>
         <LeftNavWrapper>
-          <HomePageWrapper>首页</HomePageWrapper>
+          <HomePageWrapper><Link to="/home">首页</Link></HomePageWrapper>
           <DownloadAPPWrapper>下载APP</DownloadAPPWrapper>
           <SearchInputWrapper>
             <SearchIcon

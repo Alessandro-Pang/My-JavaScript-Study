@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:24:12
- * @LastEditTime: 2020-06-08 21:42:08
+ * @LastEditTime: 2020-06-09 22:45:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\actionCreators.ts
@@ -281,5 +281,22 @@ export type register_actions_type = (
   user_register_success_type |
   user_register_error_type
 );
+
+// #endregion
+
+// #region 
+export interface get_article_info_type {
+  type:constants.ARTICLE_ONCTNET,
+  content:string
+};
+
+export const get_article_info = (content: string): get_article_info_type => ({
+  type: constants.ARTICLE_ONCTNET,
+  content,
+});
+
+export type article_info_type =(
+  get_article_info_type
+)
 
 // #endregion
