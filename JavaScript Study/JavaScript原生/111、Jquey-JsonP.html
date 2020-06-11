@@ -1,0 +1,144 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-10 21:11:54
+ * @LastEditTime: 2020-06-10 23:11:40
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\JavaScript Study\JavaScript原生\111、Jquey-JsonP.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../jquery.js"></script>
+  </head>
+  <body>
+    <!-- 
+    JSONP 教程
+
+    Jsonp(JSON with Padding) 是 json 的一种"使用模式"，可以让网页从别的域名（网站）那获取资料，即跨域读取数据。
+
+    为什么我们从不同的域（网站）访问数据需要一个特殊的技术( JSONP )呢？这是因为同源策略。
+
+    同源策略，它是由 Netscape 提出的一个著名的安全策略，现在所有支持 JavaScript 的浏览器都会使用这个策略。
+  -->
+    <div id="dv"></div>
+    <script>
+      function callbackFunction(result, methodName) {
+        let html = "";
+        result.forEach((res) => {
+          html += `<ul>
+                      <li>id: ${res.id}</li>
+                      <li>NavName: ${res.navName}</li>
+                      <li>href: ${res.href}</li>
+                      <li>icon: ${res.icon}</li>
+                      <li>link: ${res.link}</li>
+                    </ul>
+              `;
+        });
+        // console.log(result);
+        document.getElementById("dv").innerHTML = html;
+      }
+    </script>
+    <!-- 
+      JSONP 的实现方式：
+        因为Script 标签可以跨域引用，所以利用script标签的特性携带一个函数作为回调
+        
+        回调函数中封装好要方法，通常这里都是讲元素拼接好，插入DOM中
+
+        后端接受到回调函数，对函数进行拼接,拼接完成后返回`页面`,不是json
+              jsonp_fn + "(" + JSON.stringify(result) + ",'res.end')";
+
+      ........ hou duan ....
+      
+      后端返回一个回调函数,前端接收到后，
+      直接执行后 callbackFunction 
+    
+      jsonp_fn ： callbackFunction
+
+      res.end(jsonp_fn)
+
+      ........ qian duan .....
+      
+      callbackFunction(result,'res.end')
+     -->
+    <script src="http://127.0.0.1:3300/db/jsonp_test?jsonp_fn=callbackFunction"></script>
+
+    <!-- 隐藏域 -->
+    <input type="hidden" id="m">
+    <script>
+      $.ajax({
+        // JSONP 只支持GET请求
+        type: "get",
+        //jsonp声明,不设置就报跨域
+        dataType: "jsonp", 
+        //是否异步请求
+        async:true,  
+        //指定参数名称,默认callback,这里的参数名称要和后端保持一致
+        jsonp:"jsonp_fn",
+        //指定回调函数名称,默认JQ随机函数名
+        jsonpCallback:"callbackFuntion", 
+        //Jsonp请求地址
+        url: "http://127.0.0.1:3300/db/jsonp_test",
+        success(data) {
+          let html="";
+          data.forEach((res)=>{
+            html+='id:'+res.id
+          })
+          $("#m").val(html)
+        },
+        error(e){
+          console.log(e)
+        }
+      });
+    </script>
+
+    <!-- 
+      JSONP 应用
+      服务端 JSONP 格式数据
+
+      如客户想访问 : https://www.runoob.com/try/ajax/jsonp.php?jsoncallback=callbackFunction。
+
+      假设客户期望返回数据：["customername1","customername2"]。
+
+      真正返回到客户端的数据显示为: callbackFunction(["customername1","customername2"])。
+
+    -->
+    <input type="hidden" name="" id="h">
+    <script>
+      // 这里的回调函数名不需要指定,设置?号,jquery会自动生成随机函数名
+      $.getJSON("http://127.0.0.1:3300/db/jsonp_test?jsonp_fn=?",function(data){
+        let href = data.map((res)=>res.navName +' : '+ res.href)
+        $('#h').val(href)
+      })
+
+
+      /**
+       * 由于 JSON 语法是 JavaScript 语法的子集，
+       * JavaScript 函数 eval() 可用于将 JSON 文本转换为 JavaScript 对象。
+       *
+       *  eval() 函数使用的是 JavaScript 编译器，可解析 JSON 文本，然后生成 JavaScript 对象。
+       * 必须把文本包围在括号中，这样才能避免语法错误：
+       */
+       var txt = '{ "sites" : [' +
+      '{ "name":"菜鸟教程" , "url":"www.runoob.com" },' +
+      '{ "name":"google" , "url":"www.google.com" },' +
+      '{ "name":"微博" , "url":"www.weibo.com" } ]}';
+      
+      eval ("alert(" + JSON.stringify(txt) + ")");
+       /**
+          eval() 函数可编译并执行任何 JavaScript 代码。这隐藏了一个潜在的安全问题。
+
+          使用 JSON 解析器将 JSON 转换为 JavaScript 对象是更安全的做法。
+          JSON 解析器只能识别 JSON 文本，而不会编译脚本。
+
+          在浏览器中，这提供了原生的 JSON 支持，而且 JSON 解析器的速度更快。
+
+          较新的浏览器和最新的 ECMAScript (JavaScript) 标准中均包含了原生的对 JSON 的支持。
+       */
+      eval("alert($('#h').val())")
+    </script>
+  </body>
+</html>

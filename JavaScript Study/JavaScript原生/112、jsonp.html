@@ -1,0 +1,40 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-10 23:47:15
+ * @LastEditTime: 2020-06-11 00:01:41
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\JavaScript Study\JavaScript原生\112.jsonp.html
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../jsonp.js"></script>
+</head>
+<body>
+  <!-- 
+    jsonp(url, opts, fn)
+
+    url (String) url to fetch
+    opts (Object), optional
+        param (String) name of the query string parameter to specify the callback (defaults to callback)
+        timeout (Number) how long after a timeout error is emitted. 0 to disable (defaults to 60000)
+        prefix (String) prefix for the global callback functions that handle jsonp responses (defaults to __jp)
+        name (String) name of the global callback functions that handle jsonp responses (defaults to prefix + incremented counter)
+    fn callback
+   -->
+   <script>
+
+     jsonp("http://127.0.0.1:3300/db/jsonp_test",{
+       param:'jsonp_fn'
+     },function(err,res){
+       console.log(err)
+       console.log(res)
+     })
+
+</script>
+  </body>
+</html>

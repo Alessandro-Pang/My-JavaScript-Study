@@ -15,7 +15,7 @@ const mapDispatchToprops = (dispatch: any) => ({
     }
     newList.forEach((value: any) => {
       if (Number(value.a_id) === Number(article_id)) {
-        dispatch(actionCreators.get_article_info(value.content_info));
+        dispatch(actionCreators.get_article_info(value));
       }
     })
   }
