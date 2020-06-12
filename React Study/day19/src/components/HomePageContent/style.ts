@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:14:03
- * @LastEditTime: 2020-06-09 13:28:42
+ * @LastEditTime: 2020-06-11 13:12:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\style.ts
@@ -65,13 +65,13 @@ export const SectionTitle: ElementType = style.strong`
   
   a {
 
-    &:link{
+    &:link {
       color:#333;
-      text-decoration:none; 
+      text-decoration:none;
     }
 
     &:visited {
-      color:#aaa
+      color:#aaa;
     }  
     
     &:hover {

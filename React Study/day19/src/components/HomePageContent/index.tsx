@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:13:50
- * @LastEditTime: 2020-06-09 23:48:40
+ * @LastEditTime: 2020-06-11 13:21:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\index.ts
@@ -62,7 +62,7 @@ class HomePageContent extends PureComponent<Props> {
         <SectionsWrapper key={items.a_id}>
           <Content>
             <SectionTitle>
-              <Link to={"/home/article/" + items.a_id}>{items.title}</Link>
+              <Link to={"/home/article/" + items.a_id} key={"/home/article/" + items.a_id}>{items.title}</Link>
             </SectionTitle>
             <SectionAbstract>
               {items.content}
