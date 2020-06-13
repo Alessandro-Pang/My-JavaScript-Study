@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 23:13:50
- * @LastEditTime: 2020-06-11 13:21:19
+ * @LastEditTime: 2020-06-12 08:20:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\HomePageSections\index.ts
@@ -41,16 +41,9 @@ interface Props {
 }
 
 class HomePageContent extends PureComponent<Props> {
-  newList: any;
-  constructor(props: Props) {
-    super(props)
-    const { articleList } = props;
-    this.newList = articleList.toJS();
-  }
+
   componentDidMount() {
-    if (!this.newList.length) {
-      this.props.actions.get_article_list();
-    }
+    this.props.actions.get_article_list();
   }
 
   article_list = () => {

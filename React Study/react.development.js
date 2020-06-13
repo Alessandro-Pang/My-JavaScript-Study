@@ -8,8 +8,19 @@
  */
 
 'use strict';
+/**
+ * UMD: 通用模块定义
+    CommonJS 和 AMD 模块化风格不统一。
+    这就导致了需要一种能同时支持两种风格的方法，这带给了我们通用模块定义。
 
+    使AMD和CommonJS和谐相处，支持老式的global变量定义。
+
+    exports && module CommonJS模块化
+
+    define([qlik,Jquery],function(layout,$){})  AMD 模块化
+ */
 (function(global, factory) {
+    //检查是否模块化环境
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
         typeof define === 'function' && define.amd ? define(factory) :
         (global.React = factory());
