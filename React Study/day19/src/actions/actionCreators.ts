@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:24:12
- * @LastEditTime: 2020-06-09 22:45:43
+ * @LastEditTime: 2020-06-13 21:08:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\actionCreators.ts
@@ -9,6 +9,7 @@
 
 import * as constants from "./constants";
 import immutable from "immutable";
+import Dialog from "../components/dialog";
 const base_url = "http://127.0.0.1:3300/db/";
 
 //#region input focus
@@ -183,10 +184,8 @@ export const fetch_login_user = (loginInfo: object) => (dispatch: Function) => {
     .then((res) => {
       if (res.status === "success") {
         dispatch(login_user_success(res.status));
-        alert("登录成功");
       } else if (res.status === "error") {
         dispatch(login_user_error(res.status));
-        alert("登录失败");
       }
     })
     .catch(() => {
@@ -284,7 +283,7 @@ export type register_actions_type = (
 
 // #endregion
 
-// #region 
+// #region article action
 export interface get_article_info_type {
   type:constants.ARTICLE_ONCTNET,
   content:string

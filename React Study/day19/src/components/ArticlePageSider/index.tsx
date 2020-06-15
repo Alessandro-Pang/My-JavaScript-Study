@@ -19,7 +19,7 @@ const ArticleSider = (props: any) => {
   let refs_commend: any;
   const scrollEvent = () => {
     let scrollHeight = window.scrollY;
-    if (scrollHeight >= 600) {
+    if (scrollHeight >= 530) {
       refs_commend.style.position = "fixed";
       refs_commend.style.top = "60px";
     } else {

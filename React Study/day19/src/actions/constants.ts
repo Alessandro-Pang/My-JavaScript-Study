@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 23:23:56
- * @LastEditTime: 2020-06-09 14:39:55
+ * @LastEditTime: 2020-06-13 10:58:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\actions\actionTypes.ts
  */ 
 export const HEADER_INPUT_FOCUS = 'header/input_focus';
-export const HEADER_INPUT_BLUR = 'header/input_blUr';
+export const HEADER_INPUT_BLUR = 'header/input_blur';
 export const HEADER_HOTBOX_MOUSEIN = "header/hotbox_mouseIn";
 export const HEADER_HOTBOX_MOUSEOUT = "header/hotbox_mouseOut";
 export const HEADER_HOTBOX_LIST = "header/hotbox_list";

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 21:12:28
- * @LastEditTime: 2020-06-09 23:12:27
+ * @LastEditTime: 2020-06-13 11:01:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\App.js
@@ -14,7 +14,7 @@ import HomePageContent from "../../containers/content";
 import HomePageSider from "../../components/HomePageSider";
 import { MainWrapper, CallbackTop } from './style';
 
-export default  function Home () {
+const Home = () => {
   const [showCallTop, setShowCallTop] = useState(false);
   
   const handleScroll = () => {
@@ -57,3 +57,4 @@ export default  function Home () {
   );
 }
 
+export default Home;

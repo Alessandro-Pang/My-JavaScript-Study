@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:03:03
- * @LastEditTime: 2020-06-08 22:45:05
+ * @LastEditTime: 2020-06-13 19:47:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\components\LoginRegister\style.js
  */
 
 import style from "styled-components";
-import {ElementType} from "react";
+import { ElementType } from "react";
 
 export const LoginRegisterWrapper: ElementType = style.div`
   display:flex;
@@ -19,15 +19,14 @@ export const LoginRegisterWrapper: ElementType = style.div`
   min-height:600px;
   background-color:#f1f1f1;
   padding-top:45px;
-  margin-left:-5px;
-`
+`;
 
 export const Logo: ElementType = style.img`
   position:absolute;
   top:27px;
   left:10px;
   width:180px;
-`
+`;
 
 export const MainWrapper: ElementType = style.div`
   margin-top:52px;
@@ -41,7 +40,7 @@ export const MainWrapper: ElementType = style.div`
   padding:50px 50px 30px;
   flex-direction:column;
   background-color:#fff;
-`
+`;
 
 export const Maintitle: ElementType = style.div`
   display:flex;
@@ -85,15 +84,15 @@ export const Maintitle: ElementType = style.div`
     color:#ea6f5a;
     font-weight:bold;
   }
-`
+`;
 
 export const SinginContainer: ElementType = style.div`
   height:calc( 100% - 200px );
   width:100%;
   margin-top:35px;
-`
+`;
 
-export const LoginForm = style.div`
+export const LoginForm: ElementType = style.div`
   width:100%;
   display:flex;
   flex-direction:column;
@@ -120,6 +119,7 @@ export const LoginForm = style.div`
     left:10px;
     top:14px;
     font-size:18px;
+    cursor:pointer;
   }
 
   & > div:nth-of-type(1) > input{
@@ -180,7 +180,7 @@ export const LoginForm = style.div`
   input[type="submit"]:hover{
     background-color:#187cb7;
   }
-`
+`;
 
 export const MoreSignWrapper: ElementType = style.div`
   display:flex;
@@ -235,6 +235,7 @@ export const MoreSignWrapper: ElementType = style.div`
 
   .iconfont{
     font-size:28px;
+    cursor:pointer;
   }
   li:nth-of-type(1)>.iconfont{
     color:#e05244;
@@ -245,7 +246,7 @@ export const MoreSignWrapper: ElementType = style.div`
   li:nth-of-type(3)>.iconfont{
     color:#498ad5;
   }
-`
+`;
 
 export const RegisterForm: ElementType = style.div`
   width:100%;
@@ -276,6 +277,7 @@ export const RegisterForm: ElementType = style.div`
     left:10px;
     top:14px;
     font-size:18px;
+    cursor:pointer;
   }
 
   & > div:nth-of-type(1) > input{
@@ -321,4 +323,4 @@ export const RegisterForm: ElementType = style.div`
       text-decoration:none;
     }
   }
-`
+`;

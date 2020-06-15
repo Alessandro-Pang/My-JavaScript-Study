@@ -4,7 +4,7 @@ import ArticleContent from "../../containers/article/Content"
 import ArticleSider from "../../containers/article/Sider"
 import {ArticlePageWrapper} from "./style";
 
-const AticlePage = (props:any) =>{
+const AticlePage = () =>{
     return (
       <ArticlePageWrapper>
         <Header />

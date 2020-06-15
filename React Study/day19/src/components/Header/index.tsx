@@ -14,31 +14,46 @@ import { Link } from "react-router-dom";
 //#region import Style Componentd
 
 import {
-  HeaderWrapper, Logo, WriteWrapper,NavBarWrapper,
-  LeftNavWrapper,HomePageWrapper, DownloadAPPWrapper,
-  SearchInputWrapper,SearchIcon,SearchInput,
-  RightNavWrapper,RegisterWrapper,ModeWrapper,
-  BetaWrapper,LoginWrapper,SearchHotList,
+  HeaderWrapper,
+  Logo,
+  WriteWrapper,
+  NavBarWrapper,
+  LeftNavWrapper,
+  HomePageWrapper,
+  DownloadAPPWrapper,
+  SearchInputWrapper,
+  SearchIcon,
+  SearchInput,
+  RightNavWrapper,
+  RegisterWrapper,
+  ModeWrapper,
+  BetaWrapper,
+  LoginWrapper,
+  SearchHotList,
 } from "./styles";
 
 //#endregion
 
 const Header = (props: any) => {
-
   // #region import props
-  
+
   const {
-    focus, mouseIn,list,page,
-    actions,handleInputFocus,
-    handleClickInBatch,user_login_state,
-    handleClickLogout,handleClickLoginRegister,
+    focus,
+    mouseIn,
+    list,
+    page,
+    actions,
+    handleInputFocus,
+    handleClickInBatch,
+    user_login_state,
+    handleClickLogout,
+    handleClickLoginRegister,
   } = props;
 
   //#endregion
 
   // #region getHotList
   const getHotList = () => {
-
     const newList = list.toJS();
     const pageList = [];
     let spinIcon: any = undefined;
@@ -67,7 +82,10 @@ const Header = (props: any) => {
               handleClickInBatch(page, list, spinIcon);
             }}
           >
-            <i className="iconfont" ref={icon => spinIcon = icon}>&#58909;</i>换一批
+            <i className="iconfont" ref={(icon) => (spinIcon = icon)}>
+              &#58909;
+            </i>
+            换一批
           </div>
           {pageList}
         </SearchHotList>
@@ -91,7 +109,7 @@ const Header = (props: any) => {
     return <LoginWrapper onClick={handleClickLogout}>登出</LoginWrapper>;
   };
   // #endregion
-  
+
   let input: ElementRef<"input">;
 
   return (
@@ -99,7 +117,9 @@ const Header = (props: any) => {
       <Logo />
       <NavBarWrapper>
         <LeftNavWrapper>
-          <HomePageWrapper><Link to="/home">首页</Link></HomePageWrapper>
+          <HomePageWrapper>
+            <Link to="/home">首页</Link>
+          </HomePageWrapper>
           <DownloadAPPWrapper>下载APP</DownloadAPPWrapper>
           <SearchInputWrapper>
             <SearchIcon

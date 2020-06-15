@@ -7,8 +7,7 @@ const ArticleContent = (props: any) => {
   const { id } = useParams();
 
   useEffect(() => {
-    //存在一个非常严重的BUG
-    //虽然现在这么写可以勉强解决，但不代表他就消失了！
+    //存在一个BUG,虽然现在这么写可以勉强解决...
     if(Number(id) !== Number(article_content.a_id)){
       article(article_list, id);
       window.scroll(0, 0);

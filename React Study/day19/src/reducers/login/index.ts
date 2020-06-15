@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 21:57:39
- * @LastEditTime: 2020-06-08 22:06:51
+ * @LastEditTime: 2020-06-13 21:35:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\src\reducers\login\index.js
@@ -13,7 +13,7 @@ import { Login_actions_type } from "../../actions/actionCreators";
 import { loginReducer_type } from "../../actions/types";
 
 const initState = fromJS({
-  user_login_state: "error",
+  user_login_state: "",
   username: "",
   password: "",
   remember: false,
