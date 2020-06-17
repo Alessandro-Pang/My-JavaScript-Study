@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-06 21:38:05
- * @LastEditTime: 2020-06-07 10:50:09
+ * @LastEditTime: 2020-06-15 11:09:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day19\commonReactLibrary.md
@@ -117,7 +117,7 @@
 
 - &:postcss-loader
 
-  - autoprefiexer
+  - autoprefixer
 
   - precss
 
