@@ -5,7 +5,8 @@
   "main": "webpack-config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress  --colors -d --watch --proflie  --config webpack.config.js"
+    "dev": "webpack-dev-server --progress  --colors -d --watch --proflie  --config webpack.config.js",
+    "build":"webpack --progress --colors -d --proflie --config webpack.config.js"
   },
   "keywords": [],
   "author": "",

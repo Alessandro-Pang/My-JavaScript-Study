@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../utils";
 import "./index.less";
-
 export default class index extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,7 @@ export default class index extends Component {
     return (
       <div className="index-wrapper">
         <div className="main">
-          <h1>ZiYang Blog</h1>
+          <h1>ziyang Blog</h1>
           <h2>Man Proposes , God Disposes</h2>
           <h3>{this.state.currentDate}</h3>
           <div className="tag">

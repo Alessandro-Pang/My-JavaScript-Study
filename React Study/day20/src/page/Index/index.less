@@ -1,8 +1,6 @@
 .index-wrapper{
   width:100%;
   height:100vh;
-  min-width: 500px;
-  min-height: 600px;
   background-image: url(../../static/home/_bg.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -21,7 +19,7 @@
     width:100%;
     height: 100%;
     display: block;
-    position: absolute;
+    position: fixed;
     background-color: rgba(0,0,0,.3);
     background-position: center;
     background-attachment: fixed;
@@ -50,7 +48,7 @@
   animation: open-index 1s ease-in-out;
 
   h1{
-    font-size:35px;
+    font-size: 2.3rem;
     font-weight:bold;
     letter-spacing: 2px;
     color:#fff;
@@ -59,7 +57,7 @@
   }
 
   h2{
-    font-size:28px;
+    font-size:1.8rem;
     font-weight: bold;
     color:#eee;
     margin:0 0 30px;
@@ -68,7 +66,7 @@
   }
 
   h3{
-    font-size:40px;
+    font-size:2.5rem;
     font-weight: bold;
     color:#fff;
     margin:50px 0 50px;
@@ -120,5 +118,11 @@
   }
   to{
     transform: scale(1);
+  }
+}
+
+@media screen and (max-width:500px){
+  html{
+    font-size:11.3px;
   }
 }

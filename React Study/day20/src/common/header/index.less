@@ -10,33 +10,53 @@ header {
 }
 
 header {
-  top:0;
+  top: 0;
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .position {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    width: 100%;
 
     h1.logo {
-      flex: 1;
-      width: max-content;
-      min-width: 200px;
-      margin-top:10px;
+      position: absolute;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 150px;
+      margin-left: 20px;
       font-weight: bold;
-      font-size: 18px;
       line-height: 60px;
       vertical-align: middle;
+      overflow: hidden;
 
-      a{
-        transition: all .4s linear;
-        &:hover{
-          color:yellowgreen;
-          font-size: 20px;
+      a>img {
+        width: 100%;
+      }
+
+      &::after {
+        content: '';
+        width: 150px;
+        height: 40px;
+        left: -150px;
+        position: absolute;
+        transition: .4s all linear;
+        background: linear-gradient(120deg,
+            transparent,
+            rgba(13, 123, 233, 0.801),
+            rgba(21, 208, 241, 0.575));
+      }
+
+      &:hover {
+        &::after {
+          transform: translateX(300px);
+        }
+
+        &>a>img {
+          background-color: rgba(21, 208, 241, 0.1);
         }
       }
     }
@@ -50,8 +70,13 @@ header {
   }
 }
 
- 
+#header > div > ul{
+  margin-left: 220px;
+}
+
 .pcy-menu-itemgroup.ant-menu-item-group .ant-menu-item.pcy-menu-items {
-    font-size: 13px ;
-    margin: 2px
-  }
+  font-size: 13px;
+  margin: 2px
+}
+
+@media screen and (max-width:900px) {}

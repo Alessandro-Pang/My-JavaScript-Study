@@ -91,7 +91,7 @@ export default class index extends Component {
                   >
                     <Card.Meta
                       title={<a href="#">Europe Street beat</a>}
-                      description="www.instagram.com"
+                      description="小伙伴们，有一句话叫“盛世收藏乱世黄金”，大家知道黄金作为人人垂涎又高大上的期货产品，对于社会经济……"
                     />
                   </Card>
                 </Col>
@@ -133,7 +133,7 @@ export default class index extends Component {
                   >
                     <Card.Meta
                       title={<a href="#">Europe Street beat</a>}
-                      description="www.instagram.com"
+                      description="小伙伴们，有一句话叫“盛世收藏乱世黄金”，大家知道黄金作为人人垂涎又高大上的期货产品，对于社会经济……"
                     />
                   </Card>
                 </Col>
