@@ -1,14 +1,15 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 19:52:43
- * @LastEditTime: 2020-06-20 22:56:49
+ * @LastEditTime: 2020-06-21 01:02:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\page\geticon\index.jsx
  */
 
 import React, { Component } from "react";
-import iconfont from "../../static/font/iconfont.svg";
+import "../../static/icon/css/font-awesome.min.css";
+import iconfont from "../../static/icon/fonts/fontawesome-webfont.svg";
 export default class index extends Component {
   constructor(props) {
     super(props);
@@ -16,36 +17,50 @@ export default class index extends Component {
       icon: [],
     };
   }
-
+  handleClickGetIcon = (e) => {
+    console.log(e.target.getAttribute("unicode"));
+  };
   componentDidMount() {
     fetch(iconfont)
       .then((res) => res.text())
       .then((res) => {
-        const glyphName = res.match(/name="(\w|-)+"/g);
-        const unicode = res.match(/&#\d+;/g);
+        const glyphName = res.match(/name="(\w|-|_)+"/g);
+        const unicode = res.match(/&#(\d|\w)+;/g);
         const className = glyphName.map((item) =>
-          item.replace(/(name=|\")/g, "")
+          item.replace(/(name=|"|)/g, "").replace(/_/g, "-")
         );
 
         const list = unicode.map((val, index) => (
-          <li key={val} style={{ float: "left", listStyle: "none" ,margin:"0 5px"}}>
+          <li
+            key={val}
+            style={{ float: "left", listStyle: "none", margin: "0 5px" }}
+          >
             <i
-              style={{fontSize:"22px"}}
-              className={"iconfont icon-" + className[index]}
-              glyphName={className[index]}
               unicode={val}
+              aria-hidden="true"
+              glyphName={className[index]}
+              className="fa fa-fw fa-2x"
+              dangerouslySetInnerHTML={{ __html: val }}
+              onClick={this.handleClickGetIcon}
             ></i>
           </li>
         ));
         let glyphBox = [];
         let temp = [];
-        for (let i = 0; i < list.length; i++) {
-          if (i % 10 === 0 && i !== 0) {
-            temp.push(list[i]);
-            glyphBox.push(<ol style={{ display: "block" ,width:"300px"}}>{temp}</ol>);
-            temp=[];
+        for (let i = 1; i <= list.length; i++) {
+          if (i % 10 === 0) {
+            temp.push(list[i - 1]);
+            glyphBox.push(
+              <ol
+                key={"glyph-ol-" + i}
+                style={{ display: "block", width: "100%" }}
+              >
+                {temp}
+              </ol>
+            );
+            temp = [];
           } else {
-            temp.push(list[i]);
+            temp.push(list[i - 1]);
           }
         }
         this.setState({
@@ -56,6 +71,16 @@ export default class index extends Component {
   }
 
   render() {
-    return <div>{this.state.icon}</div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "max-content",
+        }}
+      >
+        {this.state.icon}
+      </div>
+    );
   }
 }

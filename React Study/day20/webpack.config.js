@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-16 13:38:41
- * @LastEditTime: 2020-06-20 16:39:39
+ * @LastEditTime: 2020-06-21 11:13:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\webpack.config.js
@@ -12,7 +12,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 function getIPAdress() {
-  var interfaces = require('os').networkInterfaces();　　
+  var interfaces = require('os').networkInterfaces();　
+  console.log(interfaces);　
   for (var devName in interfaces) {　　　　
       var iface = interfaces[devName];　　　　　　
       for (var i = 0; i < iface.length; i++) {
