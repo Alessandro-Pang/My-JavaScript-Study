@@ -37,7 +37,9 @@ export default class index extends Component {
             <div>never finding two the same.</div>
           </div>
           <Link to="/home">
-            <button className="goto"> Go To Blog >>> </button>
+            <button className="goto">
+              Go To Blog <span>&gt;&gt;&gt;</span>
+            </button>
           </Link>
         </div>
       </div>

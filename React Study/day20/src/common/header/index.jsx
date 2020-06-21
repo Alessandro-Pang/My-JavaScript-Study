@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-16 10:52:26
- * @LastEditTime: 2020-06-20 20:27:33
+ * @LastEditTime: 2020-06-21 21:45:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\common\header\index.jsx
@@ -12,157 +12,157 @@ import { Link } from "react-router-dom";
 import { Menu } from "antd";
 const { SubMenu } = Menu;
 import "./index.less";
-import IconPcy from "src/common/pcy-iconfont";
+import IconPcy from "src/common/zy-iconfont";
 import cover from "src/static/logo.png";
 const Header = () => {
   return (
-    <header id="header">
-      <div className="position">
-        <h1 className="logo">
+    <header id="zy-header">
+      <div className="zy-position">
+        <h1 className="zy-logo">
           <Link to="/">
             <img src={cover} alt="" />
           </Link>
         </h1>
-        <Menu mode="horizontal" defaultSelectedKeys="1" className="nav">
-          <Menu.Item className="pcy-menu-items" key="1">
+        <Menu mode="horizontal" defaultSelectedKeys="1" className="zy-nav">
+          <Menu.Item className="zy-menu-items" key="1">
             <Link to="/home">
-              <IconPcy iconfont="&#58897;" />
+              <IconPcy iconfont="&#xf003;" />
               博客
             </Link>
           </Menu.Item>
-          <SubMenu className="pcy-menu-submenu" icon={<IconPcy iconfont="&#58897;" />} key="2" title="前端教程">
-            <Menu.Item className="pcy-menu-items" key="21">
+          <SubMenu className="zy-menu-submenu" icon={<IconPcy iconfont="&#xf003;" />} key="2" title="前端教程">
+            <Menu.Item className="zy-menu-items" key="21">
               <Link to="/home">
-                <IconPcy iconfont="&#58897;" />
+                <IconPcy iconfont="&#xf003;" />
                 前端三剑客
               </Link>
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="22">
+            <Menu.Item className="zy-menu-items" key="22">
               <Link to="/home">
-                <IconPcy iconfont="&#58897;" />
+                <IconPcy iconfont="&#xf003;" />
                 前端新特性
               </Link>
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="23">
+            <Menu.Item className="zy-menu-items" key="23">
               <Link to="/home">
-                <IconPcy iconfont="&#58897;" />
+                <IconPcy iconfont="&#xf003;" />
                 前端框架
               </Link>
             </Menu.Item>
           </SubMenu>
 
           <SubMenu key="5" title="后端教程" >
-            <Menu.ItemGroup className="pcy-menu-itemgroup" title="语言教程">
-              <Menu.Item className="pcy-menu-items" key="51">
+            <Menu.ItemGroup className="zy-menu-itemgroup" title="语言教程">
+              <Menu.Item className="zy-menu-items" key="51">
                 NodeJS
               </Menu.Item>
-              <Menu.Item className="pcy-menu-items" key="52">
+              <Menu.Item className="zy-menu-items" key="52">
                 Python
               </Menu.Item>
-              <Menu.Item className="pcy-menu-items" key="53">
+              <Menu.Item className="zy-menu-items" key="53">
                 Java
               </Menu.Item>
             </Menu.ItemGroup>
-            <Menu.ItemGroup className="pcy-menu-itemgroup" title="关系型数据库">
-              <Menu.Item className="pcy-menu-items" key="5111">
+            <Menu.ItemGroup className="zy-menu-itemgroup" title="关系型数据库">
+              <Menu.Item className="zy-menu-items" key="5111">
                 Oracle
               </Menu.Item>
-              <Menu.Item className="pcy-menu-items" key="5112">
+              <Menu.Item className="zy-menu-items" key="5112">
                 MySQL
               </Menu.Item>
-              <Menu.Item className="pcy-menu-items" key="5113">
+              <Menu.Item className="zy-menu-items" key="5113">
                 SqlServer
               </Menu.Item>
             </Menu.ItemGroup>
             <Menu.ItemGroup
-              className="pcy-menu-itemgroup"
+              className="zy-menu-itemgroup"
               title="非关系型数据库"
             >
-              <Menu.Item className="pcy-menu-items" key="5221">
+              <Menu.Item className="zy-menu-items" key="5221">
                 Mongdb
               </Menu.Item>
-              <Menu.Item className="pcy-menu-items" key="5223">
+              <Menu.Item className="zy-menu-items" key="5223">
                 Redis
               </Menu.Item>
-              <Menu.Item className="pcy-menu-items" key="5323">
+              <Menu.Item className="zy-menu-items" key="5323">
                 PostSQL
               </Menu.Item>
             </Menu.ItemGroup>
           </SubMenu>
 
           <SubMenu key="6" title="算法教程">
-            <Menu.Item className="pcy-menu-items" key="6c51">
+            <Menu.Item className="zy-menu-items" key="6c51">
               JavaScript
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="5c62">
+            <Menu.Item className="zy-menu-items" key="5c62">
               Python
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="56c3">
+            <Menu.Item className="zy-menu-items" key="56c3">
               LeetCode
             </Menu.Item>
           </SubMenu>
 
           <SubMenu key="7" title="BI教程">
-            <Menu.Item className="pcy-menu-items" key="65w11">
+            <Menu.Item className="zy-menu-items" key="65w11">
               Excle
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="56w12">
+            <Menu.Item className="zy-menu-items" key="56w12">
               Qlik Sense
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="51w163">
+            <Menu.Item className="zy-menu-items" key="51w163">
               Power BI
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="512w63">
+            <Menu.Item className="zy-menu-items" key="512w63">
               Tablua
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="15w63">
+            <Menu.Item className="zy-menu-items" key="15w63">
               数据分析
             </Menu.Item>
           </SubMenu>
 
           <SubMenu key="8" title="源码解读">
-            <Menu.Item className="pcy-menu-items" key="62a51">
+            <Menu.Item className="zy-menu-items" key="62a51">
               JQuery
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="53a62">
+            <Menu.Item className="zy-menu-items" key="53a62">
               zepto
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="526a3">
+            <Menu.Item className="zy-menu-items" key="526a3">
               Vue
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="56a32">
+            <Menu.Item className="zy-menu-items" key="56a32">
               React
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="5a263">
+            <Menu.Item className="zy-menu-items" key="5a263">
               Angular
             </Menu.Item>
           </SubMenu>
 
           <SubMenu key="8.1" title="面试相关">
-            <Menu.Item className="pcy-menu-items" key="6c151">
+            <Menu.Item className="zy-menu-items" key="6c151">
               计算机基础
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="564c2">
+            <Menu.Item className="zy-menu-items" key="564c2">
               网络协议
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="5c643">
+            <Menu.Item className="zy-menu-items" key="5c643">
               前端面试
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="5c476">
+            <Menu.Item className="zy-menu-items" key="5c476">
               后端面试
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="58c49">
+            <Menu.Item className="zy-menu-items" key="58c49">
               BI面试
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="54c99">
+            <Menu.Item className="zy-menu-items" key="54c99">
               ETL面试
             </Menu.Item>
-            <Menu.Item className="pcy-menu-items" key="898c1">
+            <Menu.Item className="zy-menu-items" key="898c1">
               DBA面试
             </Menu.Item>
           </SubMenu>
 
-          <Menu.Item className="pcy-menu-items" key="about-me">
+          <Menu.Item className="zy-menu-items" key="about-me">
             关于我
           </Menu.Item>
         </Menu>

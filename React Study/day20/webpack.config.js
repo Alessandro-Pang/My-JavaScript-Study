@@ -1,31 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2020-06-16 13:38:41
- * @LastEditTime: 2020-06-21 11:13:47
+ * @LastEditTime: 2020-06-21 20:35:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\webpack.config.js
- */ 
+ */
+
 const { HotModuleReplacementPlugin } = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
-function getIPAdress() {
-  var interfaces = require('os').networkInterfaces();　
-  console.log(interfaces);　
-  for (var devName in interfaces) {　　　　
-      var iface = interfaces[devName];　　　　　　
-      for (var i = 0; i < iface.length; i++) {
-          var alias = iface[i];
-          if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-              return alias.address;
-          }
-      }　　
-  }
-}
-
-const host = getIPAdress();
 
 const config = {
   output: {
@@ -84,7 +69,7 @@ const config = {
   },
 
   devServer: {
-    host:'0.0.0.0',
+    host:'192.168.43.39',
     port: "9009",
     open: "Chrome",
     hot: true,
@@ -100,7 +85,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public/index.html"),
-      favicon: path.join(__dirname,'public/favicon.ico'),
+      favicon: path.join(__dirname, "public/favicon.ico"),
       filename: "index.html",
       inject: "body",
       showError: true,
