@@ -1,3 +1,11 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2020-04-21 22:05:40
+ * @LastEditTime: 2020-06-22 13:26:28
+ * @LastEditors: 
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\React Study\day02\05.html
+--> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +20,7 @@
   <body>
     <div id="app"></div>
     <script type="text/babel">
-    /**
+      /**
       上面两个例子中，参数 e 作为 React 事件对象将会被作为第二个参数进行传递。
       通过箭头函数的方式，事件对象必须显式的进行传递，但是通过 bind 的方式，事件对象以及更多的参数将会被隐式的进行传递。
       值得注意的是，通过 bind 方式向监听函数传参，在类组件中定义的监听函数，事件对象 e 要排在所传递参数的后面，例如:
@@ -20,12 +28,12 @@
       class Demo extends React.Component {
         constructor(props) {
           super(props);
-          (this.state = {
+          this.state = {
             date: new Date(),
             onToggle: true,
-            name:"hello.world"
-          }),
-            (this.onToggleClick = this.onToggleClick.bind(this));
+            name: "hello.world",
+          };
+          this.onToggleClick = this.onToggleClick.bind(this);
         }
         onToggleClick() {
           this.setState((prevState) => ({ onToggle: !prevState.onToggle }));
@@ -38,10 +46,10 @@
             date: new Date(),
           });
         }
-        preventPop(name,e){
+        preventPop(name, e) {
           //通过preventDefault设置默认时间
           e.preventDefault();
-          console.log('test code ,debuger',e);
+          console.log("test code ,debuger", e);
         }
         render() {
           return (
@@ -49,8 +57,11 @@
               <button onClick={this.onToggleClick}>
                 {this.state.onToggle ? "ON" : "OFF"}
               </button>
-               {/* 通过 bind() 方法传递参数。 */}
-              <a href="https://reactjs.org" onClick={this.preventPop.bind(this,this.state.name)}>
+              {/* 通过 bind() 方法传递参数。 */}
+              <a
+                href="https://reactjs.org"
+                onClick={this.preventPop.bind(this, this.state.name)}
+              >
                 Click
               </a>
               <h2>{this.state.date.toLocaleTimeString()}</h2>

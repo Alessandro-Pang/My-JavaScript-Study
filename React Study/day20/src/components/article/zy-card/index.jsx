@@ -1,10 +1,10 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 11:13:45
- * @LastEditTime: 2020-06-21 23:49:22
+ * @LastEditTime: 2020-06-22 16:58:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\home\zy-card\index.jsx
+ * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\article\zy-card\index.jsx
  */
 
 import React from "react";
@@ -22,6 +22,7 @@ const ZyCard = (props) => {
     create_date,
     pageView,
     likes,
+    loading,
   } = props;
   return (
     <Typography>
@@ -34,13 +35,13 @@ const ZyCard = (props) => {
           </Row>
           <Row className="zy-card-intro">
             <Col span={18}>
+              <i
+                className="fa fa-quote-left fa-2x fa-pull-left fa-border"
+                aria-hidden="true"
+              ></i>
               <Paragraph
                 ellipsis={{ rows: 2, expandable: true, symbol: "更多" }}
               >
-                <i
-                  className="fa fa-quote-left fa-2x fa-pull-left fa-border"
-                  aria-hidden="true"
-                ></i>
                 {intro}
               </Paragraph>
             </Col>
@@ -59,10 +60,7 @@ const ZyCard = (props) => {
             </Col>
             <Col xs={{ span: 9 }} md={{ span: 6 }} lg={{ span: 5 }}>
               <Tooltip title="发布时间">
-                <i
-                  className="fa fa-clock-o fa-lg fa-fw "
-                  aria-hidden="true"
-                ></i>
+                <i className="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                 {create_date}
               </Tooltip>
             </Col>

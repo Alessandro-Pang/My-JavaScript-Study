@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-16 13:38:41
- * @LastEditTime: 2020-06-21 20:35:40
+ * @LastEditTime: 2020-06-22 13:11:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\webpack.config.js
@@ -69,7 +69,7 @@ const config = {
   },
 
   devServer: {
-    host:'192.168.43.39',
+    host:'0.0.0.0',
     port: "9009",
     open: "Chrome",
     hot: true,
