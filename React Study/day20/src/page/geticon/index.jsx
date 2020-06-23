@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 19:52:43
- * @LastEditTime: 2020-06-21 18:36:01
+ * @LastEditTime: 2020-06-23 21:27:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\page\geticon\index.jsx
@@ -24,7 +24,7 @@ export default class index extends PureComponent {
       .then((res) => res.text())
       .then((res) => {
         const glyphName = res.match(/name="(\w|-|_)+"/g);
-        const unicode = res.match(/&#(\d|\w)+;/g);
+        const unicode = res.match(/&#(\d|\w|-)+;/g);
         const className = glyphName.map((item) =>
           item.replace(/(name=|"|)/g, "").replace(/_/g, "-")
         );

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress  --colors -d --watch --proflie  --config webpack.config.js",
-    "build":"webpack --progress --colors -d --proflie --config webpack.config.js"
+    "build": "webpack --progress --colors -d --proflie --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.2",
     "antd": "^4.3.4",
+    "markdown-to-jsx": "^6.11.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",

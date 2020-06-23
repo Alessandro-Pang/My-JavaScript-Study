@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-16 10:52:26
- * @LastEditTime: 2020-06-21 21:45:58
+ * @LastEditTime: 2020-06-23 09:46:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\common\header\index.jsx
@@ -30,64 +30,36 @@ const Header = () => {
               博客
             </Link>
           </Menu.Item>
-          <SubMenu className="zy-menu-submenu" icon={<IconPcy iconfont="&#xf003;" />} key="2" title="前端教程">
+          <SubMenu
+            className="zy-menu-submenu"
+            icon={<IconPcy iconfont="&#xf003;" />}
+            key="2"
+            title="小白文档"
+          >
             <Menu.Item className="zy-menu-items" key="21">
               <Link to="/home">
                 <IconPcy iconfont="&#xf003;" />
-                前端三剑客
+                前端开发
               </Link>
             </Menu.Item>
             <Menu.Item className="zy-menu-items" key="22">
               <Link to="/home">
                 <IconPcy iconfont="&#xf003;" />
-                前端新特性
+                后端开发
               </Link>
             </Menu.Item>
             <Menu.Item className="zy-menu-items" key="23">
               <Link to="/home">
                 <IconPcy iconfont="&#xf003;" />
-                前端框架
+                数据分析
               </Link>
             </Menu.Item>
-          </SubMenu>
-
-          <SubMenu key="5" title="后端教程" >
-            <Menu.ItemGroup className="zy-menu-itemgroup" title="语言教程">
-              <Menu.Item className="zy-menu-items" key="51">
-                NodeJS
-              </Menu.Item>
-              <Menu.Item className="zy-menu-items" key="52">
-                Python
-              </Menu.Item>
-              <Menu.Item className="zy-menu-items" key="53">
-                Java
-              </Menu.Item>
-            </Menu.ItemGroup>
-            <Menu.ItemGroup className="zy-menu-itemgroup" title="关系型数据库">
-              <Menu.Item className="zy-menu-items" key="5111">
-                Oracle
-              </Menu.Item>
-              <Menu.Item className="zy-menu-items" key="5112">
-                MySQL
-              </Menu.Item>
-              <Menu.Item className="zy-menu-items" key="5113">
-                SqlServer
-              </Menu.Item>
-            </Menu.ItemGroup>
-            <Menu.ItemGroup
-              className="zy-menu-itemgroup"
-              title="非关系型数据库"
-            >
-              <Menu.Item className="zy-menu-items" key="5221">
-                Mongdb
-              </Menu.Item>
-              <Menu.Item className="zy-menu-items" key="5223">
-                Redis
-              </Menu.Item>
-              <Menu.Item className="zy-menu-items" key="5323">
-                PostSQL
-              </Menu.Item>
-            </Menu.ItemGroup>
+            <Menu.Item className="zy-menu-items" key="213">
+              <Link to="/home">
+                <IconPcy iconfont="&#xf003;" />
+                面试相关
+              </Link>
+            </Menu.Item>
           </SubMenu>
 
           <SubMenu key="6" title="算法教程">
@@ -102,66 +74,34 @@ const Header = () => {
             </Menu.Item>
           </SubMenu>
 
-          <SubMenu key="7" title="BI教程">
-            <Menu.Item className="zy-menu-items" key="65w11">
-              Excle
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="56w12">
-              Qlik Sense
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="51w163">
-              Power BI
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="512w63">
-              Tablua
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="15w63">
-              数据分析
-            </Menu.Item>
-          </SubMenu>
-
-          <SubMenu key="8" title="源码解读">
+          <SubMenu key="8" title="源码导读">
             <Menu.Item className="zy-menu-items" key="62a51">
-              JQuery
+              web前端
             </Menu.Item>
             <Menu.Item className="zy-menu-items" key="53a62">
-              zepto
+              Node
             </Menu.Item>
             <Menu.Item className="zy-menu-items" key="526a3">
-              Vue
+              Java
             </Menu.Item>
             <Menu.Item className="zy-menu-items" key="56a32">
-              React
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="5a263">
-              Angular
+              Python
             </Menu.Item>
           </SubMenu>
-
-          <SubMenu key="8.1" title="面试相关">
-            <Menu.Item className="zy-menu-items" key="6c151">
-              计算机基础
+          <SubMenu key="book" title="子洋书斋">
+            <Menu.Item className="zy-menu-items" key="deve">
+              编程开发
             </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="564c2">
-              网络协议
+            <Menu.Item className="zy-menu-items" key="me">
+              个人精进
             </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="5c643">
-              前端面试
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="5c476">
-              后端面试
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="58c49">
-              BI面试
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="54c99">
-              ETL面试
-            </Menu.Item>
-            <Menu.Item className="zy-menu-items" key="898c1">
-              DBA面试
+            <Menu.Item className="zy-menu-items" key="xiaoshuo">
+              散文小说
             </Menu.Item>
           </SubMenu>
-
+          <Menu.Item className="zy-menu-items" key="about">
+            时间轴
+          </Menu.Item>
           <Menu.Item className="zy-menu-items" key="about-me">
             关于我
           </Menu.Item>

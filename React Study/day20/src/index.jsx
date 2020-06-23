@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-15 12:10:59
- * @LastEditTime: 2020-06-21 21:39:46
+ * @LastEditTime: 2020-06-23 23:53:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\index.jsx
@@ -16,9 +16,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import createSageMiddleWare from "redux-saga";
 // import saga from "./page/Home/store/saga";
 import reducers from "./store/reducers";
-import "src/index.less";
-import 'antd/dist/antd.css';
-import "src/static/iconfont/css/font-awesome.min.css";
+// import "src/index.less";
 import sagas from "./store/sagas";
 import App from "src/page/App";
 

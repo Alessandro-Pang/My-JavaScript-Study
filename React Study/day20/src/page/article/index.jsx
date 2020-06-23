@@ -1,18 +1,17 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { BackTop, Row, Col } from "antd";
 import Header from "common/header";
 import Footer from "common/footer";
-import ArticleList from "@/articleList";
+import ArticleContent from "@/articleContent";
 import Aside from "@/aside";
 import "./index.less";
 
-export default class index extends Component {
-  render() {
+const AticlePage =(props)  => {
     return (
       <Fragment>
         <Header></Header>
         <Row id="zy-article-container">
-          <ArticleList></ArticleList>
+          <ArticleContent></ArticleContent>
           <Col span={6} id="zy-aside-container">
             <Aside></Aside>
           </Col>
@@ -25,5 +24,6 @@ export default class index extends Component {
         <Footer></Footer>
       </Fragment>
     );
-  }
 }
+
+export default AticlePage;

@@ -1,12 +1,11 @@
 /*
- * @Author: your name
+ * @Author: zi.yang
  * @Date: 2020-06-16 13:38:41
- * @LastEditTime: 2020-06-22 13:11:04
+ * @LastEditTime: 2020-06-23 14:27:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\webpack.config.js
- */
-
+ */ 
 const { HotModuleReplacementPlugin } = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -22,6 +21,7 @@ const config = {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
     alias: {
       "@": path.join(__dirname, "src/components"),
+      common:path.join(__dirname,"src/common"),
       src: path.join(__dirname, "src"),
     },
   },
@@ -54,11 +54,11 @@ const config = {
         ],
       },
       {
-        test: /\.(jpe?g|png|gif)$/,
+        test: /\.(jpe?g|png|gif|cur)$/,
         loader: "url-loader",
         options: {
           limit: "1024",
-          name: "[hash:8]-[name]-[ext]",
+          name: "[hash:8]-[name].[ext]",
         },
       },
       {
