@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-16 21:53:55
- * @LastEditTime: 2020-06-23 22:13:50
+ * @LastEditTime: 2020-06-28 00:14:40
  * @LastEditors: Please set LastEditors
  * @Description: 自定义Icon ClassName 依赖于 font-awesome
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\common\zy-iconfont\index.jsx
@@ -48,8 +48,8 @@ function ZyIconFont(props) {
           onMouseLeave={(e) => {
             onMouseLeave && onMouseLeave(e);
           }}
+          dangerouslySetInnerHTML={{__html: iconfont}}
         >
-          {iconfont}
         </i>
       );
     }

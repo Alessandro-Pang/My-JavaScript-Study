@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Row, Col, Pagination } from "antd";
 import "./index.less";
 import ZyCard from "./zy-card";
-import Logo from "src/static/logo.png";
+import Logo from "src/static/favicon.png";
 
 export default class ArticleList extends Component {
   intro = ` 小伙伴们，有一句话叫“盛世收藏乱世黄金”，大家知道黄金作为人人垂涎又高大上的期货产品，对于社会经济
@@ -10,7 +10,7 @@ export default class ArticleList extends Component {
   小伙伴们，有一句话叫“盛世收藏乱世黄金”，大家知道黄金作为人人垂涎又高大上的期货产品，对于社会经济
   小伙伴们，有一句话叫“盛世收藏乱世黄金”，大家知道黄金作为人人垂涎又高大上的期货产品，对于社会经济`;
   pcyCardArr = [];
-  eachCard = (loading, intro) => {
+  eachCard = (intro) => {
     for (let i = 0; i < 10; i++) {
       const randomPageView = (Math.random() * 1000) << 0;
       const randomLikes = (Math.random() * 1000) << 0;
@@ -18,7 +18,7 @@ export default class ArticleList extends Component {
         <ZyCard
           key={"zyCard-keys" + i}
           title="这是一段文字，用来描述标题，用来描述标题"
-          link={"/home/article/" + i}
+          link={"/blog/article/" + i}
           intro={this.intro}
           cover={Logo}
           author="子洋"

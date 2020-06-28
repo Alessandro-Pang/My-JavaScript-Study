@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { BackTop, Row, Col } from "antd";
-import Header from "common/header";
+import Header from "container/header";
 import Footer from "common/footer";
 import ArticleList from "@/articleList";
 import Aside from "@/aside";

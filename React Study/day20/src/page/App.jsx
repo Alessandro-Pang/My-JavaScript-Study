@@ -5,8 +5,10 @@ import Home from "./Home";
 import AticlePage from "./article";
 import Show404 from "./404"
 import IconPicker from "./geticon";
+import EditArticle from "./editArticle"
 import "antd/dist/antd.css";
-import "src/static/iconfont/css/font-awesome.min.css";
+import "mditor/dist/css/mditor.min.css";
+// import "src/static/iconfont/css/font-awesome.min.css";
 
 class App extends Component {
   render() {
@@ -14,8 +16,9 @@ class App extends Component {
       <Switch>
         <Route path="/" exact component={Index}></Route>
         <Route path="/home" exact component={Home}></Route>
-        <Route Path="/home/article/:id" exact component={AticlePage}></Route>
         <Route path="/icon" exact component={IconPicker}></Route>
+        <Route path="/blog/edit" exact component={EditArticle}></Route>
+        <Route Path="/blog/article/:id" exact component={AticlePage}></Route>
         <Route component={Show404}></Route>
       </Switch>
     );

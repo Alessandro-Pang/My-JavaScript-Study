@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-16 13:38:41
- * @LastEditTime: 2020-06-23 14:27:50
+ * @LastEditTime: 2020-06-27 23:11:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\webpack.config.js
@@ -20,9 +20,11 @@ const config = {
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
     alias: {
+      src: path.join(__dirname, "src"),
       "@": path.join(__dirname, "src/components"),
       common:path.join(__dirname,"src/common"),
-      src: path.join(__dirname, "src"),
+      static:path.join(__dirname,"src/static"),
+      container:path.join(__dirname,"src/containers")
     },
   },
   module: {

@@ -1,10 +1,10 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 11:13:45
- * @LastEditTime: 2020-06-22 16:58:55
+ * @LastEditTime: 2020-06-25 18:57:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\article\zy-card\index.jsx
+ * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\articleList\zy-card\index.jsx
  */
 
 import React from "react";
@@ -22,7 +22,6 @@ const ZyCard = (props) => {
     create_date,
     pageView,
     likes,
-    loading,
   } = props;
   return (
     <Typography>

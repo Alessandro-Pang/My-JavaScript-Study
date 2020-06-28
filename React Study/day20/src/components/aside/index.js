@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-21 23:58:12
- * @LastEditTime: 2020-06-23 23:09:03
+ * @LastEditTime: 2020-06-27 21:31:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\aside\index.js
@@ -23,7 +23,7 @@ const Aside = (props) => {
           key={"tags-" + i}
           tagName={Math.random().toString(36).slice(2, 8)}
           icon="fa-tag"
-          link={'/home/article/'+ i}
+          link={'/blog/article/'+ i}
         ></Tag>
       );
     }
@@ -66,27 +66,27 @@ const Aside = (props) => {
     const filing = [
       {
         date: "2020-12",
-        link:"/home/article/",
+        link:"/blog/article/",
         count:"10"
       },
       {
         date: "2020-11",
-        link:"/home/article/",
+        link:"/blog/article/",
         count:"5"
       },
       {
         date: "2020-10",
-        link:"/home/article/",
+        link:"/blog/article/",
         count:"15"
       },
       {
         date: "2020-09",
-        link:"/home/article/",
+        link:"/blog/article/",
         count:"35"
       },
       {
         date: "2020-08",
-        link:"/home/article/",
+        link:"/blog/article/",
         count:"25"
       },
     ];

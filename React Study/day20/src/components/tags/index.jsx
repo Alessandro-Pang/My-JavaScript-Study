@@ -52,7 +52,6 @@ const Tags = (props) => {
     >
       {linkRouter()}
       <ZyIcon  onClick={handleClick} iconfont={props.icon} />
-      {/* <i className={"fa fa-fw " + props.icon} onClick={handleClick} /> */}
     </li>
   );
 };
