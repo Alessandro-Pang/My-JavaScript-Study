@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-15 12:10:59
- * @LastEditTime: 2020-06-25 18:08:09
+ * @LastEditTime: 2020-06-28 16:48:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\index.jsx
@@ -19,7 +19,6 @@ import reducers from "./store/reducers";
 import "src/index.less";
 import sagas from "./store/sagas";
 import App from "src/page/App";
-
 //2.create reduxSag middleware
 const sagaMiddleWare = createSageMiddleWare();
 const enhancer = composeWithDevTools(applyMiddleware(sagaMiddleWare));

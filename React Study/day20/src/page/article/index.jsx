@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
+import {useParams} from "react-router-dom"
 import { BackTop, Row, Col } from "antd";
 import Header from "container/header";
 import Footer from "common/footer";
@@ -34,7 +35,6 @@ function code (){
 `
 const AticlePage = (props) => {
   window.scrollTo(0,0)
-
   return (
     <Fragment>
       <Header></Header>

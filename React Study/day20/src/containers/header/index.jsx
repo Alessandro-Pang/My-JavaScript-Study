@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import Header from "common/header";
+import {get_menu_info} from "./store/actionCreators"
 
 const mapStateToProps = state =>{
   return {
@@ -8,7 +9,7 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = dispatch =>({
-  get_menu:dispatch({type:"header/get_menu_info"})
+  menusList:dispatch(get_menu_info())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Header)

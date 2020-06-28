@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-15 13:38:07
- * @LastEditTime: 2020-06-28 00:00:03
+ * @LastEditTime: 2020-06-28 14:55:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\containers\header\store\saga.js
@@ -10,8 +10,11 @@
 import { takeEvery, put } from "redux-saga/effects";
 import { GET_MENU_INFO } from "./constants";
 import { menu_info } from "./actionCreators";
-const baseUrl = "http://127.0.0.1:8899/api/v1/menu";
 
+const location = window.location.origin.replace(window.location.port,"");
+const baseUrl = location+"8899/api/v1/menu";
+
+//pc 端正常访问 ，移动端报typeerror:failed to fetch --> 地址访问127.0.0.1 --> X
 function* get_menus() {
   const data = yield fetch(`${baseUrl}/info`);
   const res = yield data.json((res) => res.json());

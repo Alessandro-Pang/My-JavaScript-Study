@@ -18,7 +18,7 @@ class App extends Component {
         <Route path="/home" exact component={Home}></Route>
         <Route path="/icon" exact component={IconPicker}></Route>
         <Route path="/blog/edit" exact component={EditArticle}></Route>
-        <Route Path="/blog/article/:id" exact component={AticlePage}></Route>
+        <Route path="/blog/article/:id"exact component={AticlePage}></Route>
         <Route component={Show404}></Route>
       </Switch>
     );

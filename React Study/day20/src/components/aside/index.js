@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-21 23:58:12
- * @LastEditTime: 2020-06-27 21:31:00
+ * @LastEditTime: 2020-06-28 10:46:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\aside\index.js
@@ -9,7 +9,7 @@
 
 import React, { Fragment } from "react";
 import { Col, Row, Input, Form, Button } from "antd";
-import Tag from "@/tags";
+import Tag from "common/tags";
 import { FireOutlined } from "@ant-design/icons";
 import HotArticleList from "@/hotArticleList"
 import "./index.less";
@@ -165,7 +165,7 @@ const Aside = (props) => {
           <Col className="zy-sider-col">
             <Row className="zy-sider-title">
               <i className="fa fa-link fa-lg fa-fw fa-rotate-90" />
-              友情链接
+              导航链接
             </Row>
             <Row className="zy-sider-content">{getLink()}</Row>
           </Col>
