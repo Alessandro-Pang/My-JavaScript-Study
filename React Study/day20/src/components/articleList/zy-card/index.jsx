@@ -64,7 +64,7 @@ const ZyCard = (props) => {
               </Tooltip>
             </Col>
             <Col>
-              <Tooltip title="浏览量" >
+              <Tooltip title="浏览量">
                 <i className="fa fa-eye fa-lg fa-fw " aria-hidden="true"></i>
                 {pageView}
               </Tooltip>

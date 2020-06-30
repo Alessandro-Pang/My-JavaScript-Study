@@ -8,10 +8,6 @@ import {
   set_page
 } from "./store/actionCreators";
 
-/**
- * 
- * @param {*} state 
- */
 const mapStateToProps = (state) => {
   return {
     articleList: state.ArticleListReducers.articleList,
@@ -23,9 +19,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
-    { get_article_info, set_page_offset, set_page_size,set_page },
+    { set_page_offset,get_article_info, set_page_size,set_page },
     dispatch
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
+export default connect(mapStateToProps,mapDispatchToProps)(ArticleList);

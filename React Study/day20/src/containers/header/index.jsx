@@ -1,15 +1,15 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Header from "common/header";
-import {get_menu_info} from "./store/actionCreators"
-
-const mapStateToProps = state =>{
+import { get_menu_info } from "./store/actionCreators";
+import { bindActionCreators } from "redux";
+const mapStateToProps = (state) => {
   return {
-    menus:state.HeaderReducers.menus
-  }
-}
+    menus: state.HeaderReducers.menus,
+  };
+};
 
 const mapDispatchToProps = dispatch =>({
-  _menusList:dispatch(get_menu_info())
+  _menusList:dispatch(get_menu_info()),
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header)
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
