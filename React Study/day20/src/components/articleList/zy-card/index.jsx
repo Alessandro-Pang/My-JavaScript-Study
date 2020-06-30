@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 11:13:45
- * @LastEditTime: 2020-06-25 18:57:46
+ * @LastEditTime: 2020-06-30 07:15:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\articleList\zy-card\index.jsx
@@ -51,25 +51,25 @@ const ZyCard = (props) => {
             </Col>
           </Row>
           <Row className="zy-card-footer">
-            <Col xs={{ span: 5 }} md={{ span: 4 }} lg={{ span: 3 }}>
+            <Col>
               <Tooltip title="作者">
                 <i className="fa fa-user fa-lg fa-fw " aria-hidden="true"></i>
                 {author}
               </Tooltip>
             </Col>
-            <Col xs={{ span: 9 }} md={{ span: 6 }} lg={{ span: 5 }}>
+            <Col className="create_date">
               <Tooltip title="发布时间">
                 <i className="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                 {create_date}
               </Tooltip>
             </Col>
-            <Col xs={{ span: 5 }} lg={{ span: 3 }}>
-              <Tooltip title="浏览量">
+            <Col>
+              <Tooltip title="浏览量" >
                 <i className="fa fa-eye fa-lg fa-fw " aria-hidden="true"></i>
                 {pageView}
               </Tooltip>
             </Col>
-            <Col xs={{ span: 5 }} lg={{ span: 3 }}>
+            <Col>
               <Tooltip title="点赞量">
                 <i
                   className="fa fa-thumbs-o-up fa-lg fa-fw "

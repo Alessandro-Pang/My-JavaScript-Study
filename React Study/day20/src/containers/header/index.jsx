@@ -9,7 +9,7 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = dispatch =>({
-  menusList:dispatch(get_menu_info())
+  _menusList:dispatch(get_menu_info())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Header)

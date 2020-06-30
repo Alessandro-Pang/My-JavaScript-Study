@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-15 13:28:25
- * @LastEditTime: 2020-06-27 23:17:59
+ * @LastEditTime: 2020-06-29 23:45:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\store\reducers\index.js
@@ -9,8 +9,10 @@
 
 import { combineReducers } from "redux";
 import HeaderReducers from "container/header/store/reducers";
+import ArticleListReducers from "container/articleList/store/reducers"
 const Reducers = combineReducers({
-  HeaderReducers
+  HeaderReducers,
+  ArticleListReducers
 });
 
 export default Reducers;
