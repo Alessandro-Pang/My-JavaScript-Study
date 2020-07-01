@@ -1,32 +1,38 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Row, Col, Pagination } from "antd";
-import "./index.less";
 import ZyCard from "./zy-card";
 import Logo from "src/static/logo.png";
+import "./index.less";
 
-class ArticleList extends React.PureComponent {
-  componentDidMount() {
-    const { actions, page, page_size } = this.props;
-    actions.get_article_info(page, page_size);
-  }
-  handleClickUpdatePage(number, type) {
-    const { actions,page, page_size } = this.props;
-    // 不直接修改 state 对象
-    let [newPage,new_size] = [page, page_size ];
-    if (type === "page") {
-      actions.set_page(number);
-      newPage = number;
-    } else if (type === "size") {
-      actions.set_page_size(number);
-      new_size = number;
+const ArticleList = (props) => {
+  const {
+    page,
+    actions,
+    page_size,
+    articleList,
+    articleLimit,
+    handleClickUpdatePage,
+  } = props;
+  const { rows, count } = articleList;
+  useEffect(() => {
+    /**
+     * react 警告Warning:
+     *   Cannot update during an existing state transition (such as within `render`).
+     * 报错的原因 是由于引用的子组件 通过props进行传递了  
+     * 传递的过程中实际上已经处于render阶段了 ，
+     * 在这个阶段 如果你再改变这个state值的话 就会包这个错 
+     * 尽量不要在render的时候通过点击改变state
+     * 解决方法：在声明周期的 Hook 中执行方法
+     */
+    if (rows && !articleLimit.length) {
+      const data = rows.slice(0, 10);
+      actions.article_limit_list(data);
     }
-    actions.get_article_info(newPage,new_size);
-  }
+  });
 
-  eachCard = () => {
-    const { articleList } = this.props;
-    if (!articleList.rows) return;
-    return articleList.rows.map((items) => (
+  const eachCard = () => {
+    if (!articleLimit) return <></>;
+    return articleLimit.map((items) => (
       <ZyCard
         key={items.article_id}
         title={items.article_title}
@@ -40,37 +46,47 @@ class ArticleList extends React.PureComponent {
       />
     ));
   };
-  render() {
-    return (
-      <Fragment>
-        <Col
-          lg={{ span: 14, offset: 2 }}
-          md={{ span: 14, offset: 2 }}
-          xs={{ span: 22, offset: 1 }}
-          sm={{ span: 20, offset: 2 }}
-        >
-          {this.eachCard()}
-          <Row className="zy-article-pagination">
-            <Pagination
-              total={this.props.articleList.count}
-              defaultCurrent={1}
-              defaultPageSize={10}
-              responsive
-              showSizeChanger
-              showQuickJumper
-              onChange={(pageNum) => {
-                this.handleClickUpdatePage(pageNum, "page");
-              }}
-              onShowSizeChange={(current, size) => {
-                this.handleClickUpdatePage(size, "size");
-              }}
-            />
-            {/* 你不会希望一页显示一百条的 */}
-          </Row>
-        </Col>
-      </Fragment>
-    );
-  }
-}
+  return (
+    <Fragment>
+      <Col
+        lg={{ span: 14, offset: 2 }}
+        md={{ span: 14, offset: 2 }}
+        xs={{ span: 22, offset: 1 }}
+        sm={{ span: 20, offset: 2 }}
+      >
+        {eachCard()}
+        <Row className="zy-article-pagination">
+          <Pagination
+            total={count || 1}
+            defaultCurrent="1"
+            defaultPageSize="10"
+            responsive
+            showSizeChanger
+            showQuickJumper
+            onChange={(pageNum) => {
+              handleClickUpdatePage({
+                number: pageNum,
+                type: "page",
+                page,
+                page_size,
+                articleList,
+              });
+            }}
+            onShowSizeChange={(current, size) => {
+              handleClickUpdatePage({
+                number: size,
+                type: "size",
+                page,
+                page_size,
+                articleList,
+              });
+            }}
+          />
+          {/* 你不会希望一页显示一百条的 */}
+        </Row>
+      </Col>
+    </Fragment>
+  );
+};
 
 export default ArticleList;

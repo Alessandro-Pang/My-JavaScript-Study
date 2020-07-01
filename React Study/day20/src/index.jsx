@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-15 12:10:59
- * @LastEditTime: 2020-06-30 10:57:51
+ * @LastEditTime: 2020-07-01 07:14:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\index.jsx
@@ -36,3 +36,6 @@ render(
     </Provider>,
   document.getElementById("root")
 );
+
+
+//user not register in ['admin','administrator','root','sa']

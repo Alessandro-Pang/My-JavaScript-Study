@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 11:17:46
- * @LastEditTime: 2020-07-01 23:53:31
+ * @LastEditTime: 2020-06-30 22:54:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\containers\articleList\store\reducers.js
@@ -9,14 +9,14 @@
 
 import {
   ARTICLE_INFO,
+  SET_PAGE_OFFSET_NUM,
   SET_PAGE_SIZE_NUM,
-  ARTICLE_LIMIT_LIST,
   PAGE_NUMBER,
 } from "./constants";
 
 const initState = {
   articleList: [],
-  articleLimit:[],
+  offset: 0,
   pagesize: 10,
   page: 1,
 };
@@ -25,12 +25,12 @@ const ArticleListReducers = (state = initState, action) => {
   switch (action.type) {
     case ARTICLE_INFO:
       return { ...state, articleList: action.articleList };
+    case SET_PAGE_OFFSET_NUM:
+      return { ...state, offset: action.offset };
     case SET_PAGE_SIZE_NUM:
       return { ...state, pagesize: action.pagesize };
     case PAGE_NUMBER:
       return { ...state, page: action.page };
-    case ARTICLE_LIMIT_LIST:
-      return {...state,articleLimit:action.articleLimit}
     default:
       return state;
   }

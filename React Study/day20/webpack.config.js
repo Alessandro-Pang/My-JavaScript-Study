@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-16 13:38:41
- * @LastEditTime: 2020-06-28 10:48:43
+ * @LastEditTime: 2020-07-01 07:18:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\webpack.config.js
@@ -13,7 +13,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const config = {
   target:"web",
-  mode:"developer",
+  mode:"development",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[hash:8].bundle.js",

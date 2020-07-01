@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./index.less";
 const HotArticleList = () => {
   const content = (
-    <ul>
+    <ul className="zy-popover">
       <li>作者：子洋</li>
       <li>点赞量：880</li>
       <li>浏览量：1000</li>

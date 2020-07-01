@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-21 23:58:12
- * @LastEditTime: 2020-06-28 10:46:04
+ * @LastEditTime: 2020-07-01 22:16:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\aside\index.js
@@ -12,23 +12,13 @@ import { Col, Row, Input, Form, Button } from "antd";
 import Tag from "common/tags";
 import { FireOutlined } from "@ant-design/icons";
 import HotArticleList from "@/hotArticleList"
+import LabelTheWall from "container/labelTheWall";
+import BlogFiling from "container/blogFiling";
+
 import "./index.less";
 
 const Aside = (props) => {
-  const getTags = () => {
-    const tags = [];
-    for (let i = 0; i <= 25; i++) {
-      tags.push(
-        <Tag
-          key={"tags-" + i}
-          tagName={Math.random().toString(36).slice(2, 8)}
-          icon="fa-tag"
-          link={'/blog/article/'+ i}
-        ></Tag>
-      );
-    }
-    return tags;
-  };
+  
   const getLink = () => {
     const lins = [];
     const links = [
@@ -60,47 +50,6 @@ const Aside = (props) => {
       );
     }
     return lins;
-  };
-  const getFiling = () => {
-    const arr = [];
-    const filing = [
-      {
-        date: "2020-12",
-        link:"/blog/article/",
-        count:"10"
-      },
-      {
-        date: "2020-11",
-        link:"/blog/article/",
-        count:"5"
-      },
-      {
-        date: "2020-10",
-        link:"/blog/article/",
-        count:"15"
-      },
-      {
-        date: "2020-09",
-        link:"/blog/article/",
-        count:"35"
-      },
-      {
-        date: "2020-08",
-        link:"/blog/article/",
-        count:"25"
-      },
-    ];
-    for (let i = 0; i < 5; i++) {
-      arr.push(
-        <Tag
-          key={"tags-" + i}
-          tagName={filing[i].date +' ( ' +filing[i].count+'篇 )'}
-          link={filing[i].link + i}
-          icon="fa-bookmark"
-        ></Tag>
-      );
-    }
-    return arr;
   };
   return (
     <Fragment>
@@ -138,7 +87,7 @@ const Aside = (props) => {
             <Row className="zy-sider-title">
               <i className="fa fa-tags fa-fw fa-lg fa-rotate-90" /> 标签墙
             </Row>
-            <Row className="zy-sider-content">{getTags()}</Row>
+            <Row className="zy-sider-content"><LabelTheWall/></Row>
           </Col>
         </Row>
         <Row className="zy-sider">
@@ -147,7 +96,7 @@ const Aside = (props) => {
               <i className="fa fa-calendar fa-fw fa-lg" /> 博客归档
             </Row>
             <Row className="zy-sider-content">
-              {getFiling()}
+              <BlogFiling/>
             </Row>
           </Col>
         </Row>

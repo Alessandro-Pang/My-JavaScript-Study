@@ -1,38 +1,12 @@
 import React, { Fragment } from "react";
-import {useParams} from "react-router-dom"
 import { BackTop, Row, Col } from "antd";
 import Header from "container/header";
 import Footer from "common/footer";
-import ArticleContent from "@/articleContent";
+import ArticleContent from "container/articleContent";
 import CommentList from "@/commentList";
 import Aside from "@/aside";
 import "./index.less";
 
-let article = `
-# abc
-
-## backlsa
-
-function code (){
-  console.log(1)
-}
-
-- list 
- - list 2
-
-**haha**
-
-\`\`\`
-  function(){
-    return false
-  }
-
-  (function(){
-    return true
-  })()
-\`\`\`
-
-`
 const AticlePage = (props) => {
   window.scrollTo(0,0)
   return (
@@ -46,7 +20,7 @@ const AticlePage = (props) => {
           sm={{ span: 20, offset: 2 }}
         >
           <Row>
-            <ArticleContent article={article}></ArticleContent>
+            <ArticleContent></ArticleContent>
           </Row>
           <CommentList />
         </Col>

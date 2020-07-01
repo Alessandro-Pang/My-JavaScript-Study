@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 import ZyIcon from "common/zy-iconfont";
 import "./index.less";
 
@@ -30,9 +30,10 @@ const Tags = (props) => {
     ${randomInt(100, 200)},
     ${randomInt(100, 200)},
     ${(Math.random() * 10 + 3) / 10})`;
+  //判断连接类型并渲染Router
   const linkRouter = () => {
     if (!props.link) {
-      return <NavLink to={location.pathname}>{props.tagName}</NavLink>;
+      return <Link to={location.pathname}>{props.tagName}</Link>;
     }
     const link = props.link;
     const isHttp =

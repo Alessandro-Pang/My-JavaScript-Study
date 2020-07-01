@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import Header from "common/header";
 import { get_menu_info } from "./store/actionCreators";
-import { bindActionCreators } from "redux";
+
 const mapStateToProps = (state) => {
   return {
-    menus: state.HeaderReducers.menus,
+    menus: state.Header.menus,
   };
 };
 

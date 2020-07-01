@@ -1,18 +1,25 @@
 /*
  * @Author: your name
  * @Date: 2020-06-15 13:28:25
- * @LastEditTime: 2020-06-30 22:18:14
+ * @LastEditTime: 2020-07-01 22:15:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\store\reducers\index.js
  */
 
 import { combineReducers } from "redux";
-import HeaderReducers from "container/header/store/reducers";
-import ArticleListReducers from "container/articleList/store/reducers"
+import Header from "container/header/store/reducers";
+import ArticleList from "container/articleList/store/reducers"
+import ArticleContent from "container/articleContent/store/reducers"
+import LabelTheWall from "container/labelTheWall/store/reducers"
+import BlogFiling from "container/blogFiling/store/reducers"
+
 const Reducers = combineReducers({
-  HeaderReducers,
-  ArticleListReducers
+  Header,
+  ArticleList,
+  ArticleContent,
+  LabelTheWall,
+  BlogFiling
 });
 
 export default Reducers;
