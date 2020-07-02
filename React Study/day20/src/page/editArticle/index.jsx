@@ -16,6 +16,7 @@ const editArticle = () => {
     const checkValue = value.match(
       /(<\/?(script|input|textarea|iframe|frame|button|submit|form)(\s|\w|=|\d|\W)*?>)/gi
     );
+    console.log(document.getElementsByClassName('markdown-body')[0].innerHTML)
     if (!checkValue) return value;
     const result = checkValue.map((items) => {
       const text = items.match(/^<\/?\w+/gi);

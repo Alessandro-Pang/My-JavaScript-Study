@@ -11,7 +11,6 @@ const ArticleContent = (props) => {
 
   useEffect(() => {
     const aid = articleInfo.article_id;
-    console.log(1)
     if (!aid || aid !== id << 0) {
       props.actions.get_article_info(id);
     }
@@ -27,7 +26,6 @@ const ArticleContent = (props) => {
     likes,
   } = articleInfo;
   const html = parser.parse(article_details || "");
-
   return (
     <Col span={24} id="zy-article-content">
       <Row className="zy-markdown">
@@ -46,7 +44,6 @@ const ArticleContent = (props) => {
             <Col
               xs={{ span: 6 }}
               md={{ span: 4 }}
-              lg={{ span: 3 }}
               title="文章标签"
             >
               <i className="fa fa-tags fa-lg fa-fw " aria-hidden="true"></i>
@@ -73,15 +70,17 @@ const ArticleContent = (props) => {
               ></i>
               {likes}
             </Col>
-            <Col xs={{ span: 24 }} lg={{ span: 12 }} title="创作时间">
+            <Col xs={{ span: 24 }} lg={{ span: 8 }} title="创作时间">
               <i className="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
               {createdAt}
             </Col>
           </Row>
           <section
             id="zy-markdown-style"
+            className="article"
             dangerouslySetInnerHTML={{ __html: html }}
-          ></section>
+          >
+          </section>
         </Col>
       </Row>
     </Col>

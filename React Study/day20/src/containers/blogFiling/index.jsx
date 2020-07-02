@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import BlogFiling from "@/blogFiling";
 import { get_filing_list } from "./store/actionCreators"
-
 const mapStateToProps = (state) => {
   return {
     filingList: state.BlogFiling.filingList,

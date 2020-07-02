@@ -6,9 +6,4 @@
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\containers\articleList\store\constants.js
  */ 
-export const GET_ARTICLE_INFO = "article/list/get_list_info";
-export const ARTICLE_INFO = "article/list/set_list_info";
-
-export const SET_PAGE_OFFSET_NUM = "article/list/set_page_offset_num";
-export const SET_PAGE_SIZE_NUM = "article/list/set_page_size_num";
-export const PAGE_NUMBER = "article/list/article_list_page_num"
+export const HOT_ARTICLE_LIST = "article/get_hot_article_list";

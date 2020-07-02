@@ -1,72 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Popover } from "antd";
 import { Link } from "react-router-dom";
+import formatDate from "src/utils/date";
 import "./index.less";
-const HotArticleList = () => {
-  const content = (
-    <ul className="zy-popover">
-      <li>作者：子洋</li>
-      <li>点赞量：880</li>
-      <li>浏览量：1000</li>
-      <li>点赞率：88%</li>
-      {/* (点赞 / 阅读 * 100).toFixed(2) */}
-      <li>创作时间：2020/12/23</li>
-    </ul>
-  );
-  return (
-    <ol className="zy-hot-article-list">
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">造成这个原因的因素很多:</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">浏览器显示的内容没有刷新:</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">浏览器显示的内容没有刷新:</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">浏览器显示的内容没有刷新浏览器显示的内容没有刷新:</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">浏览器显示的内容没有刷新浏览器显示的内容没有刷新:</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">浏览器显示的内容没有刷新:</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">浏览器显示的内容没有刷新:</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">造成这个原因的因素很多:浏览器显示的内容没有刷新</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">浏览器显示的内容没有刷新:浏览器显示的内容没有刷新</Link>
-        </Popover>
-      </li>
-      <li>
-        <Popover content={content} title="文章详情">
-          <Link to="/home/article/">造成这个原因的因素很多造成这个原因的因素很多:</Link>
-        </Popover>
-      </li>
-    </ol>
-  );
+const HotArticleList = (props) => {
+  const { articleList, hotList, initHotList } = props;
+  useEffect(() => {
+    if (!hotList.length) {
+      initHotList(articleList);
+    }
+  });
+  const eachHotList = (hotList) =>
+    hotList.map((items) => {
+      if (!items.article_id) return <></>;
+      const likeRate = (
+        ((items.likes << 0) / (items.pageview << 0)) *
+        100
+      ).toFixed(2);
+      const content = (
+        <ul
+          key={"hot_article_descript-" + items.article_id}
+          className="zy-popover"
+        >
+          <li>作者：{items.article_author}</li>
+          <li>点赞量：{items.likes}</li>
+          <li>浏览量：{items.pageview}</li>
+          <li>点赞率：{isNaN(likeRate) ? "0%" : likeRate + "%"}</li>
+          <li>创作时间：{formatDate(items.createdAt, "YYYY-MM-DD")}</li>
+        </ul>
+      );
+      return (
+        <li key={"hot_article_list-" + items.article_id}>
+          <Popover content={content} title="文章详情">
+            <Link to={"/blog/article/" + items.article_id}>
+              {items.article_title}
+            </Link>
+          </Popover>
+        </li>
+      );
+    });
+  return <ol className="zy-hot-article-list">{eachHotList(hotList)}</ol>;
 };
 
 export default HotArticleList;

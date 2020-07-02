@@ -1,43 +1,14 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 11:18:10
- * @LastEditTime: 2020-06-30 15:43:56
+ * @LastEditTime: 2020-07-02 07:36:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \My-JavaScript-Study\React Study\day20\src\containers\articleList\store\actionCreators.js
+ * @FilePath: \My-JavaScript-Study\React Study\day20\src\containers\hotArticleList\store\actionCreators.js
  */
+import { HOT_ARTICLE_LIST } from "./constants";
 
-import {
-  GET_ARTICLE_INFO,
-  ARTICLE_INFO,
-  PAGE_NUMBER,
-  SET_PAGE_OFFSET_NUM,
-  SET_PAGE_SIZE_NUM,
-} from "./constants";
-
-export const get_article_info = (page, pageSize) => ({
-  type: GET_ARTICLE_INFO,
-  page,
-  pageSize,
-});
-
-export const article_info = (articleList) => ({
-  type: ARTICLE_INFO,
-  articleList,
-});
-
-
-export const set_page = (page) => ({
-  type: PAGE_NUMBER,
-  page,
-});
-
-export const set_page_offset = (offset) => ({
-  type: SET_PAGE_OFFSET_NUM,
-  offset,
-});
-
-export const set_page_size = (pagesize) => ({
-  type: SET_PAGE_SIZE_NUM,
-  pagesize,
+export const hot_article_list = (hotList) => ({
+  type: HOT_ARTICLE_LIST,
+  hotList
 });

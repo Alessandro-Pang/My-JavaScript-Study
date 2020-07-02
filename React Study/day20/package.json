@@ -5,8 +5,8 @@
   "main": "webpack-config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress  --colors -d --watch --proflie  --config webpack.config.js",
-    "build": "webpack --progress --colors -d --proflie --config webpack.config.js"
+    "dev": "webpack-dev-server --progress  --colors -d --watch --proflie  --config script/webpack.dev.conf.js",
+    "build": "webpack --progress --colors -d --proflie --config script/webpack.prod.conf.js"
   },
   "keywords": [],
   "author": "",
@@ -48,8 +48,10 @@
     "postcss-loader": "^3.0.0",
     "redux-devtools-extension": "^2.13.8",
     "style-loader": "^1.2.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   }

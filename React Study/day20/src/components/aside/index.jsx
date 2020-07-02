@@ -1,17 +1,17 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-21 23:58:12
- * @LastEditTime: 2020-07-01 22:16:41
+ * @LastEditTime: 2020-07-02 17:22:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\aside\index.js
+ * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\aside\index.jsx
  */
 
 import React, { Fragment } from "react";
 import { Col, Row, Input, Form, Button } from "antd";
 import Tag from "common/tags";
 import { FireOutlined } from "@ant-design/icons";
-import HotArticleList from "@/hotArticleList"
+import HotArticleList from "container/hotArticleList"
 import LabelTheWall from "container/labelTheWall";
 import BlogFiling from "container/blogFiling";
 
@@ -103,7 +103,8 @@ const Aside = (props) => {
         <Row className="zy-sider">
           <Col className="zy-sider-col">
             <Row className="zy-sider-title">
-              <FireOutlined style={{ marginRight: 2 }} /> 热门文章
+              <FireOutlined style={{ marginRight: 2 }} /> 
+              热门文章
             </Row>
             <Row className="zy-sider-content">
               <HotArticleList/>

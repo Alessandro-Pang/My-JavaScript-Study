@@ -3,7 +3,7 @@ import { Row, Col, Pagination } from "antd";
 import ZyCard from "./zy-card";
 import Logo from "src/static/logo.png";
 import "./index.less";
-
+import formatDate from "src/utils/date"
 const ArticleList = (props) => {
   const {
     page,
@@ -18,9 +18,9 @@ const ArticleList = (props) => {
     /**
      * react 警告Warning:
      *   Cannot update during an existing state transition (such as within `render`).
-     * 报错的原因 是由于引用的子组件 通过props进行传递了  
+     * 报错的原因 是由于引用的子组件 通过props进行传递了
      * 传递的过程中实际上已经处于render阶段了 ，
-     * 在这个阶段 如果你再改变这个state值的话 就会包这个错 
+     * 在这个阶段 如果你再改变这个state值的话 就会包这个错
      * 尽量不要在render的时候通过点击改变state
      * 解决方法：在声明周期的 Hook 中执行方法
      */
@@ -40,7 +40,7 @@ const ArticleList = (props) => {
         intro={items.article_intro}
         cover={items.article_cover || Logo}
         author={items.article_author}
-        create_date={items.createdAt}
+        create_date={formatDate(items.createdAt,'YYYY-MM-DD')}
         pageView={items.pageview}
         likes={items.likes}
       />
@@ -58,8 +58,8 @@ const ArticleList = (props) => {
         <Row className="zy-article-pagination">
           <Pagination
             total={count || 1}
-            defaultCurrent="1"
-            defaultPageSize="10"
+            defaultCurrent={page || "1"}
+            defaultPageSize={page_size || "10"}
             responsive
             showSizeChanger
             showQuickJumper
