@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-07-02 21:15:44
- * @LastEditTime: 2020-07-03 00:00:34
+ * @LastEditTime: 2020-07-03 10:30:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\utils\fetchX\index.js
@@ -25,7 +25,6 @@ export default class FetchX {
   };
 
   _fetch = async (url, data, type, options) => {
-    console.log()
     const headerObj = options.headers
       ? new Headers(options.headers)
       : new Headers({

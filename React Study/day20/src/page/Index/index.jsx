@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../utils";
 import "./index.less";
+
 export default class index extends Component {
-  state = {
-    currentDate: formatDate(new Date(), "YYYY.MM.DD hh:mm:ss"),
-  };
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentDate: formatDate(new Date(), "YYYY.MM.DD hh:mm:ss"),
+    };
+  }
+
   componentDidMount() {
     this.task();
   }

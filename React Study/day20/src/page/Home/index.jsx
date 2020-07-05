@@ -6,8 +6,7 @@ import ArticleList from "container/articleList";
 import Aside from "@/aside";
 import "./index.less";
 
-export default class index extends Component {
-  render() {
+const Home = () => {
     return (
       <Fragment>
         <Header></Header>
@@ -25,5 +24,6 @@ export default class index extends Component {
         <Footer></Footer>
       </Fragment>
     );
-  }
 }
+
+export default Home;

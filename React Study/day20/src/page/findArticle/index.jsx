@@ -2,13 +2,11 @@ import React, { Fragment } from "react";
 import { BackTop, Row, Col } from "antd";
 import Header from "container/header";
 import Footer from "common/footer";
-import ArticleContent from "container/articleContent";
-import CommentList from "@/commentList";
+import ArticleCard from "@/ArticleCard";
 import Aside from "@/aside";
-import "./index.less";
+// import "./index.less";
 
-const AticlePage = (props) => {
-  window.scrollTo(0,0)
+const FindArticle = () => {
   return (
     <Fragment>
       <Header></Header>
@@ -19,10 +17,7 @@ const AticlePage = (props) => {
           xs={{ span: 22, offset: 1 }}
           sm={{ span: 20, offset: 2 }}
         >
-          <Row>
-            <ArticleContent></ArticleContent>
-          </Row>
-          <CommentList />
+          <ArticleCard />
         </Col>
         <Col span={6} id="zy-aside-container">
           <Aside></Aside>
@@ -38,4 +33,4 @@ const AticlePage = (props) => {
   );
 };
 
-export default AticlePage;
+export default FindArticle;

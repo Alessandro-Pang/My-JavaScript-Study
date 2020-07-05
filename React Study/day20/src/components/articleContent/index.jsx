@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
 import { Row, Col } from "antd";
-import Mditor from "mditor";
-import "./index.less";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "./index.less";
+import 'highlight.js/styles/vs2015.css';
 
 const ArticleContent = (props) => {
-  const parser = new Mditor.Parser();
   const { articleInfo } = props;
   const { id } = useParams();
 
   useEffect(() => {
     const aid = articleInfo.article_id;
     if (!aid || aid !== id << 0) {
+      props.actions.article_info("");
       props.actions.get_article_info(id);
     }
   });
@@ -25,7 +25,7 @@ const ArticleContent = (props) => {
     pageview,
     likes,
   } = articleInfo;
-  const html = parser.parse(article_details || "");
+  const html = article_details || '';
   return (
     <Col span={24} id="zy-article-content">
       <Row className="zy-markdown">
@@ -76,9 +76,8 @@ const ArticleContent = (props) => {
             </Col>
           </Row>
           <section
-            id="zy-markdown-style"
-            className="article"
-            dangerouslySetInnerHTML={{ __html: html }}
+            className="zy-markdown-style"
+            dangerouslySetInnerHTML={{ __html: html.replace(/<pre>/g,'<pre class="hljs">')}}
           >
           </section>
         </Col>

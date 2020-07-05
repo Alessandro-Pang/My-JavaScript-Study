@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Popover } from "antd";
 import { Link } from "react-router-dom";
 import formatDate from "src/utils/date";
 import "./index.less";
 const HotArticleList = (props) => {
-  const { articleList, hotList, initHotList } = props;
-  useEffect(() => {
-    if (!hotList.length) {
-      initHotList(articleList);
-    }
-  });
+  const { hotList } = props;
+
   const eachHotList = (hotList) =>
     hotList.map((items) => {
       if (!items.article_id) return <></>;
