@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { BackTop, Row, Col } from "antd";
 import Header from "container/header";
 import Footer from "common/footer";
-import ArticleCard from "@/ArticleCard";
+import FindList from "container/findList";
 import Aside from "@/aside";
 // import "./index.less";
 
@@ -17,7 +17,7 @@ const FindArticle = () => {
           xs={{ span: 22, offset: 1 }}
           sm={{ span: 20, offset: 2 }}
         >
-          <ArticleCard />
+          <FindList />
         </Col>
         <Col span={6} id="zy-aside-container">
           <Aside></Aside>

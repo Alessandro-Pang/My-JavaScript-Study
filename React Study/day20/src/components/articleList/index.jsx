@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { Row, Col, Pagination } from "antd";
-import ZyCard from "./zy-card";
+import ZyCard from "@/zy-card";
 import Logo from "src/static/logo.png";
 import "./index.less";
 import formatDate from "src/utils/date"

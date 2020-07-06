@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-15 13:28:25
- * @LastEditTime: 2020-07-02 07:41:34
+ * @LastEditTime: 2020-07-05 21:53:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\store\reducers\index.js
@@ -14,6 +14,7 @@ import ArticleContent from "container/articleContent/store/reducers"
 import LabelTheWall from "container/labelTheWall/store/reducers"
 import BlogFiling from "container/blogFiling/store/reducers"
 import HotArticleList from "container/hotArticleList/store/reducers"
+import FindArticleList from "container/findList/store/reducers"
 
 const Reducers = combineReducers({
   Header,
@@ -21,7 +22,8 @@ const Reducers = combineReducers({
   ArticleContent,
   LabelTheWall,
   BlogFiling,
-  HotArticleList
+  HotArticleList,
+  FindArticleList
 });
 
 export default Reducers;

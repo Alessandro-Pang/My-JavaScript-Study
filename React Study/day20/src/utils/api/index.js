@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-07-02 21:11:25
- * @LastEditTime: 2020-07-03 14:23:46
+ * @LastEditTime: 2020-07-05 23:15:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\utils\api\index.js
@@ -23,3 +23,10 @@ export const fetchFilingList = () => fetchX.get("/article/findFiling");
 export const fetchTagList = () => fetchX.get("/article/findTagList");
 
 export const fetchHotArticle = () => fetchX.get("/article/findHotArticle");
+
+export const fetchFindArticleList = (action) =>
+  fetchX.get("/article/findArticelList", {
+    typename: action.typename,
+    typeValue: action.typeValue,
+  });
+  

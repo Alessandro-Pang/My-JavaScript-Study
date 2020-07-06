@@ -9,7 +9,7 @@ const BlogFiling = (props) => {
     <Tag
       key={"filing-" + items.createdAt}
       tagName={items.createdAt + " ( " + items.count + "篇 )"}
-      link={"/blog/filing/" + items.createdAt}
+      link={"/blog/find/article/filing/" + items.createdAt}
       icon="fa-bookmark"
     ></Tag>
   ));
