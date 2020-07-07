@@ -11,18 +11,13 @@ const FindArticle = (props) => {
   const path = "/blog/find/article/";
   const len = pathname.length - (path.length + typeValue.length) - 1;
   const typename = pathname.substr(path.length, len);
+  const { actions, articleList } = props;
   useEffect(() => {
-    const { actions, articleList } = props;
     actions.get_findArticle(typename, typeValue);
-    // let canvas = document.getElementById("canvas");
-    // let ctx = canvas.getContext("2d");
-    // ctx.font="30px Arial";
-    // ctx.strokeText(typename,10,50);
-  });
+  },[typeValue]);
   const eachCard = () => {
-    const { rows } = props.articleList;
-    if (!rows) return <></>;
-    return rows.map((items) => (
+    if (!articleList) return <></>;
+    return articleList.rows.map((items) => (
       <ZyCard
         key={items.article_id}
         title={items.article_title}
@@ -38,16 +33,14 @@ const FindArticle = (props) => {
   };
   return (
     <Col
-      lg={{ span: 14, offset: 2 }}
       md={{ span: 14, offset: 2 }}
       xs={{ span: 22, offset: 1 }}
       sm={{ span: 20, offset: 2 }}
-      className=""
     >
-      {/* <Row style={{marginTop:10}}>
-        <canvas id="canvas"  height="150px" style={{background:"#ccc"}}></canvas>
-      </Row> */}
-      <Row style={{ width: "100%" }}>{eachCard()}</Row>
+      <Row style={{height:145,justifyContent:'center',alignItems:'center'}}>
+        {typeValue}
+      </Row> 
+      {eachCard()}
     </Col>
   );
 };

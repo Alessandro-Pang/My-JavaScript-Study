@@ -1,7 +1,7 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 11:17:46
- * @LastEditTime: 2020-07-01 09:00:36
+ * @LastEditTime: 2020-07-06 08:27:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\containers\articleContent\store\reducers.js
@@ -12,7 +12,7 @@ import {
 } from "./constants";
 
 const initState = {
-  articleInfo: {},
+  articleInfo: null,
 };
 
 const ArticleContentReducers = (state = initState, action) => {

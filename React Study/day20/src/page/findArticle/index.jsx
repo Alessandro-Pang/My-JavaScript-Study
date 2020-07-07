@@ -11,14 +11,7 @@ const FindArticle = () => {
     <Fragment>
       <Header></Header>
       <Row id="zy-article-container">
-        <Col
-          lg={{ span: 14, offset: 2 }}
-          md={{ span: 14, offset: 2 }}
-          xs={{ span: 22, offset: 1 }}
-          sm={{ span: 20, offset: 2 }}
-        >
-          <FindList />
-        </Col>
+        <FindList />
         <Col span={6} id="zy-aside-container">
           <Aside></Aside>
         </Col>

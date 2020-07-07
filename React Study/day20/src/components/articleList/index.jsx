@@ -3,7 +3,7 @@ import { Row, Col, Pagination } from "antd";
 import ZyCard from "@/zy-card";
 import Logo from "src/static/logo.png";
 import "./index.less";
-import formatDate from "src/utils/date"
+import formatDate from "src/utils/date";
 const ArticleList = (props) => {
   const {
     page,
@@ -13,7 +13,6 @@ const ArticleList = (props) => {
     articleLimit,
     handleClickUpdatePage,
   } = props;
-  const { rows, count } = articleList;
   useEffect(() => {
     /**
      * react 警告Warning:
@@ -24,11 +23,11 @@ const ArticleList = (props) => {
      * 尽量不要在render的时候通过点击改变state
      * 解决方法：在声明周期的 Hook 中执行方法
      */
-    if (rows && !articleLimit.length) {
-      const data = rows.slice(0, 10);
+    if (articleList) {
+      const data = articleList.rows.slice(0, 10);
       actions.article_limit_list(data);
     }
-  });
+  },[articleList]);
 
   const eachCard = () => {
     if (!articleLimit) return <></>;
@@ -40,7 +39,7 @@ const ArticleList = (props) => {
         intro={items.article_intro}
         cover={items.article_cover || Logo}
         author={items.article_author}
-        create_date={formatDate(items.createdAt,'YYYY-MM-DD')}
+        create_date={formatDate(items.createdAt, "YYYY-MM-DD")}
         pageView={items.pageview}
         likes={items.likes}
       />
@@ -57,7 +56,7 @@ const ArticleList = (props) => {
         {eachCard()}
         <Row className="zy-article-pagination">
           <Pagination
-            total={count || 1}
+            total={(articleList && articleList.count) || 1}
             defaultCurrent={page || "1"}
             defaultPageSize={page_size || "10"}
             responsive
