@@ -1,12 +1,13 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-07-02 21:11:25
- * @LastEditTime: 2020-07-05 23:15:19
+ * @LastEditTime: 2020-07-07 10:15:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\React Study\day20\src\utils\api\index.js
  */
 import { FetchX } from "src/utils";
+import navLink from "./data/navlink.json";
 
 const baseUrl = "http://127.0.0.1:8899/api/v1";
 const fetchX = new FetchX(baseUrl);
@@ -29,4 +30,6 @@ export const fetchFindArticleList = (action) =>
     typename: action.typename,
     typeValue: action.typeValue,
   });
-  
+
+// const staicFetch = new FetchX();
+export const fetchNavLinkList = () => navLink//staicFetch.get(navLink);

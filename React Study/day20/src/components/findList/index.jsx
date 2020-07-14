@@ -13,6 +13,7 @@ const FindArticle = (props) => {
   const typename = pathname.substr(path.length, len);
   const { actions, articleList } = props;
   useEffect(() => {
+    window.scrollTo(0,0);
     actions.get_findArticle(typename, typeValue);
   },[typeValue]);
   const eachCard = () => {

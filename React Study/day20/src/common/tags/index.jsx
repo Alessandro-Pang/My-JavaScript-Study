@@ -37,9 +37,9 @@ const Tags = (props) => {
     }
     const link = props.link;
     const isHttp =
-      link === undefined || link.slice(0, 7) === "http://" ? true : false;
+    link.slice(0, 8) === "https://" || link.slice(0, 7) === "http://" ? true : false;
     if (isHttp) {
-      return <a href={link}>{props.tagName}</a>;
+      return <a target="_bank" href={link}>{props.tagName}</a>;
     } else {
       return <NavLink to={link}>{props.tagName}</NavLink>;
     }

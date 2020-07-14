@@ -1,10 +1,10 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-20 11:13:45
- * @LastEditTime: 2020-06-30 07:15:25
+ * @LastEditTime: 2020-07-07 08:59:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\articleList\zy-card\index.jsx
+ * @FilePath: \My-JavaScript-Study\React Study\day20\src\components\zy-card\index.jsx
  */
 
 import React from "react";
@@ -45,7 +45,7 @@ const ZyCard = (props) => {
               </Paragraph>
             </Col>
             <Col span={6} className="zy-card-cover">
-              <Link to="/home/1">
+              <Link to={link}>
                 <img src={cover} alt="" />
               </Link>
             </Col>

@@ -3,7 +3,7 @@ import { BackTop, Row, Col } from "antd";
 import Header from "container/header";
 import Footer from "common/footer";
 import ArticleList from "container/articleList";
-import Aside from "@/aside";
+import Aside from "../aside";
 import "./index.less";
 
 const Home = () => {

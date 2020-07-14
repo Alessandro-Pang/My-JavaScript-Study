@@ -4,7 +4,7 @@ import Header from "container/header";
 import Footer from "common/footer";
 import ArticleContent from "container/articleContent";
 import CommentList from "@/commentList";
-import Aside from "@/aside";
+import Aside from "../aside";
 import "./index.less";
 
 const AticlePage = (props) => {
