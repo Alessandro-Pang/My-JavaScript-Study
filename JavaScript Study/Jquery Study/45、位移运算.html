@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<div>
+	num = 5 ;<br>
+	向右位移1位 <br>
+	5 转换成2进制 ： 000101 <br>
+	000101 >> 1 == 000010  <br>
+	00010 = 2 ; 则 5 >> 1 == 2  <br>
+ 	<br>
+	num = 12 <br>
+	12 转换成2进制 ： 001100 <br>
+	001100 >> 2 == 000011 <br>
+	000011 = 3 ; 则 12 >> 2 == 3 <br>
+</div>
+
+<script type="text/javascript">
+	// 常规位移计算
+	const num = 5;
+	console.log(`${num} 向右位移1位 ${num} >> 1 : ${num >> 1}`);
+	console.log(`${num} 向右位移2位 ${num} >> 2 : ${num >> 2}`);
+	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	// 位移峰值
+	console.log(`${num} 向右位移32位 ${num} >> 32 : ${num >> 32}`);
+	console.log(`${num} 向右位移33位 ${num} >> 33 : ${num >> 33}`);
+	console.log(`${num} 向右位移64位 ${num} >> 64 : ${num >> 64}`);
+	console.log(`${num} 向右位移65位 ${num} >> 65 : ${num >> 65}`);
+	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");;
+
+	// 超出10位取反运算
+	const num2 = 11111111111;
+	console.log(`${num2} 向右位移1位 ${num2} >> 1 : ${num2 >> 1}`);
+	console.log(`${num2} 向右位移2位 ${num2} >> 2 : ${num2 >> 2}`);
+	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");;
+
+	// 位移峰值
+	console.log(`${num2} 向右位移32位 ${num2} >> 32 : ${num2 >> 32}`);
+	console.log(`${num2} 向右位移33位 ${num2} >> 33 : ${num2 >> 33}`);
+	console.log(`${num2} 向右位移64位 ${num2} >> 64 : ${num2 >> 64}`);
+	console.log(`${num2} 向右位移65位 ${num2} >> 65 : ${num2 >> 65}`);
+	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");;
+
+	// 当 num 的值大于等于27位时，位移计算后始终返回0
+	const num3 = 111111111111111111111111111;
+	console.log(`${num3} 向右位移1位 ${num3} >> 1 : ${num3 >> 1}`);
+	console.log(`${num3} 向右位移2位 ${num3} >> 2 : ${num3 >> 2}`);
+	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");;
+
+	// 位移峰值
+	console.log(`${num3} 向右位移32位 ${num3} >> 32 : ${num3 >> 32}`);
+	console.log(`${num3} 向右位移33位 ${num3} >> 33 : ${num3 >> 33}`);
+	console.log(`${num3} 向右位移64位 ${num3} >> 64 : ${num3 >> 64}`);
+	console.log(`${num3} 向右位移65位 ${num3} >> 65 : ${num3 >> 65}`);
+	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");;
+</script>
+</body>
+</html>
