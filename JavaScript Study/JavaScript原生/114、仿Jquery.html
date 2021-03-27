@@ -1,0 +1,50 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-27 17:45:17
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-27 22:07:47
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\JavaScript Study\JavaScript原生\114、仿Jquery.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./domQuery.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <div class="myapp"></div>
+  <script>
+   
+    const h2 = $().create('h2').css({
+      transform: "translate('30px','90px')",
+      color: 'red'
+    }).text('Hello,DOM Query').attr({
+      id: 'app2',
+      name: "myQuery"
+    })
+
+
+    const div = $().create('div').css({
+      color: 'green',
+      transform: 'rotate(60deg)',
+      fontSize: '77px',
+      position:"absolute",
+      top:'300px'
+    }).attr({
+      'name': 'mydiv',
+      'data-index': '99'
+    }).text('666啊,我的大兄弟');
+
+    $('#app').append(h2).append(div)
+
+  </script>
+</body>
+
+</html>

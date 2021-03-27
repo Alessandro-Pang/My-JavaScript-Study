@@ -25,6 +25,24 @@
           return <h1>Oh,Go Bye!</h1>;
         }
       }
+      class Table extends React.Component{
+        constructor(props){
+          super(props)
+        }
+
+        render(){
+          return (
+            <table>
+              <thader>{this.props.header}</thader>
+              <tbody>
+                
+              </tbody>
+            </table>
+          )
+        }
+      }
+
+
       class Demo extends React.Component {
         constructor(props) {
           super(props);

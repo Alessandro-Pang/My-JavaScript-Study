@@ -1,0 +1,85 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-27 10:51:25
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-27 12:34:46
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\100、2021的重学09.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <input type="text" name="" id="" v-model="key" placeholder="新增Key">
+      <input type="text" name="" id="" v-model="value" placeholder="新增value">
+      <button @click="handleAddObj">Object复制</button>
+      <button @click="vueSetAddObj">Set方法新增</button>
+    </div>
+    <div v-for="(item,key,index) of obj">
+        {{ key }} ----- {{ item }} ----- {{ index }}
+        <br>
+    </div>
+    <div v-for="item in list"> 
+        {{ item }}
+    </div>
+  </div>
+
+  <script>
+    /**
+     * VueJS 变异数组方法
+     *  push()  --- 在数组最后追加元素
+     *  pop()   ---- 删除数组最后一个元素
+     *  unshift()  --- 在数组的开头添加元素
+     *  shift()  --- 删除第一个元素，返回数组长度
+     *  splice() --- 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容
+     *  sort()  --- 数组排序
+     *  reverse()  --- 方法将数组中元素的位置颠倒，并返回该数组
+     */
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        value:'',
+        key:'',
+        obj: {
+          name:"zi.yang",
+          age:"22",
+          gender:"male",
+          salary:'100$',
+          address:'beijing'
+        },
+        list:[1,2,3,4,5,6,7]
+      },
+      methods: {
+        handleAddObj(){
+          const key = this.key;
+          const value = this.value;
+          const target = {};
+          Object.assign(target,this.obj,{[key]:value});
+          this.obj = target;
+        },
+        vueSetAddObj(){
+          this.$set(this.obj,this.key,this.value);
+        }
+      }
+    });
+
+    // Vue 不允许直接通过 obj.xxx = xxx 添加键值对
+    // 如果需要添加，需要通过 Vue.set 方法添加
+    Vue.set(vm.obj,"country","china");
+
+    // 通过 set 方法修改数组
+    Vue.set(vm.list,1,9999)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-25 07:54:11
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-25 08:14:05
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\JavaScript Study\Jquery Study\46、todoList-Jquery.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./jquery.js"></script>
+</head>
+<body>
+  <div>
+    <input type="text" id="input"><button id="btn">提交</button>
+    <ul id="list"></ul>
+  </div>
+
+  <script>
+    /*
+      MVP:  
+        MVP与MVC有着一个重大的区别：在MVP中View并不直接使用Model，
+        它们之间的通信是通过Presenter (MVC中的Controller)来进行的，
+        所有的交互都发生在Presenter内部，而在MVC中View会直接从Model中读取数据而不是通过 Controller。
+      M - Model     : 提供数据 - 模型层，发送 Ajax 请求
+      V - View      : 负责展示 - 视图
+      P - Presenter : 逻辑处理 - 控制器
+    */
+    function Page(){}
+
+    $.extend(Page.prototype,{
+      init:function(){
+        this.bindEvents()
+      },
+      bindEvents:function(){
+        var btn = $('#btn');
+        // $.proxy 代理 handleBtnClick 中的 this 指向
+        btn.on('click',$.proxy(this.handleBtnClick,this));
+      },
+      handleBtnClick:function(){
+        var inputEle = $('#input')
+        var inputValue = inputEle.val();
+        var ulElem = $('#list');
+        ulElem.append('<ul>'+ inputValue +'</ul>');
+        inputEle.val('');
+      }
+    });
+
+    // 为什么要使用 extend 扩展，而不直接在 Page 中编写
+    // $.proxy 有什么意义
+
+    var page = new Page();
+    page.init();
+  </script>
+</body>
+</html>

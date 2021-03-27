@@ -1,0 +1,162 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-26 08:12:39
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-27 00:05:05
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\98、2021的重学07.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <style>
+    .activated {
+      color: red;
+    }
+
+    .className1 {
+      color: green
+    }
+
+    .className2 {
+      font-size: 30px;
+    }
+
+    .className3 {
+      transform: rotate(90deg);
+    }
+
+    .default {
+      transition: all .5s linear;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div>姓名： {{ fullName }} <button @click="changeName">点击修改姓名</button></div>
+    <div v-show="show">{{ message }}</div><button @click="handleToggleShow"> {{ isShow }} </button>
+    <div v-if="where === 1"> where ==== 1 </div>
+    <div v-else-if="where === 2"> where ==== 2 </div>
+    <div v-else-if="where === 3"> where ==== 2 </div>
+    <div v-else-if="where === 4"> where ==== 2 </div>
+    <div v-else-if="where === 5"> where ==== 2 </div>
+    <div v-else-if="where === 6"> where ==== 2 </div>
+    <div v-else-if="where === 7"> where ==== 2 </div>
+    <div v-else-if="where === 8"> where ==== 2 </div>
+    <div v-else-if="where === 9"> where ==== 2 </div>
+    <div v-else> where anything </div>
+    <button @click="handleToRandom">点击切换 where 的值</button>
+
+    <div style="margin:30px;border-top:1px solid red"></div>
+    当切换组件时，Vue 会检查当前是否有可复用的组件，
+    当有可用的组件时，将不会重新渲染 DOM ，因此里面的内容也不会被重置
+    如果，想要告诉 Vue 当前组件需要重新渲染时，加上 key 属性
+    当你给某个元素加上 Key 值后，vue 会知道该元素是页面上唯一的
+    <div v-if="keyShow">
+      用户名：<input type="text" key="username">
+    </div>
+    <div v-else>
+      邮箱：<input type="text" key="email">
+    </div>
+    <button @click="()=>this.keyShow = !this.keyShow">点击切换</button>
+    <!-- Class 对象绑定 -->
+    <div @click="handleChangeColor" :class={activated:isActivated}>{{ message }}</div>
+    <!-- class 数组绑定 -->
+    <div @click="handleChangeColor2" class="default" :class="[className1,className2,className3]">
+      {{ message }}</div>
+    <div :style="styleObj">styleObj</div>
+    <div @click="handleChangeStyle" class="default" :style="[styleObj,styleObj2]">style</div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        firstName: "Zi",
+        lastName: 'Yang',
+        show: true,
+        message: 'Hello World',
+        where: 1,
+        keyShow: false,
+        isActivated: false,
+        className1: '',
+        className2: '',
+        className3: '',
+        styleObj: {
+          color: "red",
+          fontSize: "33px",
+        },
+        styleObj2: {
+          position:'absolute',
+          top:0,
+          transform: ''
+        }
+      },
+      computed: {
+        fullName: {
+          // getter
+          get: function () {
+            return this.firstName + ' ' + this.lastName
+          },
+          // setter 不知道什么原因导致不生效
+          set: function (value) {
+            this.firstName = 'zhang';
+            this.lastName = 'hao';
+          }
+        },
+        isShow() {
+          return this.show ? '显示消息' : '隐藏消息'
+        }
+      },
+      methods: {
+        changeName() {
+          this.lastName = Math.random().toString(36).slice(-6);
+        },
+        handleToggleShow() {
+          this.show = !this.show;
+        },
+        handleToRandom() {
+          this.where = Math.round(Math.random() * 10);
+        },
+        handleChangeColor() {
+          this.isActivated = !this.isActivated;
+        },
+        handleChangeColor2() {
+          this.className1 = this.className1 === 'className1' ? '' : 'className1';
+          this.className2 = this.className2 === 'className2' ? '' : 'className2';
+          this.className3 = this.className3 === 'className3' ? '' : 'className3'
+        },
+        handleChangeStyle() {
+          if (this.styleObj2.transform === "") {
+            this.styleObj2.transform = 'translate(149px,150px)'
+
+            const _this = this;
+            setInterval(function () {
+              var n1 = Math.round(Math.random() * 1000);
+              var n2 = Math.round(Math.random() * 900);
+              _this.styleObj2.transform = "translate(" + n1 + "px," + n2 + "px)";
+              var c1 = Math.round(Math.random() * 255);
+              var c2 = Math.round(Math.random() * 255);
+              var c3 = Math.round(Math.random() * 255);
+              var a = (Math.round(Math.random())*10 + 3)/10;
+              _this.styleObj2.color = "rgba("+c1+","+c2+","+c3+","+a+")"
+            }, 500)
+
+          } else {
+            this.styleObj2.transform = ''
+          }
+
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>

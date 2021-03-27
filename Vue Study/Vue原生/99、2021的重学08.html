@@ -1,0 +1,71 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-27 10:51:25
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-27 11:48:11
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\99、2021的重学08.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Vue 可以通过 template 组件代替元素 -->
+    <!-- 如果想使用循环时，外层不嵌套额外的元素，可以使用 template 代替 -->
+    <template v-for="(item,index) in list">
+      <ul :key="item.id">
+        <li>歌名：{{ item.name }}</li>
+        <li>收藏量： {{ item.duration }} </li>
+      </ul>
+      <span> 可乐加冰：{{ item.album.name }}</span>
+      <!-- vue 中 v-for 的 in 和 of 没有实际的区别 -->
+      <!-- vue 官方解释称：可以用 of 替代 in 作为分隔符，因为它更接近 JavaScript 迭代器的语法 -->
+      <template v-for="(value,key) of item">
+        <div v-if="handleGetNoObj(value)">
+          <!-- vue 中，可以直接修改对象的值，但不能直接增加新的属性，需要通过Set方法 -->
+          {{key}} ---- {{value}}
+        </div>
+      </template>
+      <br>
+      <br>
+      <br>
+    </template>
+
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        list: []
+      },
+      created() {
+        const _this = this;
+        const path =
+          'http://musicapi.leanapp.cn/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA'
+        fetch(path).then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          _this.list = res.result.songs
+        })
+      },
+      methods: {
+        handleGetNoObj(item) {
+          return !(item instanceof Object)
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>

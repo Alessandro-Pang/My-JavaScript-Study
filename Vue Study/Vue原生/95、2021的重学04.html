@@ -1,0 +1,86 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-25 08:32:14
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-25 22:40:56
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\95、2021的重学04.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="content"><button @click="handleSubmit">提交</button>
+    <div>待完成</div>
+      <!-- 父组件 handleItemDelete 监听由子组件创建的自定义 delete 事件 -->
+      <todo-item  :list="list" @delete="handleItemDelete" ></todo-item>
+    <div>已完成</div>
+    <ul>
+      <completed-item :completed-list="CompletedList"></completed-item>
+    </ul>
+  </div>
+
+  <script>
+    const TodoItem = {
+      props:['list'],
+      template:`<ul>
+                  <li v-for='(item,index) in list' :key='index' @click='handleItemClick(item,index)'>{{ item }}</li>
+                </ul>`,
+      methods:{
+        handleItemClick:function (item,index){
+          // 不同于组件和 prop，事件名不存在任何自动化的大小写转换。
+          // 而是触发的事件名需要完全匹配监听这个事件所用的名称
+          // 触发当前实例上的事件。附加参数都会传给监听器回调
+          this.$emit("delete",item,index)
+        }
+      }
+    };
+
+    Vue.component("CompletedItem",{
+      props:['completedList'],
+      data(){
+        return {
+            itemList : this.completedList
+        }
+      },
+      template:`<ul>
+                  <li style="text-decoration:line-through;" v-for="(item,index) in itemList" :key="index"> {{ item }} </li>
+                </ul>`,
+      watch:{
+        completedList:function(newVal){
+          this.itemList = newVal;
+        }
+      }          
+    })
+
+    new Vue({
+      el:'#app',
+      data:{
+        content:'',
+        list:[],
+        CompletedList:[]
+      },
+      components:{
+        TodoItem:TodoItem
+      },
+      methods: {
+        handleSubmit() {
+          this.list.push(this.content);
+          this.content = '';
+        },
+        handleItemDelete(item,index){
+          this.list.splice(index,1);
+          this.CompletedList.push(item);
+        }
+      },
+    })
+  </script>
+</body>
+</html>

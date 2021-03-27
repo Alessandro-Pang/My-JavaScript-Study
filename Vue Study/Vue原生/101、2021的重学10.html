@@ -1,0 +1,114 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-27 14:45:30
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-27 17:07:26
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\101、2021的重学10.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <table>
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <!-- 遵顼 H5 规范,当 tbody 中有不是 tr 的元素,如自定义组件,将会直接移到 table 外面 -->
+      <!-- 如果你这时传入值,子组件会接收不到值,汇报 undefined -->
+      <!-- 如果想在 tbody 中使用 tr 则需要 直接使用 tr 标签,然后使用 is 绑定自定义组件-->
+      <!-- 其他如 select 、 ul 、 ol 等标签，则都需要使用 is 属性绑定 -->
+      <tbody v-for="item in list" :key="item.id">
+        <tr is="row" :item-id="item.id" :item-content="item.item"></tr>
+      </tbody>
+    </table>
+    <!-- ref 引用 ，ref = "hello" hello 为这个 ref 引用的名称 -->
+    <div ref="hello" @click="handleClick">Hello world</div>
+    <counter ref="one" @change="handleChange"></counter>
+    <counter ref="two" @change="handleChange"></counter>
+    <div> total : {{total}} </div>
+  </div>
+  <script>
+    Vue.component('row', {
+      props: ['itemId', 'itemContent'],
+      template: '<tr><td>{{itemId}}</td><td>{{itemContent}}</td></tr>'
+    });
+
+    Vue.component('counter',{
+      data(){
+        return {
+          number:0
+        }
+      },
+      template:'<div @click="handleClick">{{ number }}</div>',
+      methods:{
+        handleClick(){
+          this.number ++;
+          // 发布订阅模式
+          // 子组件向外触发 change 事件时，父组件就可以监听到这个 change 事件
+          this.$emit('change',this.number);
+        },
+      }
+    })
+
+    /**
+     * 当在根组件中 data 可以使用对象的方式绑定数据
+     * 当在非根组件（子组件）中 定义 data 时，
+     *    data 必须是一个函数，不能是一个对象
+     *    同时 data 必须返回一个对象，对象中绑定数据，
+     *    因为子组件不会像根组件一样，只会调用一次，同一个子组件，会被调用多次，
+     *    每一个子组件都应该有自己的数据，而不应该共享数据，
+     *    通过一个函数返回对象的目的，就是让每一个子组件都有一个独立的存储空间，
+     *    这样避免了，多个子组件之间，数据互相影响的问题
+     * 
+     * ------ data 函数的效果听起来像是闭包
+     */
+    new Vue({
+      el: "#app",
+      data: {
+        list: [{
+          id: 1,
+          item: 'hello'
+        }, {
+          id: 2,
+          item: 'world'
+        }, {
+          id: 3,
+          item: "ziyang"
+        }, {
+          id: 4,
+          item: "china"
+        }],
+        total:0
+      },
+      methods:{
+        handleClick(){
+          // this.$ref 获取组件中所有的引用
+          const hello = this.$refs.hello;
+          console.log(hello.innerText);
+        },
+        handleChange(number){
+          // 当在一个元素上使用 ref 将会返回这个元素 ，如 <div>
+          // 当在一个组件上使用 ref 将会返回这个组件的实例
+          let oneNum = this.$refs.one.number;
+          let twoNum = this.$refs.two.number;
+          this.total = oneNum + twoNum;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

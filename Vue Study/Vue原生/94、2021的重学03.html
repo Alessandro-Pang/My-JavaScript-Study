@@ -1,0 +1,77 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-25 08:32:14
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-25 22:06:12
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\95、2021的重学03.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="content"><button @click="handleSubmit">提交</button>
+    <div>待完成</div>
+      <todo-item  :list="list" :handle-to-completed="handleToCompleted" ></todo-item>
+    <div>已完成</div>
+    <ul>
+      <completed-item :CompletedList="CompletedList"></completed-item>
+    </ul>
+  </div>
+
+  <script>
+    // Vue 自定义组件中，TodoItem 驼峰式命名 会自动转换成 todo-item 命名
+    // Vue.component("TodoItem",{
+    //   // FIXME: 子组件接收参数的变量，会自动转换成小写，所以不能使用驼峰式命名法
+    //   props:['list','handletocompleted'],
+    //   template:`<ul>
+    //               <li v-for='(item,index) in list' :key='index' @click='handletocompleted(item,index)'>{{ item }}</li>
+    //             </ul>`,      
+    // });
+
+    const TodoItem = {
+      // 当参数需要使用驼峰式命名法时，v-bind 的变量名，应当是短横线命名法
+      props:['list','handleToCompleted'],
+      template:`<ul>
+                  <li v-for='(item,index) in list' :key='index' @click='handleToCompleted(item,index)'>{{ item }}</li>
+                </ul>`,
+    };
+
+    Vue.component("CompletedItem",{
+      props:['CompletedList'],
+      template:`<ul>
+                  <li v-for="(item,index) in CompletedList" :key="index"> {{ item }} </li>
+                </ul>`
+    })
+
+    new Vue({
+      el:'#app',
+      data:{
+        content:'',
+        list:[],
+        CompletedList:[]
+      },
+      components:{
+        TodoItem:TodoItem
+      },
+      methods: {
+        handleSubmit() {
+          this.list.push(this.content);
+          this.content = '';
+        },
+        handleToCompleted(item,index){
+          this.list.splice(index,1);
+          this.CompletedList.push(item);
+        }
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-27 22:30:58
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-27 23:25:18
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\103、2021的重学12.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bus,总线,发布订阅模式,观察者模式">
+  <title>费父子组件传值</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 原生事件 -->
+    <!-- 当没有加入 .native 修饰符时， @click 是一个自定义事件 -->
+    <child @click.native="handleClick"></child>
+
+    <child content="Hello"></child>
+    <child content="world"></child>
+    <child2 content="wuhahaha"></child2>
+
+  </div>
+
+  <script>
+    /** 发布订阅模式：总线机制 */
+    Vue.prototype.bus = new Vue();
+    /**
+     * 发布—订阅模式又叫观察者模式，
+     *  它定义对象间的一种一对多的依赖关系，
+     *  当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。
+     * 
+     * 理解 发布-订阅 模式
+     *    发布订阅模式的核心在于 中央节点
+     *    当某个子节点的状态发生改变，子节点将消息发送给中央节点
+     *    中央节点再将消息发布给所有子节点，然后同步修改状态
+     * 
+     * 发布-订阅 模式的优缺点
+     * 优点：发布—订阅模式的优点非常明显，一为时间上的解耦，二为对象之间的解耦。
+     * 缺点：创建订阅者本身要消耗一定的时间和内存，而 且当你订阅一个消息后，
+     *      也许此消息最后都未发生，但这个订阅者会始终存在于内存中。
+     */
+    Vue.component('child', {
+      props: {
+        content: {
+          type: String,
+          required: false,
+          default: "Hello,Vue",
+          validator(value) {
+            return value.length >= 5
+          }
+        }
+      },
+      data() {
+        return {
+          slefContent: this.content
+        }
+      },
+      template: "<div @click='handleClick'> {{ slefContent }} </div>",
+      methods: {
+        handleClick: function () {
+          // 当子组件发生的状态发生改变时，通知总线
+          this.bus.$emit('change', this.slefContent)
+        }
+      },
+      mounted: function () {
+        // 所有子组件在挂载时都会被总线监听
+        var _this = this;
+        // 总线订阅 子组件 change 事件
+        this.bus.$on('change', function (msg) {
+          // 当前 this 指向 bus
+          _this.slefContent = msg;
+        })
+      }
+    });
+
+    // child2 也同时被总线监听 change 事件
+    Vue.component('child2', {
+      props: ['content'],
+      data() {
+        return {
+          slefContent: this.content
+        }
+      },
+      template: "<div @click='handleClick'> {{ slefContent }} </div>",
+      methods: {
+        handleClick: function () {
+          this.bus.$emit('change', this.slefContent)
+        }
+      },
+      mounted: function () {
+        var _this = this;
+        this.bus.$on('change', function (msg) {
+          _this.slefContent = msg;
+        })
+      }
+    });
+
+    const vm = new Vue({
+      el: "#app",
+      methods: {
+        handleClick() {
+          alert('click')
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

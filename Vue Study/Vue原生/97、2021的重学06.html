@@ -1,0 +1,115 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-25 23:23:24
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-26 08:02:27
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\97、2021的重学06.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- vue 指令中的值，不是一个字符串，而是一个变量 -->
+    <div v-text="divText"  v-bind:title="title"></div>
+    {{ message }}
+    <div v-html="vHtml + 999999" v-bind:title="title"></div>
+    <div v-text="divText + ' 6666666666'"></div>
+
+    <div style="margin:30px 0;border-top: 1px solid red;"></div>
+    computed 计算属性 演示：
+    <br>
+    fullName 是计算属性，当fullName中依赖的 firstName 和 lastName 没有发生改变，则不会触发计算
+    <br>
+    如下演示，当我们修改 age 时，不会影响到 fullName 属性，当我们修改name时，才会重新计算。
+    <div>
+      姓名：{{fullName}} --- 年龄：{{  age }} --- 发生改变：computed fullName changed <span style="color:red">{{ isChanged }}</span>
+      <br>
+      <button @click="changeAge">点击修改年龄</button>
+      <button @click="changeName">点击修改姓名</button>
+    </div>
+    姓名修改历史记录：
+    <ul>
+      <li v-for="(item,index) in changedHistory" :key="index">{{ item }}</li>
+    </ul>
+    <div style="margin:30px 0;border-top: 1px solid red;"></div>
+    methods 方法 演示：
+    <br>
+    当 Methods 不是事件，会随着 DATA 的变化而重新计算，
+    <br>
+    如当前，在 DATA 中声明一个变量，用以存储 getFullName 重新计算的次数，
+    <br>
+    methods属性渲染次数会一直渲染到Vue抛出异常 （102次）,才会停止渲染。
+    <br>
+    并且，当 data 中的任意一个对象，发生改变，都会使 methods 重新渲染
+    <br>
+    而计算属性，只会当 依赖的值，即返回值发生改变时，重新渲染计算
+    <div>
+      姓名：{{ getFullName() }} ----- 计算属性渲染次数:{{ computedCount }} ---- methods属性渲染次数：{{methodsCount}}
+    </div>    
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el:'#app',
+      data:{
+        title:'哈哈哈，这是一段文字',
+        message:"插值表达式模板语法",
+        divText:'v-text 指令插入值',
+        vHtml:'<h1>ZiYang : v-html</h1>',
+        firstName:'zi.',
+        lastName:'Yang',
+        isChanged:new Date().getTime(),
+        age:'18',
+        changedHistory:[],
+        computedCount:0,
+        methodsCount:0,
+      },
+      computed:{
+        /**
+         * 计算属性有缓存功能，
+         * 当计算属性中依赖的值（即返回值）没有发生改变，则不会重新计算，用于提高效率
+         */
+        fullName(){
+          this.isChanged = new Date().getTime();
+          this.computedCount = this.computedCount + 1 ;
+          return this.firstName+this.lastName
+        }
+      },
+      methods: {
+        changeAge(){
+          console.log('changeAge')
+          this.age = Math.round(Math.random()*100);
+        },
+        changeName(){
+          console.log('changeName')
+          this.lastName = Math.random().toString(36).slice(-6);
+        },
+        getFullName(){
+          // 当任意数据发生改变，都会使得 methods 重新计算
+          // 如当前让一个变量记录每执行一次都 +1,
+          // 会因为当前方法不是事件，导致一直在计算，知道 Vue 抛出异常
+          this.methodsCount = this.methodsCount + 1 ;
+          
+
+          // 当 data 中有可计算的变量时， 如 new Date ，会使methods重新计算
+          console.log('计算了一次');
+          return this.firstName+this.lastName
+        },
+      },
+      watch:{
+        isChanged:function(newVal,oldVal){
+          this.changedHistory.push(oldVal)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

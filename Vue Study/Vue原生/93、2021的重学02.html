@@ -1,0 +1,57 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-25 07:25:34
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-25 08:30:47
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\94、2021的重学02.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO List</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="content"><button @click="handleSubmit">提交</button>
+    <div>待完成</div>
+    <ul>
+      <li v-for="(item,index) in list" :key="index" @click="handleToCompleted(item,index)">{{ item }}</li>
+    </ul>
+    <div>已完成</div>
+    <ul>
+      <li v-for="(item,index) in CompletedList" :key="index"> {{ item }} </li>
+    </ul>
+  </div>
+
+  <script>
+    // Object.definePorpties
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        content: '',
+        list: ['第一课的内容', '第二课的内容'],
+        CompletedList: []
+      },
+      methods: {
+        handleSubmit() {
+          this.list.push(this.content);
+          this.content = '';
+        },
+        handleToCompleted(item,index){
+          this.list.splice(index,1);
+          this.CompletedList.push(item);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

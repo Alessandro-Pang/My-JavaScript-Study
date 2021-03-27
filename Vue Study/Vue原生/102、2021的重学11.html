@@ -1,0 +1,88 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-27 14:45:30
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-27 22:19:16
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\102、2021的重学11.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <counter ref="counter1" @changed="handleAddPlus" content="Hello world" :count="2"></counter>
+    <counter ref="counter2" @changed="handleAddPlus" :count="3"></counter>
+    <div>{{ total }}</div>
+  </div>
+  <script>
+    /**
+     * 为什么子组件要使用 data 函数:
+     * 
+     * 当一个组件被定义,data必须声明为返回一个初始数据对象的函数,
+     * 因为组件可能被用来创建多个实例,也就是说,在很多页面中,定义的组件可以复用在多个页面
+     *
+     * 如果data是一个纯碎的对象,则所有的实例将共享引用同一份data数据对象,
+     * 无论在哪个组件实例中修改data,都会影响到所有的组件实例
+     * 
+     * 如果data是函数,每次创建一个新实例后,调用data函数,从而返回初始数据的一个全新副本数据对象
+     * 这样每复用一次组件,会返回一份新的data数据,类似于给每个组件实例创建一个私有的数据空间,
+     * 让各个组件的实例各自独立,互不影响,保持低耦合
+     */
+    Vue.component('counter',{
+      props:{
+        count:{
+          type:Number,
+          required:true,
+        },
+        content:{
+          type:String,
+          default:'default value',
+          // 校验字符串是否长度等于 5
+          validator:function(value){
+            return (value.length) > 10;
+          }
+        }
+      },
+      data(){
+        return {
+          number:this.count
+        }
+      },
+      template:'<div>{{ number }} ---- {{ content }} <button @click="handleClickAddNumber"> 点击 +1 </button></div>',
+      methods:{
+        handleClickAddNumber(){
+          const step = Math.round(Math.random()*10);
+          this.number += step;
+          this.$emit('changed',step)
+        }
+      }
+    });
+
+    new Vue({
+      el: "#app",
+      data: {
+        total:0
+      },
+      // 在挂载前,无法获取 ref 引用实例,所以不能在 mounted 生命周期之前使用
+      mounted(){
+        this.total = this.$refs.counter1.number + this.$refs.counter2.number
+      },
+      methods:{
+        handleAddPlus(step){
+          this.total += step;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

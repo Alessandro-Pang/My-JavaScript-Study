@@ -807,8 +807,11 @@
         this.isAsyncPlaceholder = false;
     };
 
+    // configurable 是否可配置
     var prototypeAccessors = { child: { configurable: true } };
 
+
+    // 向后兼容组件实例的别名。 
     // DEPRECATED: alias for componentInstance for backwards compat.
     /* istanbul ignore next */
     prototypeAccessors.child.get = function() {

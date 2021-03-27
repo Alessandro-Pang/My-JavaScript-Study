@@ -1,0 +1,72 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-25 22:42:19
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-25 23:20:22
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\96、2021的重学05.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el:'#app',
+      template:`<div>{{message}}<button @click="onDestroy">销毁组件</button></div>`,
+      data:{
+        message:"hello,world"
+      },
+      beforeCreate(){
+        // 初始化事件和生命周期相关的内容
+        console.log('beforeCreate');
+      },
+      created(){
+        // 处理外部注入和双向绑定相关的内容
+        console.log('created')
+      },
+      beforeMount() {
+        // 挂载 template 模板和数据，此时还没有渲染页面
+        console.log(this.$el)
+        console.log('beforeMount');
+      },
+      mounted() {
+        // 此时将 vue 实例挂载到页面上
+        console.log(this.$el)
+        console.log('mounted');
+      },
+      beforeDestroy() {
+        // 当 vm.$destroy() 被调用时触发
+        console.log('beforeDestory')
+      },
+      destroyed() {
+        // 当组件完全被销毁时执行
+        console.log('destroyed')
+      },
+      beforeUpdate() {
+        // 数据发生改变，还没重新渲染之前执行
+        console.log('beforeUpdate');
+      },
+      updated(){
+        // 数据发生改变，重新渲染之后执行
+        console.log('updated')
+      },
+      methods:{
+        onDestroy:function(){
+          this.$destroy()
+        }
+      }
+    })
+  </script>
+</body>
+</html>
