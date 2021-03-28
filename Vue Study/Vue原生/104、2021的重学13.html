@@ -2,7 +2,7 @@
  * @Author: zi.yang
  * @Date: 2021-03-27 23:25:59
  * @LastEditors: zi.yang
- * @LastEditTime: 2021-03-27 23:34:34
+ * @LastEditTime: 2021-03-27 23:44:41
  * @Description: In User Settings Edit
  * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\104、2021的重学13.html
 -->
@@ -20,18 +20,25 @@
 <body>
   <div id="app">
     <child>
-      <div>66666</div>
-      <div>
-        <h1>急啊急啊急啊</h1>
-      </div>
-      <div>假假假假</div>
-      <div>66666</div>
+      <!-- 具名插槽 -->
+      <div class="header" slot="header"> header </div>
+      <div class="footer" slot="footer"> footer </div>
+    </child>
+    <child>
+      <div class="footer" slot="footer"> 2222footer2222 </div>
     </child>
   </div>
 
   <script>
+    // 如果插槽不命名,则每使用一个 slot 插槽都会将 组件内的内容 呈现出来
     Vue.component('child', {
-      template: "<div><slot></slot></div>"
+      template: `<div>
+                    <slot name="header">
+                      <h1> default header </h1>  
+                    </slot>
+                    <div> content </div>
+                    <slot name="footer"></slot>
+                  </div>`
     })
     const vm = new Vue({
       el: "#app"

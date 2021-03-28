@@ -1,0 +1,112 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-28 00:08:25
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-28 00:48:06
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\106、2021的重学15.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 动态组件 -->
+    <component :is="type"></component>
+    <button @click="handleBtnClick">change component</button>
+
+    <br>
+    <input type="text" v-model="msg" name="" id="">
+    <div v-once>v-once 指令 ： {{ msg }}</div>
+    <div>没有 v-once 指令 ： {{ msg }}</div>
+
+    <br>
+    组件销毁历史记录:
+    <ul>
+      <template v-for="(item,index) in destroyList">
+        <li :key="index">{{ destroyRecird(index,item) }}</li>
+      </template>
+    </ul>
+  </div>
+
+  <!-- 
+     v-once
+      只会渲染元素和组件一次。
+      随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。
+      这可以用于优化更新性能。
+
+    在测试中, 被v-once指定的组件仍会被销毁
+   -->
+  <script>
+    Vue.prototype.bus = new Vue();
+
+    Vue.component("child-one", {
+      template: "<h1 v-once>child-one</h1>",
+      data() {
+        return {
+          destroyList: []
+        }
+      },
+      mounted() {
+        const _this = this;
+        this.bus.$on("destroy", function (msg) {
+          _this.destroyList.push(msg)
+        });
+      },
+      beforeDestroy() {
+        this.bus.$emit("destroy", "child-one");
+      }
+    });
+
+    Vue.component("child-two", {
+      template: "<h1 v-once>child-two</h1>",
+      data() {
+        return {
+          destroyList: []
+        }
+      },
+      mounted() {
+        const _this = this;
+        this.bus.$on("destroy", function (msg) {
+          _this.destroyList.push(msg);
+        });
+      },
+      beforeDestroy() {
+        this.bus.$emit("destroy", "child-two");
+      }
+    })
+
+    new Vue({
+      el: "#app",
+      data: {
+        type: "child-one",
+        destroyList: [],
+        msg:"msg content"
+      },
+      mounted() {
+        const _this = this;
+        this.bus.$on("destroy", function (msg) {
+          _this.destroyList.push(msg)
+        });
+      },
+      methods: {
+        handleBtnClick() {
+          this.type = this.type === "child-one" ? "child-two" : "child-one"
+        },
+        destroyRecird(index,item){
+          return "序号：" + (index+1) + " ---- 组件名：" + item
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
