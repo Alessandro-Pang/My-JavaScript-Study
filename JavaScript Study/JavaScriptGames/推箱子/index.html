@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>推箱子</title>
+	<style type="text/css">
+		*{margin:0;padding: 0}
+		#container{
+			position: relative;
+			margin:50px auto;
+		}
+		/* 蓝色区域 */
+		.pos0{
+			float: left;
+			width:50px;
+			height:50px;
+			background: blue
+		}
+		/* 灰色区域 */
+		.pos1{
+			float: left;
+			width: 50px;
+			height: 50px;
+			background:#666;
+		}
+		/* 墙体区域 */
+		.pos2{
+			float: left;
+			width: 50px;
+			height: 50px;
+			background: url(images/wall.png) no-repeat;
+		}
+		/* 红色区域 */
+		.pos3{
+			float: left;
+			width: 50px;
+			height: 50px;
+			background: red;
+		}
+		.box{
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			background: url('images/box.png') no-repeat;
+		}
+		.person{
+			position:absolute;
+			width: 50px;
+			height: 50px;
+			background: url(images/person.png) no-repeat;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="container"></div>
+
+	<script type="text/javascript" src="./jquery.js"></script>
+	<script type="text/javascript" src="./js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-29 21:39:14
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-29 22:05:28
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\111、2021的重学20.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ <script src="./vue.js"></script>
+ <style>
+   .v-enter,
+   .v-leave-to{
+    opacity: 0;
+   }
+   .v-enter-active,.v-leave-active{
+    transition: opacity 1s;
+   }
+ </style>
+</head>
+<body>
+
+  <div id="app">
+    <!-- mode in-out : 先进入后隐藏 ; out-in : 先隐藏再显示-->
+    <transition mode="in-out">
+      <!-- 多个元素过渡，通过设置Key实现  -->
+      <div v-if="show" key="hello">
+        Hello,Wolrd
+      </div>
+      <div v-else key="bye">
+        Bye , Wolrd
+      </div>
+    </transition>
+    
+    <div style="margin:50px 0;border-top:1px solid red"></div>
+    
+    <transition>
+      <!-- 自定义组件实现过渡效果 -->
+      <child v-if="show"></child>
+      <child-one v-else></child-one>
+    </transition>
+
+    <div style="margin:50px 0;border-top:1px solid red"></div>
+    
+    <transition>
+      <!-- 动态组件实现过渡效果 -->
+      <component :is="show ? 'child' : 'child-one'"></component>
+    </transition>
+    <button @click="handleClick">点击切换</button>
+  </div>
+
+  <script>
+    Vue.component('child',{
+      template:"<div>hello,child</div>"
+    });
+    Vue.component('child-one',{
+      template:"<div>hello,child-one</div>"
+    }); 
+    new Vue({
+      el:"#app",
+      data:{
+        show:true
+      },
+      methods:{
+        handleClick(){
+          this.show = !this.show
+        }
+      }
+    })
+  </script>
+</body>
+</html>

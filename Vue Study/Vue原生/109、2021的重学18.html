@@ -1,0 +1,63 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-29 21:00:51
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-29 21:17:12
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\109、2021的重学18.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <transition
+      @before-enter="handleBeforeEnter" 
+      @enter="handleEnter"
+      @after-enter="handleAfterEnter">
+      <div v-show="show">
+        Hello,world
+      </div>
+    </transition>
+    <button @click="handleClick">点击切换</button>
+  </div>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick() {
+          this.show = !this.show;
+        },
+        handleBeforeEnter(el) {
+          el.style.color = 'red'
+        },
+        handleEnter(el, done) {
+          setTimeout(() => {
+            el.style.color = "green"
+          }, 2000);
+          // 当 done 被调用后，才会执行下一个钩子
+          setTimeout(() => {
+            done(); // 完成动画
+          }, 4000);
+        },
+        handleAfterEnter(el) {
+          el.style.color = "black"
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-29 21:17:38
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-29 21:30:37
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\110、2021的重学19.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ <script src="./vue.js"></script>
+ <script src="./velocity.min.js"></script>
+</head>
+<body>
+
+  <div id="app">
+    <transition 
+      @before-enter = "handleBeforeEnter"
+      @enter = "handleEnter"
+      @after-enter = "handleAfterEnter"
+    >
+      <div v-show="show">
+        Hello,world
+      </div>
+    </transition>
+    <button @click="handleClick">点击切换</button>
+  </div>
+  <script>
+    new Vue({
+      el:"#app",
+      data:{
+        show:true
+      },
+      methods:{
+        handleClick(){
+          this.show = !this.show
+        },
+        handleBeforeEnter(el){
+          el.style.opacity = 0
+        },
+        handleEnter(el,done){
+          Velocity(el,{
+            opacity:1,
+            fontSize:'22px'
+          },{
+            /* Velocity 动画配置项的默认值 */
+            duration: 1000,        // 动画执行时间
+            easing: "swing",       // 缓动效果
+            queue: "",             // 队列
+            begin: undefined,      // 动画开始时的回调函数
+            progress: undefined,   // 动画执行中的回调函数（该函数会随着动画执行被不断触发）
+            complete: done,        // 动画结束时的回调函数
+            display: undefined,    // 动画结束时设置元素的 css display 属性
+            visibility: undefined, // 动画结束时设置元素的 css visibility 属性
+            loop: false,           // 循环
+            delay: false,          // 延迟
+            mobileHA: true         // 移动端硬件加速（默认开启）
+          })
+        },
+        handleAfterEnter(el){
+          Velocity(el,{
+            fontSize:'18px'
+          },{
+            duration:300,
+            easing:"swing"
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>

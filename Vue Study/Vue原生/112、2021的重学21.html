@@ -1,0 +1,70 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-29 21:59:42
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-29 22:12:10
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\112、2021的重学21.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ <script src="./vue.js"></script>
+ <style>
+   .v-enter,.v-leave-to{
+    opacity: 0;
+   }
+   .v-enter-active,.v-leave-active{
+     transition: opacity 1s;
+   }
+ </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 列表过渡 -->
+    <transition-group >
+      <div v-for="(item,index) of list" :key="item.id">
+        {{item.title}}
+      </div>
+    </transition-group>
+    <!-- 
+        transition-group 原理 
+        transition-gorup 会将每组元素都包裹一层 transition 标签
+    -->
+    <!-- <transition>
+      <div>hello,wolrd</div>
+    </transition>
+    <transition>
+      <div>hello,wolrd</div>
+    </transition>
+    <transition>
+      <div>hello,wolrd</div>
+    </transition>
+    <transition>
+      <div>hello,wolrd</div>
+    </transition> -->
+    <button @click="handleBtnClick">Add</button>
+  </div>
+  <script>
+    new Vue({
+      el:"#app",
+      data:{
+        list:[],
+        count:0
+      },
+      methods: {
+        handleBtnClick(){
+          this.list.push({
+            id:this.count++,
+            title:"hello,wolrd"
+          })
+        }
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-29 21:17:38
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-29 22:26:50
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\113、2021的重学22.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 封装动画组件</title>
+ <script src="./vue.js"></script>
+ <script src="./velocity.min.js"></script>
+ <!-- tweenjs -->
+</head>
+<body>
+
+  <div id="app">
+    <swing :show="show">
+      <div>Hello,Erverone</div>
+    </swing> 
+    <swing :show="show">
+      <h1>Hello,Zi.Yang</h1>
+    </swing> 
+    <button @click="handleClick">点击切换</button>
+  </div>
+  <script>
+    Vue.component('swing',{
+      props:{
+        show:{
+          type:Boolean,
+          required:true
+        }
+      },
+      // 这里不能使用 v-show ,需要使用 v-if
+      template:`
+        <transition 
+        @before-enter = "handleBeforeEnter"
+        @enter = "handleEnter"
+        @after-enter = "handleAfterEnter"
+      >
+        <slot v-if="show"></slot>
+      </transition>
+      `,
+      methods:{
+        handleBeforeEnter(el){
+          el.style.opacity = 0
+        },
+        handleEnter(el,done){
+          Velocity(el,{
+            opacity:1,
+            fontSize:'22px'
+          },{
+            /* Velocity 动画配置项的默认值 */
+            duration: 1000,        // 动画执行时间
+            easing: "swing",       // 缓动效果
+            complete: done,        // 动画结束时的回调函数
+          })
+        },
+        handleAfterEnter(el){
+          Velocity(el,{
+            fontSize:'18px'
+          },{
+            duration:300,
+            easing:"swing"
+          })
+        }
+      }
+    });
+
+    new Vue({
+      el:"#app",
+      data:{
+        show:true
+      },
+      methods:{
+        handleClick(){
+          this.show = !this.show
+        },
+      }
+    })
+  </script>
+</body>
+</html>

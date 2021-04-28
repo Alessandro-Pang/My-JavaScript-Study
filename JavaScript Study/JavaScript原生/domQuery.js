@@ -2,9 +2,9 @@
  * @Author: zi.yang
  * @Date: 2021-03-27 21:15:12
  * @LastEditors: zi.yang
- * @LastEditTime: 2021-03-27 21:15:51
+ * @LastEditTime: 2021-03-28 16:24:41
  * @Description: 自己封装的一个类 JQuery 库
- * @FilePath: \My-JavaScript-Study\JavaScript Study\DomQuery.js
+ * @FilePath: \My-JavaScript-Study\JavaScript Study\JavaScript原生\domQuery.js
  */
 function DomQuery(queryContent) {
   this.element = null;
@@ -16,11 +16,11 @@ function DomQuery(queryContent) {
 // 初始化
 function init(queryContent) {
   const queryType = this.queryClassify(queryContent);
-  const div = null;
+  let element = null;
   if (queryType !== "" && queryType !== null && queryType !== void 0) {
-    const div = this.query(queryType.queryValue, queryType.queryType);
+    element = this.query(queryType.queryValue, queryType.queryType);
   }
-  return this.mounted(div);
+  return this.mounted(element);
 }
 
 // 挂载
@@ -33,10 +33,9 @@ function mounted(element) {
 
 // 查询类型
 function queryClassify(query) {
-  if (!query || query === null || query === void 0 || query === "") return this
+  if (!query || query === null || query === void 0 || query === "") return this;
   const eleType = query.substring(0, 1);
   const eleQuery = query.substring(1);
-  const queryType = '';
   switch (eleType) {
     case '#':
       type = 'id';

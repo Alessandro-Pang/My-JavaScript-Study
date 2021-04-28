@@ -1,0 +1,103 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-28 22:40:24
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-28 23:14:22
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\107、2021的重学16.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ <script src="./vue.js"></script>
+ <style>
+   /*
+    在动画运行的第一帧时，挂载类样式，
+    当动画运行到第二帧时，fade-enter 移除
+    当类样式移除后，opacity 默认恢复到 1
+   */
+  .fade-enter{
+    opacity: 0;
+  }
+  /* 
+    在动画运行的第一帧时，挂载类样式，
+    当动画结束后，销毁类样式 
+  */
+  .fade-enter-active{
+    transition: opacity 3s;
+  }
+
+  /*
+    当 fade-enter 被移除时，会挂载 fade-enter-to 样式
+    因为这时的动画已经在执行了，所以不会挂载新的动画效果
+    当动画结束后，销毁类样式
+   */
+  .fade-enter-to{
+    color:red;
+    font-size: 22px;
+  }
+
+  .fade-leave{
+    opacity: 1;
+    font-size:33px;
+    color:red
+  }
+
+  .fade-leave-to{
+    opacity: 0;
+    font-size:0px;
+    color:yellow
+  }
+
+  .fade-leave-active{
+    transition: all 3s;
+  }
+
+  .animate{
+    font-size: 22px;
+    color:red;
+    transition: all 3s;
+  }
+
+  .hide{
+    color: green;
+    opacity: 0;
+  }
+ </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 当 transition 没有命名时，默认为 v -->
+    <transition name="fade">
+      <div v-show="show">Hello world</div>
+    </transition>
+    <button @click="handleClick">点击 {{ isShow }}</button>
+
+    <div class="animate" :class="{hide:show}">哈哈哈哈哈</div>
+  </div>
+
+  <script>
+    new Vue({
+      el:"#app",
+      data:{
+        show:true
+      },
+      methods:{
+        handleClick:function(){
+          this.show = !this.show;
+        }
+      },
+      computed:{
+        isShow:function(){
+          return this.show ? '显示' : '隐藏'
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

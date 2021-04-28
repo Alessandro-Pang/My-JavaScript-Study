@@ -1,0 +1,106 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2021-03-28 23:15:59
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2021-03-29 00:03:26
+ * @Description: In User Settings Edit
+ * @FilePath: \My-JavaScript-Study\Vue Study\Vue原生\108、2021的重学17.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <link rel="stylesheet" href="./animate.css">
+
+  <style>
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0);
+      }
+
+      50% {
+        transform: scale(1.5);
+      }
+
+      100% {
+        translate: scale(1);
+      }
+    }
+
+    .fade-enter-active {
+      transform-origin: left center;
+      animation: bounce-in 1s;
+    }
+
+    .fade-leave-active {
+      transform-origin: left center;
+      animation: bounce-in 1s reverse;
+    }
+
+    @keyframes flicker {
+      0% {
+        /* transform: scale(.5); */
+        opacity: 0;
+        color: red;
+      }
+
+      100% {
+        /* transform: scale(3); */
+        opacity: 1;
+        color: yellow;
+      }
+    }
+
+    .flicker {
+      transform-origin: left center;
+      animation: flicker .4s linear reverse infinite
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <transition name="fade">
+      <div v-show="show">
+        Hello world
+      </div>
+    </transition>
+
+    <div class="flicker">★</div>
+    <br>
+    <br>
+    <!-- 在第一次显示元素需要加 appear 属性 -->
+    <transition name="fade" appear enter-active-class="animate__animated animate__bounce"
+      leave-active-class="animate__animated animate__shakeX"
+      appear-active-class="animate__animated animate__bounce">
+      <div v-show="show">
+        Hello world
+      </div>
+    </transition>
+
+    <button @click="handleClick">点击切换</button>
+  </div>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick: function () {
+          this.show = !this.show;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
